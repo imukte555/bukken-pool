@@ -111,7 +111,6 @@ STATIONS = {
     "品川":   {"suumo": "17460", "homes": None, "nomu": "ensen_tokyo/2196/2196260", "livable": "tokyo/s2196260", "athome": None},
     "西小山": {"suumo": "28780", "homes": None, "nomu": "ensen_tokyo/2327/2327240", "livable": "tokyo/s2327240", "athome": None},
     "洗足":   {"suumo": "21470", "homes": None, "nomu": "ensen_tokyo/2327/2327250", "livable": "tokyo/s2327250", "athome": None},
-    "平和島": {"suumo": "34650", "homes": None, "nomu": "ensen_tokyo/2331/2331090", "livable": "tokyo/s2331090", "athome": None},
 }
 
 # 駅ごとに許容する区（これ以外の区の物件は弾く）
@@ -143,7 +142,6 @@ STATION_AREAS = {
     "品川":     ["港区", "品川区"],
     "西小山":   ["品川区", "目黒区"],
     "洗足":     ["目黒区", "大田区", "品川区"],
-    "平和島":   ["大田区"],
 }
 
 OIMACHI_REJECT_PATTERNS = [
