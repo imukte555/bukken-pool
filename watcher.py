@@ -1816,7 +1816,6 @@ def main():
     if not seen:
         print("初回実行: スナップショットのみ保存（通知なし）")
         save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
-                "prices": price_now,
                     "prices": price_now})
         return
 
@@ -1975,6 +1974,7 @@ def main():
         send_heartbeat(len(items), summary)
 
     save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
+                "prices": price_now,
                 "notified_on": prev.get("notified_on") if (already or (manual and not forced))
                                else today_jst})
 
