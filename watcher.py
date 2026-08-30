@@ -986,11 +986,12 @@ def collect_station(station, codes):
 
         # HOMES (3種別) — Cloudflare回避でcurl_cffi使用 + リトライ
         # 駅コード未検証のポータルはスキップ（推測URLで別エリアを拾わないため）
-        # 予算5回に収めるため、第一希望+優先駅のマンションだけHOMESを見る
+        # 予算5回に収める。マンションはSUUMO/ノムコムで足りているが、
+        # 土地は掲載自体が少ないので、この枠は土地に使う。
         HOMES_TARGETS = ("大井町", "戸越") + tuple(PRIORITY_STATIONS)
         use_homes = codes.get("homes") and station in HOMES_TARGETS
         for kind, path in ([] if not use_homes else
-                           [("mansion", f"mansion/chuko/tokyo/{codes['homes']}/list/")]):
+                           [("land", f"tochi/tokyo/{codes['homes']}/list/")]):
             items = []
             for pn in (1,):   # 予算5回に収めるため1ページのみ
                 url = f"https://www.homes.co.jp/{path}?page={pn}"
@@ -1008,7 +1009,7 @@ def collect_station(station, codes):
         # アットホーム (3種別) — Cloudflare回避でcurl_cffi使用 + リトライ
         use_athome = codes.get("athome") and station in HOMES_TARGETS
         for kind, path in ([] if not use_athome else
-                           [("mansion", f"mansion/chuko/tokyo/{codes['athome']}/list/")]):
+                           [("land", f"tochi/tokyo/{codes['athome']}/list/")]):
             items = []
             for pn in (1,):   # 予算5回に収めるため1ページのみ
                 url = f"https://www.athome.co.jp/{path}?page={pn}"
@@ -1871,7 +1872,7 @@ def main():
             return (pk, w, unit)
 
         # 種別ごとの枠（合計30）: 土地9 / 戸建8 / 賃貸7 / マンション6
-        quota = {"land": 9, "house": 8, "rent": 7, "mansion": 6}
+        quota = {"land": 12, "house": 7, "rent": 6, "mansion": 5}
 
         # 種別ごとに「優先駅 → その他の新着 → プール(既出)」の順で埋める。
         # 優先駅を先に一括確保すると種別が偏る（目黒/中目黒は賃貸が多い）ので
@@ -1921,7 +1922,7 @@ def main():
         print(f"  種別実績: 土地{bt['land']}/戸建{bt['house']}/賃貸{bt['rent']}/マンション{bt['mansion']}")
         print(f"  優先駅: {dict(ps)}")
         new_items = picked
-        print(f"→ 上限{TARGET_MAX_ITEMS}件にカット (種別バランス: 土地9/戸建8/賃貸7/マンション6)")
+        print(f"→ 上限{TARGET_MAX_ITEMS}件にカット (種別バランス: 土地12/戸建7/賃貸6/マンション5)")
 
     # --- 駐車場チェック（確定した通知対象のみ詳細fetch） ---
     # 詳細ページを1回だけ取得して、駐車場と全駅からの徒歩を埋める
