@@ -1,0 +1,75 @@
+name: Daily Property Watch
+
+on:
+  schedule:
+    # 1回16分かかる。プライベートリポジトリの無料枠は月2000分なので、
+    # 予備を含めて1日3回走らせると月1440分を食って枠を超える
+    # （実際に2026-08-30に枠切れでジョブが起動しなくなった）。
+    # 予備は廃止し1日1回だけにする。毎時00分は混むので37分にずらす。
+    - cron: '37 21 * * *'   # 06:37 JST
+  workflow_dispatch:  # 手動実行可能
+    inputs:
+      force_notify:
+        description: '強制テスト通知（新着0でも上位3件を通知）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write  # state.jsonコミット用
+
+# 実行が重なるとstate.jsonとdocs/index.htmlの押し合いになり、
+# リポジトリの記録と公開ページが食い違う（2026-08-30に実際に発生）。
+# 同時に1本しか走らせない。後から来たものは前が終わるまで待つ。
+concurrency:
+  group: daily-property-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Run watcher
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          DEBUG_FORCE_NOTIFY: ${{ inputs.force_notify && '1' || '0' }}
+        run: python watcher.py
+
+      - name: Publish 在庫ページ (GitHub Pages)
+        if: always()
+        timeout-minutes: 12
+        run: |
+          if [ ! -f docs/index.html ]; then echo "no page, skip"; exit 0; fi
+          cp docs/index.html index.html
+          touch .nojekyll
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .nojekyll state.json
+          git diff --cached --quiet && echo "変更なし" || \
+            git commit -q -m "在庫ページ更新 $(date -u +%Y-%m-%dT%H:%M)"
+          for i in 1 2 3; do
+            git pull --rebase -q origin main && git push origin HEAD:main && break
+            sleep 5
+          done
+          WANT=$(grep -oE '<title>物件在庫 [0-9]+件' index.html | head -1)
+          for i in $(seq 1 48); do
+            n=$(curl -s "https://imukte555.github.io/bukken-pool/?cb=$(date +%s)-$i" \
+                | grep -oE '<title>物件在庫 [0-9]+件' | head -1)
+            echo "check $i: $n"
+            if [ "$n" = "$WANT" ]; then echo "公開確認 OK ($n)"; exit 0; fi
+            sleep 10
+          done
+          echo "公開が確認できませんでした (期待:$WANT 実際:$n)"; exit 1
+
