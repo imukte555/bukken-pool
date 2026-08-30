@@ -1340,13 +1340,45 @@ def apply_filters(item):
 
 # === 永続化 ===
 
+def mark_price_changes(items, prev_prices):
+    """前回の価格と比べて値下げ/値上げを記録する。
+    買い手にとって値下げは強いシグナルなので、通知とページで明示する。
+    戻り値: 今回の価格表（次回の比較用）
+    """
+    now = {}
+    for it in items:
+        p = it.get("price")
+        if p is None:
+            continue
+        key = it["id"]
+        now[key] = p
+        old = prev_prices.get(key)
+        if old is None or old == p:
+            continue
+        if it.get("type") == "rent":
+            diff = f"{abs(old - p):.1f}万円"
+            old_s, new_s = f"{old}万円/月", f"{p}万円/月"
+        else:
+            diff = fmt_price_man(abs(old - p))
+            old_s, new_s = fmt_price_man(old), fmt_price_man(p)
+        if p < old:
+            it["_price_note"] = f"🔻値下げ {old_s}→{new_s} ({diff}安)"
+            it["_price_down"] = True
+        else:
+            it["_price_note"] = f"🔺値上げ {old_s}→{new_s}"
+    n = sum(1 for i in items if i.get("_price_down"))
+    if n:
+        print(f"値下げを検知: {n}件")
+    return now
+
+
 def load_state():
     if STATE_FILE.exists():
         try:
             return json.loads(STATE_FILE.read_text())
         except Exception:
             pass
-    return {"seen_ids": [], "last_run": None}
+    return {"seen_ids": [], "last_run": None, "prices": {}}
 
 
 def save_state(state):
@@ -1510,6 +1542,7 @@ def sort_for_notify(items):
     """優先駅を先頭に、駅ごとにまとめる。駅内は駐車場あり→駅近の順。"""
     order = {s: i for i, s in enumerate(PRIORITY_STATIONS)}
     return sorted(items, key=lambda it: (
+        0 if it.get("_price_down") else 1,   # 値下げは最優先で見せる
         order.get(it.get("station"), 99),
         it.get("station") or "",
         0 if it.get("parking") in ("有", "近隣") else 1,
@@ -1584,7 +1617,8 @@ def notify(new_items):
             if pp and pk in ("有", "近隣", "空無"):
                 pk_str += f" {pp}"
             dup_str = it.get("_dup_note", "")
-            parts = [price, layout, area, walk, age_str, pk_str, dup_str]
+            price_note = it.get("_price_note", "")
+            parts = [price, layout, area, walk, age_str, pk_str, price_note, dup_str]
             meta = " ".join(p for p in parts if p)
             lines.append(f"{head}\n  {meta}\n  {it['url']}")
         return lines
@@ -1777,10 +1811,13 @@ def main():
 
     state = load_state()
     seen = set(state.get("seen_ids", []))
+    price_now = mark_price_changes(items, state.get("prices", {}) or {})
 
     if not seen:
         print("初回実行: スナップショットのみ保存（通知なし）")
-        save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time())})
+        save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
+                "prices": price_now,
+                    "prices": price_now})
         return
 
     new_items = [it for it in items if it["id"] not in seen]
