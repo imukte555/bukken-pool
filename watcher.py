@@ -62,6 +62,9 @@ WALK_MAX = 7         # 駅徒歩上限(分) ※売買（マンション/戸建/�
 # 全駅とも徒歩7分以内（2026-08-30 shoさん指示で例外を撤廃）。
 # 以前は恵比寿など高額5駅を10分まで許容していたが、7分に統一。
 WALK_MAX_BY_STATION = {}
+
+# 条件を満たす物件が極端に少ないエリア。取りこぼさないよう深くまで見る。
+DEEP_SCAN_STATIONS = ("恵比寿", "広尾", "代官山", "中目黒", "目黒", "大井町")
 AREA_MIN = 45.0      # 専有/建物面積 下限(㎡)
 PRICE_MIN = 3000     # 3000万
 PRICE_MAX = 12000    # 1.2億（建物込みの予算上限）
@@ -966,8 +969,12 @@ def collect_station(station, codes):
                             # 新築戸建のみ追加。新築マンションは実測でほぼ通らず
                             # アクセス数だけ増えるので外す
                             ("house",   f"ikkodate/tokyo/ek_{codes['suumo']}/")]:
+            # 恵比寿・広尾・代官山などは条件を満たす物件が極端に少ない。
+            # 実測（恵比寿172件/広尾170件/代官山180件を全走査）で通過は1件だけだった。
+            # 取りこぼしを無くすため、この駅だけ深いページまで見る。
+            pages = (1, 2, 3, 4, 5, 6) if station in DEEP_SCAN_STATIONS else (1, 2, 3, 4)
             items = []
-            for pn in (1, 2, 3, 4):
+            for pn in pages:
                 url = (f"https://suumo.jp/{path}?et=10&pn={pn}"
                        f"&kb={PRICE_MIN}&kt={PRICE_MAX}")
                 html = fetch_with_retry(url)
