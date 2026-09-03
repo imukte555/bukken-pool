@@ -657,6 +657,19 @@ def parse_suumo_rent(html: str, station: str):
 
             layout = parse_layout(row_text)
             area = parse_area(row_text)
+            # 敷金/礼金（td[4]相当）。"23.6万円 -" のように敷金→礼金の順。
+            shikirei = ""
+            raw_sr = cells[4] if len(cells) > 4 else ""
+            if raw_sr:
+                parts = raw_sr.split()
+                if len(parts) >= 2:
+                    def _fmt(x):
+                        x = x.strip()
+                        return "なし" if x in ("-", "‐", "―", "0円", "0万円") else x
+                    shikirei = f"敷{_fmt(parts[0])}/礼{_fmt(parts[1])}"
+                elif len(parts) == 1:
+                    shikirei = f"敷礼{parts[0]}"
+
             floor = ""
             mf = re.search(r"(B?\d+階)", row_text)
             if mf:
@@ -677,6 +690,7 @@ def parse_suumo_rent(html: str, station: str):
                 "walk": walk,
                 "built": built,
                 "floor": floor,
+                "shikirei": shikirei,
                 "addr": addr,
                 "url": href,
                 "source": "SUUMO賃貸",
@@ -1630,7 +1644,8 @@ def notify(new_items):
                 pk_str += f" {pp}"
             dup_str = it.get("_dup_note", "")
             price_note = it.get("_price_note", "")
-            parts = [price, layout, area, walk, age_str, pk_str, price_note, dup_str]
+            sr = it.get("shikirei", "") if it.get("type") == "rent" else ""
+            parts = [price, layout, area, walk, age_str, sr, pk_str, price_note, dup_str]
             meta = " ".join(p for p in parts if p)
             lines.append(f"{head}\n  {meta}\n  {it['url']}")
         return lines

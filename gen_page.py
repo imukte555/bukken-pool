@@ -78,6 +78,7 @@ def build(items, out_path, station_order=None):
             layout = "" if it.get("type") == "land" else "間取り記載なし"
         note = html.escape(it.get("_dup_note") or "")
         pnote = html.escape(it.get("_price_note") or "")
+        sr = html.escape(it.get("shikirei") or "") if it.get("type") == "rent" else ""
         cards.append(f"""<a class="card" href="{html.escape(it['url'])}" target="_blank" rel="noopener"
    data-station="{html.escape(it['station'])}" data-type="{it.get('type','')}"
    data-parking="{'1' if it.get('parking') in ('有','近隣') else '0'}"
@@ -91,6 +92,7 @@ def build(items, out_path, station_order=None):
     <div class="price">{fmt_price(it)}</div>
     <div class="meta">{"・".join(x for x in (layout, area, age) if x)}</div>
     <div class="meta">{fmt_walk(it)}</div>
+    {f'<div class="meta">{sr}</div>' if sr else ''}
     <div class="meta pk">{fmt_parking(it)}</div>
     <div class="meta addr">{html.escape(it.get('addr') or '住所記載なし')}</div>
     {f'<div class="meta down">{pnote}</div>' if pnote else ''}
