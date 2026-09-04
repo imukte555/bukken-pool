@@ -67,6 +67,10 @@ WALK_MAX_BY_STATION = {}
 DEEP_SCAN_STATIONS = ("恵比寿", "広尾", "代官山", "中目黒", "目黒", "大井町")
 AREA_MIN = 45.0      # 専有/建物面積 下限(㎡)
 PRICE_MIN = 3000     # 3000万
+# 予算オーバーでも「価格以外は条件を満たす」物件は捨てずに価格を追い続ける。
+# 不況で値下がりして予算内に入ってきた瞬間を捕まえるため。
+WATCH_PRICE_MAX = 25000   # 2.5億まで監視対象（売買）
+WATCH_RENT_MAX = 45.0     # 45万円/月まで監視対象（賃貸）
 PRICE_MAX = 12000    # 1.2億（建物込みの予算上限）
 BUILT_MAX_AGE = 30
 CURRENT_YEAR = 2026
@@ -1350,6 +1354,71 @@ def apply_filters(item):
 
 # === 永続化 ===
 
+def is_watch_candidate(item):
+    """予算オーバーだが価格以外は条件を満たす物件か。
+    値下がりで予算内に入ってきたら知りたいので、捨てずに追跡する。
+    """
+    t = item.get("type")
+    p = item.get("price")
+    if p is None:
+        return False
+    if t == "rent":
+        if not (RENT_MAX < p <= WATCH_RENT_MAX):
+            return False
+    else:
+        if not (PRICE_MAX < p <= WATCH_PRICE_MAX):
+            return False
+    # 価格以外は本来の条件を通ること
+    saved = globals()["PRICE_MAX"], globals()["RENT_MAX"]
+    try:
+        globals()["PRICE_MAX"] = WATCH_PRICE_MAX
+        globals()["RENT_MAX"] = WATCH_RENT_MAX
+        return apply_rent_filters(item) if t == "rent" else apply_filters(item)
+    finally:
+        globals()["PRICE_MAX"], globals()["RENT_MAX"] = saved
+
+
+def track_watchlist(all_raw, prev_watch):
+    """監視リストを更新し、値下がりを検知する。
+    戻り値: (今回の監視表, 予算内に入ってきた物件, 値下がりした物件)
+    """
+    now, entered, dropped = {}, [], []
+    seen = set()
+    for it in all_raw:
+        key = it.get("id")
+        if not key or key in seen:
+            continue
+        p = it.get("price")
+        if p is None:
+            continue
+        old = prev_watch.get(key)
+        if is_watch_candidate(it):
+            seen.add(key)
+            now[key] = {"price": p, "name": (it.get("name") or "")[:40],
+                        "station": it.get("station"), "type": it.get("type"),
+                        "url": it.get("url"), "area": it.get("area"),
+                        "first": (old or {}).get("first", p)}
+            if old and p < old["price"]:
+                it["_watch_note"] = (f"監視中の値下げ {fmt_watch_price(it, old['price'])}"
+                                     f"→{fmt_watch_price(it, p)}")
+                dropped.append((it, old["price"]))
+        elif old:
+            # 監視していた物件が予算内に入ってきた
+            limit = RENT_MAX if it.get("type") == "rent" else PRICE_MAX
+            if p <= limit and old["price"] > limit:
+                it["_entered"] = True
+                it["_watch_note"] = (f"🎯予算内に下落 {fmt_watch_price(it, old['first'])}"
+                                     f"→{fmt_watch_price(it, p)}")
+                entered.append((it, old["first"]))
+    return now, entered, dropped
+
+
+def fmt_watch_price(item, p):
+    if item.get("type") == "rent":
+        return f"{p}万円/月"
+    return fmt_price_man(p)
+
+
 def mark_price_changes(items, prev_prices):
     """前回の価格と比べて値下げ/値上げを記録する。
     買い手にとって値下げは強いシグナルなので、通知とページで明示する。
@@ -1627,7 +1696,7 @@ def notify(new_items):
             if pp and pk in ("有", "近隣", "空無"):
                 pk_str += f" {pp}"
             dup_str = it.get("_dup_note", "")
-            price_note = it.get("_price_note", "")
+            price_note = it.get("_price_note", "") or it.get("_watch_note", "")
             sr = it.get("shikirei", "") if it.get("type") == "rent" else ""
             parts = [price, layout, area, walk, age_str, sr, pk_str, price_note, dup_str]
             meta = " ".join(p for p in parts if p)
@@ -1824,10 +1893,22 @@ def main():
     seen = set(state.get("seen_ids", []))
     price_now = mark_price_changes(items, state.get("prices", {}) or {})
 
+    # 予算オーバーだが条件を満たす物件を追跡する（不況で下がってくるのを待つ）
+    watch_now, entered, dropped = track_watchlist(_RAW_FOR_WHATIF,
+                                                  state.get("watchlist", {}) or {})
+    print(f"監視リスト: {len(watch_now)}件（予算オーバーだが条件は満たす）")
+    if entered:
+        print(f"🎯 予算内に下がってきた物件: {len(entered)}件")
+        for it, first in entered:
+            print(f"   [{it['station']}] {it.get('name','')[:30]} "
+                  f"{fmt_watch_price(it, first)}→{fmt_watch_price(it, it['price'])}")
+    if dropped:
+        print(f"監視中の値下げ: {len(dropped)}件")
+
     if not seen:
         print("初回実行: スナップショットのみ保存（通知なし）")
         save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
-                    "prices": price_now})
+                    "prices": price_now, "watchlist": watch_now})
         return
 
     new_items = [it for it in items if it["id"] not in seen]
@@ -1961,6 +2042,12 @@ def main():
         print(f"DEBUG_FORCE_NOTIFY=1: 全{len(items)}件を仮新着として通知")
         new_items = items
 
+    # 予算内に下がってきた物件は最優先で通知に入れる
+    if entered:
+        ent_items = [it for it, _ in entered]
+        ent_ids = {i["id"] for i in ent_items}
+        new_items = ent_items + [i for i in new_items if i["id"] not in ent_ids]
+
     # 同じ日に2回通知しない（予備の実行が走っても二重送信しないため）
     from datetime import datetime, timezone, timedelta
     today_jst = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d")
@@ -1986,6 +2073,7 @@ def main():
 
     save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
                 "prices": price_now,
+                "watchlist": watch_now,
                 "notified_on": prev.get("notified_on") if (already or (manual and not forced))
                                else today_jst})
 
