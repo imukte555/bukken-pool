@@ -106,14 +106,6 @@ STATIONS = {
     "日本橋": {"suumo": "29710", "homes": None,                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": None},
     "東日本橋": {"suumo": "32170", "homes": None,                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": None},
     # --- 大井町・蒲田の周辺と目黒線沿い（2026-08-29 追加。コードは実URLで検証済み）---
-    "青物横丁": {"suumo": "00240", "homes": None, "nomu": "ensen_tokyo/2331/2331050", "livable": "tokyo/s2331050", "athome": None},
-    "新馬場": {"suumo": "20140", "homes": None, "nomu": "ensen_tokyo/2331/2331040", "livable": "tokyo/s2331040", "athome": None},
-    "大森":   {"suumo": "06360", "homes": None, "nomu": "ensen_tokyo/2196/2196280", "livable": "tokyo/s2196280", "athome": None},
-    "大崎":   {"suumo": "05780", "homes": None, "nomu": "ensen_tokyo/2172/2172070", "livable": "tokyo/s2172070", "athome": None},
-    "天王洲アイル": {"suumo": "25440", "homes": None, "nomu": None, "livable": None, "athome": None},
-    "品川":   {"suumo": "17460", "homes": None, "nomu": "ensen_tokyo/2196/2196260", "livable": "tokyo/s2196260", "athome": None},
-    "西小山": {"suumo": "28780", "homes": None, "nomu": "ensen_tokyo/2327/2327240", "livable": "tokyo/s2327240", "athome": None},
-    "洗足":   {"suumo": "21470", "homes": None, "nomu": "ensen_tokyo/2327/2327250", "livable": "tokyo/s2327250", "athome": None},
     # --- 2026-08-31 追加。大井町/戸越/蒲田の周辺と浅草線沿い。
     #     コードはSUUMO・ノムコムとも実URLで1駅ずつ検証済み ---
     "浜松町":   {"suumo": "31160", "homes": None, "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": None},
@@ -141,14 +133,6 @@ STATION_AREAS = {
     "新橋":     ["港区", "中央区"],
     "日本橋":   ["中央区"],
     "東日本橋": ["中央区", "台東区"],
-    "青物横丁": ["品川区"],
-    "新馬場":   ["品川区"],
-    "大森":     ["大田区", "品川区"],
-    "大崎":     ["品川区"],
-    "天王洲アイル": ["品川区"],
-    "品川":     ["港区", "品川区"],
-    "西小山":   ["品川区", "目黒区"],
-    "洗足":     ["目黒区", "大田区", "品川区"],
     "浜松町":   ["港区"],
     "田町":     ["港区"],
 }
