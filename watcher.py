@@ -113,6 +113,8 @@ STATIONS = {
     # --- 2026-08-31 追加。大井町/戸越/蒲田の周辺と浅草線沿い。
     #     コードはSUUMO・ノムコムとも実URLで1駅ずつ検証済み ---
     "浜松町":   {"suumo": "31160", "homes": None, "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": None},
+    # 伊丹空港の最寄り（大阪府豊中市）
+    "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": None},
     "田町":     {"suumo": "23500", "homes": None, "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": None},
 }
 
@@ -139,6 +141,7 @@ STATION_AREAS = {
     "東日本橋": ["中央区", "台東区"],
     "浜松町":   ["港区"],
     "田町":     ["港区"],
+    "蛍池":     ["豊中市", "池田市"],
 }
 
 OIMACHI_REJECT_PATTERNS = [
@@ -971,12 +974,13 @@ def collect_station(station, codes):
     log = []
     if True:
         # SUUMO (5種別: 中古3 + 新築2)
-        for kind, path in [("mansion", f"ms/chuko/tokyo/ek_{codes['suumo']}/"),
-                            ("house",   f"chukoikkodate/tokyo/ek_{codes['suumo']}/"),
-                            ("land",    f"tochi/tokyo/ek_{codes['suumo']}/"),
+        pref = codes.get("pref", "tokyo")   # 駅ごとに都道府県を指定（既定は東京）
+        for kind, path in [("mansion", f"ms/chuko/{pref}/ek_{codes['suumo']}/"),
+                            ("house",   f"chukoikkodate/{pref}/ek_{codes['suumo']}/"),
+                            ("land",    f"tochi/{pref}/ek_{codes['suumo']}/"),
                             # 新築戸建のみ追加。新築マンションは実測でほぼ通らず
                             # アクセス数だけ増えるので外す
-                            ("house",   f"ikkodate/tokyo/ek_{codes['suumo']}/")]:
+                            ("house",   f"ikkodate/{pref}/ek_{codes['suumo']}/")]:
             # 恵比寿・広尾・代官山などは条件を満たす物件が極端に少ない。
             # 実測（恵比寿172件/広尾170件/代官山180件を全走査）で通過は1件だけだった。
             # 取りこぼしを無くすため、この駅だけ深いページまで見る。
@@ -1079,7 +1083,8 @@ def collect_station(station, codes):
         # SUUMO 賃貸（管理費込みRENT_MAX以下）— 2ページまで
         rent_items = []
         for pn in (1, 2):   # 賃貸は最大の供給源なので2ページ取る
-            url = f"https://suumo.jp/chintai/tokyo/ek_{codes['suumo']}/?page={pn}"
+            url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
+                   f"/ek_{codes['suumo']}/?page={pn}")
             html = fetch_with_retry(url)
             page = parse_suumo_rent(html, station)
             if not page:
@@ -1330,7 +1335,7 @@ def apply_filters(item):
 
     # 東京都内のみ許容（神奈川/埼玉/千葉等を除外）
     addr = item.get("addr", "")
-    if addr and not re.search(r"(品川区|渋谷区|目黒区|港区|大田区|新宿区|世田谷区|中央区|台東区)", addr):
+    if addr and not re.search(r"(品川区|渋谷区|目黒区|港区|大田区|新宿区|世田谷区|中央区|台東区|豊中市|池田市)", addr):
         # 23区名がaddrにない → 都外の可能性。空addrは保留(parseミス)
         if "県" in addr or "市" in addr.replace("品川市", ""):
             return False
