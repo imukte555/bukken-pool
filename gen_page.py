@@ -79,10 +79,13 @@ def build(items, out_path, station_order=None):
         note = html.escape(it.get("_dup_note") or "")
         pnote = html.escape(it.get("_price_note") or "")
         sr = html.escape(it.get("shikirei") or "") if it.get("type") == "rent" else ""
+        hnote = html.escape(it.get("_hist_note") or "")
         cards.append(f"""<a class="card" href="{html.escape(it['url'])}" target="_blank" rel="noopener"
    data-station="{html.escape(it['station'])}" data-type="{it.get('type','')}"
    data-parking="{'1' if it.get('parking') in ('有','近隣') else '0'}"
-   data-down="{'1' if it.get('_price_down') else '0'}">
+   data-down="{'1' if it.get('_price_down') else '0'}"
+   data-cut="{'1' if (it.get('_cuts') or 0) >= 1 else '0'}"
+   data-stale="{'1' if (it.get('_days') or 0) >= 90 else '0'}">
   <div class="thumb">{thumb}</div>
   <div class="body">
     <div class="tag">{TYPE_ICON.get(it.get('type'),'')} {TYPE_LABEL.get(it.get('type'),'')}
@@ -96,6 +99,7 @@ def build(items, out_path, station_order=None):
     <div class="meta pk">{fmt_parking(it)}</div>
     <div class="meta addr">{html.escape(it.get('addr') or '住所記載なし')}</div>
     {f'<div class="meta down">{pnote}</div>' if pnote else ''}
+    {f'<div class="meta hist">{hnote}</div>' if hnote else ''}
     {f'<div class="meta dup">{note}</div>' if note else ''}
   </div>
 </a>""")
@@ -148,6 +152,8 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 .pk{{color:var(--fg)}}
 .dup{{color:var(--accent)}}
 .down{{color:#c0392b;font-weight:600}}
+.hist{{color:#8a6d1f}}
+@media(prefers-color-scheme:dark){{.hist{{color:#d8b74a}}}}
 @media(prefers-color-scheme:dark){{.down{{color:#ff7a6b}}}}
 .empty{{padding:40px 16px;color:var(--sub);text-align:center;grid-column:1/-1}}
 /* iPhone: 1カラム、フィルタは横スクロール、余白を詰める */
@@ -170,7 +176,7 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
   <h1>物件在庫</h1>
   <div class="count"><span id="shown">{len(items)}</span> / {len(items)}件　{jst:%Y-%m-%d %H:%M} JST時点</div>
   <div class="filters">
-    <button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button>{tchips}
+    <button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="cut" data-v="1">値下げ実績</button><button class="chip" data-f="stale" data-v="1">90日以上</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button>{tchips}
   </div>
   <div class="filters">{chips}</div>
 </header>

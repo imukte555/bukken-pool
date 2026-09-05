@@ -1419,6 +1419,54 @@ def fmt_watch_price(item, p):
     return fmt_price_man(p)
 
 
+def update_history(items, prev_hist, today):
+    """物件ごとの履歴（初回掲載日・初回価格・値下げ記録）を更新する。
+    売れ残り日数と値下げ回数は、指値が通るかの判断材料になる。
+    戻り値: 今回の履歴
+    """
+    hist = dict(prev_hist)
+    for it in items:
+        key = it.get("id")
+        p = it.get("price")
+        if not key or p is None:
+            continue
+        h = hist.get(key)
+        if h is None:
+            h = {"first": today, "first_price": p, "cuts": []}
+        else:
+            h = dict(h)
+            last = h.get("last_price", h.get("first_price"))
+            if last is not None and p < last:
+                h["cuts"] = (h.get("cuts") or []) + [[today, last, p]]
+        h["last_price"] = p
+        hist[key] = h
+
+        # 表示用の注記を組み立てる
+        days = days_between(h["first"], today)
+        notes = []
+        if days >= 1:
+            notes.append(f"掲載{days}日")
+        cuts = h.get("cuts") or []
+        if cuts:
+            total = h["first_price"] - p
+            notes.append(f"値下げ{len(cuts)}回 累計{fmt_watch_price(it, total)}安")
+        if notes:
+            it["_hist_note"] = " / ".join(notes)
+        it["_days"] = days
+        it["_cuts"] = len(cuts)
+    return hist
+
+
+def days_between(a, b):
+    from datetime import date
+    try:
+        ya, ma, da = (int(x) for x in a.split("-"))
+        yb, mb, db = (int(x) for x in b.split("-"))
+        return (date(yb, mb, db) - date(ya, ma, da)).days
+    except Exception:
+        return 0
+
+
 def mark_price_changes(items, prev_prices):
     """前回の価格と比べて値下げ/値上げを記録する。
     買い手にとって値下げは強いシグナルなので、通知とページで明示する。
@@ -1697,8 +1745,10 @@ def notify(new_items):
                 pk_str += f" {pp}"
             dup_str = it.get("_dup_note", "")
             price_note = it.get("_price_note", "") or it.get("_watch_note", "")
+            hist_note = it.get("_hist_note", "")
             sr = it.get("shikirei", "") if it.get("type") == "rent" else ""
-            parts = [price, layout, area, walk, age_str, sr, pk_str, price_note, dup_str]
+            parts = [price, layout, area, walk, age_str, sr, pk_str,
+                     price_note, hist_note, dup_str]
             meta = " ".join(p for p in parts if p)
             lines.append(f"{head}\n  {meta}\n  {it['url']}")
         return lines
@@ -1893,6 +1943,14 @@ def main():
     seen = set(state.get("seen_ids", []))
     price_now = mark_price_changes(items, state.get("prices", {}) or {})
 
+    # 掲載日数と値下げ履歴（指値が通るかの判断材料）
+    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+    _today = _dt.now(_tz(_td(hours=9))).strftime("%Y-%m-%d")
+    history_now = update_history(items, state.get("history", {}) or {}, _today)
+    _long = [i for i in items if (i.get("_days") or 0) >= 90]
+    _cut = [i for i in items if (i.get("_cuts") or 0) >= 1]
+    print(f"履歴: 90日以上の売れ残り{len(_long)}件 / 値下げ実績あり{len(_cut)}件")
+
     # 予算オーバーだが条件を満たす物件を追跡する（不況で下がってくるのを待つ）
     watch_now, entered, dropped = track_watchlist(_RAW_FOR_WHATIF,
                                                   state.get("watchlist", {}) or {})
@@ -1908,7 +1966,8 @@ def main():
     if not seen:
         print("初回実行: スナップショットのみ保存（通知なし）")
         save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
-                    "prices": price_now, "watchlist": watch_now})
+                    "prices": price_now, "watchlist": watch_now,
+                    "history": history_now})
         return
 
     new_items = [it for it in items if it["id"] not in seen]
@@ -2074,6 +2133,7 @@ def main():
     save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
                 "prices": price_now,
                 "watchlist": watch_now,
+                "history": history_now,
                 "notified_on": prev.get("notified_on") if (already or (manual and not forced))
                                else today_jst})
 
