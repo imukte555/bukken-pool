@@ -105,17 +105,17 @@ STATIONS = {
     "泉岳寺": {"suumo": "21340", "homes": "sengakuji_05181-st",  "nomu": "ensen_tokyo/2351/2351140", "livable": "tokyo/s2351140", "athome": "sengakuji-st"},
     "高輪ゲートウェイ": {"suumo": "84570", "homes": "takanawagateway_10177-st", "nomu": "ensen_tokyo/2172/2172056", "livable": "tokyo/s2172056", "athome": "takanawagateway-st"},
     "三田":   {"suumo": "36860", "homes": "mita_06402-st",       "nomu": "ensen_tokyo/2351/2351130", "livable": "tokyo/s2351130", "athome": "mita-st"},
-    "大門":   {"suumo": "22090", "homes": None,                  "nomu": "ensen_tokyo/2351/2351120", "livable": "tokyo/s2351120", "athome": "daimon-st"},
-    "新橋":   {"suumo": "20110", "homes": None,                  "nomu": "ensen_tokyo/2351/2351110", "livable": "tokyo/s2351110", "athome": "shimbashi-st"},
-    "日本橋": {"suumo": "29710", "homes": None,                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": None},
-    "東日本橋": {"suumo": "32170", "homes": None,                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": None},
+    "大門":   {"suumo": "22090", "homes": "daimon_06403-st",                  "nomu": "ensen_tokyo/2351/2351120", "livable": "tokyo/s2351120", "athome": "daimon-st"},
+    "新橋":   {"suumo": "20110", "homes": "shimbashi_00558-st",                  "nomu": "ensen_tokyo/2351/2351110", "livable": "tokyo/s2351110", "athome": "shimbashi-st"},
+    "日本橋": {"suumo": "29710", "homes": "nihombashi_06309-st",                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": "nihombashi-st"},
+    "東日本橋": {"suumo": "32170", "homes": None,                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st"},
     # --- 大井町・蒲田の周辺と目黒線沿い（2026-08-29 追加。コードは実URLで検証済み）---
     # --- 2026-08-31 追加。大井町/戸越/蒲田の周辺と浅草線沿い。
     #     コードはSUUMO・ノムコムとも実URLで1駅ずつ検証済み ---
-    "浜松町":   {"suumo": "31160", "homes": None, "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": None},
+    "浜松町":   {"suumo": "31160", "homes": "hamamatsucho_00572-st", "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": "hamamatsucho-st"},
     # 伊丹空港の最寄り（大阪府豊中市）
     "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st"},
-    "田町":     {"suumo": "23500", "homes": None, "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": None},
+    "田町":     {"suumo": "23500", "homes": "tamachi_00573-st", "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": "tamachi-st"},
 }
 
 # 駅ごとに許容する区（これ以外の区の物件は弾く）
