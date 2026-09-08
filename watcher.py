@@ -1677,12 +1677,25 @@ def audit_items(items, label=""):
     return bad
 
 
+def rooms_of(item):
+    """間取りから部屋数を取る（2LDK→2、1SLDK→1.5、記載なし→0）"""
+    lay = item.get("layout") or ""
+    m = re.match(r"^(\d+)", lay)
+    if not m:
+        return 0
+    n = float(m.group(1))
+    if "S" in lay.upper().replace("SLDK", "S"):
+        n += 0.5
+    return n
+
+
 def sort_for_notify(items):
     """優先駅を先頭に、駅ごとにまとめる。駅内は駐車場あり→駅近の順。"""
     order = {s: i for i, s in enumerate(PRIORITY_STATIONS)}
     return sorted(items, key=lambda it: (
         0 if it.get("_price_down") else 1,   # 値下げは最優先で見せる
         order.get(it.get("station"), 99),
+        0 if rooms_of(it) >= 2 else 1,       # 2LDK以上を先に見せる
         it.get("station") or "",
         0 if it.get("parking") in ("有", "近隣") else 1,
         it.get("walk") or 99,

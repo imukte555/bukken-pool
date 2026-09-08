@@ -53,9 +53,19 @@ def build(items, out_path, station_order=None):
     # カードもタブと同じ優先順（左＝上）に並べる。駅内は駐車場あり→駅近。
     rank = {s: i for i, s in enumerate(stations)}
 
+    def _rooms(it):
+        import re as _re
+        m = _re.match(r"^(\d+)", it.get("layout") or "")
+        if not m:
+            return 0
+        n = float(m.group(1))
+        return n + 0.5 if "S" in (it.get("layout") or "").upper() else n
+
     def sort_key(it):
         return (0 if it.get("_price_down") else 1,
                 rank.get(it.get("station"), 999),
+                0 if _rooms(it) >= 2 else 1,   # 2LDK以上を上に
+
                 0 if it.get("parking") in ("有", "近隣") else 1,
                 it.get("walk") or 99)
 
@@ -85,6 +95,7 @@ def build(items, out_path, station_order=None):
    data-parking="{'1' if it.get('parking') in ('有','近隣') else '0'}"
    data-down="{'1' if it.get('_price_down') else '0'}"
    data-cut="{'1' if (it.get('_cuts') or 0) >= 1 else '0'}"
+   data-rooms="{'1' if _rooms(it) >= 2 else '0'}"
    data-stale="{'1' if (it.get('_days') or 0) >= 90 else '0'}">
   <div class="thumb">{thumb}</div>
   <div class="body">
@@ -176,7 +187,7 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
   <h1>物件在庫</h1>
   <div class="count"><span id="shown">{len(items)}</span> / {len(items)}件　{jst:%Y-%m-%d %H:%M} JST時点</div>
   <div class="filters">
-    <button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="cut" data-v="1">値下げ実績</button><button class="chip" data-f="stale" data-v="1">90日以上</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button>{tchips}
+    <button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="rooms" data-v="1">2LDK以上</button><button class="chip" data-f="cut" data-v="1">値下げ実績</button><button class="chip" data-f="stale" data-v="1">90日以上</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button>{tchips}
   </div>
   <div class="filters">{chips}</div>
 </header>
