@@ -114,7 +114,7 @@ STATIONS = {
     #     コードはSUUMO・ノムコムとも実URLで1駅ずつ検証済み ---
     "浜松町":   {"suumo": "31160", "homes": None, "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": None},
     # 伊丹空港の最寄り（大阪府豊中市）
-    "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": None},
+    "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st"},
     "田町":     {"suumo": "23500", "homes": None, "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": None},
 }
 
@@ -1081,9 +1081,9 @@ def collect_station(station, codes):
         # HOMESは6リクエストしか通らないので当日の担当2駅だけ叩く
         use_homes = bool(codes.get("homes")) and station in HOMES_TODAY
         for kind, path in ([] if not use_homes else
-                           [("mansion", f"mansion/chuko/tokyo/{codes['homes']}/list/"),
-                            ("house",   f"kodate/chuko/tokyo/{codes['homes']}/list/"),
-                            ("land",    f"tochi/tokyo/{codes['homes']}/list/")]):
+                           [("mansion", f"mansion/chuko/{pref}/{codes['homes']}/list/"),
+                            ("house",   f"kodate/chuko/{pref}/{codes['homes']}/list/"),
+                            ("land",    f"tochi/{pref}/{codes['homes']}/list/")]):
             items = []
             for pn in (1,):   # 予算5回に収めるため1ページのみ
                 url = f"https://www.homes.co.jp/{path}?page={pn}"
@@ -1101,9 +1101,9 @@ def collect_station(station, codes):
         # アットホーム (3種別) — Cloudflare回避でcurl_cffi使用 + リトライ
         use_athome = bool(codes.get("athome"))
         for kind, path in ([] if not use_athome else
-                           [("mansion", f"mansion/chuko/tokyo/{codes['athome']}/list/"),
-                            ("house",   f"kodate/tokyo/{codes['athome']}/list/"),
-                            ("land",    f"tochi/tokyo/{codes['athome']}/list/")]):
+                           [("mansion", f"mansion/chuko/{pref}/{codes['athome']}/list/"),
+                            ("house",   f"kodate/{pref}/{codes['athome']}/list/"),
+                            ("land",    f"tochi/{pref}/{codes['athome']}/list/")]):
             items = []
             for pn in (1,):   # 予算5回に収めるため1ページのみ
                 url = f"https://www.athome.co.jp/{path}?page={pn}"

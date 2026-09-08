@@ -1,60 +1,50 @@
-"""HOMESの6件制限を越える方法を実測で探す。"""
-import time, random
+"""IPを変える／時間を空ける／別ドメインで越えられるか実測。"""
+import time, os
 from curl_cffi import requests as cr
+import requests as rq
 
-SLUGS = ["oimachi_00603-st","ebisu_00577-st","meguro_00577-st","nakameguro_00577-st",
-         "togoshi_06400-st","gotanda_00603-st","musashikoyama_05069-st","kamata_00605-st",
-         "fudomae_05068-st","mita_06402-st","sengakuji_05181-st","hiro_06347-st"]
-def url(i, kind="mansion"):
-    s = SLUGS[i % len(SLUGS)]
-    return {"mansion": f"https://www.homes.co.jp/mansion/chuko/tokyo/{s}/list/",
-            "house":   f"https://www.homes.co.jp/kodate/chuko/tokyo/{s}/list/",
-            "land":    f"https://www.homes.co.jp/tochi/tokyo/{s}/list/"}[kind]
+SLUG="oimachi_00603-st"
+U=f"https://www.homes.co.jp/mansion/chuko/tokyo/{SLUG}/list/"
 
-def ok(r):
-    return r is not None and r.status_code == 200 and len(r.text) > 50000
+def ok(r): return r is not None and getattr(r,"status_code",0)==200 and len(r.text)>50000
+def get(**kw):
+    try: return cr.get(U, impersonate="chrome120", timeout=30, **kw)
+    except Exception: return None
 
-def run(label, fn, n=14):
-    print(f"\n=== {label} ===", flush=True)
-    got = 0
-    for i in range(n):
-        try:
-            r = fn(i)
-        except Exception:
-            r = None
-        good = ok(r)
-        got += good
-        print(f"  {i+1:>2}: {'OK' if good else 'ブロック'} "
-              f"HTTP{r.status_code if r is not None else 'ERR'}", flush=True)
-        if not good and i >= 7:
-            break
-        time.sleep(3)
-    print(f"  → {got}/{n} 成功", flush=True)
-    return got
+print("=== 0. 現在のIPと素の状態 ===", flush=True)
+try: print("  IP:", rq.get("https://api.ipify.org", timeout=15).text, flush=True)
+except Exception as e: print("  IP取得失敗", e, flush=True)
+r=get(); print(f"  1回目: {'OK' if ok(r) else 'ブロック'}", flush=True)
 
-# A: 毎回新しいSessionを作る
-def a(i):
-    s = cr.Session(impersonate="chrome120")
-    return s.get(url(i), timeout=30)
-run("A: 毎回新しいSession", a)
-time.sleep(60)
+print("\n=== 1. 使い切ってから何分で復帰するか ===", flush=True)
+n=0
+for i in range(10):
+    if ok(get()): n+=1
+    time.sleep(2)
+print(f"  連続で {n}/10 成功（ここでブロック状態）", flush=True)
+for wait in (60, 120, 300):
+    time.sleep(wait)
+    r=get()
+    print(f"  {wait}秒待機後: {'復帰OK' if ok(r) else 'まだブロック'}", flush=True)
+    if ok(r): break
 
-# B: impersonate を毎回変える
-IMPS = ["chrome120","chrome124","chrome131","safari17_0","edge101","chrome116","safari15_5"]
-def b(i):
-    return cr.get(url(i), impersonate=IMPS[i % len(IMPS)], timeout=30)
-run("B: 指紋を毎回変える", b)
-time.sleep(60)
+print("\n=== 2. モバイル版/別ホストは別枠か ===", flush=True)
+for label,u in [("m.homes.co.jp", U.replace("www.","m.")),
+                ("末尾スラッシュ無し", U.rstrip("/")),
+                ("?page=1付き", U+"?page=1")]:
+    try:
+        r=cr.get(u, impersonate="chrome120", timeout=30)
+        print(f"  {label:<20} HTTP{r.status_code} len={len(r.text)} {'OK' if ok(r) else 'NG'}", flush=True)
+    except Exception as e:
+        print(f"  {label:<20} ERR {e}", flush=True)
+    time.sleep(5)
 
-# C: Referer を付けて自然な遷移に見せる
-def c(i):
-    h = {"Referer": "https://www.homes.co.jp/", "Accept-Language": "ja,en;q=0.9"}
-    return cr.get(url(i), headers=h, impersonate="chrome120", timeout=30)
-run("C: Referer付き", c)
-time.sleep(60)
-
-# D: 種別を変える（同一駅の別カテゴリ）
-def d(i):
-    return cr.get(url(i // 3, ["mansion","house","land"][i % 3]),
-                  impersonate="chrome120", timeout=30)
-run("D: 種別ローテ", d)
+print("\n=== 3. 公開プロキシ経由（r.jina.ai） ===", flush=True)
+for i in range(3):
+    try:
+        r=rq.get("https://r.jina.ai/"+U, timeout=45)
+        good = r.status_code==200 and len(r.text)>20000
+        print(f"  {i+1}: HTTP{r.status_code} len={len(r.text)} {'OK' if good else 'NG'}", flush=True)
+    except Exception as e:
+        print(f"  {i+1}: ERR {str(e)[:60]}", flush=True)
+    time.sleep(5)
