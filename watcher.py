@@ -853,6 +853,23 @@ def consume_budget(host):
         return True
 
 
+# 連続で失敗した回数。単発の202で全部止めると取り逃すので、
+# 連続3回失敗して初めて諦める
+_HOST_FAILS = {}
+CONSECUTIVE_FAIL_LIMIT = 3
+
+
+def note_fail(host):
+    with _BUDGET_LOCK:
+        _HOST_FAILS[host] = _HOST_FAILS.get(host, 0) + 1
+        return _HOST_FAILS[host]
+
+
+def note_ok(host):
+    with _BUDGET_LOCK:
+        _HOST_FAILS[host] = 0
+
+
 def kill_budget(host):
     with _BUDGET_LOCK:
         if host in _HOST_BUDGET:
@@ -923,12 +940,21 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
         # HOMESの202はfetch内でhtml=""になる。athomeの認証中ページは硬い200なので中身で判定
         if html and "認証中" not in html[:3000]:
             speed_up(host)
+            note_ok(host)
             return html
         if host in _HOST_BUDGET:
-            # このホストは一度202が出たら間隔を空けても通らない。即打ち切る
-            kill_budget(host)
-            print(f"  {host}: ブロック検知、以降スキップ", file=sys.stderr)
-            return ""
+            # 202は一時的なことが多い。連続で失敗した時だけ諦める。
+            # 1回で全部止めると取り逃す（実測: 202が3回で全ポータル0件になった）
+            n = note_fail(host)
+            slow_down(host, f"(202 {n}回目)")
+            if n >= CONSECUTIVE_FAIL_LIMIT:
+                kill_budget(host)
+                print(f"  {host}: {n}回連続で弾かれたため以降スキップ", file=sys.stderr)
+                return ""
+            if attempt == max_retry - 1:
+                return ""
+            time.sleep(8 * (attempt + 1) + random.uniform(0, 4))
+            continue
         slow_down(host, f"(retry {attempt + 1}/{max_retry})")
         if attempt == max_retry - 1:
             break
