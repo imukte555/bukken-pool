@@ -1,17 +1,17 @@
 {
   "seen_ids": [
-    "suumo:m:20585658",
-    "suumo:m:20837457",
     "suumo:l:21008080",
+    "suumo:m:20918523",
+    "suumo:l:79178891",
+    "suumo:l:79109850",
+    "suumo:l:20863072",
     "suumo:h:21602342",
     "suumo:l:20863877",
     "suumo:l:21631004",
     "suumo:l:20540402",
     "suumo:l:21612503",
-    "suumo:m:20918523",
-    "suumo:l:79178891",
-    "suumo:l:79109850",
-    "suumo:l:20863072",
+    "suumo:m:20585658",
+    "suumo:m:20837457",
     "suumo:h:21425622",
     "suumo:l:21017451",
     "suumo:l:21021265",
@@ -31,6 +31,9 @@
     "suumo:m:21005727",
     "suumo:h:21395289",
     "suumo:h:21307308",
+    "suumo:m:21239491",
+    "suumo:m:21657889",
+    "suumo:m:21380169",
     "suumo:m:21266683",
     "suumo:m:21665549",
     "suumo:m:21537301",
@@ -38,44 +41,41 @@
     "suumo:m:20587605",
     "suumo:m:21119806",
     "suumo:m:20354701",
-    "suumo:m:21239491",
-    "suumo:m:21657889",
-    "suumo:m:21380169",
     "suumo:m:21643103",
     "suumo:l:21483914",
-    "suumo:r:jnc_000080459472",
-    "suumo:r:jnc_000107924722",
-    "suumo:r:jnc_000108998120",
-    "suumo:r:jnc_000109682587",
-    "suumo:r:jnc_000106634983",
-    "suumo:r:jnc_000108089024",
-    "suumo:r:jnc_000108089025",
-    "suumo:r:jnc_000109676015",
-    "suumo:r:jnc_000108910693",
     "suumo:r:jnc_000108470669",
     "suumo:r:jnc_000107389836",
-    "athome:h:1195791721",
+    "suumo:r:jnc_000109396185",
     "livable:h:C13261765",
     "suumo:r:jnc_000108910652",
     "suumo:r:jnc_000109640904",
     "suumo:r:jnc_000109355761",
     "suumo:r:jnc_000109701505",
     "suumo:r:jnc_000107443349",
+    "suumo:r:jnc_000108531046",
     "suumo:r:jnc_000107290588",
     "suumo:r:jnc_000108094363",
-    "suumo:r:jnc_000106120392",
-    "suumo:r:jnc_000106120400",
-    "suumo:r:jnc_000106120378",
-    "suumo:r:jnc_000109396185",
-    "livable:l:C13266784",
-    "suumo:r:jnc_000109600819",
-    "suumo:r:jnc_000109334234",
-    "suumo:r:jnc_000109609902",
-    "suumo:r:jnc_000104903148",
+    "suumo:r:jnc_000109682587",
+    "suumo:r:jnc_000106634983",
+    "suumo:r:jnc_000108774137",
+    "suumo:r:jnc_000109488969",
+    "suumo:r:jnc_000108089024",
+    "suumo:r:jnc_000108089025",
+    "suumo:r:jnc_000109676015",
+    "suumo:r:jnc_000108910693",
+    "suumo:r:jnc_000080459472",
+    "suumo:r:jnc_000107924722",
+    "suumo:r:jnc_000108998120",
     "suumo:r:jnc_000107686311",
     "suumo:r:jnc_000103023730",
     "suumo:r:jnc_000109372911",
     "suumo:r:jnc_000106870230",
+    "livable:l:C13266784",
+    "suumo:r:jnc_000109600819",
+    "suumo:r:jnc_000109334234",
+    "suumo:r:jnc_000109547653",
+    "suumo:r:jnc_000109609902",
+    "suumo:r:jnc_000108506045",
     "nomu:m:F82C4025",
     "suumo:r:jnc_000107039458",
     "suumo:r:jnc_000107393932",
@@ -96,7 +96,6 @@
     "suumo:r:jnc_000109073540",
     "suumo:r:jnc_000109707806",
     "suumo:r:jnc_000109244976",
-    "suumo:r:jnc_000105999354",
     "suumo:r:jnc_000109396207",
     "suumo:r:jnc_000108438590",
     "suumo:r:jnc_000109617662",
@@ -104,37 +103,37 @@
     "suumo:r:jnc_000109066929",
     "suumo:r:jnc_000109495125",
     "suumo:r:jnc_000107565289",
+    "suumo:r:jnc_000108732304",
+    "suumo:r:jnc_000108666648",
+    "suumo:r:jnc_000108802490",
+    "suumo:r:jnc_000109372915",
+    "suumo:r:jnc_000107595696",
     "nomu:m:V8770005",
     "suumo:r:jnc_000109073485",
     "suumo:r:jnc_000109537857",
     "suumo:r:jnc_000109369127",
     "suumo:r:jnc_000069747839",
     "suumo:r:jnc_000109148942",
-    "suumo:r:jnc_000108802490",
-    "suumo:r:jnc_000108732304",
-    "suumo:r:jnc_000108666648",
-    "suumo:r:jnc_000109372915",
-    "suumo:r:jnc_000107595696",
     "suumo:r:jnc_000106747710",
     "suumo:r:jnc_000106747712",
     "suumo:r:jnc_000105022759",
     "suumo:r:jnc_000109073864",
     "suumo:r:jnc_000108613077"
   ],
-  "last_run": 1788898216,
+  "last_run": 1788899796,
   "prices": {
-    "suumo:m:20585658": 9480,
-    "suumo:m:20837457": 11880,
     "suumo:l:21008080": 9800,
+    "suumo:m:20918523": 11980,
+    "suumo:l:79178891": 11000,
+    "suumo:l:79109850": 11000,
+    "suumo:l:20863072": 11000,
     "suumo:h:21602342": 9500,
     "suumo:l:20863877": 9800,
     "suumo:l:21631004": 9800,
     "suumo:l:20540402": 9800,
     "suumo:l:21612503": 9800,
-    "suumo:m:20918523": 11980,
-    "suumo:l:79178891": 11000,
-    "suumo:l:79109850": 11000,
-    "suumo:l:20863072": 11000,
+    "suumo:m:20585658": 9480,
+    "suumo:m:20837457": 11880,
     "suumo:h:21425622": 8780,
     "suumo:l:21017451": 4980,
     "suumo:l:21021265": 4980,
@@ -154,6 +153,9 @@
     "suumo:m:21005727": 10990,
     "suumo:h:21395289": 8010,
     "suumo:h:21307308": 9090,
+    "suumo:m:21239491": 11999,
+    "suumo:m:21657889": 11999,
+    "suumo:m:21380169": 11999,
     "suumo:m:21266683": 10490,
     "suumo:m:21665549": 11580,
     "suumo:m:21537301": 11850,
@@ -161,44 +163,41 @@
     "suumo:m:20587605": 10480,
     "suumo:m:21119806": 10790,
     "suumo:m:20354701": 11380,
-    "suumo:m:21239491": 11999,
-    "suumo:m:21657889": 11999,
-    "suumo:m:21380169": 11999,
     "suumo:m:21643103": 8980,
     "suumo:l:21483914": 9580,
-    "suumo:r:jnc_000080459472": 22.5,
-    "suumo:r:jnc_000107924722": 23.5,
-    "suumo:r:jnc_000108998120": 27.25,
-    "suumo:r:jnc_000109682587": 20.6,
-    "suumo:r:jnc_000106634983": 23.8,
-    "suumo:r:jnc_000108089024": 25.6,
-    "suumo:r:jnc_000108089025": 25.8,
-    "suumo:r:jnc_000109676015": 26.0,
-    "suumo:r:jnc_000108910693": 26.4,
     "suumo:r:jnc_000108470669": 25.2,
     "suumo:r:jnc_000107389836": 28.0,
-    "athome:h:1195791721": 9500,
+    "suumo:r:jnc_000109396185": 28.0,
     "livable:h:C13261765": 9500,
     "suumo:r:jnc_000108910652": 15.3,
     "suumo:r:jnc_000109640904": 17.8,
     "suumo:r:jnc_000109355761": 19.5,
     "suumo:r:jnc_000109701505": 20.2,
     "suumo:r:jnc_000107443349": 21.1,
+    "suumo:r:jnc_000108531046": 21.9,
     "suumo:r:jnc_000107290588": 26.6,
     "suumo:r:jnc_000108094363": 27.0,
-    "suumo:r:jnc_000106120392": 26.6,
-    "suumo:r:jnc_000106120400": 26.8,
-    "suumo:r:jnc_000106120378": 26.9,
-    "suumo:r:jnc_000109396185": 28.0,
-    "livable:l:C13266784": 4980,
-    "suumo:r:jnc_000109600819": 21.3,
-    "suumo:r:jnc_000109334234": 24.2,
-    "suumo:r:jnc_000109609902": 24.6,
-    "suumo:r:jnc_000104903148": 25.3,
+    "suumo:r:jnc_000109682587": 20.6,
+    "suumo:r:jnc_000106634983": 23.8,
+    "suumo:r:jnc_000108774137": 24.2,
+    "suumo:r:jnc_000109488969": 25.0,
+    "suumo:r:jnc_000108089024": 25.6,
+    "suumo:r:jnc_000108089025": 25.8,
+    "suumo:r:jnc_000109676015": 26.0,
+    "suumo:r:jnc_000108910693": 26.4,
+    "suumo:r:jnc_000080459472": 22.5,
+    "suumo:r:jnc_000107924722": 23.5,
+    "suumo:r:jnc_000108998120": 27.25,
     "suumo:r:jnc_000107686311": 23.7,
     "suumo:r:jnc_000103023730": 25.8,
     "suumo:r:jnc_000109372911": 27.4,
     "suumo:r:jnc_000106870230": 27.8,
+    "livable:l:C13266784": 4980,
+    "suumo:r:jnc_000109600819": 21.3,
+    "suumo:r:jnc_000109334234": 24.2,
+    "suumo:r:jnc_000109547653": 24.2,
+    "suumo:r:jnc_000109609902": 24.6,
+    "suumo:r:jnc_000108506045": 25.3,
     "nomu:m:F82C4025": 10480,
     "suumo:r:jnc_000107039458": 26.5,
     "suumo:r:jnc_000107393932": 26.7,
@@ -219,7 +218,6 @@
     "suumo:r:jnc_000109073540": 27.9,
     "suumo:r:jnc_000109707806": 22.2,
     "suumo:r:jnc_000109244976": 26.0,
-    "suumo:r:jnc_000105999354": 26.2,
     "suumo:r:jnc_000109396207": 19.9,
     "suumo:r:jnc_000108438590": 21.0,
     "suumo:r:jnc_000109617662": 21.5,
@@ -227,17 +225,17 @@
     "suumo:r:jnc_000109066929": 22.8,
     "suumo:r:jnc_000109495125": 23.0,
     "suumo:r:jnc_000107565289": 28.0,
+    "suumo:r:jnc_000108732304": 24.0,
+    "suumo:r:jnc_000108666648": 24.5,
+    "suumo:r:jnc_000108802490": 27.0,
+    "suumo:r:jnc_000109372915": 26.3,
+    "suumo:r:jnc_000107595696": 26.7,
     "nomu:m:V8770005": 11980,
     "suumo:r:jnc_000109073485": 21.5,
     "suumo:r:jnc_000109537857": 25.1,
     "suumo:r:jnc_000109369127": 26.5,
     "suumo:r:jnc_000069747839": 27.2,
     "suumo:r:jnc_000109148942": 27.3,
-    "suumo:r:jnc_000108802490": 27.0,
-    "suumo:r:jnc_000108732304": 24.0,
-    "suumo:r:jnc_000108666648": 24.5,
-    "suumo:r:jnc_000109372915": 26.3,
-    "suumo:r:jnc_000107595696": 26.7,
     "suumo:r:jnc_000106747710": 12.3,
     "suumo:r:jnc_000106747712": 13.1,
     "suumo:r:jnc_000105022759": 13.3,
@@ -245,6 +243,15 @@
     "suumo:r:jnc_000108613077": 26.9
   },
   "watchlist": {
+    "homes:h:b-1375350001854": {
+      "price": 22880,
+      "name": "中古一戸建てー目黒区中目黒１丁目 3LDK 駅徒歩５分ー",
+      "station": "恵比寿",
+      "type": "house",
+      "url": "https://www.homes.co.jp/kodate/b-1375350001854/",
+      "area": 52.01,
+      "first": 22880
+    },
     "homes:h:b-1282360004482": {
       "price": 25000,
       "name": "中古一戸建て品格の漂う街とデザイン　恵比寿西2丁目",
@@ -272,68 +279,14 @@
       "area": 48.55,
       "first": 22800
     },
-    "athome:l:1110295118": {
-      "price": 22800,
-      "name": "土地渋谷区 恵比寿４丁目（恵比寿駅） 住宅用地22,800万円坪単価1,552.",
-      "station": "恵比寿",
-      "type": "land",
-      "url": "https://www.athome.co.jp/tochi/1110295118/?DOWN=2&BKLISTID=002LPC&SEARCHDIV=1&sref=list_simple",
-      "area": 48.55,
-      "first": 22800
-    },
-    "athome:l:1106195019": {
-      "price": 22800,
-      "name": "写真充実土地渋谷区 恵比寿４丁目（恵比寿駅） 住宅用地22,800万円坪単価1,",
-      "station": "恵比寿",
-      "type": "land",
-      "url": "https://www.athome.co.jp/tochi/1106195019/?DOWN=2&BKLISTID=002LPC&SEARCHDIV=1&sref=list_simple",
-      "area": 48.79,
-      "first": 22800
-    },
-    "nomu:h:E89Q7004": {
-      "price": 25000,
-      "name": "渋谷区恵比寿西二丁目戸建",
-      "station": "恵比寿",
-      "type": "house",
-      "url": "https://www.nomu.com/house/id/E89Q7004/",
-      "area": 109.86,
-      "first": 25000
-    },
-    "athome:h:1019824791": {
-      "price": 13380,
-      "name": "写真充実新築一戸建て品川区 平塚３丁目（戸越駅） 3階建 ２ＳＬＤＫ13,380",
-      "station": "戸越",
-      "type": "house",
-      "url": "https://www.athome.co.jp/kodate/1019824791/?DOWN=2&BKLISTID=002LPC&SEARCHDIV=1&sref=list_simple",
-      "area": 68.87,
-      "first": 13380
-    },
-    "athome:h:1150899708": {
-      "price": 13380,
-      "name": "写真充実新築一戸建て品川区 平塚３丁目（戸越駅） 3階建 ２ＳＬＤＫ13,380",
-      "station": "戸越",
-      "type": "house",
-      "url": "https://www.athome.co.jp/kodate/1150899708/?DOWN=2&BKLISTID=002LPC&SEARCHDIV=1&sref=list_simple",
-      "area": 68.87,
-      "first": 13380
-    },
-    "athome:h:1110079318": {
-      "price": 19280,
-      "name": "新築一戸建て品川区 戸越５丁目（戸越駅） 3階建 ４ＬＤＫ19,280万円間取り",
-      "station": "戸越",
-      "type": "house",
-      "url": "https://www.athome.co.jp/kodate/1110079318/?DOWN=2&BKLISTID=002LPC&SEARCHDIV=1&sref=list_simple",
-      "area": 85.91,
-      "first": 19280
-    },
-    "nomu:l:UF470042": {
-      "price": 22800,
-      "name": "渋谷区恵比寿4丁目 土地",
-      "station": "恵比寿",
-      "type": "land",
-      "url": "https://www.nomu.com/land/id/UF470042/",
-      "area": 48.79,
-      "first": 22800
+    "nomu:m:FF4C5050": {
+      "price": 18800,
+      "name": "ピアース中目黒ローレルアイ",
+      "station": "中目黒",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FF4C5050/",
+      "area": 73.34,
+      "first": 18800
     },
     "nomu:m:FC7C5009": {
       "price": 21800,
@@ -380,23 +333,23 @@
       "area": 67.58,
       "first": 17980
     },
-    "nomu:m:FF4C5050": {
-      "price": 18800,
-      "name": "ピアース中目黒ローレルアイ",
-      "station": "中目黒",
-      "type": "mansion",
-      "url": "https://www.nomu.com/mansion/id/FF4C5050/",
-      "area": 73.34,
-      "first": 18800
-    },
-    "suumo:r:jnc_000108683103": {
-      "price": 29.0,
-      "name": "ザ マグノリアガーデン恵比寿",
+    "nomu:h:E89Q7004": {
+      "price": 25000,
+      "name": "渋谷区恵比寿西二丁目戸建",
       "station": "恵比寿",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000108683103/?bc=100512625574",
-      "area": 48.86,
-      "first": 29.0
+      "type": "house",
+      "url": "https://www.nomu.com/house/id/E89Q7004/",
+      "area": 109.86,
+      "first": 25000
+    },
+    "nomu:l:UF470042": {
+      "price": 22800,
+      "name": "渋谷区恵比寿4丁目 土地",
+      "station": "恵比寿",
+      "type": "land",
+      "url": "https://www.nomu.com/land/id/UF470042/",
+      "area": 48.79,
+      "first": 22800
     },
     "livable:m:C48267122": {
       "price": 21800,
@@ -407,12 +360,156 @@
       "area": 80.2,
       "first": 21800
     },
+    "suumo:r:jnc_000108438536": {
+      "price": 28.8,
+      "name": "グレイスコート目黒",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108438536/?bc=100520841516",
+      "area": 54.58,
+      "first": 28.8
+    },
+    "suumo:r:jnc_000107403218": {
+      "price": 28.7,
+      "name": "AIFLAT品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107403218/?bc=100485811149",
+      "area": 48.04,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000105447007": {
+      "price": 29.4,
+      "name": "AIFLAT品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105447007/?bc=100485655508",
+      "area": 48.04,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000105848887": {
+      "price": 29.4,
+      "name": "AIFLAT品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105848887/?bc=100496576164",
+      "area": 48.04,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000105447005": {
+      "price": 29.7,
+      "name": "AIFLAT品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105447005/?bc=100509427895",
+      "area": 48.72,
+      "first": 29.7
+    },
+    "suumo:r:jnc_000107311695": {
+      "price": 29.7,
+      "name": "AIFLAT品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107311695/?bc=100505802460",
+      "area": 48.72,
+      "first": 29.7
+    },
+    "suumo:r:jnc_000107311696": {
+      "price": 29.9,
+      "name": "AIFLAT品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107311696/?bc=100468822351",
+      "area": 48.72,
+      "first": 29.9
+    },
+    "suumo:r:jnc_000108340396": {
+      "price": 29.9,
+      "name": "AIFLAT品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108340396/?bc=100514371466",
+      "area": 48.72,
+      "first": 29.9
+    },
+    "suumo:r:jnc_000107311697": {
+      "price": 29.9,
+      "name": "AIFLAT品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107311697/?bc=100505503743",
+      "area": 48.72,
+      "first": 29.9
+    },
+    "suumo:r:jnc_000090139804": {
+      "price": 28.5,
+      "name": "ＬｉｖｅＦｌａｔ戸越",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000090139804/?bc=100523971502",
+      "area": 79.29,
+      "first": 28.5
+    },
+    "suumo:r:jnc_000109538075": {
+      "price": 42.0,
+      "name": "ＬｉｖｅＦｌａｔ戸越",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109538075/?bc=100522816456",
+      "area": 79.29,
+      "first": 42.0
+    },
+    "suumo:r:jnc_000109120529": {
+      "price": 28.5,
+      "name": "戸越Ｂ．ＩＧ．　ＲＥＳＩＤＥＮＣＥ",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109120529/?bc=100521683284",
+      "area": 61.69,
+      "first": 28.5
+    },
+    "suumo:r:jnc_000107559566": {
+      "price": 28.7,
+      "name": "品川区戸越４ 賃貸",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107559566/?bc=100516671608",
+      "area": 48.04,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000105688854": {
+      "price": 29.4,
+      "name": "品川区戸越４ 賃貸",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105688854/?bc=100516671648",
+      "area": 48.04,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000105688853": {
+      "price": 29.7,
+      "name": "品川区戸越４ 賃貸",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105688853/?bc=100516671606",
+      "area": 48.72,
+      "first": 29.7
+    },
+    "suumo:r:jnc_000107459365": {
+      "price": 29.9,
+      "name": "品川区戸越４ 賃貸",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107459365/?bc=100522431895",
+      "area": 48.72,
+      "first": 29.9
+    },
     "suumo:r:jnc_000105344272": {
       "price": 29.6,
       "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町",
       "station": "大井町",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000105344272/?bc=100524558901",
+      "url": "https://suumo.jp/chintai/jnc_000105344272/?bc=100494525764",
       "area": 52.9,
       "first": 29.6
     },
@@ -430,7 +527,7 @@
       "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町",
       "station": "大井町",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000105344275/?bc=100513945292",
+      "url": "https://suumo.jp/chintai/jnc_000105344275/?bc=100494602488",
       "area": 52.9,
       "first": 29.7
     },
@@ -439,7 +536,7 @@
       "name": "オープンレジデンシア大井町",
       "station": "大井町",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000108973194/?bc=100524201108",
+      "url": "https://suumo.jp/chintai/jnc_000108973194/?bc=100525255601",
       "area": 73.09,
       "first": 29.0
     },
@@ -490,147 +587,21 @@
     },
     "suumo:r:jnc_000107565222": {
       "price": 29.3,
-      "name": "ＧＲＡＮ　ＰＡＳＥＯ大井町",
+      "name": "ＧＲＡＮ ＰＡＳＥＯ大井町",
       "station": "大井町",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000107565222/?bc=100513535365",
+      "url": "https://suumo.jp/chintai/jnc_000107565222/?bc=100487106370",
       "area": 51.14,
       "first": 29.3
     },
-    "suumo:r:jnc_000107403218": {
-      "price": 28.7,
-      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
-      "station": "戸越",
+    "suumo:r:jnc_000108683103": {
+      "price": 29.0,
+      "name": "ザ マグノリアガーデン恵比寿",
+      "station": "恵比寿",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000107403218/?bc=100521007516",
-      "area": 48.04,
-      "first": 28.7
-    },
-    "suumo:r:jnc_000105447007": {
-      "price": 29.4,
-      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000105447007/?bc=100507915275",
-      "area": 48.04,
-      "first": 29.4
-    },
-    "suumo:r:jnc_000105848887": {
-      "price": 29.4,
-      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000105848887/?bc=100496576164",
-      "area": 48.04,
-      "first": 29.4
-    },
-    "suumo:r:jnc_000105447005": {
-      "price": 29.7,
-      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000105447005/?bc=100485947482",
-      "area": 48.72,
-      "first": 29.7
-    },
-    "suumo:r:jnc_000107311695": {
-      "price": 29.7,
-      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000107311695/?bc=100505802460",
-      "area": 48.72,
-      "first": 29.7
-    },
-    "suumo:r:jnc_000107311696": {
-      "price": 29.9,
-      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000107311696/?bc=100525813319",
-      "area": 48.72,
-      "first": 29.9
-    },
-    "suumo:r:jnc_000108340396": {
-      "price": 29.9,
-      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000108340396/?bc=100514371466",
-      "area": 48.72,
-      "first": 29.9
-    },
-    "suumo:r:jnc_000107311697": {
-      "price": 29.9,
-      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000107311697/?bc=100505503743",
-      "area": 48.72,
-      "first": 29.9
-    },
-    "suumo:r:jnc_000090139804": {
-      "price": 28.5,
-      "name": "LiveFlat戸越",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000090139804/?bc=100523056344",
-      "area": 79.29,
-      "first": 28.5
-    },
-    "suumo:r:jnc_000109538075": {
-      "price": 42.0,
-      "name": "LiveFlat戸越",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109538075/?bc=100513138507",
-      "area": 79.29,
-      "first": 42.0
-    },
-    "suumo:r:jnc_000109120529": {
-      "price": 28.5,
-      "name": "戸越Ｂ．ＩＧ．　ＲＥＳＩＤＥＮＣＥ",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109120529/?bc=100521683956",
-      "area": 61.69,
-      "first": 28.5
-    },
-    "suumo:r:jnc_000107559566": {
-      "price": 28.7,
-      "name": "品川区戸越４ 賃貸",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000107559566/?bc=100516671608",
-      "area": 48.04,
-      "first": 28.7
-    },
-    "suumo:r:jnc_000105688854": {
-      "price": 29.4,
-      "name": "品川区戸越４ 賃貸",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000105688854/?bc=100516671648",
-      "area": 48.04,
-      "first": 29.4
-    },
-    "suumo:r:jnc_000105688853": {
-      "price": 29.7,
-      "name": "品川区戸越４ 賃貸",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000105688853/?bc=100516671606",
-      "area": 48.72,
-      "first": 29.7
-    },
-    "suumo:r:jnc_000107459365": {
-      "price": 29.9,
-      "name": "品川区戸越４ 賃貸",
-      "station": "戸越",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000107459365/?bc=100516120993",
-      "area": 48.72,
-      "first": 29.9
+      "url": "https://suumo.jp/chintai/jnc_000108683103/?bc=100512625574",
+      "area": 48.86,
+      "first": 29.0
     },
     "nomu:m:RB470815": {
       "price": 12700,
@@ -712,78 +683,6 @@
       "url": "https://www.nomu.com/mansion/id/BB470002/",
       "area": 72.12,
       "first": 24800
-    },
-    "livable:m:C13267715": {
-      "price": 16980,
-      "name": "シティタワー武蔵小山",
-      "station": "武蔵小山",
-      "type": "mansion",
-      "url": "https://www.livable.co.jp/mansion/C13267715/",
-      "area": 57.41,
-      "first": 16980
-    },
-    "livable:l:C48265574": {
-      "price": 14980,
-      "name": "東京都品川区小山台１丁目",
-      "station": "武蔵小山",
-      "type": "land",
-      "url": "https://www.livable.co.jp/tochi/C48265574/",
-      "area": 136.0,
-      "first": 14980
-    },
-    "suumo:r:jnc_000106298026": {
-      "price": 29.8,
-      "name": "スタイリオフィット武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000106298026/?bc=100500634507",
-      "area": 65.33,
-      "first": 29.8
-    },
-    "suumo:r:jnc_000096937483": {
-      "price": 29.4,
-      "name": "エフローレプルミエ武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000096937483/?bc=100525227587",
-      "area": 56.74,
-      "first": 29.4
-    },
-    "suumo:r:jnc_000096937497": {
-      "price": 29.4,
-      "name": "品川区小山２ 賃貸",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000096937497/?bc=100525814927",
-      "area": 56.74,
-      "first": 29.4
-    },
-    "suumo:r:jnc_000109447738": {
-      "price": 28.7,
-      "name": "プレゾン武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109447738/?bc=100524190160",
-      "area": 66.04,
-      "first": 28.7
-    },
-    "suumo:r:jnc_000108740582": {
-      "price": 28.7,
-      "name": "品川区小山２ 賃貸",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000108740582/?bc=100518670886",
-      "area": 59.51,
-      "first": 28.7
-    },
-    "suumo:r:jnc_000095960345": {
-      "price": 28.7,
-      "name": "レクス武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000095960345/?bc=100518725118",
-      "area": 59.51,
-      "first": 28.7
     },
     "nomu:m:R8670643": {
       "price": 24980,
@@ -902,6 +801,15 @@
       "area": 78.66,
       "first": 18500
     },
+    "livable:m:C13267715": {
+      "price": 16980,
+      "name": "シティタワー武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C13267715/",
+      "area": 57.41,
+      "first": 16980
+    },
     "livable:m:C13263122": {
       "price": 21980,
       "name": "パークタワーグランスカイ",
@@ -910,15 +818,6 @@
       "url": "https://www.livable.co.jp/mansion/C13263122/",
       "area": 83.84,
       "first": 21980
-    },
-    "nomu:m:WF470054": {
-      "price": 21900,
-      "name": "ザ・パークハウス代官山レジデンス",
-      "station": "代官山",
-      "type": "mansion",
-      "url": "https://www.nomu.com/mansion/id/WF470054/",
-      "area": 61.62,
-      "first": 21900
     },
     "livable:m:C48267270": {
       "price": 13740,
@@ -956,6 +855,15 @@
       "area": 64.5,
       "first": 18490
     },
+    "livable:l:C48265574": {
+      "price": 14980,
+      "name": "東京都品川区小山台１丁目",
+      "station": "武蔵小山",
+      "type": "land",
+      "url": "https://www.livable.co.jp/tochi/C48265574/",
+      "area": 136.0,
+      "first": 14980
+    },
     "livable:h:C13268780": {
       "price": 16980,
       "name": "東京都品川区西五反田５丁目",
@@ -964,6 +872,69 @@
       "url": "https://www.livable.co.jp/kodate/C13268780/",
       "area": 154.53,
       "first": 16980
+    },
+    "suumo:r:jnc_000106298026": {
+      "price": 29.8,
+      "name": "スタイリオフィット武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000106298026/?bc=100500634507",
+      "area": 65.33,
+      "first": 29.8
+    },
+    "suumo:r:jnc_000096937483": {
+      "price": 29.4,
+      "name": "エフローレプルミエ武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000096937483/?bc=100525214530",
+      "area": 56.74,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000096937497": {
+      "price": 29.4,
+      "name": "品川区小山２ 賃貸",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000096937497/?bc=100525814927",
+      "area": 56.74,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000109447738": {
+      "price": 28.7,
+      "name": "プレゾン武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109447738/?bc=100524135770",
+      "area": 66.04,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000108740582": {
+      "price": 28.7,
+      "name": "品川区小山２ 賃貸",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108740582/?bc=100518780601",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000095960345": {
+      "price": 28.7,
+      "name": "レクス武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000095960345/?bc=100484681868",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "nomu:m:WF470054": {
+      "price": 21900,
+      "name": "ザ・パークハウス代官山レジデンス",
+      "station": "代官山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/WF470054/",
+      "area": 61.62,
+      "first": 21900
     },
     "nomu:m:RB370479": {
       "price": 20500,
@@ -1055,6 +1026,15 @@
       "area": 53.37,
       "first": 24800
     },
+    "livable:m:C13261261": {
+      "price": 21600,
+      "name": "イニシア高輪プレシアスコート",
+      "station": "泉岳寺",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C13261261/",
+      "area": 70.42,
+      "first": 21600
+    },
     "livable:m:C48262656": {
       "price": 21800,
       "name": "クレストプライムタワー芝",
@@ -1073,69 +1053,6 @@
       "area": 62.24,
       "first": 18800
     },
-    "livable:m:C13261261": {
-      "price": 21600,
-      "name": "イニシア高輪プレシアスコート",
-      "station": "泉岳寺",
-      "type": "mansion",
-      "url": "https://www.livable.co.jp/mansion/C13261261/",
-      "area": 70.42,
-      "first": 21600
-    },
-    "suumo:r:jnc_000109177923": {
-      "price": 28.2,
-      "name": "オープンブルーム東日本橋",
-      "station": "東日本橋",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109177923/?bc=100523650957",
-      "area": 46.97,
-      "first": 28.2
-    },
-    "suumo:r:jnc_000108584610": {
-      "price": 29.0,
-      "name": "オープンブルーム東日本橋",
-      "station": "東日本橋",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000108584610/?bc=100517443982",
-      "area": 46.97,
-      "first": 29.0
-    },
-    "suumo:r:jnc_000109483277": {
-      "price": 28.3,
-      "name": "中央区東日本橋３ 賃貸",
-      "station": "東日本橋",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109483277/?bc=100524965423",
-      "area": 56.42,
-      "first": 28.3
-    },
-    "suumo:r:jnc_000109483276": {
-      "price": 28.3,
-      "name": "ジェノヴィア東日本橋駅前グリーンヴェール",
-      "station": "東日本橋",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109483276/?bc=100524719315",
-      "area": 56.42,
-      "first": 28.3
-    },
-    "suumo:r:jnc_000109180236": {
-      "price": 28.2,
-      "name": "中央区東日本橋２ 賃貸",
-      "station": "東日本橋",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109180236/?bc=100296408254",
-      "area": 46.97,
-      "first": 28.2
-    },
-    "suumo:r:jnc_000108596742": {
-      "price": 29.0,
-      "name": "中央区東日本橋２ 賃貸",
-      "station": "東日本橋",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000108596742/?bc=100517726363",
-      "area": 46.97,
-      "first": 29.0
-    },
     "nomu:m:RF570244": {
       "price": 19000,
       "name": "品川タワーレジデンス",
@@ -1144,6 +1061,60 @@
       "url": "https://www.nomu.com/mansion/id/RF570244/",
       "area": 56.33,
       "first": 19000
+    },
+    "suumo:r:jnc_000109177923": {
+      "price": 28.2,
+      "name": "オープンブルーム東日本橋",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109177923/?bc=100524813293",
+      "area": 46.97,
+      "first": 28.2
+    },
+    "suumo:r:jnc_000108584610": {
+      "price": 29.0,
+      "name": "オープンブルーム東日本橋",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108584610/?bc=100517390871",
+      "area": 46.97,
+      "first": 29.0
+    },
+    "suumo:r:jnc_000109483277": {
+      "price": 28.3,
+      "name": "中央区東日本橋３ 賃貸",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483277/?bc=100524965348",
+      "area": 56.42,
+      "first": 28.3
+    },
+    "suumo:r:jnc_000109483276": {
+      "price": 28.3,
+      "name": "ジェノヴィア東日本橋駅前グリーンヴェール",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483276/?bc=100524589407",
+      "area": 56.42,
+      "first": 28.3
+    },
+    "suumo:r:jnc_000109180236": {
+      "price": 28.2,
+      "name": "中央区東日本橋２ 賃貸",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109180236/?bc=100522136792",
+      "area": 46.97,
+      "first": 28.2
+    },
+    "suumo:r:jnc_000108596742": {
+      "price": 29.0,
+      "name": "中央区東日本橋２ 賃貸",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108596742/?bc=100517726896",
+      "area": 46.97,
+      "first": 29.0
     },
     "suumo:r:jnc_000109483736": {
       "price": 28.1,
@@ -2919,6 +2890,18 @@
       "first_price": 22.2,
       "cuts": [],
       "last_price": 22.2
+    },
+    "suumo:r:jnc_000108531046": {
+      "first": "2026-09-09",
+      "first_price": 21.9,
+      "cuts": [],
+      "last_price": 21.9
+    },
+    "suumo:r:jnc_000109547653": {
+      "first": "2026-09-09",
+      "first_price": 24.2,
+      "cuts": [],
+      "last_price": 24.2
     }
   },
   "notified_on": "2026-09-08"
