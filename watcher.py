@@ -199,6 +199,16 @@ def card_image(node):
     return ""
 
 
+def suumo_mb(area_min):
+    """SUUMOの面積下限(mb)は10刻みしか受け付けない。
+    45 のような値を渡すとエラーページが返り、取得が丸ごと0件になる
+    （2026-09-08に中古マンションが全駅0件になった原因）。
+    取りこぼさないよう「下限を超えない最大の10刻み」に丸める。
+    """
+    v = int(area_min) // 10 * 10
+    return max(10, v)
+
+
 def parse_price_man(text: str):
     # ノムコム/リバブルは "1 億 4,280 万円" のように空白あり
     m = re.search(r"(\d+)\s*億\s*([\d,]+)?\s*万", text)
@@ -990,7 +1000,7 @@ def collect_station(station, codes):
                 # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
                 # 50㎡未満14件→0件。同じ取得回数でも大きい物件を多く拾える）
                 # 土地は建物面積の概念が違うので mb は付けない
-                _mb = "" if kind == "land" else f"&mb={int(AREA_MIN)}"
+                _mb = "" if kind == "land" else f"&mb={suumo_mb(AREA_MIN)}"
                 url = (f"https://suumo.jp/{path}?et=10&pn={pn}"
                        f"&kb={PRICE_MIN}&kt={PRICE_MAX}{_mb}")
                 html = fetch_with_retry(url)
@@ -1091,7 +1101,7 @@ def collect_station(station, codes):
             # 45㎡未満が58件→0件。取得枠を狭い部屋に食われなくなる）
             url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
                    f"/ek_{codes['suumo']}/?page={pn}"
-                   f"&mb={int(RENT_AREA_MIN)}&cb={RENT_MIN}&ct={RENT_MAX}")
+                   f"&mb={suumo_mb(RENT_AREA_MIN)}&cb={RENT_MIN}&ct={RENT_MAX}")
             html = fetch_with_retry(url)
             page = parse_suumo_rent(html, station)
             if not page:
