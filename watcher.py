@@ -838,7 +838,10 @@ MAX_INTERVAL = 6.0
 # HOMES/アットホームは「1実行あたり最初の5〜6回だけ通し、超えるとIPごと
 # ブロックして間隔を空けても解けない」仕様（Actions上で実測）。
 # 予算内に収め、最初の202が出た時点で打ち切る。
-_HOST_BUDGET = {"www.homes.co.jp": 18, "www.athome.co.jp": 18}
+# HOMESはActionsのIPから1実行6リクエストで打ち止め（2026-09-08実測。
+# 6件目以降は間隔を6秒/10秒に広げても復帰しない）。無駄打ちしないよう
+# 6に固定し、駅を日替わりで回して全駅をカバーする。
+_HOST_BUDGET = {"www.homes.co.jp": 6, "www.athome.co.jp": 18}
 _BUDGET_LOCK = threading.Lock()
 
 
@@ -975,10 +978,32 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
     return ""
 
 
+def homes_stations_today(n=2):
+    """HOMESは1実行6リクエスト(=2駅×3種別)しか通らない。
+    日替わりで対象駅をずらし、数日かければ全駅を回れるようにする。
+    第一希望と優先駅を先頭に置いた順で巡回する。
+    """
+    from datetime import datetime, timezone, timedelta
+    # 第一希望の大井町は毎日固定。残り1枠を他の駅で日替わりに回す。
+    fixed = "大井町" if STATIONS.get("大井町", {}).get("homes") else None
+    rest = [k for k in (tuple(PRIORITY_STATIONS)
+                        + tuple(x for x in STATIONS if x not in PRIORITY_STATIONS))
+            if k != fixed and STATIONS.get(k, {}).get("homes")]
+    if not rest:
+        return (fixed,) if fixed else ()
+    doy = datetime.now(timezone(timedelta(hours=9))).timetuple().tm_yday
+    picked = [rest[(doy + i) % len(rest)] for i in range(max(0, n - (1 if fixed else 0)))]
+    return tuple(([fixed] if fixed else []) + picked)
+
+
 def collect_all():
     """駅ごとの取得を並列実行。同一サイトへの同時接続は WORKERS で抑える。"""
     all_items = []
     portal_count = Counter()
+
+    global HOMES_TODAY
+    HOMES_TODAY = homes_stations_today()
+    print(f"HOMESの本日の担当駅: {'/'.join(HOMES_TODAY) or 'なし'}（1実行6リクエスト上限）")
 
     results = []
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
@@ -1006,6 +1031,9 @@ def collect_all():
         print(f"  {k}: {v}")
 
     return all_items
+
+
+HOMES_TODAY = ()
 
 
 def collect_station(station, codes):
@@ -1050,9 +1078,8 @@ def collect_station(station, codes):
         # 駅コード未検証のポータルはスキップ（推測URLで別エリアを拾わないため）
         # 予算5回に収める。マンションはSUUMO/ノムコムで足りているが、
         # 土地は掲載自体が少ないので、この枠は土地に使う。
-        # 全駅・全種別を対象にする。予算(_HOST_BUDGET)を使い切ったら
-        # そこで打ち切られるので、優先駅から順に回るよう並べ替え済み
-        use_homes = bool(codes.get("homes"))
+        # HOMESは6リクエストしか通らないので当日の担当2駅だけ叩く
+        use_homes = bool(codes.get("homes")) and station in HOMES_TODAY
         for kind, path in ([] if not use_homes else
                            [("mansion", f"mansion/chuko/tokyo/{codes['homes']}/list/"),
                             ("house",   f"kodate/chuko/tokyo/{codes['homes']}/list/"),
