@@ -108,7 +108,7 @@ STATIONS = {
     "大門":   {"suumo": "22090", "homes": "daimon_06403-st",                  "nomu": "ensen_tokyo/2351/2351120", "livable": "tokyo/s2351120", "athome": "daimon-st"},
     "新橋":   {"suumo": "20110", "homes": "shimbashi_00558-st",                  "nomu": "ensen_tokyo/2351/2351110", "livable": "tokyo/s2351110", "athome": "shimbashi-st"},
     "日本橋": {"suumo": "29710", "homes": "nihombashi_06309-st",                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": "nihombashi-st"},
-    "東日本橋": {"suumo": "32170", "homes": None,                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st"},
+    "東日本橋": {"suumo": "32170", "homes": "higashinihombashi_06405-st",                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st"},
     # --- 大井町・蒲田の周辺と目黒線沿い（2026-08-29 追加。コードは実URLで検証済み）---
     # --- 2026-08-31 追加。大井町/戸越/蒲田の周辺と浅草線沿い。
     #     コードはSUUMO・ノムコムとも実URLで1駅ずつ検証済み ---
