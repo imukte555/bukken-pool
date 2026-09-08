@@ -1910,6 +1910,25 @@ def main():
             bad_urls = {v["url"] for v in violations}
             items = [i for i in items if i.get("url") not in bad_urls]
             print(f"条件違反を除外: {len(items)}件に", file=sys.stderr)
+        # 値下げ・掲載日数・監視リストはページ生成より前に計算する。
+        # 後回しにすると注記(_hist_note等)が間に合わずページに出ない。
+        _state = load_state()
+        price_now = mark_price_changes(items, _state.get("prices", {}) or {})
+        from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+        _today = _dt.now(_tz(_td(hours=9))).strftime("%Y-%m-%d")
+        history_now = update_history(items, _state.get("history", {}) or {}, _today)
+        _long = [i for i in items if (i.get("_days") or 0) >= 90]
+        _cut = [i for i in items if (i.get("_cuts") or 0) >= 1]
+        print(f"履歴: 90日以上の売れ残り{len(_long)}件 / 値下げ実績あり{len(_cut)}件")
+        watch_now, entered, dropped = track_watchlist(
+            _RAW_FOR_WHATIF, _state.get("watchlist", {}) or {})
+        print(f"監視リスト: {len(watch_now)}件（予算オーバーだが条件は満たす）")
+        if entered:
+            print(f"🎯 予算内に下がってきた物件: {len(entered)}件")
+            for _it, _first in entered:
+                print(f"   [{_it['station']}] {_it.get('name','')[:30]} "
+                      f"{fmt_watch_price(_it, _first)}→{fmt_watch_price(_it, _it['price'])}")
+
         _ALL_ITEMS = items
         import gen_page
         # 駅タブは左から優先順（恵比寿/目黒/中目黒 → 以降はSTATIONS定義順）
@@ -1920,6 +1939,13 @@ def main():
     except Exception as e:
         print(f"在庫ページ生成に失敗: {e}", file=sys.stderr)
         _ALL_ITEMS = items
+        _st2 = load_state()
+        price_now = mark_price_changes(items, _st2.get("prices", {}) or {})
+        from datetime import datetime as _dt2, timezone as _tz2, timedelta as _td2
+        _today = _dt2.now(_tz2(_td2(hours=9))).strftime("%Y-%m-%d")
+        history_now = update_history(items, _st2.get("history", {}) or {}, _today)
+        watch_now, entered, dropped = track_watchlist(
+            _RAW_FOR_WHATIF, _st2.get("watchlist", {}) or {})
     print_reject_tally()
     try:
         whatif_report(_RAW_FOR_WHATIF, len(items))
@@ -1946,25 +1972,6 @@ def main():
 
     state = load_state()
     seen = set(state.get("seen_ids", []))
-    price_now = mark_price_changes(items, state.get("prices", {}) or {})
-
-    # 掲載日数と値下げ履歴（指値が通るかの判断材料）
-    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
-    _today = _dt.now(_tz(_td(hours=9))).strftime("%Y-%m-%d")
-    history_now = update_history(items, state.get("history", {}) or {}, _today)
-    _long = [i for i in items if (i.get("_days") or 0) >= 90]
-    _cut = [i for i in items if (i.get("_cuts") or 0) >= 1]
-    print(f"履歴: 90日以上の売れ残り{len(_long)}件 / 値下げ実績あり{len(_cut)}件")
-
-    # 予算オーバーだが条件を満たす物件を追跡する（不況で下がってくるのを待つ）
-    watch_now, entered, dropped = track_watchlist(_RAW_FOR_WHATIF,
-                                                  state.get("watchlist", {}) or {})
-    print(f"監視リスト: {len(watch_now)}件（予算オーバーだが条件は満たす）")
-    if entered:
-        print(f"🎯 予算内に下がってきた物件: {len(entered)}件")
-        for it, first in entered:
-            print(f"   [{it['station']}] {it.get('name','')[:30]} "
-                  f"{fmt_watch_price(it, first)}→{fmt_watch_price(it, it['price'])}")
     if dropped:
         print(f"監視中の値下げ: {len(dropped)}件")
 
