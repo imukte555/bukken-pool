@@ -481,6 +481,61 @@ def parse_athome(html: str, station: str, kind: str):
 
 # === ノムコム パーサー ===
 
+def parse_athome_rent(html: str, station: str):
+    """アットホームの賃貸一覧をパースする。SUUMOと構造が違うので専用。
+    1カード=1建物で、中に複数の部屋が入る。
+    """
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    out = []
+    for card in soup.select("[class*=property]"):
+        a = card.find("a", href=lambda x: x and re.search(r"/chintai/\d{6,}", x or ""))
+        if not a:
+            continue
+        href = a.get("href") or ""
+        m = re.search(r"/chintai/(\d{6,})", href)
+        if not m:
+            continue
+        pid = m.group(1)
+        text = card.get_text(" ", strip=True)
+        name = text.split(" ")[0][:40]
+        # 「ＪＲ横須賀線 「西大井」駅 徒歩9分」形式
+        walk = parse_walk(text, station)
+        built = parse_built(text)
+        addr = parse_addr(text)
+        # 「12 万円 15,000円」→ 賃料+管理費
+        mr = re.search(r"([\d.]+)\s*万円\s*([\d,]+)円", text)
+        if mr:
+            rent = float(mr.group(1))
+            kanri = int(mr.group(2).replace(",", "")) / 10000.0
+            price = round(rent + kanri, 2)
+        else:
+            mr2 = re.search(r"([\d.]+)\s*万円", text)
+            price = float(mr2.group(1)) if mr2 else None
+        ma = re.search(r"([\d.]+)\s*m²", text)
+        area = float(ma.group(1)) if ma else None
+        ml = re.search(r"\b(\d[SLDKR]{1,4})\b", text)
+        layout = ml.group(1) if ml else ""
+        msr = re.search(r"敷金\s*/\s*礼金", text)
+        out.append({
+            "id": f"athome:r:{pid}",
+            "station": station,
+            "type": "rent",
+            "name": name,
+            "price": price,
+            "area": area,
+            "layout": layout,
+            "walk": walk,
+            "addr": addr,
+            "built": built,
+            "url": _abs(href.split("?")[0], "https://www.athome.co.jp"),
+            "img": _abs(card_image(card), "https://www.athome.co.jp"),
+            "source": "アットホーム賃貸",
+        })
+    return out
+
+
 def parse_nomu(html: str, station: str, kind: str):
     if not html:
         return []
@@ -1119,16 +1174,19 @@ def collect_station(station, codes):
         for kind, path in ([] if not use_athome else
                            [("mansion", f"mansion/chuko/{pref}/{codes['athome']}/list/"),
                             ("house",   f"kodate/{pref}/{codes['athome']}/list/"),
-                            ("land",    f"tochi/{pref}/{codes['athome']}/list/")]):
+                            ("land",    f"tochi/{pref}/{codes['athome']}/list/"),
+                            ("rent",    f"chintai/{pref}/{codes['athome']}/list/")]):
             items = []
-            for pn in (1,):   # 予算5回に収めるため1ページのみ
+            for pn in (1,):   # 予算に収めるため1ページのみ
                 url = f"https://www.athome.co.jp/{path}?page={pn}"
                 html = fetch_with_retry(url, impersonate=True)
-                page_items = parse_athome(html, station, kind)
+                page_items = (parse_athome_rent(html, station) if kind == "rent"
+                              else parse_athome(html, station, kind))
                 if not page_items:
                     break
                 items.extend(page_items)
-            kept = filter_with_walk_rescue(items)
+            kept = ([i for i in items if apply_rent_filters(i)] if kind == "rent"
+                    else filter_with_walk_rescue(items))
             log.append(f"[アットホーム {kind}] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count[f"アットホーム {kind}"] += len(kept)
