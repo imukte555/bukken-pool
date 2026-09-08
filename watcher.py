@@ -534,7 +534,7 @@ def parse_livable(html: str, station: str, kind: str):
     items = []
     seen = set()
     # リバブルはCSS-modulesでクラス名がハッシュ化される。aタグから辿る
-    for a in soup.find_all("a", href=lambda h: h and re.search(r"/(?:mansion|kodate)/C\d{6,12}", h or "")):
+    for a in soup.find_all("a", href=lambda h: h and re.search(r"/(?:mansion|kodate|tochi)/C\d{6,12}", h or "")):
         href = a["href"]
         if not href.startswith("http"):
             href = "https://www.livable.co.jp" + href
@@ -838,7 +838,7 @@ MAX_INTERVAL = 6.0
 # HOMES/アットホームは「1実行あたり最初の5〜6回だけ通し、超えるとIPごと
 # ブロックして間隔を空けても解けない」仕様（Actions上で実測）。
 # 予算内に収め、最初の202が出た時点で打ち切る。
-_HOST_BUDGET = {"www.homes.co.jp": 5, "www.athome.co.jp": 5}
+_HOST_BUDGET = {"www.homes.co.jp": 18, "www.athome.co.jp": 18}
 _BUDGET_LOCK = threading.Lock()
 
 
@@ -956,7 +956,12 @@ def collect_all():
 
     results = []
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        futs = {ex.submit(collect_station, st, cd): st for st, cd in STATIONS.items()}
+        # HOMES/アットホームは1実行あたりのリクエスト数に上限があるので、
+        # 予算が尽きる前に優先駅と第一希望を先に回す
+        _head = tuple(PRIORITY_STATIONS) + ("大井町", "戸越", "武蔵小山")
+        _ordered = sorted(STATIONS.items(),
+                          key=lambda kv: (_head.index(kv[0]) if kv[0] in _head else 99, kv[0]))
+        futs = {ex.submit(collect_station, st, cd): st for st, cd in _ordered}
         for f in as_completed(futs):
             st = futs[f]
             try:
@@ -1019,10 +1024,13 @@ def collect_station(station, codes):
         # 駅コード未検証のポータルはスキップ（推測URLで別エリアを拾わないため）
         # 予算5回に収める。マンションはSUUMO/ノムコムで足りているが、
         # 土地は掲載自体が少ないので、この枠は土地に使う。
-        HOMES_TARGETS = ("大井町", "戸越") + tuple(PRIORITY_STATIONS)
-        use_homes = codes.get("homes") and station in HOMES_TARGETS
+        # 全駅・全種別を対象にする。予算(_HOST_BUDGET)を使い切ったら
+        # そこで打ち切られるので、優先駅から順に回るよう並べ替え済み
+        use_homes = bool(codes.get("homes"))
         for kind, path in ([] if not use_homes else
-                           [("land", f"tochi/tokyo/{codes['homes']}/list/")]):
+                           [("mansion", f"mansion/chuko/tokyo/{codes['homes']}/list/"),
+                            ("house",   f"kodate/chuko/tokyo/{codes['homes']}/list/"),
+                            ("land",    f"tochi/tokyo/{codes['homes']}/list/")]):
             items = []
             for pn in (1,):   # 予算5回に収めるため1ページのみ
                 url = f"https://www.homes.co.jp/{path}?page={pn}"
@@ -1038,9 +1046,11 @@ def collect_station(station, codes):
             time.sleep(SLEEP_BETWEEN)
 
         # アットホーム (3種別) — Cloudflare回避でcurl_cffi使用 + リトライ
-        use_athome = codes.get("athome") and station in HOMES_TARGETS
+        use_athome = bool(codes.get("athome"))
         for kind, path in ([] if not use_athome else
-                           [("land", f"tochi/tokyo/{codes['athome']}/list/")]):
+                           [("mansion", f"mansion/chuko/tokyo/{codes['athome']}/list/"),
+                            ("house",   f"kodate/tokyo/{codes['athome']}/list/"),
+                            ("land",    f"tochi/tokyo/{codes['athome']}/list/")]):
             items = []
             for pn in (1,):   # 予算5回に収めるため1ページのみ
                 url = f"https://www.athome.co.jp/{path}?page={pn}"
@@ -1078,7 +1088,8 @@ def collect_station(station, codes):
         # リバブル
         for kind, path in ([] if not codes.get("livable") else
                            [("mansion", f"kounyu/mansion/{codes['livable']}/"),
-                            ("house",   f"kounyu/kodate/{codes['livable']}/")]):
+                            ("house",   f"kounyu/kodate/{codes['livable']}/"),
+                            ("land",    f"kounyu/tochi/{codes['livable']}/")]):
             items = []
             for pn in (1, 2, 3):
                 url = f"https://www.livable.co.jp/{path}?page={pn}"
