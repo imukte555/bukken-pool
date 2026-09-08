@@ -838,10 +838,29 @@ MAX_INTERVAL = 6.0
 # HOMES/アットホームは「1実行あたり最初の5〜6回だけ通し、超えるとIPごと
 # ブロックして間隔を空けても解けない」仕様（Actions上で実測）。
 # 予算内に収め、最初の202が出た時点で打ち切る。
-# HOMESはActionsのIPから1実行6リクエストで打ち止め（2026-09-08実測。
-# 6件目以降は間隔を6秒/10秒に広げても復帰しない）。無駄打ちしないよう
-# 6に固定し、駅を日替わりで回して全駅をカバーする。
-_HOST_BUDGET = {"www.homes.co.jp": 6, "www.athome.co.jp": 18}
+# HOMESはActionsのIPから連続5〜6リクエストで弾かれるが、
+# 300秒待てば復帰する（2026-09-08実測: 60秒/120秒はNG、300秒でOK）。
+# そこで「N件取ったら休む」方式にして全駅から取り切る。
+_HOST_QUOTA = {"www.homes.co.jp": 5, "www.athome.co.jp": 15}
+_HOST_COOLDOWN_SEC = {"www.homes.co.jp": 320, "www.athome.co.jp": 180}
+_HOST_USED = {}
+_HOST_BUDGET = {}   # 予算制は廃止（互換のため空で残す）
+
+
+def take_slot(host):
+    """N件使ったら所定時間休んでから続ける。休めば復帰するので諦めない。"""
+    q = _HOST_QUOTA.get(host)
+    if not q:
+        return
+    with _BUDGET_LOCK:
+        used = _HOST_USED.get(host, 0) + 1
+        _HOST_USED[host] = used
+        need_rest = (used % q == 0)
+    if need_rest:
+        wait = _HOST_COOLDOWN_SEC.get(host, 300)
+        print(f"  {host}: {used}件取得。ブロック回避のため{wait}秒休みます",
+              file=sys.stderr)
+        time.sleep(wait)
 _BUDGET_LOCK = threading.Lock()
 
 
@@ -935,8 +954,7 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
         until = _BLOCKED_UNTIL.get(host, 0)
     if time.time() < until:
         return ""  # ブロック中。叩かない
-    if not consume_budget(host):
-        return ""
+    take_slot(host)
     for attempt in range(max_retry):
         with _Gate(host):
             html = fetch(url, impersonate=impersonate)
@@ -945,18 +963,15 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
             speed_up(host)
             note_ok(host)
             return html
-        if host in _HOST_BUDGET:
-            # 202は一時的なことが多い。連続で失敗した時だけ諦める。
-            # 1回で全部止めると取り逃す（実測: 202が3回で全ポータル0件になった）
+        if host in _HOST_QUOTA:
+            # 弾かれたら休んで再挑戦する。300秒で復帰することを実測済み。
             n = note_fail(host)
-            slow_down(host, f"(202 {n}回目)")
-            if n >= CONSECUTIVE_FAIL_LIMIT:
-                kill_budget(host)
-                print(f"  {host}: {n}回連続で弾かれたため以降スキップ", file=sys.stderr)
-                return ""
             if attempt == max_retry - 1:
                 return ""
-            time.sleep(8 * (attempt + 1) + random.uniform(0, 4))
+            wait = _HOST_COOLDOWN_SEC.get(host, 300)
+            print(f"  {host}: 弾かれたため{wait}秒休んで再試行 ({n}回目)",
+                  file=sys.stderr)
+            time.sleep(wait)
             continue
         slow_down(host, f"(retry {attempt + 1}/{max_retry})")
         if attempt == max_retry - 1:
@@ -1002,8 +1017,9 @@ def collect_all():
     portal_count = Counter()
 
     global HOMES_TODAY
-    HOMES_TODAY = homes_stations_today()
-    print(f"HOMESの本日の担当駅: {'/'.join(HOMES_TODAY) or 'なし'}（1実行6リクエスト上限）")
+    print(f"HOMES: 全{sum(1 for v in STATIONS.values() if v.get('homes'))}駅から取得"
+          f"（{_HOST_QUOTA['www.homes.co.jp']}件ごとに"
+          f"{_HOST_COOLDOWN_SEC['www.homes.co.jp']}秒休憩）")
 
     results = []
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
@@ -1078,8 +1094,8 @@ def collect_station(station, codes):
         # 駅コード未検証のポータルはスキップ（推測URLで別エリアを拾わないため）
         # 予算5回に収める。マンションはSUUMO/ノムコムで足りているが、
         # 土地は掲載自体が少ないので、この枠は土地に使う。
-        # HOMESは6リクエストしか通らないので当日の担当2駅だけ叩く
-        use_homes = bool(codes.get("homes")) and station in HOMES_TODAY
+        # 休憩を挟めば全駅から取れる
+        use_homes = bool(codes.get("homes"))
         for kind, path in ([] if not use_homes else
                            [("mansion", f"mansion/chuko/{pref}/{codes['homes']}/list/"),
                             ("house",   f"kodate/chuko/{pref}/{codes['homes']}/list/"),
