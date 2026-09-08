@@ -987,8 +987,12 @@ def collect_station(station, codes):
             pages = (1, 2, 3, 4, 5, 6) if station in DEEP_SCAN_STATIONS else (1, 2, 3, 4)
             items = []
             for pn in pages:
+                # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
+                # 50㎡未満14件→0件。同じ取得回数でも大きい物件を多く拾える）
+                # 土地は建物面積の概念が違うので mb は付けない
+                _mb = "" if kind == "land" else f"&mb={int(AREA_MIN)}"
                 url = (f"https://suumo.jp/{path}?et=10&pn={pn}"
-                       f"&kb={PRICE_MIN}&kt={PRICE_MAX}")
+                       f"&kb={PRICE_MIN}&kt={PRICE_MAX}{_mb}")
                 html = fetch_with_retry(url)
                 page_items = parse_suumo(html, station, kind)
                 if not page_items:
