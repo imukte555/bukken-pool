@@ -78,7 +78,7 @@ CURRENT_YEAR = 2026
 # === フィルタ（賃貸） ===
 RENT_MAX = 28.0      # 管理費込み上限(万円)
 RENT_MIN = 8.0       # 下限(万円) 安すぎる1Rを除外
-RENT_AREA_MIN = 40.0 # 賃貸の面積下限(㎡)
+RENT_AREA_MIN = 45.0 # 賃貸の面積下限(㎡) ※売買と同じ45㎡に統一(2026-09-08)
 RENT_WALK_MAX = 7    # 賃貸の駅徒歩上限(分) ※売買と同じ7分
 RENT_MAX_AGE = 20    # 賃貸の築年数上限(年) ※20年未満のみ
 HOUSE_MAX_AGE = 20   # 戸建の築年数上限(年) ※20年未満のみ
@@ -1087,8 +1087,11 @@ def collect_station(station, codes):
         # SUUMO 賃貸（管理費込みRENT_MAX以下）— 2ページまで
         rent_items = []
         for pn in (1, 2):   # 賃貸は最大の供給源なので2ページ取る
+            # 賃貸もサーバー側で面積と賃料を絞る（実測: 大井町1ページで
+            # 45㎡未満が58件→0件。取得枠を狭い部屋に食われなくなる）
             url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
-                   f"/ek_{codes['suumo']}/?page={pn}")
+                   f"/ek_{codes['suumo']}/?page={pn}"
+                   f"&mb={int(RENT_AREA_MIN)}&cb={RENT_MIN}&ct={RENT_MAX}")
             html = fetch_with_retry(url)
             page = parse_suumo_rent(html, station)
             if not page:
