@@ -953,6 +953,27 @@ _BLOCKED_UNTIL = {}
 _BLOCK_LOCK = threading.Lock()
 BLOCK_COOLDOWN = 300  # 秒
 
+# 取得全体の締切。これを超えたら残りの取得を諦めて集計・公開へ進む。
+# 実測: アットホームがActionsのIPを完全にブロックしており、180秒休憩付きの
+# 再試行を251回繰り返して3時間を使い切り、ページ生成まで到達せずに
+# タイムアウトで落ちた（2026-09-09 run 34375924565）。
+# 「1サイトが死んでも必ず公開まで届く」ことを最優先にする。
+FETCH_BUDGET_SEC = int(os.environ.get("FETCH_BUDGET_SEC", 8400))   # 140分
+_RUN_STARTED = time.time()
+
+# 同一ホストで通算これだけ弾かれたら、その実行ではもう叩かない。
+# 休憩を挟んでも戻らない＝IP単位で拒否されている状態なので、待つだけ無駄。
+HOST_GIVEUP_FAILS = int(os.environ.get("HOST_GIVEUP_FAILS", 12))
+_HOST_DEAD = set()
+
+# 在庫ページに載せた件数。次回の実行で「大きく減っていないか」を見るために
+# state.json へ持ち越す。
+_PAGE_COUNT = 0
+
+
+def budget_left():
+    return FETCH_BUDGET_SEC - (time.time() - _RUN_STARTED)
+
 # bot検知が厳しいサイトは「同時1本 + 最低間隔」で叩く。
 # 並列化した状態で普通に投げると即ブロックされるため。
 _HOST_GATE = {
@@ -993,6 +1014,12 @@ def take_slot(host):
         need_rest = (used % q == 0)
     if need_rest:
         wait = _HOST_COOLDOWN_SEC.get(host, 300)
+        if wait >= budget_left():
+            # 休むと締切を割る。ここで待つより他のサイトに時間を回す。
+            _HOST_DEAD.add(host)
+            print(f"  {host}: 残り時間が足りないため以降の取得を打ち切ります",
+                  file=sys.stderr)
+            return
         print(f"  {host}: {used}件取得。ブロック回避のため{wait}秒休みます",
               file=sys.stderr)
         time.sleep(wait)
@@ -1085,6 +1112,10 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
         max_retry = 2
     """bot検知(HOMES 202/athome認証中)対策: リトライ+指数バックオフ+ホスト単位クールダウン"""
     host = _host_of(url)
+    if budget_left() <= 0:
+        return ""            # 取得の締切切れ。残りは諦めて公開まで進む
+    if host in _HOST_DEAD:
+        return ""            # このホストはこの実行では見捨てた
     with _BLOCK_LOCK:
         until = _BLOCKED_UNTIL.get(host, 0)
     if time.time() < until:
@@ -1101,9 +1132,21 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
         if host in _HOST_QUOTA:
             # 弾かれたら休んで再挑戦する。300秒で復帰することを実測済み。
             n = note_fail(host)
+            if n >= HOST_GIVEUP_FAILS:
+                # 休憩を挟んでも戻らない＝IPごと拒否されている。待つほど
+                # 他のサイトの取得時間を削るだけなので、以降は叩かない。
+                _HOST_DEAD.add(host)
+                print(f"  {host}: 通算{n}回弾かれたため、この実行では取得を打ち切ります",
+                      file=sys.stderr)
+                return ""
             if attempt == max_retry - 1:
                 return ""
             wait = _HOST_COOLDOWN_SEC.get(host, 300)
+            if wait >= budget_left():
+                _HOST_DEAD.add(host)
+                print(f"  {host}: 休憩{wait}秒ぶんの時間が残っていないため打ち切ります",
+                      file=sys.stderr)
+                return ""
             print(f"  {host}: 弾かれたため{wait}秒休んで再試行 ({n}回目)",
                   file=sys.stderr)
             time.sleep(wait)
@@ -2200,11 +2243,23 @@ def main():
                       f"{fmt_watch_price(_it, _first)}→{fmt_watch_price(_it, _it['price'])}")
 
         _ALL_ITEMS = items
+        # 取得が途中で潰れた回に、少ない件数でページを上書きしてプールを
+        # 消してしまわないための歯止め。前回の6割を割ったら書き換えない。
+        # （実測: アットホームのIPブロックで取得が3時間止まった回がある）
+        prev_n = int(_state.get("page_count", 0) or 0)
+        globals()["_PAGE_COUNT"] = prev_n   # 生成できなければ前回値を維持
+        if prev_n and len(items) < prev_n * 0.6:
+            print(f"⚠️ 取得件数が前回より大きく減ったため在庫ページを更新しません "
+                  f"(前回{prev_n}件 → 今回{len(items)}件)。"
+                  f"打ち切ったサイト: {'、'.join(sorted(_HOST_DEAD)) or 'なし'}",
+                  file=sys.stderr)
+            raise RuntimeError(f"件数が前回の6割未満 ({len(items)}/{prev_n})")
         import gen_page
         # 駅タブは左から優先順（恵比寿/目黒/中目黒 → 以降はSTATIONS定義順）
         order = PRIORITY_STATIONS + [s for s in STATIONS if s not in PRIORITY_STATIONS]
         n = gen_page.build(items, str(BASE_DIR / "docs" / "index.html"),
                            station_order=order)
+        globals()["_PAGE_COUNT"] = n
         print(f"在庫ページ生成: {n}件 → docs/index.html")
     except Exception as e:
         print(f"在庫ページ生成に失敗: {e}", file=sys.stderr)
@@ -2249,7 +2304,7 @@ def main():
         print("初回実行: スナップショットのみ保存（通知なし）")
         save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
                     "prices": price_now, "watchlist": watch_now,
-                    "history": history_now})
+                    "history": history_now, "page_count": _PAGE_COUNT})
         return
 
     new_items = [it for it in items if it["id"] not in seen]
@@ -2426,7 +2481,8 @@ def main():
                 "history": history_now,
                 "notified_on": prev.get("notified_on")
                                if (already or (manual_hold and not forced))
-                               else today_jst})
+                               else today_jst,
+                "page_count": _PAGE_COUNT})
 
 
 def send_heartbeat(total, summary):
