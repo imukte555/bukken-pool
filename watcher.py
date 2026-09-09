@@ -245,6 +245,34 @@ def parse_layout(text: str):
     return m.group(1) if m else ""
 
 
+def parse_floor(text: str, kind: str = "mansion"):
+    """所在階を返す。「6階/RC9階建」→「6階」、「B1階」→「B1階」。
+    ○階建（建物の高さ）だけの表記は所在階ではないので採らない。
+    戸建は所在階の概念がないので階建（例「2階建」）をそのまま返す。
+    土地は階がないので「—」。
+    """
+    if kind == "land":
+        return "—"
+    if not text:
+        return ""
+    t = text.replace("　", " ").translate(
+        str.maketrans("０１２３４５６７８９", "0123456789"))
+    if kind == "house":
+        m = re.search(r"(地上)?(\d+)\s*階建", t)
+        return f"{m.group(2)}階建" if m else ""
+    # 建物側の表記（構造・階建）を先に消す。順番が逆だと「SRC13階建 8階」の
+    # 8階まで構造欄と誤認して消えるので、構造 → 階建 の順で消す。
+    t = re.sub(r"(造|鉄筋|鉄骨|コンクリート|ブロック|SRC|RC)\s*(地上)?\s*\d+\s*階", " ", t)
+    t = re.sub(r"(地上|地下)?\s*B?\d+\s*階建(て)?", " ", t)
+    m = re.search(r"(地下\s*\d+|B\s*\d+|\d+)\s*階", t)
+    if not m:
+        return ""
+    v = m.group(1).replace(" ", "")
+    if v.startswith("地下"):
+        return "B" + v[2:] + "階"
+    return v + "階"
+
+
 def parse_walk(text: str, station: str = None):
     """駅徒歩(分)を返す。
     station指定時はその駅の徒歩のみ。指定なしの場合は
@@ -409,6 +437,7 @@ def parse_suumo(html: str, station: str, kind: str):
             "built": parse_built(text),
             "url": href,
             "img": _abs(card_image(card), "https://suumo.jp"),
+            "floor": parse_floor(text, kind),
             "source": "SUUMO",
         })
     return items
@@ -454,6 +483,7 @@ def parse_homes(html: str, station: str, kind: str):
             "addr": parse_addr(text),
             "built": parse_built(text),
             "url": href,
+            "floor": parse_floor(text, kind),
             "source": "HOMES",
         })
     return items
@@ -497,6 +527,7 @@ def parse_athome(html: str, station: str, kind: str):
             "addr": parse_addr(text),
             "built": parse_built(text),
             "url": href,
+            "floor": parse_floor(text, kind),
             "source": "アットホーム",
         })
     return items
@@ -554,6 +585,7 @@ def parse_athome_rent(html: str, station: str):
             "built": built,
             "url": _abs(href.split("?")[0], "https://www.athome.co.jp"),
             "img": _abs(card_image(card), "https://www.athome.co.jp"),
+            "floor": parse_floor(text, "rent"),
             "source": "アットホーム賃貸",
         })
     return out
@@ -610,6 +642,7 @@ def parse_rehouse(html: str, station: str):
             "addr": parse_addr(text),
             "built": parse_built(text),
             "url": _abs(href.split("?")[0], "https://www.rehouse.co.jp"),
+            "floor": parse_floor(text, kind),
             "source": "三井のリハウス",
         })
     return items
@@ -654,6 +687,7 @@ def parse_nomu(html: str, station: str, kind: str):
             "addr": parse_addr(text),
             "built": parse_built(text),
             "url": href,
+            "floor": parse_floor(text, kind),
             "source": "ノムコム",
         })
     return items
@@ -707,6 +741,7 @@ def parse_livable(html: str, station: str, kind: str):
             "addr": parse_addr(text),
             "built": parse_built(text),
             "url": href,
+            "floor": parse_floor(text, kind),
             "source": "リバブル",
         })
     return items
@@ -908,7 +943,8 @@ def parse_all_walks(text: str):
 
 def enrich_from_detail(item):
     """詳細ページを1回だけ取得し、駐車場と『全駅からの徒歩』を埋める"""
-    use_cffi = item.get("source") in ("HOMES", "アットホーム")
+    use_cffi = item.get("source") in ("HOMES", "アットホーム",
+                                      "アットホーム賃貸", "三井のリハウス")
     html = fetch_with_retry(item["url"], impersonate=use_cffi)
     if not html:
         return
@@ -937,6 +973,23 @@ def enrich_from_detail(item):
         b = parse_built(row) if row else None
         if b:
             item["built"] = b
+
+    # 所在階: SUUMOの売買一覧には階の表記が無いので詳細から必ず埋める
+    if not item.get("floor"):
+        kind = item.get("type") or "mansion"
+        if kind == "land":
+            item["floor"] = "—"
+        else:
+            row = _row_value(soup, "所在階", "階数", "所在階/構造", "所在階／構造",
+                             "構造・階建", "構造・階建て", "建物構造")
+            f = parse_floor(row, kind) if row else ""
+            if not f:
+                body = soup.get_text(" ", strip=True)
+                m = re.search(r"所在階[:：\s|]{0,3}([^。\n|]{1,16})", body)
+                if m:
+                    f = parse_floor(m.group(1), kind)
+            if f:
+                item["floor"] = f
 
     if not item.get("walks"):
         transit = _row_value(soup, "交通", "駅徒歩", "最寄") or soup.get_text(" ", strip=True)
@@ -2051,6 +2104,11 @@ def notify(new_items):
                 age_str = "新築" if yrs <= 0 else f"築{yrs}年"
             else:
                 age_str = "築年記載なし" if it["type"] in ("mansion", "house", "rent") else ""
+            # 所在階は全物件に書く。取れなければ明記して伏せない
+            if it["type"] == "land":
+                floor_str = "階なし(土地)"
+            else:
+                floor_str = it.get("floor") or "階記載なし"
             pk = it.get("parking")
             pk_str = {
                 "有":   "🚗駐車場あり",
@@ -2065,7 +2123,7 @@ def notify(new_items):
             price_note = it.get("_price_note", "") or it.get("_watch_note", "")
             hist_note = it.get("_hist_note", "")
             sr = it.get("shikirei", "") if it.get("type") == "rent" else ""
-            parts = [price, layout, area, walk, age_str, sr, pk_str,
+            parts = [price, layout, area, floor_str, walk, age_str, sr, pk_str,
                      price_note, hist_note, dup_str]
             meta = " ".join(p for p in parts if p)
             lines.append(f"{head}\n  {meta}\n  {it['url']}")

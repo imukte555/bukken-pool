@@ -83,6 +83,11 @@ def build(items, out_path, station_order=None):
         else:
             age = "築年記載なし"
         area = f"{it['area']}㎡" if it.get("area") else "面積記載なし"
+        # 所在階は全物件に出す。取れなければ「階記載なし」と明記して伏せない
+        if it.get("type") == "land":
+            floor = "階なし(土地)"
+        else:
+            floor = html.escape(it.get("floor") or "") or "階記載なし"
         layout = html.escape(it.get("layout") or "")
         if not layout:
             layout = "" if it.get("type") == "land" else "間取り記載なし"
@@ -104,7 +109,7 @@ def build(items, out_path, station_order=None):
       <span class="src">{html.escape(it.get('source',''))}</span></div>
     <div class="name">{html.escape((it.get('name') or '')[:44])}</div>
     <div class="price">{fmt_price(it)}</div>
-    <div class="meta">{"・".join(x for x in (layout, area, age) if x)}</div>
+    <div class="meta">{"・".join(x for x in (layout, area, floor, age) if x)}</div>
     <div class="meta">{fmt_walk(it)}</div>
     {f'<div class="meta">{sr}</div>' if sr else ''}
     <div class="meta pk">{fmt_parking(it)}</div>
