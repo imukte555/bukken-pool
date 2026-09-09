@@ -97,9 +97,9 @@ STATIONS = {
     "恵比寿": {"suumo": "05050", "homes": "ebisu_00577-st",       "nomu": "ensen_tokyo/2172/2172100", "livable": "tokyo/s2172100", "athome": "ebisu-st", "rehouse": "13/2172/100"},
     "広尾":   {"suumo": "33410", "homes": "hiro_06347-st",        "nomu": "ensen_tokyo/2344/2344190", "livable": "tokyo/s2344190", "athome": "hiro-st", "rehouse": "13/2344/190"},
     "代官山": {"suumo": "21850", "homes": "daikanyama_05050-st",  "nomu": "ensen_tokyo/2321/2321020", "livable": "tokyo/s2321020", "athome": "daikanyama-st", "rehouse": "13/2321/020"},
-    "目黒":   {"suumo": "39110", "homes": "meguro_00577-st",      "nomu": "ensen_tokyo/2172/2172090", "livable": "tokyo/s2172090", "athome": "meguro-st", "rehouse": "13/2172/090"},
-    "中目黒": {"suumo": "27580", "homes": "nakameguro_00577-st",  "nomu": "ensen_tokyo/2321/2321030", "livable": "tokyo/s2321030", "athome": "nakameguro-st", "rehouse": "13/2344/210"},
-    "五反田": {"suumo": "14970", "homes": "gotanda_00603-st",     "nomu": "ensen_tokyo/2172/2172080", "livable": "tokyo/s2172080", "athome": "gotanda-st", "rehouse": "13/2172/080"},
+    "目黒":   {"suumo": "39110", "homes": "meguro_00576-st",      "nomu": "ensen_tokyo/2172/2172090", "livable": "tokyo/s2172090", "athome": "meguro-st", "rehouse": "13/2172/090"},
+    "中目黒": {"suumo": "27580", "homes": "nakameguro_05051-st",  "nomu": "ensen_tokyo/2321/2321030", "livable": "tokyo/s2321030", "athome": "nakameguro-st", "rehouse": "13/2344/210"},
+    "五反田": {"suumo": "14970", "homes": "gotanda_00575-st",     "nomu": "ensen_tokyo/2172/2172080", "livable": "tokyo/s2172080", "athome": "gotanda-st", "rehouse": "13/2172/080"},
     "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st", "rehouse": "13/2327/230"},
     "不動前": {"suumo": "34410", "homes": "fudomae_05068-st",     "nomu": "ensen_tokyo/2327/2327220", "livable": "tokyo/s2327220", "athome": "fudomae-st", "rehouse": "13/2327/220"},
     "戸越":   {"suumo": "26080", "homes": "togoshi_06400-st",     "nomu": "ensen_tokyo/2351/2351170", "livable": "tokyo/s2351170", "athome": "togoshi-st", "rehouse": "13/2351/170"},
@@ -590,12 +590,11 @@ def parse_rehouse(html: str, station: str):
 
         text = card.get_text(" ", strip=True)
         # リハウスの駅ページは近隣駅の物件も混ぜて返す（実測: 目黒駅ページに
-        # 桜新町・白金台が入っていた）。カードは「路線 ◯◯駅 徒歩N分」を必ず
-        # 1つだけ持つので、その駅名が監視駅と一致するものだけ採る。
+        # 桜新町・白金台が入っていた）。カードは最寄り1駅だけを書く。監視駅と違っていても「監視駅から徒歩7分
+        # 以内」の可能性があるので捨てず、walk=None にして詳細ページで
+        # 監視駅からの分数を判定させる（他条件を満たす物件だけが詳細を見る）。
         sm = re.search(r"[^\s/]*線\s*([^\s]+?)駅\s*徒歩(\d+)分", text)
-        if not sm or sm.group(1) != station:
-            continue
-        walk = int(sm.group(2))
+        walk = int(sm.group(2)) if (sm and sm.group(1) == station) else None
         name_el = card.find(["h2", "h3", "h4"])
         name = (name_el.get_text(strip=True) if name_el else text)[:50]
         items.append({
