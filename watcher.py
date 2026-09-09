@@ -1017,6 +1017,10 @@ _RUN_STARTED = time.time()
 # 同一ホストで通算これだけ弾かれたら、その実行ではもう叩かない。
 # 休憩を挟んでも戻らない＝IP単位で拒否されている状態なので、待つだけ無駄。
 HOST_GIVEUP_FAILS = int(os.environ.get("HOST_GIVEUP_FAILS", 12))
+# ホストごとの見切り回数。アットホームはActionsのIPを完全に拒否しており
+# (実測: 251回連続で弾かれた) 待っても戻らないので早めに切り上げる。
+# HOMESは休憩を挟めば実際に復帰するので粘る。
+_HOST_GIVEUP = {"www.athome.co.jp": 3, "www.homes.co.jp": 15}
 _HOST_DEAD = set()
 
 # 在庫ページに載せた件数。次回の実行で「大きく減っていないか」を見るために
@@ -1185,7 +1189,7 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
         if host in _HOST_QUOTA:
             # 弾かれたら休んで再挑戦する。300秒で復帰することを実測済み。
             n = note_fail(host)
-            if n >= HOST_GIVEUP_FAILS:
+            if n >= _HOST_GIVEUP.get(host, HOST_GIVEUP_FAILS):
                 # 休憩を挟んでも戻らない＝IPごと拒否されている。待つほど
                 # 他のサイトの取得時間を削るだけなので、以降は叩かない。
                 _HOST_DEAD.add(host)
