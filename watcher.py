@@ -75,6 +75,9 @@ PRICE_MAX = 12000    # 1.2億（建物込みの予算上限）
 BUILT_MAX_AGE = 30
 CURRENT_YEAR = 2026
 
+# .github/workflows/daily.yml の cron '37 21 * * *' = 06:37 JST と揃える
+SCHEDULE_JST = (6, 37)
+
 # === フィルタ（賃貸） ===
 RENT_MAX = 28.0      # 管理費込み上限(万円)
 RENT_MIN = 8.0       # 下限(万円) 安すぎる1Rを除外
@@ -2393,13 +2396,21 @@ def main():
     prev = load_state()
     already = prev.get("notified_on") == today_jst
     forced = os.environ.get("DEBUG_FORCE_NOTIFY") == "1"
-    # 手動実行(workflow_dispatch)は動作確認用。通知枠を消費しない。
+    # 手動実行(workflow_dispatch)は動作確認用。定刻前なら通知枠を消費しない。
     # 消費すると、その日の自動実行がスキップされて朝のメールが届かなくなる。
+    # ただし定刻を過ぎてまだ未送信なら、手動実行でもその日の1通を送る。
+    # GitHubは同じconcurrencyグループで待機中の古いrunを破棄するため、
+    # 手動実行が定期実行を潰してメールが1日欠ける事故が実際に起きた
+    # (2026-09-09 06:37 JSTの定期実行がcancelled)。その穴を埋める。
     manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+    now_jst = datetime.now(timezone(timedelta(hours=9)))
+    after_sched = (now_jst.hour, now_jst.minute) >= SCHEDULE_JST
+    manual_hold = manual and not after_sched
     if already and not forced:
         print(f"本日({today_jst})は通知済みのため送信をスキップ（ページのみ更新）")
-    elif manual and not forced:
-        print("手動実行のため通知はスキップ（自動実行の枠を残す。ページのみ更新）")
+    elif manual_hold and not forced:
+        print(f"手動実行かつ定刻({SCHEDULE_JST[0]:02d}:{SCHEDULE_JST[1]:02d} JST)前のため"
+              "通知はスキップ（自動実行の枠を残す。ページのみ更新）")
     else:
         notify(new_items)
         already = False   # 送ったので notified_on を今日に更新する
@@ -2414,7 +2425,8 @@ def main():
                 "prices": price_now,
                 "watchlist": watch_now,
                 "history": history_now,
-                "notified_on": prev.get("notified_on") if (already or (manual and not forced))
+                "notified_on": prev.get("notified_on")
+                               if (already or (manual_hold and not forced))
                                else today_jst})
 
 
