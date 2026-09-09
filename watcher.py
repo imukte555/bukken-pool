@@ -90,32 +90,32 @@ TARGET_MAX_ITEMS = 30
 
 # === 駅コード ===
 STATIONS = {
-    "大井町": {"suumo": "05480", "homes": "oimachi_00603-st",    "nomu": "ensen_tokyo/2196/2196270", "livable": "tokyo/s2196270", "athome": "oimachi-st"},
-    "恵比寿": {"suumo": "05050", "homes": "ebisu_00577-st",       "nomu": "ensen_tokyo/2172/2172100", "livable": "tokyo/s2172100", "athome": "ebisu-st"},
-    "広尾":   {"suumo": "33410", "homes": "hiro_06347-st",        "nomu": "ensen_tokyo/2344/2344190", "livable": "tokyo/s2344190", "athome": "hiro-st"},
-    "代官山": {"suumo": "21850", "homes": "daikanyama_05050-st",  "nomu": "ensen_tokyo/2321/2321020", "livable": "tokyo/s2321020", "athome": "daikanyama-st"},
-    "目黒":   {"suumo": "39110", "homes": "meguro_00577-st",      "nomu": "ensen_tokyo/2172/2172090", "livable": "tokyo/s2172090", "athome": "meguro-st"},
-    "中目黒": {"suumo": "27580", "homes": "nakameguro_00577-st",  "nomu": "ensen_tokyo/2321/2321030", "livable": "tokyo/s2321030", "athome": "nakameguro-st"},
-    "五反田": {"suumo": "14970", "homes": "gotanda_00603-st",     "nomu": "ensen_tokyo/2172/2172080", "livable": "tokyo/s2172080", "athome": "gotanda-st"},
-    "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st"},
-    "不動前": {"suumo": "34410", "homes": "fudomae_05068-st",     "nomu": "ensen_tokyo/2327/2327220", "livable": "tokyo/s2327220", "athome": "fudomae-st"},
-    "戸越":   {"suumo": "26080", "homes": "togoshi_06400-st",     "nomu": "ensen_tokyo/2351/2351170", "livable": "tokyo/s2351170", "athome": "togoshi-st"},
-    "蒲田":   {"suumo": "08940", "homes": "kamata_00605-st",      "nomu": "ensen_tokyo/2196/2196290", "livable": "tokyo/s2196290", "athome": "kamata-st"},
-    "京急蒲田": {"suumo": "13410", "homes": "keikyukamata_05144-st", "nomu": "ensen_tokyo/2331/2331120", "livable": "tokyo/s2331120", "athome": "keikyukamata-st"},
-    "泉岳寺": {"suumo": "21340", "homes": "sengakuji_05181-st",  "nomu": "ensen_tokyo/2351/2351140", "livable": "tokyo/s2351140", "athome": "sengakuji-st"},
-    "高輪ゲートウェイ": {"suumo": "84570", "homes": "takanawagateway_10177-st", "nomu": "ensen_tokyo/2172/2172056", "livable": "tokyo/s2172056", "athome": "takanawagateway-st"},
-    "三田":   {"suumo": "36860", "homes": "mita_06402-st",       "nomu": "ensen_tokyo/2351/2351130", "livable": "tokyo/s2351130", "athome": "mita-st"},
-    "大門":   {"suumo": "22090", "homes": "daimon_06403-st",                  "nomu": "ensen_tokyo/2351/2351120", "livable": "tokyo/s2351120", "athome": "daimon-st"},
-    "新橋":   {"suumo": "20110", "homes": "shimbashi_00558-st",                  "nomu": "ensen_tokyo/2351/2351110", "livable": "tokyo/s2351110", "athome": "shimbashi-st"},
-    "日本橋": {"suumo": "29710", "homes": "nihombashi_06309-st",                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": "nihombashi-st"},
-    "東日本橋": {"suumo": "32170", "homes": "higashinihombashi_06405-st",                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st"},
+    "大井町": {"suumo": "05480", "homes": "oimachi_00603-st",    "nomu": "ensen_tokyo/2196/2196270", "livable": "tokyo/s2196270", "athome": "oimachi-st", "rehouse": "13/2196/270"},
+    "恵比寿": {"suumo": "05050", "homes": "ebisu_00577-st",       "nomu": "ensen_tokyo/2172/2172100", "livable": "tokyo/s2172100", "athome": "ebisu-st", "rehouse": "13/2172/100"},
+    "広尾":   {"suumo": "33410", "homes": "hiro_06347-st",        "nomu": "ensen_tokyo/2344/2344190", "livable": "tokyo/s2344190", "athome": "hiro-st", "rehouse": "13/2344/190"},
+    "代官山": {"suumo": "21850", "homes": "daikanyama_05050-st",  "nomu": "ensen_tokyo/2321/2321020", "livable": "tokyo/s2321020", "athome": "daikanyama-st", "rehouse": "13/2321/020"},
+    "目黒":   {"suumo": "39110", "homes": "meguro_00577-st",      "nomu": "ensen_tokyo/2172/2172090", "livable": "tokyo/s2172090", "athome": "meguro-st", "rehouse": "13/2172/090"},
+    "中目黒": {"suumo": "27580", "homes": "nakameguro_00577-st",  "nomu": "ensen_tokyo/2321/2321030", "livable": "tokyo/s2321030", "athome": "nakameguro-st", "rehouse": "13/2344/210"},
+    "五反田": {"suumo": "14970", "homes": "gotanda_00603-st",     "nomu": "ensen_tokyo/2172/2172080", "livable": "tokyo/s2172080", "athome": "gotanda-st", "rehouse": "13/2172/080"},
+    "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st", "rehouse": "13/2327/230"},
+    "不動前": {"suumo": "34410", "homes": "fudomae_05068-st",     "nomu": "ensen_tokyo/2327/2327220", "livable": "tokyo/s2327220", "athome": "fudomae-st", "rehouse": "13/2327/220"},
+    "戸越":   {"suumo": "26080", "homes": "togoshi_06400-st",     "nomu": "ensen_tokyo/2351/2351170", "livable": "tokyo/s2351170", "athome": "togoshi-st", "rehouse": "13/2351/170"},
+    "蒲田":   {"suumo": "08940", "homes": "kamata_00605-st",      "nomu": "ensen_tokyo/2196/2196290", "livable": "tokyo/s2196290", "athome": "kamata-st", "rehouse": "13/2196/290"},
+    "京急蒲田": {"suumo": "13410", "homes": "keikyukamata_05144-st", "nomu": "ensen_tokyo/2331/2331120", "livable": "tokyo/s2331120", "athome": "keikyukamata-st", "rehouse": "13/2331/120"},
+    "泉岳寺": {"suumo": "21340", "homes": "sengakuji_05181-st",  "nomu": "ensen_tokyo/2351/2351140", "livable": "tokyo/s2351140", "athome": "sengakuji-st", "rehouse": "13/2351/140"},
+    "高輪ゲートウェイ": {"suumo": "84570", "homes": "takanawagateway_10177-st", "nomu": "ensen_tokyo/2172/2172056", "livable": "tokyo/s2172056", "athome": "takanawagateway-st", "rehouse": "13/2172/056"},
+    "三田":   {"suumo": "36860", "homes": "mita_06402-st",       "nomu": "ensen_tokyo/2351/2351130", "livable": "tokyo/s2351130", "athome": "mita-st", "rehouse": "13/2352/240"},
+    "大門":   {"suumo": "22090", "homes": "daimon_06403-st",                  "nomu": "ensen_tokyo/2351/2351120", "livable": "tokyo/s2351120", "athome": "daimon-st", "rehouse": "13/2358/410"},
+    "新橋":   {"suumo": "20110", "homes": "shimbashi_00558-st",                  "nomu": "ensen_tokyo/2351/2351110", "livable": "tokyo/s2351110", "athome": "shimbashi-st", "rehouse": "13/2172/030"},
+    "日本橋": {"suumo": "29710", "homes": "nihombashi_06309-st",                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": "nihombashi-st", "rehouse": "13/2341/090"},
+    "東日本橋": {"suumo": "32170", "homes": "higashinihombashi_06405-st",                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st", "rehouse": "13/2351/060"},
     # --- 大井町・蒲田の周辺と目黒線沿い（2026-08-29 追加。コードは実URLで検証済み）---
     # --- 2026-08-31 追加。大井町/戸越/蒲田の周辺と浅草線沿い。
     #     コードはSUUMO・ノムコムとも実URLで1駅ずつ検証済み ---
-    "浜松町":   {"suumo": "31160", "homes": "hamamatsucho_00572-st", "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": "hamamatsucho-st"},
+    "浜松町":   {"suumo": "31160", "homes": "hamamatsucho_00572-st", "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": "hamamatsucho-st", "rehouse": "13/2172/040"},
     # 伊丹空港の最寄り（大阪府豊中市）
-    "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st"},
-    "田町":     {"suumo": "23500", "homes": "tamachi_00573-st", "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": "tamachi-st"},
+    "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st", "rehouse": "27/6668/100"},
+    "田町":     {"suumo": "23500", "homes": "tamachi_00573-st", "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": "tamachi-st", "rehouse": "13/2172/050"},
 }
 
 # 駅ごとに許容する区（これ以外の区の物件は弾く）
@@ -154,13 +154,22 @@ OIMACHI_REJECT_PATTERNS = [
 
 # === ユーティリティ ===
 
+# 1ページが極端に重いサイトは既定TIMEOUTでは落ちる（実測: リハウスの駅ページは770KB）
+_HOST_TIMEOUT = {"www.rehouse.co.jp": 120}
+
+
 def fetch(url: str, impersonate: bool = False) -> str:
     """通常はrequests。impersonate=True でChrome TLS指紋偽装 (Cloudflare突破)"""
+    tmo = TIMEOUT
+    for h, t in _HOST_TIMEOUT.items():
+        if h in url:
+            tmo = t
+            break
     try:
         if impersonate and HAS_CFFI:
-            r = cffi_requests.get(url, impersonate="chrome120", timeout=TIMEOUT)
+            r = cffi_requests.get(url, impersonate="chrome120", timeout=tmo)
         else:
-            r = requests.get(url, headers=HTTP_HEADERS, timeout=TIMEOUT)
+            r = requests.get(url, headers=HTTP_HEADERS, timeout=tmo)
         if r.status_code == 200 and r.text:
             return r.text
         print(f"  HTTP {r.status_code} (len={len(r.text)}): {url}", file=sys.stderr)
@@ -261,8 +270,19 @@ def parse_walk(text: str, station: str = None):
     return int(m.group(1)) if m else None
 
 
+# 住所として認める市区（誤検出を防ぐため明示列挙）。
+# STATION_AREAS の全値 + 隣接23区 + 蛍池周辺(大阪)。
+_ADDR_MUNI = (
+    "千代田区|中央区|港区|新宿区|文京区|台東区|墨田区|江東区|品川区|目黒区|"
+    "大田区|世田谷区|渋谷区|中野区|杉並区|豊島区|北区|荒川区|板橋区|練馬区|"
+    "足立区|葛飾区|江戸川区|"
+    "豊中市|池田市|吹田市|箕面市|大阪市[^\\s]{0,3}区|川西市|伊丹市"
+)
+
+
 def parse_addr(text: str):
-    m = re.search(r"((?:品川区|渋谷区|目黒区|港区)[^\s　<>「」]+)", text)
+    """住所（市区＋町丁）を返す。ここが空だと駅ごとの区チェックが効かない。"""
+    m = re.search(r"((?:" + _ADDR_MUNI + r")[^\s　<>「」,、/｜|]*)", text)
     return m.group(1) if m else ""
 
 
@@ -534,6 +554,63 @@ def parse_athome_rent(html: str, station: str):
             "source": "アットホーム賃貸",
         })
     return out
+
+
+# === 三井のリハウス パーサー ===
+# 1つのURL(all-type)で中古マンション/新築マンション/戸建/新築戸建/土地が全部返る。
+# カード .property-index-card に 価格/住所/路線+駅+徒歩/間取り/面積/築年 が揃う。
+_REHOUSE_KIND = {"mansion": "mansion", "s_mansion": "mansion",
+                 "kodate": "house", "s_kodate": "house", "tochi": "land"}
+
+
+def parse_rehouse(html: str, station: str):
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    items = []
+    seen = set()
+    for card in soup.select("div.property-index-card"):
+        a = card.find("a", href=lambda h: h and "/bkdetail/" in h)
+        if not a:
+            continue
+        href = a["href"]
+        m = re.search(r"/buy/([a-z_]+)/bkdetail/([A-Z0-9]{6,})", href)
+        if not m:
+            continue
+        kind = _REHOUSE_KIND.get(m.group(1))
+        if not kind:            # tohshi(投資用)などは対象外
+            continue
+        pid = m.group(2)
+        if pid in seen:
+            continue
+        seen.add(pid)
+
+        text = card.get_text(" ", strip=True)
+        # リハウスの駅ページは近隣駅の物件も混ぜて返す（実測: 目黒駅ページに
+        # 桜新町・白金台が入っていた）。カードは「路線 ◯◯駅 徒歩N分」を必ず
+        # 1つだけ持つので、その駅名が監視駅と一致するものだけ採る。
+        sm = re.search(r"[^\s/]*線\s*([^\s]+?)駅\s*徒歩(\d+)分", text)
+        if not sm or sm.group(1) != station:
+            continue
+        walk = int(sm.group(2))
+        name_el = card.find(["h2", "h3", "h4"])
+        name = (name_el.get_text(strip=True) if name_el else text)[:50]
+        items.append({
+            "id": f"rehouse:{kind[0]}:{pid}",
+            "img": _abs(card_image(card), "https://www.rehouse.co.jp"),
+            "station": station,
+            "type": kind,
+            "name": name,
+            "price": parse_price_man(text),
+            "area": parse_area(text),
+            "layout": parse_layout(text),
+            "walk": walk,
+            "addr": parse_addr(text),
+            "built": parse_built(text),
+            "url": _abs(href.split("?")[0], "https://www.rehouse.co.jp"),
+            "source": "三井のリハウス",
+        })
+    return items
 
 
 def parse_nomu(html: str, station: str, kind: str):
@@ -879,6 +956,7 @@ BLOCK_COOLDOWN = 300  # 秒
 _HOST_GATE = {
     "www.homes.co.jp":  (threading.Lock(), 4.0),
     "www.athome.co.jp": (threading.Lock(), 4.0),
+    "www.rehouse.co.jp": (threading.Lock(), 1.5),
     # SUUMOは並列で叩くと503を連発する（実測157件）。同時1本+1.2秒間隔。
     "suumo.jp":         (threading.Lock(), 1.3),
 }
@@ -1192,6 +1270,28 @@ def collect_station(station, codes):
             portal_count[f"アットホーム {kind}"] += len(kept)
             time.sleep(SLEEP_BETWEEN)
 
+        # 三井のリハウス — all-type で全種別を1URLから取得
+        if codes.get("rehouse"):
+            items = []
+            _pf, _rw, _st = codes["rehouse"].split("/")
+            base = ("https://www.rehouse.co.jp/buy/all-type/prefecture/"
+                    f"{_pf}/railway/{_rw}/station/{_st}/")
+            for pn in range(1, 7):
+                url = base if pn == 1 else f"{base}?page={pn}"
+                html = fetch_with_retry(url, impersonate=True)
+                page_items = parse_rehouse(html, station)
+                if not page_items:
+                    break
+                items.extend(page_items)
+                if len(page_items) < 30:
+                    break          # 最終ページ
+                time.sleep(SLEEP_BETWEEN)
+            kept = filter_with_walk_rescue(items)
+            log.append(f"[リハウス] {station}: parsed={len(items)} kept={len(kept)}")
+            all_items.extend(kept)
+            portal_count["三井のリハウス"] += len(kept)
+            time.sleep(SLEEP_BETWEEN)
+
         # ノムコム
         for kind, path in ([] if not codes.get("nomu") else
                            [("mansion", f"mansion/{codes['nomu']}/"),
@@ -1309,7 +1409,7 @@ def filter_with_walk_rescue(items):
         needs_walk = it.get("walk") is None
         needs_addr = not it.get("addr") and STATION_AREAS.get(it.get("station"))
         if (needs_walk or needs_addr) and passes_except_walk(it):
-            use_cffi = it["source"] in ("HOMES", "アットホーム")
+            use_cffi = it["source"] in ("HOMES", "アットホーム", "三井のリハウス")
             html = fetch(it["url"], impersonate=use_cffi)
             if html:
                 soup = BeautifulSoup(html, "html.parser")
