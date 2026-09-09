@@ -93,32 +93,32 @@ TARGET_MAX_ITEMS = 30
 
 # === 駅コード ===
 STATIONS = {
-    "大井町": {"suumo": "05480", "homes": "oimachi_00603-st",    "nomu": "ensen_tokyo/2196/2196270", "livable": "tokyo/s2196270", "athome": "oimachi-st", "rehouse": "13/2196/270", "sumaity": "oimachi"},
-    "恵比寿": {"suumo": "05050", "homes": "ebisu_00577-st",       "nomu": "ensen_tokyo/2172/2172100", "livable": "tokyo/s2172100", "athome": "ebisu-st", "rehouse": "13/2172/100", "sumaity": "ebisu"},
-    "広尾":   {"suumo": "33410", "homes": "hiro_06347-st",        "nomu": "ensen_tokyo/2344/2344190", "livable": "tokyo/s2344190", "athome": "hiro-st", "rehouse": "13/2344/190", "sumaity": "hiroo"},
-    "代官山": {"suumo": "21850", "homes": "daikanyama_05050-st",  "nomu": "ensen_tokyo/2321/2321020", "livable": "tokyo/s2321020", "athome": "daikanyama-st", "rehouse": "13/2321/020", "sumaity": "daikanyama"},
-    "目黒":   {"suumo": "39110", "homes": "meguro_00576-st",      "nomu": "ensen_tokyo/2172/2172090", "livable": "tokyo/s2172090", "athome": "meguro-st", "rehouse": "13/2172/090", "sumaity": "meguro"},
-    "中目黒": {"suumo": "27580", "homes": "nakameguro_05051-st",  "nomu": "ensen_tokyo/2321/2321030", "livable": "tokyo/s2321030", "athome": "nakameguro-st", "rehouse": "13/2344/210", "sumaity": "nakameguro"},
-    "五反田": {"suumo": "14970", "homes": "gotanda_00575-st",     "nomu": "ensen_tokyo/2172/2172080", "livable": "tokyo/s2172080", "athome": "gotanda-st", "rehouse": "13/2172/080", "sumaity": "gotanda"},
-    "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st", "rehouse": "13/2327/230", "sumaity": "musashikoyama"},
-    "不動前": {"suumo": "34410", "homes": "fudomae_05068-st",     "nomu": "ensen_tokyo/2327/2327220", "livable": "tokyo/s2327220", "athome": "fudomae-st", "rehouse": "13/2327/220", "sumaity": "fudomae"},
-    "戸越":   {"suumo": "26080", "homes": "togoshi_06400-st",     "nomu": "ensen_tokyo/2351/2351170", "livable": "tokyo/s2351170", "athome": "togoshi-st", "rehouse": "13/2351/170", "sumaity": "togoshi"},
-    "蒲田":   {"suumo": "08940", "homes": "kamata_00605-st",      "nomu": "ensen_tokyo/2196/2196290", "livable": "tokyo/s2196290", "athome": "kamata-st", "rehouse": "13/2196/290", "sumaity": "kamata"},
-    "京急蒲田": {"suumo": "13410", "homes": "keikyukamata_05144-st", "nomu": "ensen_tokyo/2331/2331120", "livable": "tokyo/s2331120", "athome": "keikyukamata-st", "rehouse": "13/2331/120", "sumaity": "keikyukamata"},
-    "泉岳寺": {"suumo": "21340", "homes": "sengakuji_05181-st",  "nomu": "ensen_tokyo/2351/2351140", "livable": "tokyo/s2351140", "athome": "sengakuji-st", "rehouse": "13/2351/140", "sumaity": "sengakuji"},
-    "高輪ゲートウェイ": {"suumo": "84570", "homes": "takanawagateway_10177-st", "nomu": "ensen_tokyo/2172/2172056", "livable": "tokyo/s2172056", "athome": "takanawagateway-st", "rehouse": "13/2172/056", "sumaity": "takanawagateway"},
-    "三田":   {"suumo": "36860", "homes": "mita_06402-st",       "nomu": "ensen_tokyo/2351/2351130", "livable": "tokyo/s2351130", "athome": "mita-st", "rehouse": "13/2352/240", "sumaity": "mita"},
-    "大門":   {"suumo": "22090", "homes": "daimon_06403-st",                  "nomu": "ensen_tokyo/2351/2351120", "livable": "tokyo/s2351120", "athome": "daimon-st", "rehouse": "13/2358/410", "sumaity": "daimon"},
-    "新橋":   {"suumo": "20110", "homes": "shimbashi_00558-st",                  "nomu": "ensen_tokyo/2351/2351110", "livable": "tokyo/s2351110", "athome": "shimbashi-st", "rehouse": "13/2172/030", "sumaity": "shimbashi"},
-    "日本橋": {"suumo": "29710", "homes": "nihombashi_06309-st",                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": "nihombashi-st", "rehouse": "13/2341/090", "sumaity": "nihombashi"},
-    "東日本橋": {"suumo": "32170", "homes": "higashinihombashi_06405-st",                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st", "rehouse": "13/2351/060", "sumaity": None},
+    "大井町": {"suumo": "05480", "homes": "oimachi_00603-st",    "nomu": "ensen_tokyo/2196/2196270", "livable": "tokyo/s2196270", "athome": "oimachi-st", "rehouse": "13/2196/270", "sumaity": "oimachi", "chintai": "tokyo/000000037"},
+    "恵比寿": {"suumo": "05050", "homes": "ebisu_00577-st",       "nomu": "ensen_tokyo/2172/2172100", "livable": "tokyo/s2172100", "athome": "ebisu-st", "rehouse": "13/2172/100", "sumaity": "ebisu", "chintai": "tokyo/000000066"},
+    "広尾":   {"suumo": "33410", "homes": "hiro_06347-st",        "nomu": "ensen_tokyo/2344/2344190", "livable": "tokyo/s2344190", "athome": "hiro-st", "rehouse": "13/2344/190", "sumaity": "hiroo", "chintai": "tokyo/000005286"},
+    "代官山": {"suumo": "21850", "homes": "daikanyama_05050-st",  "nomu": "ensen_tokyo/2321/2321020", "livable": "tokyo/s2321020", "athome": "daikanyama-st", "rehouse": "13/2321/020", "sumaity": "daikanyama", "chintai": "tokyo/000005086"},
+    "目黒":   {"suumo": "39110", "homes": "meguro_00576-st",      "nomu": "ensen_tokyo/2172/2172090", "livable": "tokyo/s2172090", "athome": "meguro-st", "rehouse": "13/2172/090", "sumaity": "meguro", "chintai": "tokyo/000000065"},
+    "中目黒": {"suumo": "27580", "homes": "nakameguro_05051-st",  "nomu": "ensen_tokyo/2321/2321030", "livable": "tokyo/s2321030", "athome": "nakameguro-st", "rehouse": "13/2344/210", "sumaity": "nakameguro", "chintai": "tokyo/000005087"},
+    "五反田": {"suumo": "14970", "homes": "gotanda_00575-st",     "nomu": "ensen_tokyo/2172/2172080", "livable": "tokyo/s2172080", "athome": "gotanda-st", "rehouse": "13/2172/080", "sumaity": "gotanda", "chintai": "tokyo/000000064"},
+    "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st", "rehouse": "13/2327/230", "sumaity": "musashikoyama", "chintai": "tokyo/000005103"},
+    "不動前": {"suumo": "34410", "homes": "fudomae_05068-st",     "nomu": "ensen_tokyo/2327/2327220", "livable": "tokyo/s2327220", "athome": "fudomae-st", "rehouse": "13/2327/220", "sumaity": "fudomae", "chintai": "tokyo/000005102"},
+    "戸越":   {"suumo": "26080", "homes": "togoshi_06400-st",     "nomu": "ensen_tokyo/2351/2351170", "livable": "tokyo/s2351170", "athome": "togoshi-st", "rehouse": "13/2351/170", "sumaity": "togoshi", "chintai": "tokyo/000005352"},
+    "蒲田":   {"suumo": "08940", "homes": "kamata_00605-st",      "nomu": "ensen_tokyo/2196/2196290", "livable": "tokyo/s2196290", "athome": "kamata-st", "rehouse": "13/2196/290", "sumaity": "kamata", "chintai": "tokyo/000000039"},
+    "京急蒲田": {"suumo": "13410", "homes": "keikyukamata_05144-st", "nomu": "ensen_tokyo/2331/2331120", "livable": "tokyo/s2331120", "athome": "keikyukamata-st", "rehouse": "13/2331/120", "sumaity": "keikyukamata", "chintai": "tokyo/000005182"},
+    "泉岳寺": {"suumo": "21340", "homes": "sengakuji_05181-st",  "nomu": "ensen_tokyo/2351/2351140", "livable": "tokyo/s2351140", "athome": "sengakuji-st", "rehouse": "13/2351/140", "sumaity": "sengakuji", "chintai": "tokyo/000005172"},
+    "高輪ゲートウェイ": {"suumo": "84570", "homes": "takanawagateway_10177-st", "nomu": "ensen_tokyo/2172/2172056", "livable": "tokyo/s2172056", "athome": "takanawagateway-st", "rehouse": "13/2172/056", "sumaity": "takanawagateway", "chintai": "tokyo/000020260"},
+    "三田":   {"suumo": "36860", "homes": "mita_06402-st",       "nomu": "ensen_tokyo/2351/2351130", "livable": "tokyo/s2351130", "athome": "mita-st", "rehouse": "13/2352/240", "sumaity": "mita", "chintai": "tokyo/000005350"},
+    "大門":   {"suumo": "22090", "homes": "daimon_06403-st",                  "nomu": "ensen_tokyo/2351/2351120", "livable": "tokyo/s2351120", "athome": "daimon-st", "rehouse": "13/2358/410", "sumaity": "daimon", "chintai": "tokyo/000005349"},
+    "新橋":   {"suumo": "20110", "homes": "shimbashi_00558-st",                  "nomu": "ensen_tokyo/2351/2351110", "livable": "tokyo/s2351110", "athome": "shimbashi-st", "rehouse": "13/2172/030", "sumaity": "shimbashi", "chintai": "tokyo/000000033"},
+    "日本橋": {"suumo": "29710", "homes": "nihombashi_06309-st",                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": "nihombashi-st", "rehouse": "13/2341/090", "sumaity": "nihombashi", "chintai": "tokyo/000005246"},
+    "東日本橋": {"suumo": "32170", "homes": "higashinihombashi_06405-st",                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st", "rehouse": "13/2351/060", "sumaity": None, "chintai": "tokyo/000005347"},
     # --- 大井町・蒲田の周辺と目黒線沿い（2026-08-29 追加。コードは実URLで検証済み）---
     # --- 2026-08-31 追加。大井町/戸越/蒲田の周辺と浅草線沿い。
     #     コードはSUUMO・ノムコムとも実URLで1駅ずつ検証済み ---
-    "浜松町":   {"suumo": "31160", "homes": "hamamatsucho_00572-st", "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": "hamamatsucho-st", "rehouse": "13/2172/040", "sumaity": "hamamatsucho"},
+    "浜松町":   {"suumo": "31160", "homes": "hamamatsucho_00572-st", "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": "hamamatsucho-st", "rehouse": "13/2172/040", "sumaity": "hamamatsucho", "chintai": "tokyo/000000034"},
     # 伊丹空港の最寄り（大阪府豊中市）
-    "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st", "rehouse": "27/6668/100", "sumaity": "hotarugaike"},
-    "田町":     {"suumo": "23500", "homes": "tamachi_00573-st", "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": "tamachi-st", "rehouse": "13/2172/050", "sumaity": "tamachi"},
+    "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st", "rehouse": "27/6668/100", "sumaity": "hotarugaike", "chintai": "osaka/000006365"},
+    "田町":     {"suumo": "23500", "homes": "tamachi_00573-st", "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": "tamachi-st", "rehouse": "13/2172/050", "sumaity": "tamachi", "chintai": "tokyo/000000035"},
 }
 
 # 駅ごとに許容する区（これ以外の区の物件は弾く）
@@ -291,11 +291,16 @@ def parse_walk(text: str, station: str = None):
     # 駅指定: 駅名直後の徒歩X分のみ
     if station:
         s = re.escape(station)
+        # 駅名の直前が駅名の一部になる文字だと別の駅を拾ってしまう。
+        # 実測: 「中目黒駅 徒歩5分」を目黒として、
+        #       「東日本橋駅 徒歩2分」を日本橋として誤って採っていた。
+        # 直前は「行頭 or 記号・空白・線・ヶ所の区切り」でなければならない。
+        head = r"(?:^|[\s/|｜、,，。\(\)（）\[\]【】＞>・線駅分「」]|>)"
         patterns = [
             rf"「{s}」駅?\s*徒?歩\s*(\d+)\s*分",           # 「大井町」駅 徒歩4分 / 「大井町」徒歩4分
             rf"「{s}駅」\s*徒?歩\s*(\d+)\s*分",            # 「大井町駅」徒歩4分
-            rf"{s}駅\s*徒?歩\s*(\d+)\s*分",                # 大井町駅 徒歩4分
-            rf"{s}\s*駅?\s*[\s]?徒?歩\s*(\d+)\s*分",       # 大井町 徒歩4分
+            rf"{head}{s}駅\s*徒?歩\s*(\d+)\s*分",           # 大井町駅 徒歩4分
+            rf"{head}{s}\s*駅?\s*[\s]?徒?歩\s*(\d+)\s*分",  # 大井町 徒歩4分
         ]
         for pat in patterns:
             m = re.search(pat, text)
@@ -730,6 +735,81 @@ def parse_sumaity(html: str, station: str, kind: str):
     return items
 
 
+# CHINTAI(賃貸)。section.cassette_item.build が建物、その中の
+# tbody.js-detailLinkUrl が部屋。部屋の列は
+#   間取図 / 階 / 家賃 / 管理費 / 敷金 / 礼金 / 間取り / 専有面積 / お問合せ
+# の順で、建物側に 住所・交通(複数駅)・築年・階建 が載る。
+# 実測: 目黒駅ページで建物26件・部屋52件、すべて生HTMLから取れる。
+def parse_chintai(html: str, station: str):
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    items = []
+    seen = set()
+    for bld in soup.select("section.cassette_item"):
+        btext = bld.get_text(" | ", strip=True)
+        name = ""
+        nm = re.search(r"賃貸[^|]*\|\s*([^|]{1,40}?)\s*\|\s*住所", btext)
+        if nm:
+            name = nm.group(1).strip()
+        ma = re.search(r"住所\s*\|\s*([^|]{4,40})", btext)
+        addr = ma.group(1).strip() if ma else ""
+        built = None
+        mb = re.search(r"築年\s*\|\s*(\d{4})年", btext)
+        if mb:
+            built = int(mb.group(1))
+        # 交通欄は「南北線/白金台駅 徒歩1分」形式。共通パーサーが読めるよう
+        # 路線とのスラッシュを空白にする
+        transit = btext.replace("/", " ")
+        walk = parse_walk(transit, station)
+        walks = parse_all_walks(transit)
+
+        for room in bld.select("tbody.js-detailLinkUrl"):
+            a = room.find("a", href=lambda h: h and "/detail/bk-" in h)
+            if not a:
+                continue
+            m = re.search(r"/detail/(bk-\w+)/", a["href"])
+            if not m or m.group(1) in seen:
+                continue
+            seen.add(m.group(1))
+            cells = [td.get_text(" ", strip=True)
+                     for td in room.find_all("td")]
+            rtext = " ".join(cells)
+            floor = parse_floor(rtext, "rent")
+            mr = re.search(r"([\d.]+)\s*万円", rtext)
+            rent = float(mr.group(1)) if mr else None
+            mk = re.search(r"万円\s*([\d,]+)\s*円", rtext)
+            kanri = int(mk.group(1).replace(",", "")) if mk else 0
+            total = round(rent + kanri / 10000, 2) if rent is not None else None
+            # 敷金→礼金の順に並ぶ（ヘッダで実測）
+            sk = re.findall(r"(なし|[\d.]+\s*ヶ月|[\d,]+\s*円)", rtext)
+            shikirei = ""
+            if len(sk) >= 2:
+                shikirei = f"敷{sk[-2].replace(' ', '')}/礼{sk[-1].replace(' ', '')}"
+            items.append({
+                "id": f"chintai:r:{m.group(1)}",
+                "img": _abs(card_image(room), "https://www.chintai.net"),
+                "station": station,
+                "type": "rent",
+                "name": name or addr or "CHINTAI掲載物件",
+                "price": total,
+                "rent": rent,
+                "kanri": kanri,
+                "area": parse_area(rtext),
+                "layout": parse_layout(rtext),
+                "walk": walk,
+                "walks": walks,
+                "built": built,
+                "floor": floor,
+                "shikirei": shikirei,
+                "addr": addr,
+                "url": _abs(a["href"], "https://www.chintai.net"),
+                "source": "CHINTAI",
+                "parking": None,
+            })
+    return items
+
+
 def parse_nomu(html: str, station: str, kind: str):
     if not html:
         return []
@@ -1062,8 +1142,10 @@ def enrich_from_detail(item):
         if kind == "land":
             item["floor"] = "—"
         else:
+            # 戸建はSUUMOでは「構造・工法」に「木造3階建」と載る（実測）
             row = _row_value(soup, "所在階", "階数", "所在階/構造", "所在階／構造",
-                             "構造・階建", "構造・階建て", "建物構造")
+                             "構造・階建", "構造・階建て", "建物構造",
+                             "構造・工法", "構造", "階建")
             f = parse_floor(row, kind) if row else ""
             if not f:
                 body = soup.get_text(" ", strip=True)
@@ -1457,6 +1539,28 @@ def collect_station(station, codes):
             log.append(f"[アットホーム {kind}] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count[f"アットホーム {kind}"] += len(kept)
+            time.sleep(SLEEP_BETWEEN)
+
+        # CHINTAI(賃貸) — 一覧に所在階・敷金礼金・築年まで載っている
+        if codes.get("chintai"):
+            _pf, _sc = codes["chintai"].split("/")
+            items = []
+            # ページ送りは ?page= ではなく /list/pageN/（実測。?page=は無視され
+            # 同じ1ページ目が返るため重複していた）
+            pages = (1, 2, 3, 4, 5) if station in DEEP_SCAN_STATIONS else (1, 2, 3)
+            for pn in pages:
+                url = (f"https://www.chintai.net/{_pf}/ensen/{_sc}/list/"
+                       + ("" if pn == 1 else f"page{pn}/"))
+                html = fetch_with_retry(url, impersonate=True)
+                page_items = parse_chintai(html, station)
+                if not page_items:
+                    break
+                items.extend(page_items)
+                time.sleep(SLEEP_BETWEEN)
+            kept = [i for i in items if apply_rent_filters(i)]
+            log.append(f"[CHINTAI] {station}: parsed={len(items)} kept={len(kept)}")
+            all_items.extend(kept)
+            portal_count["CHINTAI"] += len(kept)
             time.sleep(SLEEP_BETWEEN)
 
         # スマイティ — 一覧に所在階まで載っているので詳細を見ずに済む
