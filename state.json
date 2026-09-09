@@ -1,1 +1,3677 @@
-{"seen_ids": ["suumo:h:21602342", "suumo:l:20863877", "suumo:l:21631004", "suumo:l:20540402", "suumo:l:21612503", "suumo:l:21008080", "suumo:m:20585658", "suumo:m:20837457", "suumo:m:20918523", "suumo:l:79178891", "suumo:l:79109850", "suumo:l:20863072", "suumo:h:21425622", "suumo:l:21017451", "suumo:l:21021265", "suumo:l:21046673", "suumo:l:21617837", "suumo:l:21578921", "suumo:l:78229550", "suumo:h:21064438", "suumo:h:21342505", "suumo:m:21281858", "suumo:m:20326787", "suumo:m:21213947", "suumo:m:21229075", "suumo:h:21434232", "suumo:l:21525571", "suumo:l:21640200", "suumo:m:21005727", "suumo:h:21395289", "suumo:h:21307308", "suumo:m:21239491", "suumo:m:21657889", "suumo:m:21380169", "suumo:m:21266683", "suumo:m:21665549", "suumo:m:21537301", "suumo:m:20540371", "suumo:m:20587605", "suumo:m:21119806", "suumo:m:20354701", "suumo:m:21643103", "suumo:l:21483914", "livable:h:C13261765", "suumo:r:jnc_000108910652", "suumo:r:jnc_000109640904", "suumo:r:jnc_000109355761", "suumo:r:jnc_000109701505", "suumo:r:jnc_000107443349", "suumo:r:jnc_000108531046", "suumo:r:jnc_000107290588", "suumo:r:jnc_000108094363", "suumo:r:jnc_000108470669", "suumo:r:jnc_000107389836", "suumo:r:jnc_000109682587", "suumo:r:jnc_000106634983", "suumo:r:jnc_000108774137", "suumo:r:jnc_000109488969", "suumo:r:jnc_000108089024", "suumo:r:jnc_000108089025", "suumo:r:jnc_000109676015", "suumo:r:jnc_000108910693", "suumo:r:jnc_000080459472", "suumo:r:jnc_000107924722", "suumo:r:jnc_000108998120", "suumo:r:jnc_000109396185", "suumo:r:jnc_000107686311", "suumo:r:jnc_000103023730", "suumo:r:jnc_000109372911", "suumo:r:jnc_000106870230", "livable:l:C13266784", "suumo:r:jnc_000109600819", "suumo:r:jnc_000109334234", "suumo:r:jnc_000109547653", "suumo:r:jnc_000109609902", "suumo:r:jnc_000108506045", "nomu:m:F82C4025", "suumo:r:jnc_000107039458", "suumo:r:jnc_000107393932", "suumo:r:jnc_000109533062", "suumo:r:jnc_000108806880", "suumo:r:jnc_000108462250", "suumo:r:jnc_000098784392", "suumo:r:jnc_000108960094", "suumo:r:jnc_000088512197", "suumo:r:jnc_000108979127", "suumo:r:jnc_000099377365", "suumo:r:jnc_000108716401", "suumo:r:jnc_000099377366", "suumo:r:jnc_000109617744", "suumo:r:jnc_000109707805", "suumo:r:jnc_000108844856", "suumo:r:jnc_000108811185", "suumo:r:jnc_000109073540", "suumo:r:jnc_000109707806", "suumo:r:jnc_000109244976", "suumo:r:jnc_000109396207", "suumo:r:jnc_000108438590", "suumo:r:jnc_000109617662", "suumo:r:jnc_000109701621", "suumo:r:jnc_000109066929", "suumo:r:jnc_000109495125", "suumo:r:jnc_000107565289", "suumo:r:jnc_000108732304", "suumo:r:jnc_000108666648", "suumo:r:jnc_000108802490", "suumo:r:jnc_000109372915", "suumo:r:jnc_000107595696", "nomu:m:V8770005", "suumo:r:jnc_000109073485", "suumo:r:jnc_000109537857", "suumo:r:jnc_000109369127", "suumo:r:jnc_000069747839", "suumo:r:jnc_000109148942", "suumo:r:jnc_000106747710", "suumo:r:jnc_000106747712", "suumo:r:jnc_000105022759", "suumo:r:jnc_000109073864", "suumo:r:jnc_000108613077"], "last_run": 1788901754, "prices": {"suumo:h:21602342": 9500, "suumo:l:20863877": 9800, "suumo:l:21631004": 9800, "suumo:l:20540402": 9800, "suumo:l:21612503": 9800, "suumo:l:21008080": 9800, "suumo:m:20585658": 9480, "suumo:m:20837457": 11880, "suumo:m:20918523": 11980, "suumo:l:79178891": 11000, "suumo:l:79109850": 11000, "suumo:l:20863072": 11000, "suumo:h:21425622": 8780, "suumo:l:21017451": 4980, "suumo:l:21021265": 4980, "suumo:l:21046673": 4980, "suumo:l:21617837": 6480, "suumo:l:21578921": 6480, "suumo:l:78229550": 6480, "suumo:h:21064438": 9980, "suumo:h:21342505": 10880, "suumo:m:21281858": 11990, "suumo:m:20326787": 9980, "suumo:m:21213947": 11800, "suumo:m:21229075": 11850, "suumo:h:21434232": 5880, "suumo:l:21525571": 10750, "suumo:l:21640200": 8900, "suumo:m:21005727": 10990, "suumo:h:21395289": 8010, "suumo:h:21307308": 9090, "suumo:m:21239491": 11999, "suumo:m:21657889": 11999, "suumo:m:21380169": 11999, "suumo:m:21266683": 10490, "suumo:m:21665549": 11580, "suumo:m:21537301": 11850, "suumo:m:20540371": 11980, "suumo:m:20587605": 10480, "suumo:m:21119806": 10790, "suumo:m:20354701": 11380, "suumo:m:21643103": 8980, "suumo:l:21483914": 9580, "livable:h:C13261765": 9500, "suumo:r:jnc_000108910652": 15.3, "suumo:r:jnc_000109640904": 17.8, "suumo:r:jnc_000109355761": 19.5, "suumo:r:jnc_000109701505": 20.2, "suumo:r:jnc_000107443349": 21.1, "suumo:r:jnc_000108531046": 21.9, "suumo:r:jnc_000107290588": 26.6, "suumo:r:jnc_000108094363": 27.0, "suumo:r:jnc_000108470669": 25.2, "suumo:r:jnc_000107389836": 28.0, "suumo:r:jnc_000109682587": 20.6, "suumo:r:jnc_000106634983": 23.8, "suumo:r:jnc_000108774137": 24.2, "suumo:r:jnc_000109488969": 25.0, "suumo:r:jnc_000108089024": 25.6, "suumo:r:jnc_000108089025": 25.8, "suumo:r:jnc_000109676015": 26.0, "suumo:r:jnc_000108910693": 26.4, "suumo:r:jnc_000080459472": 22.5, "suumo:r:jnc_000107924722": 23.5, "suumo:r:jnc_000108998120": 27.25, "suumo:r:jnc_000109396185": 28.0, "suumo:r:jnc_000107686311": 23.7, "suumo:r:jnc_000103023730": 25.8, "suumo:r:jnc_000109372911": 27.4, "suumo:r:jnc_000106870230": 27.8, "livable:l:C13266784": 4980, "suumo:r:jnc_000109600819": 21.3, "suumo:r:jnc_000109334234": 24.2, "suumo:r:jnc_000109547653": 24.2, "suumo:r:jnc_000109609902": 24.6, "suumo:r:jnc_000108506045": 25.3, "nomu:m:F82C4025": 10480, "suumo:r:jnc_000107039458": 26.5, "suumo:r:jnc_000107393932": 26.7, "suumo:r:jnc_000109533062": 26.8, "suumo:r:jnc_000108806880": 27.4, "suumo:r:jnc_000108462250": 27.4, "suumo:r:jnc_000098784392": 21.0, "suumo:r:jnc_000108960094": 24.2, "suumo:r:jnc_000088512197": 25.0, "suumo:r:jnc_000108979127": 26.6, "suumo:r:jnc_000099377365": 26.9, "suumo:r:jnc_000108716401": 27.3, "suumo:r:jnc_000099377366": 27.4, "suumo:r:jnc_000109617744": 25.6, "suumo:r:jnc_000109707805": 22.2, "suumo:r:jnc_000108844856": 24.7, "suumo:r:jnc_000108811185": 26.8, "suumo:r:jnc_000109073540": 27.9, "suumo:r:jnc_000109707806": 22.2, "suumo:r:jnc_000109244976": 26.0, "suumo:r:jnc_000109396207": 19.9, "suumo:r:jnc_000108438590": 21.0, "suumo:r:jnc_000109617662": 21.5, "suumo:r:jnc_000109701621": 21.75, "suumo:r:jnc_000109066929": 22.8, "suumo:r:jnc_000109495125": 23.0, "suumo:r:jnc_000107565289": 28.0, "suumo:r:jnc_000108732304": 24.0, "suumo:r:jnc_000108666648": 24.5, "suumo:r:jnc_000108802490": 27.0, "suumo:r:jnc_000109372915": 26.3, "suumo:r:jnc_000107595696": 26.7, "nomu:m:V8770005": 11980, "suumo:r:jnc_000109073485": 21.5, "suumo:r:jnc_000109537857": 25.1, "suumo:r:jnc_000109369127": 26.5, "suumo:r:jnc_000069747839": 27.2, "suumo:r:jnc_000109148942": 27.3, "suumo:r:jnc_000106747710": 12.3, "suumo:r:jnc_000106747712": 13.1, "suumo:r:jnc_000105022759": 13.3, "suumo:r:jnc_000109073864": 22.7, "suumo:r:jnc_000108613077": 26.9}, "watchlist": {"homes:h:b-1375350001854": {"price": 22880, "name": "中古一戸建てー目黒区中目黒１丁目 3LDK 駅徒歩５分ー", "station": "恵比寿", "type": "house", "url": "https://www.homes.co.jp/kodate/b-1375350001854/", "area": 52.01, "first": 22880}, "homes:l:b-35503070003327": {"price": 22800, "name": "土地渋谷区恵比寿4丁目 (恵比寿駅)", "station": "恵比寿", "type": "land", "url": "https://www.homes.co.jp/tochi/b-35503070003327/", "area": 48.79, "first": 22800}, "homes:l:b-1063460028484": {"price": 22800, "name": "土地渋谷区恵比寿4丁目 (恵比寿駅)", "station": "恵比寿", "type": "land", "url": "https://www.homes.co.jp/tochi/b-1063460028484/", "area": 48.55, "first": 22800}, "nomu:m:FF4C5050": {"price": 18800, "name": "ピアース中目黒ローレルアイ", "station": "中目黒", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FF4C5050/", "area": 73.34, "first": 18800}, "nomu:m:FC7C5009": {"price": 21800, "name": "プラウド大井ゼームス坂", "station": "大井町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FC7C5009/", "area": 80.2, "first": 21800}, "nomu:m:FC7BZ018": {"price": 17980, "name": "ブリリア大井町ラヴィアンタワー", "station": "大井町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FC7BZ018/", "area": 68.62, "first": 17980}, "nomu:m:KC770005": {"price": 15860, "name": "ブリリア大井仙台坂", "station": "大井町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/KC770005/", "area": 70.87, "first": 15860}, "nomu:m:RC770576": {"price": 22800, "name": "シティタワー大井町", "station": "大井町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RC770576/", "area": 70.45, "first": 22800}, "nomu:m:FC7BZ015": {"price": 17980, "name": "ブリリア大井町ラヴィアンタワー", "station": "大井町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FC7BZ015/", "area": 67.58, "first": 17980}, "nomu:h:E89Q7004": {"price": 25000, "name": "渋谷区恵比寿西二丁目戸建", "station": "恵比寿", "type": "house", "url": "https://www.nomu.com/house/id/E89Q7004/", "area": 109.86, "first": 25000}, "nomu:l:UF470042": {"price": 22800, "name": "渋谷区恵比寿4丁目 土地", "station": "恵比寿", "type": "land", "url": "https://www.nomu.com/land/id/UF470042/", "area": 48.79, "first": 22800}, "livable:m:C48267122": {"price": 21800, "name": "プラウド大井ゼームス坂", "station": "大井町", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C48267122/", "area": 80.2, "first": 21800}, "suumo:r:jnc_000107403218": {"price": 28.7, "name": "AIFLAT品川戸越パークサイド", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107403218/?bc=100485811149", "area": 48.04, "first": 28.7}, "suumo:r:jnc_000105447007": {"price": 29.4, "name": "AIFLAT品川戸越パークサイド", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105447007/?bc=100485655508", "area": 48.04, "first": 29.4}, "suumo:r:jnc_000105848887": {"price": 29.4, "name": "AIFLAT品川戸越パークサイド", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105848887/?bc=100496576164", "area": 48.04, "first": 29.4}, "suumo:r:jnc_000105447005": {"price": 29.7, "name": "AIFLAT品川戸越パークサイド", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105447005/?bc=100509427895", "area": 48.72, "first": 29.7}, "suumo:r:jnc_000107311695": {"price": 29.7, "name": "AIFLAT品川戸越パークサイド", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107311695/?bc=100505802460", "area": 48.72, "first": 29.7}, "suumo:r:jnc_000107311696": {"price": 29.9, "name": "AIFLAT品川戸越パークサイド", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107311696/?bc=100468822351", "area": 48.72, "first": 29.9}, "suumo:r:jnc_000108340396": {"price": 29.9, "name": "AIFLAT品川戸越パークサイド", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108340396/?bc=100514371466", "area": 48.72, "first": 29.9}, "suumo:r:jnc_000107311697": {"price": 29.9, "name": "AIFLAT品川戸越パークサイド", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107311697/?bc=100505503743", "area": 48.72, "first": 29.9}, "suumo:r:jnc_000090139804": {"price": 28.5, "name": "ＬｉｖｅＦｌａｔ戸越", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000090139804/?bc=100523971502", "area": 79.29, "first": 28.5}, "suumo:r:jnc_000109538075": {"price": 42.0, "name": "ＬｉｖｅＦｌａｔ戸越", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109538075/?bc=100522816456", "area": 79.29, "first": 42.0}, "suumo:r:jnc_000109120529": {"price": 28.5, "name": "戸越Ｂ．ＩＧ．　ＲＥＳＩＤＥＮＣＥ", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109120529/?bc=100521683284", "area": 61.69, "first": 28.5}, "suumo:r:jnc_000107559566": {"price": 28.7, "name": "品川区戸越４ 賃貸", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107559566/?bc=100516671608", "area": 48.04, "first": 28.7}, "suumo:r:jnc_000105688854": {"price": 29.4, "name": "品川区戸越４ 賃貸", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105688854/?bc=100516671648", "area": 48.04, "first": 29.4}, "suumo:r:jnc_000105688853": {"price": 29.7, "name": "品川区戸越４ 賃貸", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105688853/?bc=100516671606", "area": 48.72, "first": 29.7}, "suumo:r:jnc_000107459365": {"price": 29.9, "name": "品川区戸越４ 賃貸", "station": "戸越", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107459365/?bc=100522431895", "area": 48.72, "first": 29.9}, "suumo:r:jnc_000105344272": {"price": 29.6, "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105344272/?bc=100494525764", "area": 52.9, "first": 29.6}, "suumo:r:jnc_000108698234": {"price": 29.6, "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108698234/?bc=100497416754", "area": 47.86, "first": 29.6}, "suumo:r:jnc_000105344275": {"price": 29.7, "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105344275/?bc=100494602488", "area": 52.9, "first": 29.7}, "suumo:r:jnc_000108973194": {"price": 29.0, "name": "オープンレジデンシア大井町", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108973194/?bc=100525255601", "area": 73.09, "first": 29.0}, "suumo:r:jnc_000107645228": {"price": 29.3, "name": "品川区東大井６ 賃貸", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107645228/?bc=100525587393", "area": 51.14, "first": 29.3}, "suumo:r:jnc_000108570369": {"price": 29.1, "name": "品川区大井２ 賃貸", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108570369/?bc=100517201113", "area": 52.9, "first": 29.1}, "suumo:r:jnc_000108570370": {"price": 29.2, "name": "品川区大井２ 賃貸", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108570370/?bc=100517201116", "area": 52.9, "first": 29.2}, "suumo:r:jnc_000105364611": {"price": 29.6, "name": "品川区大井２ 賃貸", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105364611/?bc=100525081092", "area": 52.9, "first": 29.6}, "suumo:r:jnc_000105364612": {"price": 29.7, "name": "品川区大井２ 賃貸", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000105364612/?bc=100516672167", "area": 52.9, "first": 29.7}, "suumo:r:jnc_000107565222": {"price": 29.3, "name": "ＧＲＡＮ ＰＡＳＥＯ大井町", "station": "大井町", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107565222/?bc=100487106370", "area": 51.14, "first": 29.3}, "suumo:r:jnc_000108683103": {"price": 29.0, "name": "ザ マグノリアガーデン恵比寿", "station": "恵比寿", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108683103/?bc=100512625574", "area": 48.86, "first": 29.0}, "suumo:r:jnc_000108438536": {"price": 28.8, "name": "グレイスコート目黒", "station": "目黒", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108438536/?bc=100520841516", "area": 54.58, "first": 28.8}, "nomu:m:RB470815": {"price": 12700, "name": "パークホームズ武蔵小山", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB470815/", "area": 53.08, "first": 12700}, "nomu:m:RB470862": {"price": 18400, "name": "パークシティ武蔵小山ザタワー", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB470862/", "area": 57.56, "first": 18400}, "nomu:m:F55C2017": {"price": 17680, "name": "パークシティ武蔵小山ザタワー", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/F55C2017/", "area": 61.18, "first": 17680}, "nomu:m:F82C4047": {"price": 19980, "name": "パークシティ武蔵小山ザタワー", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/F82C4047/", "area": 63.49, "first": 19980}, "nomu:m:RB470799": {"price": 19990, "name": "パークシティ武蔵小山ザタワー", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB470799/", "area": 61.18, "first": 19990}, "nomu:m:FB4C7007": {"price": 16980, "name": "シティタワー武蔵小山", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FB4C7007/", "area": 57.41, "first": 16980}, "nomu:m:RB470611": {"price": 16800, "name": "シティタワー武蔵小山", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB470611/", "area": 57.41, "first": 16800}, "nomu:m:RB470677": {"price": 19999, "name": "パークホームズ武蔵小山", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB470677/", "area": 85.38, "first": 19999}, "nomu:m:BB470002": {"price": 24800, "name": "パークシティ武蔵小山", "station": "武蔵小山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/BB470002/", "area": 72.12, "first": 24800}, "nomu:m:R8670643": {"price": 24980, "name": "ル・サンク大崎シティタワー", "station": "五反田", "type": "mansion", "url": "https://www.nomu.com/mansion/id/R8670643/", "area": 80.88, "first": 24980}, "nomu:m:F86C6005": {"price": 12800, "name": "リビオ目黒リバーサウス", "station": "五反田", "type": "mansion", "url": "https://www.nomu.com/mansion/id/F86C6005/", "area": 57.3, "first": 12800}, "nomu:m:F86C8001": {"price": 24900, "name": "プラウドタワー東五反田", "station": "五反田", "type": "mansion", "url": "https://www.nomu.com/mansion/id/F86C8001/", "area": 80.18, "first": 24900}, "nomu:m:FF5C2012": {"price": 21980, "name": "パークタワーグランスカイ", "station": "五反田", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FF5C2012/", "area": 83.84, "first": 21980}, "nomu:m:F86C5005": {"price": 18800, "name": "パークタワーグランスカイ", "station": "五反田", "type": "mansion", "url": "https://www.nomu.com/mansion/id/F86C5005/", "area": 57.99, "first": 18800}, "nomu:m:FE3C4005": {"price": 19900, "name": "パークタワーグランスカイ", "station": "五反田", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FE3C4005/", "area": 73.26, "first": 19900}, "nomu:m:F86C6003": {"price": 24980, "name": "プラウドタワー目黒MARC", "station": "不動前", "type": "mansion", "url": "https://www.nomu.com/mansion/id/F86C6003/", "area": 75.59, "first": 24980}, "nomu:m:R8670031": {"price": 19200, "name": "クレヴィアタワー目黒不動前", "station": "不動前", "type": "mansion", "url": "https://www.nomu.com/mansion/id/R8670031/", "area": 68.98, "first": 19200}, "nomu:m:R8670761": {"price": 12380, "name": "ザ・パークワンズ目黒不動前", "station": "不動前", "type": "mansion", "url": "https://www.nomu.com/mansion/id/R8670761/", "area": 54.8, "first": 12380}, "nomu:m:RB470871": {"price": 23900, "name": "シティタワー目黒", "station": "不動前", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB470871/", "area": 71.52, "first": 23900}, "nomu:m:R8670786": {"price": 17480, "name": "プラウドタワー目黒MARC", "station": "不動前", "type": "mansion", "url": "https://www.nomu.com/mansion/id/R8670786/", "area": 61.76, "first": 17480}, "nomu:m:RE170469": {"price": 15960, "name": "シティタワー目黒", "station": "不動前", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RE170469/", "area": 55.14, "first": 15960}, "nomu:l:R8670231": {"price": 18500, "name": "品川区東五反田1丁目土地", "station": "五反田", "type": "land", "url": "https://www.nomu.com/land/id/R8670231/", "area": 78.66, "first": 18500}, "livable:m:C13267715": {"price": 16980, "name": "シティタワー武蔵小山", "station": "武蔵小山", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C13267715/", "area": 57.41, "first": 16980}, "livable:m:C13263122": {"price": 21980, "name": "パークタワーグランスカイ", "station": "五反田", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C13263122/", "area": 83.84, "first": 21980}, "livable:l:C48265574": {"price": 14980, "name": "東京都品川区小山台１丁目", "station": "武蔵小山", "type": "land", "url": "https://www.livable.co.jp/tochi/C48265574/", "area": 136.0, "first": 14980}, "livable:m:C48267272": {"price": 19590, "name": "ヴィークハウス目黒", "station": "不動前", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C48267272/", "area": 68.64, "first": 19590}, "livable:m:C48267270": {"price": 13740, "name": "ヴィークハウス目黒", "station": "不動前", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C48267270/", "area": 54.03, "first": 13740}, "livable:m:C48267266": {"price": 17590, "name": "ヴィークハウス目黒", "station": "不動前", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C48267266/", "area": 63.21, "first": 17590}, "livable:m:C48267244": {"price": 18490, "name": "ヴィークハウス目黒", "station": "不動前", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C48267244/", "area": 64.5, "first": 18490}, "livable:h:C13268780": {"price": 16980, "name": "東京都品川区西五反田５丁目", "station": "不動前", "type": "house", "url": "https://www.livable.co.jp/kodate/C13268780/", "area": 154.53, "first": 16980}, "suumo:r:jnc_000106298026": {"price": 29.8, "name": "スタイリオフィット武蔵小山", "station": "武蔵小山", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000106298026/?bc=100500634507", "area": 65.33, "first": 29.8}, "suumo:r:jnc_000096937483": {"price": 29.4, "name": "エフローレプルミエ武蔵小山", "station": "武蔵小山", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000096937483/?bc=100525214530", "area": 56.74, "first": 29.4}, "suumo:r:jnc_000096937497": {"price": 29.4, "name": "品川区小山２ 賃貸", "station": "武蔵小山", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000096937497/?bc=100525814927", "area": 56.74, "first": 29.4}, "suumo:r:jnc_000109447738": {"price": 28.7, "name": "プレゾン武蔵小山", "station": "武蔵小山", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109447738/?bc=100524135770", "area": 66.04, "first": 28.7}, "suumo:r:jnc_000108740582": {"price": 28.7, "name": "品川区小山２ 賃貸", "station": "武蔵小山", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108740582/?bc=100518780601", "area": 59.51, "first": 28.7}, "suumo:r:jnc_000095960345": {"price": 28.7, "name": "レクス武蔵小山", "station": "武蔵小山", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000095960345/?bc=100484681868", "area": 59.51, "first": 28.7}, "nomu:m:WF470054": {"price": 21900, "name": "ザ・パークハウス代官山レジデンス", "station": "代官山", "type": "mansion", "url": "https://www.nomu.com/mansion/id/WF470054/", "area": 61.62, "first": 21900}, "nomu:m:RB370479": {"price": 20500, "name": "クレストプライムタワー芝", "station": "大門", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB370479/", "area": 56.18, "first": 20500}, "nomu:m:FE3C7006": {"price": 15380, "name": "リビオレゾン新橋nex", "station": "新橋", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FE3C7006/", "area": 56.12, "first": 15380}, "nomu:m:FD0C6011": {"price": 16000, "name": "ザ・サンメゾン広尾エルド", "station": "広尾", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FD0C6011/", "area": 55.07, "first": 16000}, "nomu:m:FD0C7010": {"price": 17980, "name": "オープンレジデンシア広尾ザ・ハウス ノースコート", "station": "広尾", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FD0C7010/", "area": 70.57, "first": 17980}, "nomu:m:F82C7003": {"price": 22800, "name": "アトラス南麻布", "station": "広尾", "type": "mansion", "url": "https://www.nomu.com/mansion/id/F82C7003/", "area": 60.43, "first": 22800}, "nomu:m:F82C2013": {"price": 21600, "name": "イニシア高輪プレシアスコート", "station": "泉岳寺", "type": "mansion", "url": "https://www.nomu.com/mansion/id/F82C2013/", "area": 70.42, "first": 21600}, "nomu:m:FF5C1008": {"price": 18800, "name": "クレストプライムタワー芝", "station": "浜松町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FF5C1008/", "area": 62.24, "first": 18800}, "nomu:m:RB370500": {"price": 23000, "name": "WORLD TOWER RESIDENCE", "station": "浜松町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB370500/", "area": 53.37, "first": 23000}, "nomu:m:FC7C5003": {"price": 23980, "name": "ブリリアタワー浜離宮", "station": "浜松町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/FC7C5003/", "area": 58.91, "first": 23980}, "nomu:m:RB170212": {"price": 24800, "name": "ワールドタワーレジデンス", "station": "浜松町", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RB170212/", "area": 53.37, "first": 24800}, "livable:m:C13261261": {"price": 21600, "name": "イニシア高輪プレシアスコート", "station": "泉岳寺", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C13261261/", "area": 70.42, "first": 21600}, "livable:m:C48262656": {"price": 21800, "name": "クレストプライムタワー芝", "station": "浜松町", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C48262656/", "area": 66.3, "first": 21800}, "livable:m:C48261873": {"price": 18800, "name": "クレストプライムタワー芝", "station": "浜松町", "type": "mansion", "url": "https://www.livable.co.jp/mansion/C48261873/", "area": 62.24, "first": 18800}, "suumo:r:jnc_000109177923": {"price": 28.2, "name": "オープンブルーム東日本橋", "station": "東日本橋", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109177923/?bc=100524813293", "area": 46.97, "first": 28.2}, "suumo:r:jnc_000108584610": {"price": 29.0, "name": "オープンブルーム東日本橋", "station": "東日本橋", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108584610/?bc=100517390871", "area": 46.97, "first": 29.0}, "suumo:r:jnc_000109483277": {"price": 28.3, "name": "中央区東日本橋３ 賃貸", "station": "東日本橋", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109483277/?bc=100524965348", "area": 56.42, "first": 28.3}, "suumo:r:jnc_000109483276": {"price": 28.3, "name": "ジェノヴィア東日本橋駅前グリーンヴェール", "station": "東日本橋", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109483276/?bc=100524589407", "area": 56.42, "first": 28.3}, "suumo:r:jnc_000109180236": {"price": 28.2, "name": "中央区東日本橋２ 賃貸", "station": "東日本橋", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109180236/?bc=100522135156", "area": 46.97, "first": 28.2}, "suumo:r:jnc_000108596742": {"price": 29.0, "name": "中央区東日本橋２ 賃貸", "station": "東日本橋", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108596742/?bc=100517726363", "area": 46.97, "first": 29.0}, "nomu:m:RF570244": {"price": 19000, "name": "品川タワーレジデンス", "station": "高輪ゲートウェイ", "type": "mansion", "url": "https://www.nomu.com/mansion/id/RF570244/", "area": 56.33, "first": 19000}, "suumo:r:jnc_000109483736": {"price": 28.1, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109483736/?bc=100492078367", "area": 52.83, "first": 28.1}, "suumo:r:jnc_000109483712": {"price": 28.3, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109483712/?bc=100484366885", "area": 52.83, "first": 28.3}, "suumo:r:jnc_000107938708": {"price": 28.5, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107938708/?bc=100518993125", "area": 52.83, "first": 28.5}, "suumo:r:jnc_000109483717": {"price": 28.6, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109483717/?bc=100513200150", "area": 52.83, "first": 28.6}, "suumo:r:jnc_000109483724": {"price": 28.8, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000109483724/?bc=100484337380", "area": 52.83, "first": 28.8}, "suumo:r:jnc_000107938713": {"price": 28.9, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107938713/?bc=100484607179", "area": 52.83, "first": 28.9}, "suumo:r:jnc_000107938720": {"price": 29.0, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107938720/?bc=100491162479", "area": 52.83, "first": 29.0}, "suumo:r:jnc_000107938689": {"price": 29.2, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107938689/?bc=100491162399", "area": 52.83, "first": 29.2}, "suumo:r:jnc_000107938696": {"price": 29.5, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000107938696/?bc=100487060973", "area": 52.83, "first": 29.5}, "suumo:r:jnc_000108054903": {"price": 42.0, "name": "スタイリオ蒲田ＷＥＳＴ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108054903/?bc=100487060959", "area": 52.83, "first": 42.0}, "suumo:r:jnc_000108106753": {"price": 28.1, "name": "Ｐｌｕｍｅｒｉａ", "station": "蒲田", "type": "rent", "url": "https://suumo.jp/chintai/jnc_000108106753/?bc=100522894006", "area": 60.68, "first": 28.1}}, "history": {"suumo:m:20585658": {"first": "2026-09-06", "first_price": 9480, "cuts": [], "last_price": 9480}, "suumo:m:20837457": {"first": "2026-09-06", "first_price": 11880, "cuts": [], "last_price": 11880}, "suumo:l:79178891": {"first": "2026-09-06", "first_price": 11000, "cuts": [], "last_price": 11000}, "suumo:l:79109850": {"first": "2026-09-06", "first_price": 11000, "cuts": [], "last_price": 11000}, "suumo:l:20863072": {"first": "2026-09-06", "first_price": 11000, "cuts": [], "last_price": 11000}, "suumo:m:21281858": {"first": "2026-09-06", "first_price": 11990, "cuts": [], "last_price": 11990}, "suumo:l:21008080": {"first": "2026-09-06", "first_price": 9800, "cuts": [], "last_price": 9800}, "suumo:h:21425622": {"first": "2026-09-06", "first_price": 8780, "cuts": [], "last_price": 8780}, "suumo:l:21017451": {"first": "2026-09-06", "first_price": 5280, "cuts": [["2026-09-07", 5280, 4980]], "last_price": 4980}, "suumo:l:21021265": {"first": "2026-09-06", "first_price": 4980, "cuts": [], "last_price": 4980}, "suumo:l:21046673": {"first": "2026-09-06", "first_price": 4980, "cuts": [], "last_price": 4980}, "suumo:l:21114583": {"first": "2026-09-06", "first_price": 4980, "cuts": [], "last_price": 4980}, "suumo:l:21603398": {"first": "2026-09-06", "first_price": 6480, "cuts": [], "last_price": 6480}, "suumo:l:78229550": {"first": "2026-09-06", "first_price": 6480, "cuts": [], "last_price": 6480}, "suumo:l:21578921": {"first": "2026-09-06", "first_price": 6480, "cuts": [], "last_price": 6480}, "suumo:h:21342505": {"first": "2026-09-06", "first_price": 10880, "cuts": [], "last_price": 10880}, "suumo:h:21064438": {"first": "2026-09-06", "first_price": 9980, "cuts": [], "last_price": 9980}, "suumo:m:20326787": {"first": "2026-09-06", "first_price": 9980, "cuts": [], "last_price": 9980}, "suumo:h:21434232": {"first": "2026-09-06", "first_price": 5880, "cuts": [], "last_price": 5880}, "suumo:l:21525571": {"first": "2026-09-06", "first_price": 10750, "cuts": [], "last_price": 10750}, "suumo:l:21640200": {"first": "2026-09-06", "first_price": 8900, "cuts": [], "last_price": 8900}, "suumo:h:21602342": {"first": "2026-09-06", "first_price": 9500, "cuts": [], "last_price": 9500}, "suumo:l:20863877": {"first": "2026-09-06", "first_price": 9800, "cuts": [], "last_price": 9800}, "suumo:l:20540402": {"first": "2026-09-06", "first_price": 9800, "cuts": [], "last_price": 9800}, "suumo:l:21631004": {"first": "2026-09-06", "first_price": 9800, "cuts": [], "last_price": 9800}, "suumo:l:21612503": {"first": "2026-09-06", "first_price": 9800, "cuts": [], "last_price": 9800}, "suumo:m:21005727": {"first": "2026-09-06", "first_price": 10990, "cuts": [], "last_price": 10990}, "suumo:h:21395289": {"first": "2026-09-06", "first_price": 8010, "cuts": [], "last_price": 8010}, "suumo:m:21643103": {"first": "2026-09-06", "first_price": 8980, "cuts": [], "last_price": 8980}, "suumo:l:21483914": {"first": "2026-09-06", "first_price": 9580, "cuts": [], "last_price": 9580}, "suumo:m:21239491": {"first": "2026-09-06", "first_price": 11999, "cuts": [], "last_price": 11999}, "suumo:m:21380169": {"first": "2026-09-06", "first_price": 11999, "cuts": [], "last_price": 11999}, "suumo:m:21510299": {"first": "2026-09-06", "first_price": 11999, "cuts": [], "last_price": 11999}, "suumo:m:21266683": {"first": "2026-09-06", "first_price": 10490, "cuts": [], "last_price": 10490}, "suumo:m:21537301": {"first": "2026-09-06", "first_price": 11850, "cuts": [], "last_price": 11850}, "suumo:m:20540371": {"first": "2026-09-06", "first_price": 11980, "cuts": [], "last_price": 11980}, "suumo:m:20587605": {"first": "2026-09-06", "first_price": 10480, "cuts": [], "last_price": 10480}, "suumo:m:21119806": {"first": "2026-09-06", "first_price": 10990, "cuts": [["2026-09-07", 10990, 10790]], "last_price": 10790}, "suumo:m:20354701": {"first": "2026-09-06", "first_price": 11380, "cuts": [], "last_price": 11380}, "suumo:m:21595831": {"first": "2026-09-06", "first_price": 11580, "cuts": [], "last_price": 11580}, "suumo:r:jnc_000109617744": {"first": "2026-09-06", "first_price": 25.6, "cuts": [], "last_price": 25.6}, "suumo:r:jnc_000108278145": {"first": "2026-09-06", "first_price": 25.0, "cuts": [], "last_price": 25.0}, "suumo:r:jnc_000108703816": {"first": "2026-09-06", "first_price": 26.0, "cuts": [], "last_price": 26.0}, "suumo:r:jnc_000109343737": {"first": "2026-09-06", "first_price": 21.0, "cuts": [], "last_price": 21.0}, "suumo:r:jnc_000107924722": {"first": "2026-09-06", "first_price": 23.5, "cuts": [], "last_price": 23.5}, "suumo:r:jnc_000109558695": {"first": "2026-09-06", "first_price": 25.25, "cuts": [], "last_price": 25.25}, "suumo:r:jnc_000108055130": {"first": "2026-09-06", "first_price": 25.45, "cuts": [], "last_price": 25.45}, "suumo:r:jnc_000107183218": {"first": "2026-09-06", "first_price": 26.7, "cuts": [], "last_price": 26.7}, "suumo:r:jnc_000109483651": {"first": "2026-09-06", "first_price": 27.0, "cuts": [], "last_price": 27.0}, "suumo:r:jnc_000107368273": {"first": "2026-09-06", "first_price": 27.1, "cuts": [], "last_price": 27.1}, "suumo:r:jnc_000108998120": {"first": "2026-09-06", "first_price": 27.25, "cuts": [], "last_price": 27.25}, "suumo:r:jnc_000108872846": {"first": "2026-09-06", "first_price": 25.9, "cuts": [], "last_price": 25.9}, "suumo:r:jnc_000108408986": {"first": "2026-09-06", "first_price": 21.8, "cuts": [], "last_price": 21.8}, "suumo:r:jnc_000108408987": {"first": "2026-09-06", "first_price": 22.0, "cuts": [], "last_price": 22.0}, "suumo:r:jnc_000106634983": {"first": "2026-09-06", "first_price": 23.8, "cuts": [], "last_price": 23.8}, "suumo:r:jnc_000109503198": {"first": "2026-09-06", "first_price": 24.0, "cuts": [], "last_price": 24.0}, "suumo:r:jnc_000108065864": {"first": "2026-09-06", "first_price": 24.9, "cuts": [], "last_price": 24.9}, "athome:l:6988912886": {"first": "2026-09-06", "first_price": 11000, "cuts": [], "last_price": 11000}, "suumo:r:jnc_000109538118": {"first": "2026-09-06", "first_price": 22.0, "cuts": [], "last_price": 22.0}, "suumo:r:jnc_000108039085": {"first": "2026-09-06", "first_price": 22.7, "cuts": [], "last_price": 22.7}, "suumo:r:jnc_000109617605": {"first": "2026-09-06", "first_price": 23.3, "cuts": [], "last_price": 23.3}, "suumo:r:jnc_000107258044": {"first": "2026-09-06", "first_price": 23.5, "cuts": [], "last_price": 23.5}, "suumo:r:jnc_000105096611": {"first": "2026-09-06", "first_price": 24.0, "cuts": [], "last_price": 24.0}, "suumo:r:jnc_000109257137": {"first": "2026-09-06", "first_price": 26.4, "cuts": [], "last_price": 26.4}, "nomu:m:F82C4025": {"first": "2026-09-06", "first_price": 10480, "cuts": [], "last_price": 10480}, "suumo:r:jnc_000107248329": {"first": "2026-09-06", "first_price": 24.4, "cuts": [], "last_price": 24.4}, "suumo:r:jnc_000107409832": {"first": "2026-09-06", "first_price": 24.5, "cuts": [], "last_price": 24.5}, "suumo:r:jnc_000109058870": {"first": "2026-09-06", "first_price": 24.6, "cuts": [], "last_price": 24.6}, "suumo:r:jnc_000109609933": {"first": "2026-09-06", "first_price": 25.5, "cuts": [], "last_price": 25.5}, "suumo:r:jnc_000107039458": {"first": "2026-09-06", "first_price": 26.5, "cuts": [], "last_price": 26.5}, "suumo:r:jnc_000107393932": {"first": "2026-09-06", "first_price": 26.7, "cuts": [], "last_price": 26.7}, "athome:l:1018888564": {"first": "2026-09-06", "first_price": 9800, "cuts": [], "last_price": 9800}, "athome:l:6989914779": {"first": "2026-09-06", "first_price": 12000, "cuts": [], "last_price": 12000}, "suumo:r:jnc_000108470669": {"first": "2026-09-06", "first_price": 25.2, "cuts": [], "last_price": 25.2}, "suumo:r:jnc_000079963120": {"first": "2026-09-06", "first_price": 25.6, "cuts": [], "last_price": 25.6}, "suumo:r:jnc_000109381705": {"first": "2026-09-06", "first_price": 26.2, "cuts": [], "last_price": 26.2}, "suumo:r:jnc_000109396180": {"first": "2026-09-06", "first_price": 27.3, "cuts": [], "last_price": 27.3}, "suumo:r:jnc_000106645835": {"first": "2026-09-06", "first_price": 27.5, "cuts": [], "last_price": 27.5}, "suumo:r:jnc_000109547609": {"first": "2026-09-06", "first_price": 28.0, "cuts": [], "last_price": 28.0}, "suumo:r:jnc_000107389836": {"first": "2026-09-06", "first_price": 28.0, "cuts": [], "last_price": 28.0}, "suumo:r:jnc_000108222737": {"first": "2026-09-06", "first_price": 19.7, "cuts": [], "last_price": 19.7}, "suumo:r:jnc_000109600819": {"first": "2026-09-06", "first_price": 21.3, "cuts": [], "last_price": 21.3}, "suumo:r:jnc_000106034430": {"first": "2026-09-06", "first_price": 21.4, "cuts": [], "last_price": 21.4}, "suumo:r:jnc_000109264567": {"first": "2026-09-06", "first_price": 22.25, "cuts": [], "last_price": 22.25}, "suumo:r:jnc_000109343494": {"first": "2026-09-06", "first_price": 22.5, "cuts": [], "last_price": 22.5}, "suumo:r:jnc_000109334234": {"first": "2026-09-06", "first_price": 24.2, "cuts": [], "last_price": 24.2}, "suumo:r:jnc_000109609902": {"first": "2026-09-06", "first_price": 24.6, "cuts": [], "last_price": 24.6}, "suumo:r:jnc_000108811519": {"first": "2026-09-06", "first_price": 26.0, "cuts": [], "last_price": 26.0}, "suumo:r:jnc_000108416700": {"first": "2026-09-06", "first_price": 19.0, "cuts": [], "last_price": 19.0}, "suumo:r:jnc_000070918631": {"first": "2026-09-06", "first_price": 19.9, "cuts": [], "last_price": 19.9}, "suumo:r:jnc_000107039453": {"first": "2026-09-06", "first_price": 20.0, "cuts": [], "last_price": 20.0}, "suumo:r:jnc_000108556418": {"first": "2026-09-06", "first_price": 20.7, "cuts": [], "last_price": 20.7}, "suumo:r:jnc_000108682931": {"first": "2026-09-06", "first_price": 22.0, "cuts": [], "last_price": 22.0}, "suumo:r:jnc_000109073806": {"first": "2026-09-06", "first_price": 22.5, "cuts": [], "last_price": 22.5}, "suumo:r:jnc_000108949082": {"first": "2026-09-06", "first_price": 23.0, "cuts": [], "last_price": 23.0}, "suumo:r:jnc_000108806856": {"first": "2026-09-06", "first_price": 25.3, "cuts": [], "last_price": 25.3}, "suumo:r:jnc_000099377365": {"first": "2026-09-06", "first_price": 26.9, "cuts": [], "last_price": 26.9}, "suumo:r:jnc_000108716401": {"first": "2026-09-06", "first_price": 27.3, "cuts": [], "last_price": 27.3}, "livable:h:C13261765": {"first": "2026-09-06", "first_price": 9500, "cuts": [], "last_price": 9500}, "suumo:r:jnc_000109634369": {"first": "2026-09-06", "first_price": 15.1, "cuts": [], "last_price": 15.1}, "suumo:r:jnc_000109640904": {"first": "2026-09-06", "first_price": 17.8, "cuts": [], "last_price": 17.8}, "suumo:r:jnc_000102010589": {"first": "2026-09-06", "first_price": 19.2, "cuts": [], "last_price": 19.2}, "suumo:r:jnc_000108786071": {"first": "2026-09-06", "first_price": 21.7, "cuts": [], "last_price": 21.7}, "suumo:r:jnc_000108247819": {"first": "2026-09-06", "first_price": 22.8, "cuts": [], "last_price": 22.8}, "suumo:r:jnc_000107290588": {"first": "2026-09-06", "first_price": 26.6, "cuts": [], "last_price": 26.6}, "suumo:r:jnc_000108094363": {"first": "2026-09-06", "first_price": 27.0, "cuts": [], "last_price": 27.0}, "suumo:r:jnc_000109264125": {"first": "2026-09-06", "first_price": 24.0, "cuts": [], "last_price": 24.0}, "suumo:r:jnc_000109372911": {"first": "2026-09-06", "first_price": 27.4, "cuts": [], "last_price": 27.4}, "suumo:r:jnc_000106870230": {"first": "2026-09-06", "first_price": 27.8, "cuts": [], "last_price": 27.8}, "suumo:r:jnc_000109537878": {"first": "2026-09-06", "first_price": 22.3, "cuts": [], "last_price": 22.3}, "suumo:r:jnc_000108811178": {"first": "2026-09-06", "first_price": 23.5, "cuts": [], "last_price": 23.5}, "suumo:r:jnc_000107367915": {"first": "2026-09-06", "first_price": 23.8, "cuts": [], "last_price": 23.8}, "suumo:r:jnc_000109244976": {"first": "2026-09-06", "first_price": 26.0, "cuts": [], "last_price": 26.0}, "suumo:r:jnc_000109617386": {"first": "2026-09-06", "first_price": 22.0, "cuts": [], "last_price": 22.0}, "suumo:r:jnc_000107578666": {"first": "2026-09-06", "first_price": 23.2, "cuts": [], "last_price": 23.2}, "suumo:r:jnc_000108844856": {"first": "2026-09-06", "first_price": 24.7, "cuts": [], "last_price": 24.7}, "suumo:r:jnc_000107587911": {"first": "2026-09-06", "first_price": 25.4, "cuts": [], "last_price": 25.4}, "suumo:r:jnc_000109547785": {"first": "2026-09-06", "first_price": 12.85, "cuts": [], "last_price": 12.85}, "suumo:r:jnc_000108955443": {"first": "2026-09-06", "first_price": 20.4, "cuts": [], "last_price": 20.4}, "suumo:r:jnc_000109617662": {"first": "2026-09-06", "first_price": 21.5, "cuts": [], "last_price": 21.5}, "suumo:r:jnc_000109407588": {"first": "2026-09-06", "first_price": 22.0, "cuts": [], "last_price": 22.0}, "suumo:r:jnc_000107516623": {"first": "2026-09-06", "first_price": 22.3, "cuts": [], "last_price": 22.3}, "suumo:r:jnc_000108437890": {"first": "2026-09-06", "first_price": 23.0, "cuts": [], "last_price": 23.0}, "suumo:r:jnc_000108721601": {"first": "2026-09-06", "first_price": 25.9, "cuts": [], "last_price": 25.9}, "suumo:r:jnc_000109252410": {"first": "2026-09-06", "first_price": 17.6, "cuts": [], "last_price": 17.6}, "suumo:r:jnc_000108639287": {"first": "2026-09-06", "first_price": 18.0, "cuts": [], "last_price": 18.0}, "suumo:r:jnc_000109617648": {"first": "2026-09-06", "first_price": 19.8, "cuts": [], "last_price": 19.8}, "suumo:r:jnc_000109058971": {"first": "2026-09-06", "first_price": 21.8, "cuts": [], "last_price": 21.8}, "suumo:r:jnc_000109217621": {"first": "2026-09-06", "first_price": 22.0, "cuts": [], "last_price": 22.0}, "suumo:r:jnc_000073054525": {"first": "2026-09-06", "first_price": 27.0, "cuts": [], "last_price": 27.0}, "suumo:r:jnc_000108802490": {"first": "2026-09-06", "first_price": 27.0, "cuts": [], "last_price": 27.0}, "suumo:r:jnc_000107686311": {"first": "2026-09-06", "first_price": 23.7, "cuts": [], "last_price": 23.7}, "suumo:r:jnc_000103023730": {"first": "2026-09-06", "first_price": 25.8, "cuts": [], "last_price": 25.8}, "suumo:r:jnc_000109634087": {"first": "2026-09-06", "first_price": 18.0, "cuts": [], "last_price": 18.0}, "suumo:r:jnc_000108797191": {"first": "2026-09-06", "first_price": 19.8, "cuts": [], "last_price": 19.8}, "suumo:r:jnc_000109415350": {"first": "2026-09-06", "first_price": 19.8, "cuts": [], "last_price": 19.8}, "suumo:r:jnc_000109343066": {"first": "2026-09-06", "first_price": 22.8, "cuts": [], "last_price": 22.8}, "suumo:r:jnc_000109400750": {"first": "2026-09-06", "first_price": 22.8, "cuts": [], "last_price": 22.8}, "suumo:r:jnc_000109343067": {"first": "2026-09-06", "first_price": 23.3, "cuts": [], "last_price": 23.3}, "suumo:r:jnc_000102443542": {"first": "2026-09-06", "first_price": 15.7, "cuts": [], "last_price": 15.7}, "suumo:r:jnc_000105999354": {"first": "2026-09-06", "first_price": 26.2, "cuts": [], "last_price": 26.2}, "suumo:r:jnc_000109225818": {"first": "2026-09-06", "first_price": 20.8, "cuts": [], "last_price": 20.8}, "suumo:r:jnc_000108948622": {"first": "2026-09-06", "first_price": 26.8, "cuts": [], "last_price": 26.8}, "suumo:r:jnc_000108184099": {"first": "2026-09-06", "first_price": 21.4, "cuts": [], "last_price": 21.4}, "suumo:m:21213947": {"first": "2026-09-07", "first_price": 11800, "cuts": [], "last_price": 11800}, "suumo:m:21229075": {"first": "2026-09-07", "first_price": 11850, "cuts": [], "last_price": 11850}, "suumo:r:jnc_000108979266": {"first": "2026-09-07", "first_price": 28.0, "cuts": [], "last_price": 28.0}, "suumo:r:jnc_000109369408": {"first": "2026-09-07", "first_price": 27.8, "cuts": [], "last_price": 27.8}, "suumo:r:jnc_000109396185": {"first": "2026-09-07", "first_price": 28.0, "cuts": [], "last_price": 28.0}, "suumo:r:jnc_000108089024": {"first": "2026-09-07", "first_price": 25.6, "cuts": [], "last_price": 25.6}, "suumo:r:jnc_000108089025": {"first": "2026-09-07", "first_price": 25.8, "cuts": [], "last_price": 25.8}, "suumo:r:jnc_000105344273": {"first": "2026-09-07", "first_price": 26.6, "cuts": [], "last_price": 26.6}, "suumo:r:jnc_000079963123": {"first": "2026-09-07", "first_price": 25.6, "cuts": [], "last_price": 25.6}, "suumo:r:jnc_000109389791": {"first": "2026-09-07", "first_price": 26.2, "cuts": [], "last_price": 26.2}, "suumo:r:jnc_000108429869": {"first": "2026-09-07", "first_price": 22.6, "cuts": [], "last_price": 22.6}, "suumo:r:jnc_000105887793": {"first": "2026-09-07", "first_price": 23.8, "cuts": [], "last_price": 23.8}, "suumo:r:jnc_000109533046": {"first": "2026-09-07", "first_price": 26.5, "cuts": [], "last_price": 26.5}, "suumo:r:jnc_000109625465": {"first": "2026-09-07", "first_price": 21.3, "cuts": [], "last_price": 21.3}, "suumo:r:jnc_000108993369": {"first": "2026-09-07", "first_price": 22.9, "cuts": [], "last_price": 22.9}, "suumo:r:jnc_000108046903": {"first": "2026-09-07", "first_price": 23.1, "cuts": [], "last_price": 23.1}, "suumo:r:jnc_000109652351": {"first": "2026-09-07", "first_price": 18.4, "cuts": [], "last_price": 18.4}, "suumo:r:jnc_000081272277": {"first": "2026-09-07", "first_price": 22.3, "cuts": [], "last_price": 22.3}, "suumo:r:jnc_000081272279": {"first": "2026-09-07", "first_price": 22.4, "cuts": [], "last_price": 22.4}, "suumo:r:jnc_000109528315": {"first": "2026-09-07", "first_price": 24.9, "cuts": [], "last_price": 24.9}, "suumo:r:jnc_000106978295": {"first": "2026-09-07", "first_price": 27.5, "cuts": [], "last_price": 27.5}, "suumo:r:jnc_000109396207": {"first": "2026-09-07", "first_price": 19.9, "cuts": [], "last_price": 19.9}, "suumo:r:jnc_000107465263": {"first": "2026-09-07", "first_price": 22.7, "cuts": [], "last_price": 22.7}, "suumo:r:jnc_000108054902": {"first": "2026-09-07", "first_price": 20.4, "cuts": [], "last_price": 20.4}, "suumo:r:jnc_000106747710": {"first": "2026-09-07", "first_price": 12.3, "cuts": [], "last_price": 12.3}, "suumo:r:jnc_000106747711": {"first": "2026-09-07", "first_price": 13.1, "cuts": [], "last_price": 13.1}, "suumo:r:jnc_000105022759": {"first": "2026-09-07", "first_price": 13.3, "cuts": [], "last_price": 13.3}, "suumo:r:jnc_000096099015": {"first": "2026-09-07", "first_price": 13.0, "cuts": [], "last_price": 13.0}, "suumo:r:jnc_000109658321": {"first": "2026-09-07", "first_price": 17.5, "cuts": [], "last_price": 17.5}, "suumo:r:jnc_000109532818": {"first": "2026-09-07", "first_price": 22.0, "cuts": [], "last_price": 22.0}, "suumo:r:jnc_000109547089": {"first": "2026-09-07", "first_price": 23.2, "cuts": [], "last_price": 23.2}, "suumo:l:21617837": {"first": "2026-09-08", "first_price": 6480, "cuts": [], "last_price": 6480}, "suumo:h:21307308": {"first": "2026-09-08", "first_price": 9090, "cuts": [], "last_price": 9090}, "suumo:m:21657889": {"first": "2026-09-08", "first_price": 11999, "cuts": [], "last_price": 11999}, "suumo:m:21659489": {"first": "2026-09-08", "first_price": 11580, "cuts": [], "last_price": 11580}, "suumo:r:jnc_000080459472": {"first": "2026-09-08", "first_price": 22.5, "cuts": [], "last_price": 22.5}, "suumo:r:jnc_000109682587": {"first": "2026-09-08", "first_price": 20.6, "cuts": [], "last_price": 20.6}, "suumo:r:jnc_000108774137": {"first": "2026-09-08", "first_price": 24.2, "cuts": [], "last_price": 24.2}, "suumo:r:jnc_000109488969": {"first": "2026-09-08", "first_price": 25.0, "cuts": [], "last_price": 25.0}, "suumo:r:jnc_000109676015": {"first": "2026-09-08", "first_price": 26.0, "cuts": [], "last_price": 26.0}, "athome:l:1150948508": {"first": "2026-09-08", "first_price": 11000, "cuts": [], "last_price": 11000}, "suumo:r:jnc_000109415995": {"first": "2026-09-08", "first_price": 28.0, "cuts": [], "last_price": 28.0}, "suumo:r:jnc_000107248330": {"first": "2026-09-08", "first_price": 24.8, "cuts": [], "last_price": 24.8}, "suumo:r:jnc_000109180560": {"first": "2026-09-08", "first_price": 18.0, "cuts": [], "last_price": 18.0}, "suumo:r:jnc_000109470019": {"first": "2026-09-08", "first_price": 25.5, "cuts": [], "last_price": 25.5}, "suumo:r:jnc_000109095515": {"first": "2026-09-08", "first_price": 26.0, "cuts": [], "last_price": 26.0}, "suumo:r:jnc_000108797169": {"first": "2026-09-08", "first_price": 27.4, "cuts": [], "last_price": 27.4}, "suumo:r:jnc_000109395830": {"first": "2026-09-08", "first_price": 20.9, "cuts": [], "last_price": 20.9}, "suumo:r:jnc_000109174894": {"first": "2026-09-08", "first_price": 19.3, "cuts": [], "last_price": 19.3}, "suumo:r:jnc_000109217623": {"first": "2026-09-08", "first_price": 22.0, "cuts": [], "last_price": 22.0}, "suumo:r:jnc_000109350521": {"first": "2026-09-08", "first_price": 13.5, "cuts": [], "last_price": 13.5}, "suumo:r:jnc_000109682678": {"first": "2026-09-08", "first_price": 13.96, "cuts": [], "last_price": 13.96}, "suumo:r:jnc_000106747712": {"first": "2026-09-08", "first_price": 13.1, "cuts": [], "last_price": 13.1}, "suumo:r:jnc_000104840269": {"first": "2026-09-08", "first_price": 13.5, "cuts": [], "last_price": 13.5}, "suumo:r:jnc_000106341176": {"first": "2026-09-08", "first_price": 13.6, "cuts": [], "last_price": 13.6}, "nomu:m:V8770005": {"first": "2026-09-08", "first_price": 11980, "cuts": [], "last_price": 11980}, "suumo:r:jnc_000108978846": {"first": "2026-09-08", "first_price": 24.5, "cuts": [], "last_price": 24.5}, "suumo:r:jnc_000089890771": {"first": "2026-09-08", "first_price": 25.3, "cuts": [], "last_price": 25.3}, "suumo:r:jnc_000109693957": {"first": "2026-09-08", "first_price": 16.0, "cuts": [], "last_price": 16.0}, "suumo:r:jnc_000108416790": {"first": "2026-09-08", "first_price": 22.6, "cuts": [], "last_price": 22.6}, "suumo:r:jnc_000109105285": {"first": "2026-09-08", "first_price": 13.5, "cuts": [], "last_price": 13.5}, "suumo:r:jnc_000106490063": {"first": "2026-09-08", "first_price": 15.8, "cuts": [], "last_price": 15.8}, "suumo:r:jnc_000106576767": {"first": "2026-09-08", "first_price": 24.2, "cuts": [], "last_price": 24.2}, "suumo:r:jnc_000109682395": {"first": "2026-09-08", "first_price": 21.0, "cuts": [], "last_price": 21.0}, "suumo:r:jnc_000108191240": {"first": "2026-09-08", "first_price": 26.5, "cuts": [], "last_price": 26.5}, "suumo:r:jnc_000109687999": {"first": "2026-09-08", "first_price": 26.0, "cuts": [], "last_price": 26.0}, "suumo:r:jnc_000107833211": {"first": "2026-09-08", "first_price": 26.6, "cuts": [], "last_price": 26.6}, "suumo:r:jnc_000108910693": {"first": "2026-09-08", "first_price": 26.4, "cuts": [], "last_price": 26.4}, "suumo:r:jnc_000109533062": {"first": "2026-09-08", "first_price": 26.8, "cuts": [], "last_price": 26.8}, "suumo:r:jnc_000108806880": {"first": "2026-09-08", "first_price": 27.4, "cuts": [], "last_price": 27.4}, "suumo:r:jnc_000108462250": {"first": "2026-09-08", "first_price": 27.4, "cuts": [], "last_price": 27.4}, "suumo:r:jnc_000109494904": {"first": "2026-09-08", "first_price": 22.6, "cuts": [], "last_price": 22.6}, "suumo:r:jnc_000109547651": {"first": "2026-09-08", "first_price": 24.05, "cuts": [], "last_price": 24.05}, "suumo:r:jnc_000109027663": {"first": "2026-09-08", "first_price": 25.0, "cuts": [], "last_price": 25.0}, "suumo:r:jnc_000104903148": {"first": "2026-09-08", "first_price": 25.3, "cuts": [], "last_price": 25.3}, "suumo:r:jnc_000106986533": {"first": "2026-09-08", "first_price": 26.5, "cuts": [], "last_price": 26.5}, "suumo:r:jnc_000098784392": {"first": "2026-09-08", "first_price": 21.0, "cuts": [], "last_price": 21.0}, "suumo:r:jnc_000108960094": {"first": "2026-09-08", "first_price": 24.2, "cuts": [], "last_price": 24.2}, "suumo:r:jnc_000108979127": {"first": "2026-09-08", "first_price": 26.6, "cuts": [], "last_price": 26.6}, "suumo:r:jnc_000108135158": {"first": "2026-09-08", "first_price": 27.0, "cuts": [], "last_price": 27.0}, "suumo:r:jnc_000099377366": {"first": "2026-09-08", "first_price": 27.4, "cuts": [], "last_price": 27.4}, "suumo:r:jnc_000108910652": {"first": "2026-09-08", "first_price": 15.3, "cuts": [], "last_price": 15.3}, "suumo:r:jnc_000109355761": {"first": "2026-09-08", "first_price": 19.5, "cuts": [], "last_price": 19.5}, "suumo:r:jnc_000107443349": {"first": "2026-09-08", "first_price": 21.1, "cuts": [], "last_price": 21.1}, "suumo:r:jnc_000109120527": {"first": "2026-09-08", "first_price": 23.5, "cuts": [], "last_price": 23.5}, "suumo:r:jnc_000108732304": {"first": "2026-09-08", "first_price": 24.0, "cuts": [], "last_price": 24.0}, "suumo:r:jnc_000108666648": {"first": "2026-09-08", "first_price": 24.5, "cuts": [], "last_price": 24.5}, "suumo:r:jnc_000109360289": {"first": "2026-09-08", "first_price": 15.82, "cuts": [], "last_price": 15.82}, "suumo:r:jnc_000109460237": {"first": "2026-09-08", "first_price": 20.7, "cuts": [], "last_price": 20.7}, "suumo:r:jnc_000108438590": {"first": "2026-09-08", "first_price": 21.0, "cuts": [], "last_price": 21.0}, "suumo:r:jnc_000109066929": {"first": "2026-09-08", "first_price": 22.8, "cuts": [], "last_price": 22.8}, "suumo:r:jnc_000107565289": {"first": "2026-09-08", "first_price": 28.0, "cuts": [], "last_price": 28.0}, "suumo:r:jnc_000109558430": {"first": "2026-09-08", "first_price": 18.9, "cuts": [], "last_price": 18.9}, "suumo:r:jnc_000109423250": {"first": "2026-09-08", "first_price": 20.0, "cuts": [], "last_price": 20.0}, "suumo:r:jnc_000109073864": {"first": "2026-09-08", "first_price": 22.7, "cuts": [], "last_price": 22.7}, "suumo:r:jnc_000108613077": {"first": "2026-09-08", "first_price": 26.9, "cuts": [], "last_price": 26.9}, "suumo:r:jnc_000108811185": {"first": "2026-09-08", "first_price": 26.8, "cuts": [], "last_price": 26.8}, "suumo:r:jnc_000109073540": {"first": "2026-09-08", "first_price": 27.9, "cuts": [], "last_price": 27.9}, "suumo:r:jnc_000109470020": {"first": "2026-09-08", "first_price": 25.5, "cuts": [], "last_price": 25.5}, "suumo:r:jnc_000109372915": {"first": "2026-09-08", "first_price": 26.3, "cuts": [], "last_price": 26.3}, "suumo:r:jnc_000107595696": {"first": "2026-09-08", "first_price": 26.7, "cuts": [], "last_price": 26.7}, "nomu:m:F87C7006": {"first": "2026-09-08", "first_price": 10490, "cuts": [], "last_price": 10490}, "suumo:r:jnc_000108817115": {"first": "2026-09-08", "first_price": 20.7, "cuts": [], "last_price": 20.7}, "suumo:r:jnc_000109532816": {"first": "2026-09-08", "first_price": 21.3, "cuts": [], "last_price": 21.3}, "suumo:r:jnc_000109073485": {"first": "2026-09-08", "first_price": 21.5, "cuts": [], "last_price": 21.5}, "suumo:r:jnc_000109557819": {"first": "2026-09-08", "first_price": 22.3, "cuts": [], "last_price": 22.3}, "suumo:r:jnc_000107924432": {"first": "2026-09-08", "first_price": 22.3, "cuts": [], "last_price": 22.3}, "suumo:r:jnc_000109665737": {"first": "2026-09-08", "first_price": 22.9, "cuts": [], "last_price": 22.9}, "suumo:r:jnc_000109537857": {"first": "2026-09-08", "first_price": 25.1, "cuts": [], "last_price": 25.1}, "suumo:r:jnc_000109369127": {"first": "2026-09-08", "first_price": 26.5, "cuts": [], "last_price": 26.5}, "suumo:r:jnc_000109364833": {"first": "2026-09-08", "first_price": 27.0, "cuts": [], "last_price": 27.0}, "suumo:r:jnc_000107026476": {"first": "2026-09-08", "first_price": 21.5, "cuts": [], "last_price": 21.5}, "suumo:r:jnc_000109701505": {"first": "2026-09-08", "first_price": 20.2, "cuts": [], "last_price": 20.2}, "suumo:r:jnc_000106120392": {"first": "2026-09-08", "first_price": 26.6, "cuts": [], "last_price": 26.6}, "suumo:r:jnc_000106120400": {"first": "2026-09-08", "first_price": 26.8, "cuts": [], "last_price": 26.8}, "suumo:r:jnc_000106120380": {"first": "2026-09-08", "first_price": 26.9, "cuts": [], "last_price": 26.9}, "suumo:r:jnc_000109495125": {"first": "2026-09-08", "first_price": 23.0, "cuts": [], "last_price": 23.0}, "suumo:r:jnc_000108698010": {"first": "2026-09-08", "first_price": 25.9, "cuts": [], "last_price": 25.9}, "suumo:m:20918523": {"first": "2026-09-08", "first_price": 11980, "cuts": [], "last_price": 11980}, "suumo:r:jnc_000088512197": {"first": "2026-09-08", "first_price": 25.0, "cuts": [], "last_price": 25.0}, "suumo:r:jnc_000109701621": {"first": "2026-09-08", "first_price": 21.75, "cuts": [], "last_price": 21.75}, "suumo:r:jnc_000069747839": {"first": "2026-09-08", "first_price": 27.2, "cuts": [], "last_price": 27.2}, "suumo:r:jnc_000109148942": {"first": "2026-09-08", "first_price": 27.3, "cuts": [], "last_price": 27.3}, "athome:h:6991800318": {"first": "2026-09-09", "first_price": 11480, "cuts": [], "last_price": 11480}, "suumo:r:jnc_000106120363": {"first": "2026-09-09", "first_price": 26.7, "cuts": [], "last_price": 26.7}, "suumo:r:jnc_000106120373": {"first": "2026-09-09", "first_price": 26.8, "cuts": [], "last_price": 26.8}, "livable:l:C13266784": {"first": "2026-09-09", "first_price": 4980, "cuts": [], "last_price": 4980}, "suumo:r:jnc_000108506045": {"first": "2026-09-09", "first_price": 25.3, "cuts": [], "last_price": 25.3}, "suumo:m:21665549": {"first": "2026-09-09", "first_price": 11580, "cuts": [], "last_price": 11580}, "athome:h:1195791721": {"first": "2026-09-09", "first_price": 9500, "cuts": [], "last_price": 9500}, "suumo:r:jnc_000106120378": {"first": "2026-09-09", "first_price": 26.9, "cuts": [], "last_price": 26.9}, "suumo:r:jnc_000109707805": {"first": "2026-09-09", "first_price": 22.2, "cuts": [], "last_price": 22.2}, "suumo:r:jnc_000109707806": {"first": "2026-09-09", "first_price": 22.2, "cuts": [], "last_price": 22.2}, "suumo:r:jnc_000108531046": {"first": "2026-09-09", "first_price": 21.9, "cuts": [], "last_price": 21.9}, "suumo:r:jnc_000109547653": {"first": "2026-09-09", "first_price": 24.2, "cuts": [], "last_price": 24.2}}, "notified_on": "2026-09-08", "page_count": 119}
+{
+  "seen_ids": [
+    "suumo:m:20918523",
+    "suumo:l:79109850",
+    "suumo:l:79178891",
+    "suumo:l:20863072",
+    "suumo:l:21008080",
+    "suumo:h:21425622",
+    "suumo:l:21017451",
+    "suumo:l:21021265",
+    "suumo:l:21046673",
+    "suumo:l:21603398",
+    "suumo:l:78229550",
+    "suumo:l:21578921",
+    "suumo:h:21342505",
+    "suumo:h:21064438",
+    "suumo:m:20326787",
+    "suumo:m:21213947",
+    "suumo:m:21229075",
+    "suumo:h:21434232",
+    "suumo:l:21525571",
+    "suumo:l:21640200",
+    "suumo:m:21281858",
+    "suumo:m:21005727",
+    "suumo:h:21395289",
+    "suumo:h:21244129",
+    "suumo:h:21266070",
+    "suumo:h:21307308",
+    "suumo:h:21602342",
+    "suumo:l:20863877",
+    "suumo:l:21631004",
+    "suumo:l:20540402",
+    "suumo:l:21612503",
+    "suumo:m:20585658",
+    "suumo:m:20837457",
+    "suumo:m:21266683",
+    "suumo:m:21665549",
+    "suumo:m:21537301",
+    "suumo:m:20540371",
+    "suumo:m:20587605",
+    "suumo:m:21119806",
+    "suumo:m:20354701",
+    "suumo:m:21659489",
+    "suumo:m:21239491",
+    "suumo:m:21657889",
+    "suumo:m:21380169",
+    "suumo:l:21336392",
+    "suumo:l:20301400",
+    "suumo:m:21643103",
+    "suumo:m:20064591",
+    "suumo:l:21483914",
+    "rehouse:m:FP7BTA17",
+    "suumo:r:jnc_000080459472",
+    "suumo:r:jnc_000107924722",
+    "suumo:r:jnc_000109728227",
+    "suumo:r:jnc_000109713551",
+    "suumo:r:jnc_000108998120",
+    "suumo:r:jnc_000108106837",
+    "suumo:r:jnc_000109396185",
+    "homes:l:b-35005600000534",
+    "homes:l:b-1152570002196",
+    "suumo:r:jnc_000108470669",
+    "suumo:r:jnc_000107389836",
+    "rehouse:h:FSDAUA07",
+    "livable:l:C13266784",
+    "suumo:r:jnc_000109600819",
+    "suumo:r:jnc_000109334234",
+    "suumo:r:jnc_000109609902",
+    "suumo:r:jnc_000109027663",
+    "suumo:r:jnc_000106986533",
+    "suumo:r:jnc_000109625465",
+    "suumo:r:jnc_000107686311",
+    "suumo:r:jnc_000103023730",
+    "suumo:r:jnc_000109372911",
+    "suumo:r:jnc_000106870230",
+    "rehouse:m:FSDBBA05",
+    "suumo:r:jnc_000098784392",
+    "suumo:r:jnc_000108960094",
+    "suumo:r:jnc_000088512197",
+    "suumo:r:jnc_000108979127",
+    "suumo:r:jnc_000099377365",
+    "suumo:r:jnc_000108716401",
+    "suumo:r:jnc_000099377366",
+    "suumo:r:jnc_000109328990",
+    "rehouse:m:FXIBRA03",
+    "rehouse:m:FXIBPA05",
+    "nomu:m:F82C4025",
+    "suumo:r:jnc_000107039458",
+    "suumo:r:jnc_000109533062",
+    "suumo:r:jnc_000109232159",
+    "suumo:r:jnc_000108806880",
+    "suumo:r:jnc_000108462250",
+    "rehouse:m:F06BGA87",
+    "suumo:r:jnc_000109396207",
+    "suumo:r:jnc_000108438590",
+    "suumo:r:jnc_000109617662",
+    "suumo:r:jnc_000109701621",
+    "suumo:r:jnc_000109066929",
+    "suumo:r:jnc_000109495125",
+    "suumo:r:jnc_000107565289",
+    "suumo:r:jnc_000109617744",
+    "suumo:r:jnc_000109713657",
+    "rehouse:h:F5GBGA2F",
+    "rehouse:h:FKJBPA14",
+    "livable:h:C13261765",
+    "suumo:r:jnc_000108910652",
+    "suumo:r:jnc_000109640904",
+    "suumo:r:jnc_000109355761",
+    "suumo:r:jnc_000109701505",
+    "suumo:r:jnc_000107443349",
+    "suumo:r:jnc_000108531046",
+    "suumo:r:jnc_000107290588",
+    "suumo:r:jnc_000108094363",
+    "suumo:r:jnc_000106120392",
+    "suumo:r:jnc_000106120400",
+    "suumo:r:jnc_000106120378",
+    "suumo:r:jnc_000109728047",
+    "suumo:r:jnc_000108844856",
+    "suumo:r:jnc_000108811185",
+    "suumo:r:jnc_000109073540",
+    "suumo:r:jnc_000109707806",
+    "suumo:r:jnc_000109682587",
+    "suumo:r:jnc_000106634983",
+    "suumo:r:jnc_000109488969",
+    "suumo:r:jnc_000108089024",
+    "suumo:r:jnc_000108089025",
+    "suumo:r:jnc_000109676015",
+    "suumo:r:jnc_000108910693",
+    "suumo:r:jnc_000109244976",
+    "suumo:r:jnc_000108732304",
+    "suumo:r:jnc_000108666648",
+    "nomu:m:F87C7006",
+    "nomu:m:V8770005",
+    "livable:m:C48262241",
+    "suumo:r:jnc_000109073485",
+    "suumo:r:jnc_000109537857",
+    "suumo:r:jnc_000109369127",
+    "suumo:r:jnc_000069747839",
+    "suumo:r:jnc_000109148942",
+    "suumo:r:jnc_000108802490",
+    "rehouse:l:FLZBPA03",
+    "rehouse:l:FXC7DA09",
+    "rehouse:l:FXC7WA0B",
+    "suumo:r:jnc_000106747710",
+    "suumo:r:jnc_000106747712",
+    "suumo:r:jnc_000105022759",
+    "suumo:r:jnc_000109073864",
+    "suumo:r:jnc_000108613077"
+  ],
+  "last_run": 1788991759,
+  "prices": {
+    "suumo:m:20918523": 11980,
+    "suumo:l:79109850": 11000,
+    "suumo:l:79178891": 11000,
+    "suumo:l:20863072": 11000,
+    "suumo:l:21008080": 9800,
+    "suumo:h:21425622": 8780,
+    "suumo:l:21017451": 4980,
+    "suumo:l:21021265": 4980,
+    "suumo:l:21046673": 4980,
+    "suumo:l:21603398": 6480,
+    "suumo:l:78229550": 6480,
+    "suumo:l:21578921": 6480,
+    "suumo:h:21342505": 10880,
+    "suumo:h:21064438": 9980,
+    "suumo:m:20326787": 9980,
+    "suumo:m:21213947": 11800,
+    "suumo:m:21229075": 11850,
+    "suumo:h:21434232": 5880,
+    "suumo:l:21525571": 10750,
+    "suumo:l:21640200": 8900,
+    "suumo:m:21281858": 11990,
+    "suumo:m:21005727": 10990,
+    "suumo:h:21395289": 8010,
+    "suumo:h:21244129": 9090,
+    "suumo:h:21266070": 9090,
+    "suumo:h:21307308": 9090,
+    "suumo:h:21602342": 9500,
+    "suumo:l:20863877": 9800,
+    "suumo:l:21631004": 9800,
+    "suumo:l:20540402": 9800,
+    "suumo:l:21612503": 9800,
+    "suumo:m:20585658": 9480,
+    "suumo:m:20837457": 11880,
+    "suumo:m:21266683": 10490,
+    "suumo:m:21665549": 11580,
+    "suumo:m:21537301": 11850,
+    "suumo:m:20540371": 11980,
+    "suumo:m:20587605": 10480,
+    "suumo:m:21119806": 10790,
+    "suumo:m:20354701": 11380,
+    "suumo:m:21659489": 11580,
+    "suumo:m:21239491": 11999,
+    "suumo:m:21657889": 11999,
+    "suumo:m:21380169": 11999,
+    "suumo:l:21336392": 3380,
+    "suumo:l:20301400": 5980,
+    "suumo:m:21643103": 8980,
+    "suumo:m:20064591": 6950,
+    "suumo:l:21483914": 9580,
+    "rehouse:m:FP7BTA17": 10280,
+    "suumo:r:jnc_000080459472": 22.5,
+    "suumo:r:jnc_000107924722": 23.5,
+    "suumo:r:jnc_000109728227": 24.5,
+    "suumo:r:jnc_000109713551": 24.9,
+    "suumo:r:jnc_000108998120": 27.25,
+    "suumo:r:jnc_000108106837": 27.5,
+    "suumo:r:jnc_000109396185": 28.0,
+    "homes:l:b-35005600000534": 9800,
+    "homes:l:b-1152570002196": 12000,
+    "suumo:r:jnc_000108470669": 25.2,
+    "suumo:r:jnc_000107389836": 28.0,
+    "rehouse:h:FSDAUA07": 6980,
+    "livable:l:C13266784": 4980,
+    "suumo:r:jnc_000109600819": 21.3,
+    "suumo:r:jnc_000109334234": 24.2,
+    "suumo:r:jnc_000109609902": 24.6,
+    "suumo:r:jnc_000109027663": 25.0,
+    "suumo:r:jnc_000106986533": 26.5,
+    "suumo:r:jnc_000109625465": 21.3,
+    "suumo:r:jnc_000107686311": 23.7,
+    "suumo:r:jnc_000103023730": 25.8,
+    "suumo:r:jnc_000109372911": 27.4,
+    "suumo:r:jnc_000106870230": 27.8,
+    "rehouse:m:FSDBBA05": 9980,
+    "suumo:r:jnc_000098784392": 21.0,
+    "suumo:r:jnc_000108960094": 24.2,
+    "suumo:r:jnc_000088512197": 25.0,
+    "suumo:r:jnc_000108979127": 26.6,
+    "suumo:r:jnc_000099377365": 26.9,
+    "suumo:r:jnc_000108716401": 27.3,
+    "suumo:r:jnc_000099377366": 27.4,
+    "suumo:r:jnc_000109328990": 25.0,
+    "rehouse:m:FXIBRA03": 10980,
+    "rehouse:m:FXIBPA05": 11990,
+    "nomu:m:F82C4025": 10480,
+    "suumo:r:jnc_000107039458": 26.5,
+    "suumo:r:jnc_000109533062": 26.8,
+    "suumo:r:jnc_000109232159": 27.2,
+    "suumo:r:jnc_000108806880": 27.4,
+    "suumo:r:jnc_000108462250": 27.4,
+    "rehouse:m:F06BGA87": 10990,
+    "suumo:r:jnc_000109396207": 19.9,
+    "suumo:r:jnc_000108438590": 21.0,
+    "suumo:r:jnc_000109617662": 21.5,
+    "suumo:r:jnc_000109701621": 21.75,
+    "suumo:r:jnc_000109066929": 22.8,
+    "suumo:r:jnc_000109495125": 23.0,
+    "suumo:r:jnc_000107565289": 28.0,
+    "suumo:r:jnc_000109617744": 25.6,
+    "suumo:r:jnc_000109713657": 27.3,
+    "rehouse:h:F5GBGA2F": 6480,
+    "rehouse:h:FKJBPA14": 7200,
+    "livable:h:C13261765": 9500,
+    "suumo:r:jnc_000108910652": 15.3,
+    "suumo:r:jnc_000109640904": 17.8,
+    "suumo:r:jnc_000109355761": 19.5,
+    "suumo:r:jnc_000109701505": 20.2,
+    "suumo:r:jnc_000107443349": 21.1,
+    "suumo:r:jnc_000108531046": 21.9,
+    "suumo:r:jnc_000107290588": 26.6,
+    "suumo:r:jnc_000108094363": 27.0,
+    "suumo:r:jnc_000106120392": 26.6,
+    "suumo:r:jnc_000106120400": 26.8,
+    "suumo:r:jnc_000106120378": 26.9,
+    "suumo:r:jnc_000109728047": 24.0,
+    "suumo:r:jnc_000108844856": 24.7,
+    "suumo:r:jnc_000108811185": 26.8,
+    "suumo:r:jnc_000109073540": 27.9,
+    "suumo:r:jnc_000109707806": 22.2,
+    "suumo:r:jnc_000109682587": 20.6,
+    "suumo:r:jnc_000106634983": 23.8,
+    "suumo:r:jnc_000109488969": 25.0,
+    "suumo:r:jnc_000108089024": 25.6,
+    "suumo:r:jnc_000108089025": 25.8,
+    "suumo:r:jnc_000109676015": 26.0,
+    "suumo:r:jnc_000108910693": 26.4,
+    "suumo:r:jnc_000109244976": 26.0,
+    "suumo:r:jnc_000108732304": 24.0,
+    "suumo:r:jnc_000108666648": 24.5,
+    "nomu:m:F87C7006": 10490,
+    "nomu:m:V8770005": 11980,
+    "livable:m:C48262241": 10480,
+    "suumo:r:jnc_000109073485": 21.5,
+    "suumo:r:jnc_000109537857": 25.1,
+    "suumo:r:jnc_000109369127": 26.5,
+    "suumo:r:jnc_000069747839": 27.2,
+    "suumo:r:jnc_000109148942": 27.3,
+    "suumo:r:jnc_000108802490": 27.0,
+    "rehouse:l:FLZBPA03": 3380,
+    "rehouse:l:FXC7DA09": 7380,
+    "rehouse:l:FXC7WA0B": 5490,
+    "suumo:r:jnc_000106747710": 12.3,
+    "suumo:r:jnc_000106747712": 13.1,
+    "suumo:r:jnc_000105022759": 13.3,
+    "suumo:r:jnc_000109073864": 22.7,
+    "suumo:r:jnc_000108613077": 26.9
+  },
+  "watchlist": {
+    "homes:h:b-1375350001854": {
+      "price": 22880,
+      "name": "中古一戸建てー目黒区中目黒１丁目 3LDK 駅徒歩５分ー",
+      "station": "恵比寿",
+      "type": "house",
+      "url": "https://www.homes.co.jp/kodate/b-1375350001854/",
+      "area": 52.01,
+      "first": 22880
+    },
+    "homes:h:b-1282360004482": {
+      "price": 25000,
+      "name": "中古一戸建て品格の漂う街とデザイン　恵比寿西2丁目",
+      "station": "恵比寿",
+      "type": "house",
+      "url": "https://www.homes.co.jp/kodate/b-1282360004482/",
+      "area": 65.08,
+      "first": 25000
+    },
+    "homes:l:b-35503070003327": {
+      "price": 22800,
+      "name": "土地渋谷区恵比寿4丁目 (恵比寿駅)",
+      "station": "恵比寿",
+      "type": "land",
+      "url": "https://www.homes.co.jp/tochi/b-35503070003327/",
+      "area": 48.79,
+      "first": 22800
+    },
+    "homes:l:b-1063460028484": {
+      "price": 22800,
+      "name": "土地渋谷区恵比寿4丁目 (恵比寿駅)",
+      "station": "恵比寿",
+      "type": "land",
+      "url": "https://www.homes.co.jp/tochi/b-1063460028484/",
+      "area": 48.55,
+      "first": 22800
+    },
+    "athome:l:1106195019": {
+      "price": 22800,
+      "name": "写真充実土地渋谷区 恵比寿４丁目（恵比寿駅） 住宅用地22,800万円坪単価1,",
+      "station": "恵比寿",
+      "type": "land",
+      "url": "https://www.athome.co.jp/tochi/1106195019/?DOWN=2&BKLISTID=002LPC&SEARCHDIV=1&sref=list_simple",
+      "area": 48.79,
+      "first": 22800
+    },
+    "athome:l:1110295118": {
+      "price": 22800,
+      "name": "土地渋谷区 恵比寿４丁目（恵比寿駅） 住宅用地22,800万円坪単価1,552.",
+      "station": "恵比寿",
+      "type": "land",
+      "url": "https://www.athome.co.jp/tochi/1110295118/?DOWN=2&BKLISTID=002LPC&SEARCHDIV=1&sref=list_simple",
+      "area": 48.55,
+      "first": 22800
+    },
+    "rehouse:m:FEUBGA3F": {
+      "price": 19800,
+      "name": "ピアース恵比寿WEST HILLS",
+      "station": "恵比寿",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FEUBGA3F/",
+      "area": 52.81,
+      "first": 19800
+    },
+    "rehouse:m:FEUBPA04": {
+      "price": 19500,
+      "name": "ザ・パークハウス恵比寿",
+      "station": "恵比寿",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FEUBPA04/",
+      "area": 55.05,
+      "first": 19500
+    },
+    "rehouse:m:FEUBPA05": {
+      "price": 19500,
+      "name": "ピアース恵比寿WEST HILLS",
+      "station": "恵比寿",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FEUBPA05/",
+      "area": 63.19,
+      "first": 19500
+    },
+    "rehouse:m:FEUBFA02": {
+      "price": 18000,
+      "name": "ピアース恵比寿",
+      "station": "恵比寿",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FEUBFA02/",
+      "area": 63.78,
+      "first": 18000
+    },
+    "rehouse:m:FEUBDA0A": {
+      "price": 25000,
+      "name": "ザ・パークハウス恵比寿",
+      "station": "恵比寿",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FEUBDA0A/",
+      "area": 65.83,
+      "first": 25000
+    },
+    "rehouse:m:FEUAWA0B": {
+      "price": 16980,
+      "name": "オープンレジデンシア恵比寿ザハウス",
+      "station": "恵比寿",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FEUAWA0B/",
+      "area": 56.79,
+      "first": 16980
+    },
+    "nomu:h:E89Q7004": {
+      "price": 25000,
+      "name": "渋谷区恵比寿西二丁目戸建",
+      "station": "恵比寿",
+      "type": "house",
+      "url": "https://www.nomu.com/house/id/E89Q7004/",
+      "area": 109.86,
+      "first": 25000
+    },
+    "nomu:l:UF470042": {
+      "price": 22800,
+      "name": "渋谷区恵比寿4丁目 土地",
+      "station": "恵比寿",
+      "type": "land",
+      "url": "https://www.nomu.com/land/id/UF470042/",
+      "area": 48.79,
+      "first": 22800
+    },
+    "suumo:r:jnc_000108683103": {
+      "price": 29.0,
+      "name": "ザ マグノリアガーデン恵比寿",
+      "station": "恵比寿",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108683103/?bc=100512624092",
+      "area": 48.86,
+      "first": 29.0
+    },
+    "rehouse:m:F7FBBA03": {
+      "price": 18000,
+      "name": "パークナード目黒",
+      "station": "目黒",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F7FBBA03/",
+      "area": 70.04,
+      "first": 18000
+    },
+    "rehouse:m:F07AGA94": {
+      "price": 13498,
+      "name": "オーベル目黒",
+      "station": "目黒",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F07AGA94/",
+      "area": 56.39,
+      "first": 13498
+    },
+    "rehouse:m:F07APA09": {
+      "price": 12480,
+      "name": "オーベル目黒",
+      "station": "目黒",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F07APA09/",
+      "area": 56.44,
+      "first": 12480
+    },
+    "suumo:r:jnc_000109365200": {
+      "price": 28.9,
+      "name": "ＭＦＰＲ目黒タワー",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109365200/?bc=100524580943",
+      "area": 45.84,
+      "first": 28.9
+    },
+    "rehouse:m:FEUBFA04": {
+      "price": 17980,
+      "name": "シティハウス中目黒ステーションコート",
+      "station": "中目黒",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FEUBFA04/",
+      "area": 56.07,
+      "first": 17980
+    },
+    "nomu:m:FF4C5050": {
+      "price": 18800,
+      "name": "ピアース中目黒ローレルアイ",
+      "station": "中目黒",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FF4C5050/",
+      "area": 73.34,
+      "first": 18800
+    },
+    "rehouse:m:FSDBPA02": {
+      "price": 20800,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBPA02/",
+      "area": 65.8,
+      "first": 20800
+    },
+    "rehouse:m:FSDBFA04": {
+      "price": 24980,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBFA04/",
+      "area": 77.35,
+      "first": 24980
+    },
+    "rehouse:m:FLWBDA01": {
+      "price": 19800,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FLWBDA01/",
+      "area": 67.3,
+      "first": 19800
+    },
+    "rehouse:m:FSDBBA06": {
+      "price": 20000,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBBA06/",
+      "area": 61.18,
+      "first": 20000
+    },
+    "rehouse:m:FSDBGA0F": {
+      "price": 16980,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBGA0F/",
+      "area": 61.18,
+      "first": 16980
+    },
+    "rehouse:m:FSDBQA02": {
+      "price": 18400,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBQA02/",
+      "area": 57.56,
+      "first": 18400
+    },
+    "rehouse:m:FSDBPA0C": {
+      "price": 15480,
+      "name": "パークホームズ武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBPA0C/",
+      "area": 65.29,
+      "first": 15480
+    },
+    "rehouse:m:FSDBPA0A": {
+      "price": 24800,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBPA0A/",
+      "area": 76.33,
+      "first": 24800
+    },
+    "rehouse:l:FSDBPA09": {
+      "price": 14390,
+      "name": "小山台1丁目 土地",
+      "station": "武蔵小山",
+      "type": "land",
+      "url": "https://www.rehouse.co.jp/buy/tochi/bkdetail/FSDBPA09/",
+      "area": 68.22,
+      "first": 14390
+    },
+    "rehouse:m:FSDBPA07": {
+      "price": 16980,
+      "name": "シティタワー武蔵小山 タワー棟",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBPA07/",
+      "area": 57.41,
+      "first": 16980
+    },
+    "rehouse:m:FSDBPA05": {
+      "price": 21800,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBPA05/",
+      "area": 76.19,
+      "first": 21800
+    },
+    "rehouse:l:FSDBGA2E": {
+      "price": 14980,
+      "name": "品川区小山台1丁目土地",
+      "station": "武蔵小山",
+      "type": "land",
+      "url": "https://www.rehouse.co.jp/buy/tochi/bkdetail/FSDBGA2E/",
+      "area": 136.28,
+      "first": 14980
+    },
+    "rehouse:m:FSDBGA27": {
+      "price": 19999,
+      "name": "パークホームズ武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBGA27/",
+      "area": 85.38,
+      "first": 19999
+    },
+    "rehouse:m:FSDBTA06": {
+      "price": 12700,
+      "name": "パークホームズ武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDBTA06/",
+      "area": 53.08,
+      "first": 12700
+    },
+    "rehouse:m:FSDAWA06": {
+      "price": 19800,
+      "name": "パークホームズ武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSDAWA06/",
+      "area": 78.81,
+      "first": 19800
+    },
+    "nomu:m:RB470815": {
+      "price": 12700,
+      "name": "パークホームズ武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB470815/",
+      "area": 53.08,
+      "first": 12700
+    },
+    "nomu:m:RB470862": {
+      "price": 18400,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB470862/",
+      "area": 57.56,
+      "first": 18400
+    },
+    "nomu:m:F55C2017": {
+      "price": 17680,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F55C2017/",
+      "area": 61.18,
+      "first": 17680
+    },
+    "nomu:m:F82C4047": {
+      "price": 19980,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F82C4047/",
+      "area": 63.49,
+      "first": 19980
+    },
+    "nomu:m:RB470799": {
+      "price": 19990,
+      "name": "パークシティ武蔵小山ザタワー",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB470799/",
+      "area": 61.18,
+      "first": 19990
+    },
+    "nomu:m:FB4C7007": {
+      "price": 16980,
+      "name": "シティタワー武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FB4C7007/",
+      "area": 57.41,
+      "first": 16980
+    },
+    "nomu:m:RB470611": {
+      "price": 16800,
+      "name": "シティタワー武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB470611/",
+      "area": 57.41,
+      "first": 16800
+    },
+    "nomu:m:RB470677": {
+      "price": 19999,
+      "name": "パークホームズ武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB470677/",
+      "area": 85.38,
+      "first": 19999
+    },
+    "nomu:m:BB470002": {
+      "price": 24800,
+      "name": "パークシティ武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/BB470002/",
+      "area": 72.12,
+      "first": 24800
+    },
+    "livable:m:C13267715": {
+      "price": 16980,
+      "name": "シティタワー武蔵小山",
+      "station": "武蔵小山",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C13267715/",
+      "area": 57.41,
+      "first": 16980
+    },
+    "livable:l:C48265574": {
+      "price": 14980,
+      "name": "東京都品川区小山台１丁目",
+      "station": "武蔵小山",
+      "type": "land",
+      "url": "https://www.livable.co.jp/tochi/C48265574/",
+      "area": 136.0,
+      "first": 14980
+    },
+    "suumo:r:jnc_000106298026": {
+      "price": 29.8,
+      "name": "スタイリオフィット武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000106298026/?bc=100521971163",
+      "area": 65.33,
+      "first": 29.8
+    },
+    "suumo:r:jnc_000096937483": {
+      "price": 29.4,
+      "name": "エフローレプルミエ武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000096937483/?bc=100525980612",
+      "area": 56.74,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000109447738": {
+      "price": 28.7,
+      "name": "プレゾン武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109447738/?bc=100524205774",
+      "area": 66.04,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000096937497": {
+      "price": 29.4,
+      "name": "品川区小山２ 賃貸",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000096937497/?bc=100525814927",
+      "area": 56.74,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000108740582": {
+      "price": 28.7,
+      "name": "品川区小山２ 賃貸",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108740582/?bc=100518670886",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000108806641": {
+      "price": 28.6,
+      "name": "港区芝４ 賃貸",
+      "station": "三田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108806641/?bc=100519255604",
+      "area": 50.24,
+      "first": 28.6
+    },
+    "rehouse:m:F07BQA0B": {
+      "price": 23500,
+      "name": "ザ・ガーデンテラス目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F07BQA0B/",
+      "area": 75.56,
+      "first": 23500
+    },
+    "rehouse:m:F07BTA14": {
+      "price": 15960,
+      "name": "シティタワー目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F07BTA14/",
+      "area": 55.14,
+      "first": 15960
+    },
+    "rehouse:m:F07BPA0B": {
+      "price": 14980,
+      "name": "クレヴィアタワー目黒不動前",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F07BPA0B/",
+      "area": 56.64,
+      "first": 14980
+    },
+    "rehouse:m:FWRBFA0A": {
+      "price": 22800,
+      "name": "シティタワー目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FWRBFA0A/",
+      "area": 71.52,
+      "first": 22800
+    },
+    "rehouse:m:F07BBA0D": {
+      "price": 16500,
+      "name": "ザ・ガーデンテラス目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F07BBA0D/",
+      "area": 66.79,
+      "first": 16500
+    },
+    "nomu:m:F86C6003": {
+      "price": 24980,
+      "name": "プラウドタワー目黒MARC",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F86C6003/",
+      "area": 75.59,
+      "first": 24980
+    },
+    "nomu:m:R8670031": {
+      "price": 19200,
+      "name": "クレヴィアタワー目黒不動前",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/R8670031/",
+      "area": 68.98,
+      "first": 19200
+    },
+    "nomu:m:R8670761": {
+      "price": 12380,
+      "name": "ザ・パークワンズ目黒不動前",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/R8670761/",
+      "area": 54.8,
+      "first": 12380
+    },
+    "nomu:m:RB470871": {
+      "price": 23900,
+      "name": "シティタワー目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB470871/",
+      "area": 71.52,
+      "first": 23900
+    },
+    "nomu:m:R8670786": {
+      "price": 17480,
+      "name": "プラウドタワー目黒MARC",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/R8670786/",
+      "area": 61.76,
+      "first": 17480
+    },
+    "nomu:m:RE170469": {
+      "price": 15960,
+      "name": "シティタワー目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RE170469/",
+      "area": 55.14,
+      "first": 15960
+    },
+    "livable:m:C48267272": {
+      "price": 19590,
+      "name": "ヴィークハウス目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C48267272/",
+      "area": 68.64,
+      "first": 19590
+    },
+    "livable:m:C48267270": {
+      "price": 13740,
+      "name": "ヴィークハウス目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C48267270/",
+      "area": 54.03,
+      "first": 13740
+    },
+    "livable:m:C48267266": {
+      "price": 17590,
+      "name": "ヴィークハウス目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C48267266/",
+      "area": 63.21,
+      "first": 17590
+    },
+    "livable:m:C48267244": {
+      "price": 18490,
+      "name": "ヴィークハウス目黒",
+      "station": "不動前",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C48267244/",
+      "area": 64.5,
+      "first": 18490
+    },
+    "rehouse:m:FW9BQA11": {
+      "price": 19900,
+      "name": "アトラスタワー五反田",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FW9BQA11/",
+      "area": 57.25,
+      "first": 19900
+    },
+    "rehouse:m:FM5ASA05": {
+      "price": 14500,
+      "name": "プラウド五反田",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FM5ASA05/",
+      "area": 55.21,
+      "first": 14500
+    },
+    "livable:h:C13268780": {
+      "price": 16980,
+      "name": "東京都品川区西五反田５丁目",
+      "station": "不動前",
+      "type": "house",
+      "url": "https://www.livable.co.jp/kodate/C13268780/",
+      "area": 154.53,
+      "first": 16980
+    },
+    "nomu:m:R8670643": {
+      "price": 24980,
+      "name": "ル・サンク大崎シティタワー",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/R8670643/",
+      "area": 80.88,
+      "first": 24980
+    },
+    "nomu:m:F86C6005": {
+      "price": 12800,
+      "name": "リビオ目黒リバーサウス",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F86C6005/",
+      "area": 57.3,
+      "first": 12800
+    },
+    "nomu:m:F86C8001": {
+      "price": 24900,
+      "name": "プラウドタワー東五反田",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F86C8001/",
+      "area": 80.18,
+      "first": 24900
+    },
+    "nomu:m:FF5C2012": {
+      "price": 21980,
+      "name": "パークタワーグランスカイ",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FF5C2012/",
+      "area": 83.84,
+      "first": 21980
+    },
+    "nomu:m:F86C5005": {
+      "price": 18800,
+      "name": "パークタワーグランスカイ",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F86C5005/",
+      "area": 57.99,
+      "first": 18800
+    },
+    "nomu:m:FE3C4005": {
+      "price": 19900,
+      "name": "パークタワーグランスカイ",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FE3C4005/",
+      "area": 73.26,
+      "first": 19900
+    },
+    "nomu:l:R8670231": {
+      "price": 18500,
+      "name": "品川区東五反田1丁目土地",
+      "station": "五反田",
+      "type": "land",
+      "url": "https://www.nomu.com/land/id/R8670231/",
+      "area": 78.66,
+      "first": 18500
+    },
+    "livable:m:C13263122": {
+      "price": 21980,
+      "name": "パークタワーグランスカイ",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C13263122/",
+      "area": 83.84,
+      "first": 21980
+    },
+    "nomu:m:V9770074": {
+      "price": 15480,
+      "name": "プラウドシティ蒲田",
+      "station": "京急蒲田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/V9770074/",
+      "area": 70.19,
+      "first": 15480
+    },
+    "rehouse:m:FEUBQA03": {
+      "price": 23980,
+      "name": "パークナード代官山",
+      "station": "代官山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FEUBQA03/",
+      "area": 60.11,
+      "first": 23980
+    },
+    "rehouse:m:FW9ABA10": {
+      "price": 21500,
+      "name": "パークナード代官山",
+      "station": "代官山",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FW9ABA10/",
+      "area": 60.14,
+      "first": 21500
+    },
+    "rehouse:h:F157FA04": {
+      "price": 25000,
+      "name": "渋谷区恵比寿西2丁目 戸建",
+      "station": "代官山",
+      "type": "house",
+      "url": "https://www.rehouse.co.jp/buy/kodate/bkdetail/F157FA04/",
+      "area": 109.86,
+      "first": 25000
+    },
+    "rehouse:l:F7FBGA1D": {
+      "price": 18500,
+      "name": "東中延1丁目 土地",
+      "station": "戸越",
+      "type": "land",
+      "url": "https://www.rehouse.co.jp/buy/tochi/bkdetail/F7FBGA1D/",
+      "area": 74.22,
+      "first": 18500
+    },
+    "rehouse:m:FKXBGA51": {
+      "price": 22800,
+      "name": "シティタワー大井町",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBGA51/",
+      "area": 70.45,
+      "first": 22800
+    },
+    "rehouse:m:FKXBFA02": {
+      "price": 20700,
+      "name": "シティタワー大井町",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBFA02/",
+      "area": 73.47,
+      "first": 20700
+    },
+    "rehouse:m:FXIBQA09": {
+      "price": 17800,
+      "name": "プラウド大井ゼームス坂",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FXIBQA09/",
+      "area": 70.54,
+      "first": 17800
+    },
+    "rehouse:m:FKXBPA0C": {
+      "price": 12980,
+      "name": "ザ・パークハウス大井町レジデンス",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBPA0C/",
+      "area": 52.16,
+      "first": 12980
+    },
+    "rehouse:m:FKXBGA3E": {
+      "price": 21800,
+      "name": "プラウド大井ゼームス坂",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBGA3E/",
+      "area": 80.2,
+      "first": 21800
+    },
+    "rehouse:m:FKXBFA01": {
+      "price": 14900,
+      "name": "プレシス大井町パークフロント",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBFA01/",
+      "area": 55.68,
+      "first": 14900
+    },
+    "rehouse:m:FKXBGA08": {
+      "price": 17980,
+      "name": "ブリリア大井町ラヴィアンタワー",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBGA08/",
+      "area": 67.58,
+      "first": 17980
+    },
+    "rehouse:m:FKXBAA01": {
+      "price": 16800,
+      "name": "ブリリア大井町ラヴィアンタワー",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBAA01/",
+      "area": 68.48,
+      "first": 16800
+    },
+    "rehouse:m:FKXAGA52": {
+      "price": 17980,
+      "name": "ブリリア大井町ラヴィアンタワー",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXAGA52/",
+      "area": 68.62,
+      "first": 17980
+    },
+    "nomu:m:WF470054": {
+      "price": 21900,
+      "name": "ザ・パークハウス代官山レジデンス",
+      "station": "代官山",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/WF470054/",
+      "area": 61.62,
+      "first": 21900
+    },
+    "rehouse:m:F15BRA03": {
+      "price": 20000,
+      "name": "グランリビオ芝大門",
+      "station": "大門",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F15BRA03/",
+      "area": 70.84,
+      "first": 20000
+    },
+    "nomu:m:FC7C5009": {
+      "price": 21800,
+      "name": "プラウド大井ゼームス坂",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FC7C5009/",
+      "area": 80.2,
+      "first": 21800
+    },
+    "nomu:m:FC7BZ018": {
+      "price": 17980,
+      "name": "ブリリア大井町ラヴィアンタワー",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FC7BZ018/",
+      "area": 68.62,
+      "first": 17980
+    },
+    "nomu:m:KC770005": {
+      "price": 15860,
+      "name": "ブリリア大井仙台坂",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/KC770005/",
+      "area": 70.87,
+      "first": 15860
+    },
+    "nomu:m:RC770576": {
+      "price": 22800,
+      "name": "シティタワー大井町",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RC770576/",
+      "area": 70.45,
+      "first": 22800
+    },
+    "nomu:m:FC7BZ015": {
+      "price": 17980,
+      "name": "ブリリア大井町ラヴィアンタワー",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FC7BZ015/",
+      "area": 67.58,
+      "first": 17980
+    },
+    "nomu:m:RB370479": {
+      "price": 20500,
+      "name": "クレストプライムタワー芝",
+      "station": "大門",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB370479/",
+      "area": 56.18,
+      "first": 20500
+    },
+    "livable:m:C48267122": {
+      "price": 21800,
+      "name": "プラウド大井ゼームス坂",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C48267122/",
+      "area": 80.2,
+      "first": 21800
+    },
+    "suumo:r:jnc_000107403218": {
+      "price": 28.7,
+      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107403218/?bc=100514724234",
+      "area": 48.04,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000105447007": {
+      "price": 29.4,
+      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105447007/?bc=100485786184",
+      "area": 48.04,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000105848887": {
+      "price": 29.4,
+      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105848887/?bc=100496576164",
+      "area": 48.04,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000105447005": {
+      "price": 29.7,
+      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105447005/?bc=100486222994",
+      "area": 48.72,
+      "first": 29.7
+    },
+    "suumo:r:jnc_000107311695": {
+      "price": 29.7,
+      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107311695/?bc=100505802460",
+      "area": 48.72,
+      "first": 29.7
+    },
+    "suumo:r:jnc_000107311696": {
+      "price": 29.9,
+      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107311696/?bc=100518136594",
+      "area": 48.72,
+      "first": 29.9
+    },
+    "suumo:r:jnc_000107311697": {
+      "price": 29.9,
+      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107311697/?bc=100505503743",
+      "area": 48.72,
+      "first": 29.9
+    },
+    "suumo:r:jnc_000108340396": {
+      "price": 29.9,
+      "name": "ＡＩＦＬＡＴ品川戸越パークサイド",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108340396/?bc=100514371466",
+      "area": 48.72,
+      "first": 29.9
+    },
+    "suumo:r:jnc_000090139804": {
+      "price": 28.5,
+      "name": "LiveFlat戸越",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000090139804/?bc=100523056344",
+      "area": 79.29,
+      "first": 28.5
+    },
+    "suumo:r:jnc_000109120529": {
+      "price": 28.5,
+      "name": "戸越Ｂ．ＩＧ．　ＲＥＳＩＤＥＮＣＥ",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109120529/?bc=100521683956",
+      "area": 61.69,
+      "first": 28.5
+    },
+    "suumo:r:jnc_000107559566": {
+      "price": 28.7,
+      "name": "品川区戸越４ 賃貸",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107559566/?bc=100516671608",
+      "area": 48.04,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000105688854": {
+      "price": 29.4,
+      "name": "品川区戸越４ 賃貸",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105688854/?bc=100494655431",
+      "area": 48.04,
+      "first": 29.4
+    },
+    "suumo:r:jnc_000105688853": {
+      "price": 29.7,
+      "name": "品川区戸越４ 賃貸",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105688853/?bc=100516671606",
+      "area": 48.72,
+      "first": 29.7
+    },
+    "suumo:r:jnc_000107459365": {
+      "price": 29.9,
+      "name": "品川区戸越４ 賃貸",
+      "station": "戸越",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107459365/?bc=100516120993",
+      "area": 48.72,
+      "first": 29.9
+    },
+    "rehouse:m:FSABTA0E": {
+      "price": 20500,
+      "name": "ザ・パークハウス南麻布",
+      "station": "広尾",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FSABTA0E/",
+      "area": 70.5,
+      "first": 20500
+    },
+    "rehouse:m:FBIBGAB3": {
+      "price": 20000,
+      "name": "オープンレジデンシア広尾ザ・ハウス South Court",
+      "station": "広尾",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FBIBGAB3/",
+      "area": 57.42,
+      "first": 20000
+    },
+    "suumo:r:jnc_000105344272": {
+      "price": 29.6,
+      "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105344272/?bc=100494525395",
+      "area": 52.9,
+      "first": 29.6
+    },
+    "suumo:r:jnc_000108698234": {
+      "price": 29.6,
+      "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108698234/?bc=100497416754",
+      "area": 47.86,
+      "first": 29.6
+    },
+    "suumo:r:jnc_000105344275": {
+      "price": 29.7,
+      "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105344275/?bc=100513945292",
+      "area": 52.9,
+      "first": 29.7
+    },
+    "suumo:r:jnc_000108973194": {
+      "price": 29.0,
+      "name": "オープンレジデンシア大井町",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108973194/?bc=100524201108",
+      "area": 73.09,
+      "first": 29.0
+    },
+    "suumo:r:jnc_000107645228": {
+      "price": 29.3,
+      "name": "品川区東大井６ 賃貸",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107645228/?bc=100525587393",
+      "area": 51.14,
+      "first": 29.3
+    },
+    "suumo:r:jnc_000108570369": {
+      "price": 29.1,
+      "name": "品川区大井２ 賃貸",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108570369/?bc=100517201113",
+      "area": 52.9,
+      "first": 29.1
+    },
+    "suumo:r:jnc_000108570370": {
+      "price": 29.2,
+      "name": "品川区大井２ 賃貸",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108570370/?bc=100517201116",
+      "area": 52.9,
+      "first": 29.2
+    },
+    "suumo:r:jnc_000105364611": {
+      "price": 29.6,
+      "name": "品川区大井２ 賃貸",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105364611/?bc=100516672127",
+      "area": 52.9,
+      "first": 29.6
+    },
+    "suumo:r:jnc_000105364612": {
+      "price": 29.7,
+      "name": "品川区大井２ 賃貸",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000105364612/?bc=100492777418",
+      "area": 52.9,
+      "first": 29.7
+    },
+    "suumo:r:jnc_000107565222": {
+      "price": 29.3,
+      "name": "ＧＲＡＮ ＰＡＳＥＯ大井町",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107565222/?bc=100487379793",
+      "area": 51.14,
+      "first": 29.3
+    },
+    "nomu:m:FD0C6011": {
+      "price": 16000,
+      "name": "ザ・サンメゾン広尾エルド",
+      "station": "広尾",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FD0C6011/",
+      "area": 55.07,
+      "first": 16000
+    },
+    "nomu:m:FD0C7010": {
+      "price": 17980,
+      "name": "オープンレジデンシア広尾ザ・ハウス ノースコート",
+      "station": "広尾",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FD0C7010/",
+      "area": 70.57,
+      "first": 17980
+    },
+    "nomu:m:F82C7003": {
+      "price": 22800,
+      "name": "アトラス南麻布",
+      "station": "広尾",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F82C7003/",
+      "area": 60.43,
+      "first": 22800
+    },
+    "nomu:m:FE3C7006": {
+      "price": 15380,
+      "name": "リビオレゾン新橋nex",
+      "station": "新橋",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FE3C7006/",
+      "area": 56.12,
+      "first": 15380
+    },
+    "rehouse:m:FAXBBA05": {
+      "price": 21600,
+      "name": "イニシア高輪プレシアスコート",
+      "station": "泉岳寺",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FAXBBA05/",
+      "area": 70.42,
+      "first": 21600
+    },
+    "rehouse:m:FBHBGA64": {
+      "price": 12490,
+      "name": "コノエ東日本橋駅前",
+      "station": "東日本橋",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FBHBGA64/",
+      "area": 54.12,
+      "first": 12490
+    },
+    "nomu:m:F82C2013": {
+      "price": 21600,
+      "name": "イニシア高輪プレシアスコート",
+      "station": "泉岳寺",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F82C2013/",
+      "area": 70.42,
+      "first": 21600
+    },
+    "nomu:m:FF0C7015": {
+      "price": 13400,
+      "name": "ミオカステーロ日本橋横山町",
+      "station": "東日本橋",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FF0C7015/",
+      "area": 63.27,
+      "first": 13400
+    },
+    "nomu:m:F87C2007": {
+      "price": 16380,
+      "name": "プラウド日本橋富沢町",
+      "station": "東日本橋",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F87C2007/",
+      "area": 55.18,
+      "first": 16380
+    },
+    "nomu:m:V8770016": {
+      "price": 14890,
+      "name": "プレミスト日本橋浜町リデアル",
+      "station": "東日本橋",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/V8770016/",
+      "area": 56.61,
+      "first": 14890
+    },
+    "nomu:m:F54C8002": {
+      "price": 12490,
+      "name": "コノエ東日本橋駅前",
+      "station": "東日本橋",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/F54C8002/",
+      "area": 54.12,
+      "first": 12490
+    },
+    "nomu:m:R8771359": {
+      "price": 21000,
+      "name": "ブランズ日本橋浜町",
+      "station": "東日本橋",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/R8771359/",
+      "area": 70.68,
+      "first": 21000
+    },
+    "livable:m:C13261261": {
+      "price": 21600,
+      "name": "イニシア高輪プレシアスコート",
+      "station": "泉岳寺",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C13261261/",
+      "area": 70.42,
+      "first": 21600
+    },
+    "rehouse:m:FWPBGA13": {
+      "price": 18800,
+      "name": "クレストプライムタワー芝",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FWPBGA13/",
+      "area": 62.24,
+      "first": 18800
+    },
+    "rehouse:m:F15BPA03": {
+      "price": 23880,
+      "name": "パークコート浜離宮 ザ タワー",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/F15BPA03/",
+      "area": 63.63,
+      "first": 23880
+    },
+    "rehouse:m:FWPBGA14": {
+      "price": 21800,
+      "name": "クレストプライムタワー芝",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FWPBGA14/",
+      "area": 66.3,
+      "first": 21800
+    },
+    "livable:m:C13268099": {
+      "price": 12490,
+      "name": "コノエ東日本橋駅前",
+      "station": "東日本橋",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C13268099/",
+      "area": 54.12,
+      "first": 12490
+    },
+    "nomu:m:FF5C1008": {
+      "price": 18800,
+      "name": "クレストプライムタワー芝",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FF5C1008/",
+      "area": 62.24,
+      "first": 18800
+    },
+    "nomu:m:RB370500": {
+      "price": 23000,
+      "name": "WORLD TOWER RESIDENCE",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB370500/",
+      "area": 53.37,
+      "first": 23000
+    },
+    "nomu:m:FC7C5003": {
+      "price": 23980,
+      "name": "ブリリアタワー浜離宮",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FC7C5003/",
+      "area": 58.91,
+      "first": 23980
+    },
+    "nomu:m:RB170212": {
+      "price": 24800,
+      "name": "ワールドタワーレジデンス",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB170212/",
+      "area": 53.37,
+      "first": 24800
+    },
+    "livable:m:C48262656": {
+      "price": 21800,
+      "name": "クレストプライムタワー芝",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C48262656/",
+      "area": 66.3,
+      "first": 21800
+    },
+    "livable:m:C48261873": {
+      "price": 18800,
+      "name": "クレストプライムタワー芝",
+      "station": "浜松町",
+      "type": "mansion",
+      "url": "https://www.livable.co.jp/mansion/C48261873/",
+      "area": 62.24,
+      "first": 18800
+    },
+    "suumo:r:jnc_000109177923": {
+      "price": 28.2,
+      "name": "オープンブルーム東日本橋",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109177923/?bc=100521958558",
+      "area": 46.97,
+      "first": 28.2
+    },
+    "suumo:r:jnc_000108584610": {
+      "price": 29.0,
+      "name": "オープンブルーム東日本橋",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108584610/?bc=100518038814",
+      "area": 46.97,
+      "first": 29.0
+    },
+    "suumo:r:jnc_000109180236": {
+      "price": 28.2,
+      "name": "中央区東日本橋２ 賃貸",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109180236/?bc=100522003389",
+      "area": 46.97,
+      "first": 28.2
+    },
+    "suumo:r:jnc_000108596742": {
+      "price": 29.0,
+      "name": "中央区東日本橋２ 賃貸",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108596742/?bc=100517726896",
+      "area": 46.97,
+      "first": 29.0
+    },
+    "suumo:r:jnc_000109707786": {
+      "price": 28.7,
+      "name": "プティ・メゾン日本橋",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109707786/?bc=100526055475",
+      "area": 61.38,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000109483277": {
+      "price": 28.3,
+      "name": "中央区東日本橋３ 賃貸",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483277/?bc=100524558402",
+      "area": 56.42,
+      "first": 28.3
+    },
+    "suumo:r:jnc_000109483276": {
+      "price": 28.3,
+      "name": "ジェノヴィア東日本橋駅前グリーンヴェール",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483276/?bc=100524589407",
+      "area": 56.42,
+      "first": 28.3
+    },
+    "nomu:m:RF570244": {
+      "price": 19000,
+      "name": "品川タワーレジデンス",
+      "station": "高輪ゲートウェイ",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RF570244/",
+      "area": 56.33,
+      "first": 19000
+    },
+    "suumo:r:jnc_000109483736": {
+      "price": 28.1,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483736/?bc=100484504669",
+      "area": 52.83,
+      "first": 28.1
+    },
+    "suumo:r:jnc_000109483712": {
+      "price": 28.3,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483712/?bc=100484310749",
+      "area": 52.83,
+      "first": 28.3
+    },
+    "suumo:r:jnc_000107938708": {
+      "price": 28.5,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107938708/?bc=100518993125",
+      "area": 52.83,
+      "first": 28.5
+    },
+    "suumo:r:jnc_000109483717": {
+      "price": 28.6,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483717/?bc=100484385517",
+      "area": 52.83,
+      "first": 28.6
+    },
+    "suumo:r:jnc_000109483724": {
+      "price": 28.8,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483724/?bc=100500558092",
+      "area": 52.83,
+      "first": 28.8
+    },
+    "suumo:r:jnc_000107938713": {
+      "price": 28.9,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107938713/?bc=100513261365",
+      "area": 52.83,
+      "first": 28.9
+    },
+    "suumo:r:jnc_000107938720": {
+      "price": 29.0,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107938720/?bc=100491162479",
+      "area": 52.83,
+      "first": 29.0
+    },
+    "suumo:r:jnc_000107938689": {
+      "price": 29.2,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107938689/?bc=100491162399",
+      "area": 52.83,
+      "first": 29.2
+    },
+    "suumo:r:jnc_000107938696": {
+      "price": 29.5,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000107938696/?bc=100491162394",
+      "area": 52.83,
+      "first": 29.5
+    },
+    "suumo:r:jnc_000108054903": {
+      "price": 42.0,
+      "name": "スタイリオ蒲田ＷＥＳＴ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108054903/?bc=100487060959",
+      "area": 52.83,
+      "first": 42.0
+    },
+    "suumo:r:jnc_000108106753": {
+      "price": 28.1,
+      "name": "Ｐｌｕｍｅｒｉａ",
+      "station": "蒲田",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000108106753/?bc=100522894006",
+      "area": 60.68,
+      "first": 28.1
+    }
+  },
+  "history": {
+    "suumo:m:20585658": {
+      "first": "2026-09-06",
+      "first_price": 9480,
+      "cuts": [],
+      "last_price": 9480
+    },
+    "suumo:m:20837457": {
+      "first": "2026-09-06",
+      "first_price": 11880,
+      "cuts": [],
+      "last_price": 11880
+    },
+    "suumo:l:79178891": {
+      "first": "2026-09-06",
+      "first_price": 11000,
+      "cuts": [],
+      "last_price": 11000
+    },
+    "suumo:l:79109850": {
+      "first": "2026-09-06",
+      "first_price": 11000,
+      "cuts": [],
+      "last_price": 11000
+    },
+    "suumo:l:20863072": {
+      "first": "2026-09-06",
+      "first_price": 11000,
+      "cuts": [],
+      "last_price": 11000
+    },
+    "suumo:m:21281858": {
+      "first": "2026-09-06",
+      "first_price": 11990,
+      "cuts": [],
+      "last_price": 11990
+    },
+    "suumo:l:21008080": {
+      "first": "2026-09-06",
+      "first_price": 9800,
+      "cuts": [],
+      "last_price": 9800
+    },
+    "suumo:h:21425622": {
+      "first": "2026-09-06",
+      "first_price": 8780,
+      "cuts": [],
+      "last_price": 8780
+    },
+    "suumo:l:21017451": {
+      "first": "2026-09-06",
+      "first_price": 5280,
+      "cuts": [
+        [
+          "2026-09-07",
+          5280,
+          4980
+        ]
+      ],
+      "last_price": 4980
+    },
+    "suumo:l:21021265": {
+      "first": "2026-09-06",
+      "first_price": 4980,
+      "cuts": [],
+      "last_price": 4980
+    },
+    "suumo:l:21046673": {
+      "first": "2026-09-06",
+      "first_price": 4980,
+      "cuts": [],
+      "last_price": 4980
+    },
+    "suumo:l:21114583": {
+      "first": "2026-09-06",
+      "first_price": 4980,
+      "cuts": [],
+      "last_price": 4980
+    },
+    "suumo:l:21603398": {
+      "first": "2026-09-06",
+      "first_price": 6480,
+      "cuts": [],
+      "last_price": 6480
+    },
+    "suumo:l:78229550": {
+      "first": "2026-09-06",
+      "first_price": 6480,
+      "cuts": [],
+      "last_price": 6480
+    },
+    "suumo:l:21578921": {
+      "first": "2026-09-06",
+      "first_price": 6480,
+      "cuts": [],
+      "last_price": 6480
+    },
+    "suumo:h:21342505": {
+      "first": "2026-09-06",
+      "first_price": 10880,
+      "cuts": [],
+      "last_price": 10880
+    },
+    "suumo:h:21064438": {
+      "first": "2026-09-06",
+      "first_price": 9980,
+      "cuts": [],
+      "last_price": 9980
+    },
+    "suumo:m:20326787": {
+      "first": "2026-09-06",
+      "first_price": 9980,
+      "cuts": [],
+      "last_price": 9980
+    },
+    "suumo:h:21434232": {
+      "first": "2026-09-06",
+      "first_price": 5880,
+      "cuts": [],
+      "last_price": 5880
+    },
+    "suumo:l:21525571": {
+      "first": "2026-09-06",
+      "first_price": 10750,
+      "cuts": [],
+      "last_price": 10750
+    },
+    "suumo:l:21640200": {
+      "first": "2026-09-06",
+      "first_price": 8900,
+      "cuts": [],
+      "last_price": 8900
+    },
+    "suumo:h:21602342": {
+      "first": "2026-09-06",
+      "first_price": 9500,
+      "cuts": [],
+      "last_price": 9500
+    },
+    "suumo:l:20863877": {
+      "first": "2026-09-06",
+      "first_price": 9800,
+      "cuts": [],
+      "last_price": 9800
+    },
+    "suumo:l:20540402": {
+      "first": "2026-09-06",
+      "first_price": 9800,
+      "cuts": [],
+      "last_price": 9800
+    },
+    "suumo:l:21631004": {
+      "first": "2026-09-06",
+      "first_price": 9800,
+      "cuts": [],
+      "last_price": 9800
+    },
+    "suumo:l:21612503": {
+      "first": "2026-09-06",
+      "first_price": 9800,
+      "cuts": [],
+      "last_price": 9800
+    },
+    "suumo:m:21005727": {
+      "first": "2026-09-06",
+      "first_price": 10990,
+      "cuts": [],
+      "last_price": 10990
+    },
+    "suumo:h:21395289": {
+      "first": "2026-09-06",
+      "first_price": 8010,
+      "cuts": [],
+      "last_price": 8010
+    },
+    "suumo:m:21643103": {
+      "first": "2026-09-06",
+      "first_price": 8980,
+      "cuts": [],
+      "last_price": 8980
+    },
+    "suumo:l:21483914": {
+      "first": "2026-09-06",
+      "first_price": 9580,
+      "cuts": [],
+      "last_price": 9580
+    },
+    "suumo:m:21239491": {
+      "first": "2026-09-06",
+      "first_price": 11999,
+      "cuts": [],
+      "last_price": 11999
+    },
+    "suumo:m:21380169": {
+      "first": "2026-09-06",
+      "first_price": 11999,
+      "cuts": [],
+      "last_price": 11999
+    },
+    "suumo:m:21510299": {
+      "first": "2026-09-06",
+      "first_price": 11999,
+      "cuts": [],
+      "last_price": 11999
+    },
+    "suumo:m:21266683": {
+      "first": "2026-09-06",
+      "first_price": 10490,
+      "cuts": [],
+      "last_price": 10490
+    },
+    "suumo:m:21537301": {
+      "first": "2026-09-06",
+      "first_price": 11850,
+      "cuts": [],
+      "last_price": 11850
+    },
+    "suumo:m:20540371": {
+      "first": "2026-09-06",
+      "first_price": 11980,
+      "cuts": [],
+      "last_price": 11980
+    },
+    "suumo:m:20587605": {
+      "first": "2026-09-06",
+      "first_price": 10480,
+      "cuts": [],
+      "last_price": 10480
+    },
+    "suumo:m:21119806": {
+      "first": "2026-09-06",
+      "first_price": 10990,
+      "cuts": [
+        [
+          "2026-09-07",
+          10990,
+          10790
+        ]
+      ],
+      "last_price": 10790
+    },
+    "suumo:m:20354701": {
+      "first": "2026-09-06",
+      "first_price": 11380,
+      "cuts": [],
+      "last_price": 11380
+    },
+    "suumo:m:21595831": {
+      "first": "2026-09-06",
+      "first_price": 11580,
+      "cuts": [],
+      "last_price": 11580
+    },
+    "suumo:r:jnc_000109617744": {
+      "first": "2026-09-06",
+      "first_price": 25.6,
+      "cuts": [],
+      "last_price": 25.6
+    },
+    "suumo:r:jnc_000108278145": {
+      "first": "2026-09-06",
+      "first_price": 25.0,
+      "cuts": [],
+      "last_price": 25.0
+    },
+    "suumo:r:jnc_000108703816": {
+      "first": "2026-09-06",
+      "first_price": 26.0,
+      "cuts": [],
+      "last_price": 26.0
+    },
+    "suumo:r:jnc_000109343737": {
+      "first": "2026-09-06",
+      "first_price": 21.0,
+      "cuts": [],
+      "last_price": 21.0
+    },
+    "suumo:r:jnc_000107924722": {
+      "first": "2026-09-06",
+      "first_price": 23.5,
+      "cuts": [],
+      "last_price": 23.5
+    },
+    "suumo:r:jnc_000109558695": {
+      "first": "2026-09-06",
+      "first_price": 25.25,
+      "cuts": [],
+      "last_price": 25.25
+    },
+    "suumo:r:jnc_000108055130": {
+      "first": "2026-09-06",
+      "first_price": 25.45,
+      "cuts": [],
+      "last_price": 25.45
+    },
+    "suumo:r:jnc_000107183218": {
+      "first": "2026-09-06",
+      "first_price": 26.7,
+      "cuts": [],
+      "last_price": 26.7
+    },
+    "suumo:r:jnc_000109483651": {
+      "first": "2026-09-06",
+      "first_price": 27.0,
+      "cuts": [],
+      "last_price": 27.0
+    },
+    "suumo:r:jnc_000107368273": {
+      "first": "2026-09-06",
+      "first_price": 27.1,
+      "cuts": [],
+      "last_price": 27.1
+    },
+    "suumo:r:jnc_000108998120": {
+      "first": "2026-09-06",
+      "first_price": 27.25,
+      "cuts": [],
+      "last_price": 27.25
+    },
+    "suumo:r:jnc_000108872846": {
+      "first": "2026-09-06",
+      "first_price": 25.9,
+      "cuts": [],
+      "last_price": 25.9
+    },
+    "suumo:r:jnc_000108408986": {
+      "first": "2026-09-06",
+      "first_price": 21.8,
+      "cuts": [],
+      "last_price": 21.8
+    },
+    "suumo:r:jnc_000108408987": {
+      "first": "2026-09-06",
+      "first_price": 22.0,
+      "cuts": [],
+      "last_price": 22.0
+    },
+    "suumo:r:jnc_000106634983": {
+      "first": "2026-09-06",
+      "first_price": 23.8,
+      "cuts": [],
+      "last_price": 23.8
+    },
+    "suumo:r:jnc_000109503198": {
+      "first": "2026-09-06",
+      "first_price": 24.0,
+      "cuts": [],
+      "last_price": 24.0
+    },
+    "suumo:r:jnc_000108065864": {
+      "first": "2026-09-06",
+      "first_price": 24.9,
+      "cuts": [],
+      "last_price": 24.9
+    },
+    "athome:l:6988912886": {
+      "first": "2026-09-06",
+      "first_price": 11000,
+      "cuts": [],
+      "last_price": 11000
+    },
+    "suumo:r:jnc_000109538118": {
+      "first": "2026-09-06",
+      "first_price": 22.0,
+      "cuts": [],
+      "last_price": 22.0
+    },
+    "suumo:r:jnc_000108039085": {
+      "first": "2026-09-06",
+      "first_price": 22.7,
+      "cuts": [],
+      "last_price": 22.7
+    },
+    "suumo:r:jnc_000109617605": {
+      "first": "2026-09-06",
+      "first_price": 23.3,
+      "cuts": [],
+      "last_price": 23.3
+    },
+    "suumo:r:jnc_000107258044": {
+      "first": "2026-09-06",
+      "first_price": 23.5,
+      "cuts": [],
+      "last_price": 23.5
+    },
+    "suumo:r:jnc_000105096611": {
+      "first": "2026-09-06",
+      "first_price": 24.0,
+      "cuts": [],
+      "last_price": 24.0
+    },
+    "suumo:r:jnc_000109257137": {
+      "first": "2026-09-06",
+      "first_price": 26.4,
+      "cuts": [],
+      "last_price": 26.4
+    },
+    "nomu:m:F82C4025": {
+      "first": "2026-09-06",
+      "first_price": 10480,
+      "cuts": [],
+      "last_price": 10480
+    },
+    "suumo:r:jnc_000107248329": {
+      "first": "2026-09-06",
+      "first_price": 24.4,
+      "cuts": [],
+      "last_price": 24.4
+    },
+    "suumo:r:jnc_000107409832": {
+      "first": "2026-09-06",
+      "first_price": 24.5,
+      "cuts": [],
+      "last_price": 24.5
+    },
+    "suumo:r:jnc_000109058870": {
+      "first": "2026-09-06",
+      "first_price": 24.6,
+      "cuts": [],
+      "last_price": 24.6
+    },
+    "suumo:r:jnc_000109609933": {
+      "first": "2026-09-06",
+      "first_price": 25.5,
+      "cuts": [],
+      "last_price": 25.5
+    },
+    "suumo:r:jnc_000107039458": {
+      "first": "2026-09-06",
+      "first_price": 26.5,
+      "cuts": [],
+      "last_price": 26.5
+    },
+    "suumo:r:jnc_000107393932": {
+      "first": "2026-09-06",
+      "first_price": 26.7,
+      "cuts": [],
+      "last_price": 26.7
+    },
+    "athome:l:1018888564": {
+      "first": "2026-09-06",
+      "first_price": 9800,
+      "cuts": [],
+      "last_price": 9800
+    },
+    "athome:l:6989914779": {
+      "first": "2026-09-06",
+      "first_price": 12000,
+      "cuts": [],
+      "last_price": 12000
+    },
+    "suumo:r:jnc_000108470669": {
+      "first": "2026-09-06",
+      "first_price": 25.2,
+      "cuts": [],
+      "last_price": 25.2
+    },
+    "suumo:r:jnc_000079963120": {
+      "first": "2026-09-06",
+      "first_price": 25.6,
+      "cuts": [],
+      "last_price": 25.6
+    },
+    "suumo:r:jnc_000109381705": {
+      "first": "2026-09-06",
+      "first_price": 26.2,
+      "cuts": [],
+      "last_price": 26.2
+    },
+    "suumo:r:jnc_000109396180": {
+      "first": "2026-09-06",
+      "first_price": 27.3,
+      "cuts": [],
+      "last_price": 27.3
+    },
+    "suumo:r:jnc_000106645835": {
+      "first": "2026-09-06",
+      "first_price": 27.5,
+      "cuts": [],
+      "last_price": 27.5
+    },
+    "suumo:r:jnc_000109547609": {
+      "first": "2026-09-06",
+      "first_price": 28.0,
+      "cuts": [],
+      "last_price": 28.0
+    },
+    "suumo:r:jnc_000107389836": {
+      "first": "2026-09-06",
+      "first_price": 28.0,
+      "cuts": [],
+      "last_price": 28.0
+    },
+    "suumo:r:jnc_000108222737": {
+      "first": "2026-09-06",
+      "first_price": 19.7,
+      "cuts": [],
+      "last_price": 19.7
+    },
+    "suumo:r:jnc_000109600819": {
+      "first": "2026-09-06",
+      "first_price": 21.3,
+      "cuts": [],
+      "last_price": 21.3
+    },
+    "suumo:r:jnc_000106034430": {
+      "first": "2026-09-06",
+      "first_price": 21.4,
+      "cuts": [],
+      "last_price": 21.4
+    },
+    "suumo:r:jnc_000109264567": {
+      "first": "2026-09-06",
+      "first_price": 22.25,
+      "cuts": [],
+      "last_price": 22.25
+    },
+    "suumo:r:jnc_000109343494": {
+      "first": "2026-09-06",
+      "first_price": 22.5,
+      "cuts": [],
+      "last_price": 22.5
+    },
+    "suumo:r:jnc_000109334234": {
+      "first": "2026-09-06",
+      "first_price": 24.2,
+      "cuts": [],
+      "last_price": 24.2
+    },
+    "suumo:r:jnc_000109609902": {
+      "first": "2026-09-06",
+      "first_price": 24.6,
+      "cuts": [],
+      "last_price": 24.6
+    },
+    "suumo:r:jnc_000108811519": {
+      "first": "2026-09-06",
+      "first_price": 26.0,
+      "cuts": [],
+      "last_price": 26.0
+    },
+    "suumo:r:jnc_000108416700": {
+      "first": "2026-09-06",
+      "first_price": 19.0,
+      "cuts": [],
+      "last_price": 19.0
+    },
+    "suumo:r:jnc_000070918631": {
+      "first": "2026-09-06",
+      "first_price": 19.9,
+      "cuts": [],
+      "last_price": 19.9
+    },
+    "suumo:r:jnc_000107039453": {
+      "first": "2026-09-06",
+      "first_price": 20.0,
+      "cuts": [],
+      "last_price": 20.0
+    },
+    "suumo:r:jnc_000108556418": {
+      "first": "2026-09-06",
+      "first_price": 20.7,
+      "cuts": [],
+      "last_price": 20.7
+    },
+    "suumo:r:jnc_000108682931": {
+      "first": "2026-09-06",
+      "first_price": 22.0,
+      "cuts": [],
+      "last_price": 22.0
+    },
+    "suumo:r:jnc_000109073806": {
+      "first": "2026-09-06",
+      "first_price": 22.5,
+      "cuts": [],
+      "last_price": 22.5
+    },
+    "suumo:r:jnc_000108949082": {
+      "first": "2026-09-06",
+      "first_price": 23.0,
+      "cuts": [],
+      "last_price": 23.0
+    },
+    "suumo:r:jnc_000108806856": {
+      "first": "2026-09-06",
+      "first_price": 25.3,
+      "cuts": [],
+      "last_price": 25.3
+    },
+    "suumo:r:jnc_000099377365": {
+      "first": "2026-09-06",
+      "first_price": 26.9,
+      "cuts": [],
+      "last_price": 26.9
+    },
+    "suumo:r:jnc_000108716401": {
+      "first": "2026-09-06",
+      "first_price": 27.3,
+      "cuts": [],
+      "last_price": 27.3
+    },
+    "livable:h:C13261765": {
+      "first": "2026-09-06",
+      "first_price": 9500,
+      "cuts": [],
+      "last_price": 9500
+    },
+    "suumo:r:jnc_000109634369": {
+      "first": "2026-09-06",
+      "first_price": 15.1,
+      "cuts": [],
+      "last_price": 15.1
+    },
+    "suumo:r:jnc_000109640904": {
+      "first": "2026-09-06",
+      "first_price": 17.8,
+      "cuts": [],
+      "last_price": 17.8
+    },
+    "suumo:r:jnc_000102010589": {
+      "first": "2026-09-06",
+      "first_price": 19.2,
+      "cuts": [],
+      "last_price": 19.2
+    },
+    "suumo:r:jnc_000108786071": {
+      "first": "2026-09-06",
+      "first_price": 21.7,
+      "cuts": [],
+      "last_price": 21.7
+    },
+    "suumo:r:jnc_000108247819": {
+      "first": "2026-09-06",
+      "first_price": 22.8,
+      "cuts": [],
+      "last_price": 22.8
+    },
+    "suumo:r:jnc_000107290588": {
+      "first": "2026-09-06",
+      "first_price": 26.6,
+      "cuts": [],
+      "last_price": 26.6
+    },
+    "suumo:r:jnc_000108094363": {
+      "first": "2026-09-06",
+      "first_price": 27.0,
+      "cuts": [],
+      "last_price": 27.0
+    },
+    "suumo:r:jnc_000109264125": {
+      "first": "2026-09-06",
+      "first_price": 24.0,
+      "cuts": [],
+      "last_price": 24.0
+    },
+    "suumo:r:jnc_000109372911": {
+      "first": "2026-09-06",
+      "first_price": 27.4,
+      "cuts": [],
+      "last_price": 27.4
+    },
+    "suumo:r:jnc_000106870230": {
+      "first": "2026-09-06",
+      "first_price": 27.8,
+      "cuts": [],
+      "last_price": 27.8
+    },
+    "suumo:r:jnc_000109537878": {
+      "first": "2026-09-06",
+      "first_price": 22.3,
+      "cuts": [],
+      "last_price": 22.3
+    },
+    "suumo:r:jnc_000108811178": {
+      "first": "2026-09-06",
+      "first_price": 23.5,
+      "cuts": [],
+      "last_price": 23.5
+    },
+    "suumo:r:jnc_000107367915": {
+      "first": "2026-09-06",
+      "first_price": 23.8,
+      "cuts": [],
+      "last_price": 23.8
+    },
+    "suumo:r:jnc_000109244976": {
+      "first": "2026-09-06",
+      "first_price": 26.0,
+      "cuts": [],
+      "last_price": 26.0
+    },
+    "suumo:r:jnc_000109617386": {
+      "first": "2026-09-06",
+      "first_price": 22.0,
+      "cuts": [],
+      "last_price": 22.0
+    },
+    "suumo:r:jnc_000107578666": {
+      "first": "2026-09-06",
+      "first_price": 23.2,
+      "cuts": [],
+      "last_price": 23.2
+    },
+    "suumo:r:jnc_000108844856": {
+      "first": "2026-09-06",
+      "first_price": 24.7,
+      "cuts": [],
+      "last_price": 24.7
+    },
+    "suumo:r:jnc_000107587911": {
+      "first": "2026-09-06",
+      "first_price": 25.4,
+      "cuts": [],
+      "last_price": 25.4
+    },
+    "suumo:r:jnc_000109547785": {
+      "first": "2026-09-06",
+      "first_price": 12.85,
+      "cuts": [],
+      "last_price": 12.85
+    },
+    "suumo:r:jnc_000108955443": {
+      "first": "2026-09-06",
+      "first_price": 20.4,
+      "cuts": [],
+      "last_price": 20.4
+    },
+    "suumo:r:jnc_000109617662": {
+      "first": "2026-09-06",
+      "first_price": 21.5,
+      "cuts": [],
+      "last_price": 21.5
+    },
+    "suumo:r:jnc_000109407588": {
+      "first": "2026-09-06",
+      "first_price": 22.0,
+      "cuts": [],
+      "last_price": 22.0
+    },
+    "suumo:r:jnc_000107516623": {
+      "first": "2026-09-06",
+      "first_price": 22.3,
+      "cuts": [],
+      "last_price": 22.3
+    },
+    "suumo:r:jnc_000108437890": {
+      "first": "2026-09-06",
+      "first_price": 23.0,
+      "cuts": [],
+      "last_price": 23.0
+    },
+    "suumo:r:jnc_000108721601": {
+      "first": "2026-09-06",
+      "first_price": 25.9,
+      "cuts": [],
+      "last_price": 25.9
+    },
+    "suumo:r:jnc_000109252410": {
+      "first": "2026-09-06",
+      "first_price": 17.6,
+      "cuts": [],
+      "last_price": 17.6
+    },
+    "suumo:r:jnc_000108639287": {
+      "first": "2026-09-06",
+      "first_price": 18.0,
+      "cuts": [],
+      "last_price": 18.0
+    },
+    "suumo:r:jnc_000109617648": {
+      "first": "2026-09-06",
+      "first_price": 19.8,
+      "cuts": [],
+      "last_price": 19.8
+    },
+    "suumo:r:jnc_000109058971": {
+      "first": "2026-09-06",
+      "first_price": 21.8,
+      "cuts": [],
+      "last_price": 21.8
+    },
+    "suumo:r:jnc_000109217621": {
+      "first": "2026-09-06",
+      "first_price": 22.0,
+      "cuts": [],
+      "last_price": 22.0
+    },
+    "suumo:r:jnc_000073054525": {
+      "first": "2026-09-06",
+      "first_price": 27.0,
+      "cuts": [],
+      "last_price": 27.0
+    },
+    "suumo:r:jnc_000108802490": {
+      "first": "2026-09-06",
+      "first_price": 27.0,
+      "cuts": [],
+      "last_price": 27.0
+    },
+    "suumo:r:jnc_000107686311": {
+      "first": "2026-09-06",
+      "first_price": 23.7,
+      "cuts": [],
+      "last_price": 23.7
+    },
+    "suumo:r:jnc_000103023730": {
+      "first": "2026-09-06",
+      "first_price": 25.8,
+      "cuts": [],
+      "last_price": 25.8
+    },
+    "suumo:r:jnc_000109634087": {
+      "first": "2026-09-06",
+      "first_price": 18.0,
+      "cuts": [],
+      "last_price": 18.0
+    },
+    "suumo:r:jnc_000108797191": {
+      "first": "2026-09-06",
+      "first_price": 19.8,
+      "cuts": [],
+      "last_price": 19.8
+    },
+    "suumo:r:jnc_000109415350": {
+      "first": "2026-09-06",
+      "first_price": 19.8,
+      "cuts": [],
+      "last_price": 19.8
+    },
+    "suumo:r:jnc_000109343066": {
+      "first": "2026-09-06",
+      "first_price": 22.8,
+      "cuts": [],
+      "last_price": 22.8
+    },
+    "suumo:r:jnc_000109400750": {
+      "first": "2026-09-06",
+      "first_price": 22.8,
+      "cuts": [],
+      "last_price": 22.8
+    },
+    "suumo:r:jnc_000109343067": {
+      "first": "2026-09-06",
+      "first_price": 23.3,
+      "cuts": [],
+      "last_price": 23.3
+    },
+    "suumo:r:jnc_000102443542": {
+      "first": "2026-09-06",
+      "first_price": 15.7,
+      "cuts": [],
+      "last_price": 15.7
+    },
+    "suumo:r:jnc_000105999354": {
+      "first": "2026-09-06",
+      "first_price": 26.2,
+      "cuts": [],
+      "last_price": 26.2
+    },
+    "suumo:r:jnc_000109225818": {
+      "first": "2026-09-06",
+      "first_price": 20.8,
+      "cuts": [],
+      "last_price": 20.8
+    },
+    "suumo:r:jnc_000108948622": {
+      "first": "2026-09-06",
+      "first_price": 26.8,
+      "cuts": [],
+      "last_price": 26.8
+    },
+    "suumo:r:jnc_000108184099": {
+      "first": "2026-09-06",
+      "first_price": 21.4,
+      "cuts": [],
+      "last_price": 21.4
+    },
+    "suumo:m:21213947": {
+      "first": "2026-09-07",
+      "first_price": 11800,
+      "cuts": [],
+      "last_price": 11800
+    },
+    "suumo:m:21229075": {
+      "first": "2026-09-07",
+      "first_price": 11850,
+      "cuts": [],
+      "last_price": 11850
+    },
+    "suumo:r:jnc_000108979266": {
+      "first": "2026-09-07",
+      "first_price": 28.0,
+      "cuts": [],
+      "last_price": 28.0
+    },
+    "suumo:r:jnc_000109369408": {
+      "first": "2026-09-07",
+      "first_price": 27.8,
+      "cuts": [],
+      "last_price": 27.8
+    },
+    "suumo:r:jnc_000109396185": {
+      "first": "2026-09-07",
+      "first_price": 28.0,
+      "cuts": [],
+      "last_price": 28.0
+    },
+    "suumo:r:jnc_000108089024": {
+      "first": "2026-09-07",
+      "first_price": 25.6,
+      "cuts": [],
+      "last_price": 25.6
+    },
+    "suumo:r:jnc_000108089025": {
+      "first": "2026-09-07",
+      "first_price": 25.8,
+      "cuts": [],
+      "last_price": 25.8
+    },
+    "suumo:r:jnc_000105344273": {
+      "first": "2026-09-07",
+      "first_price": 26.6,
+      "cuts": [],
+      "last_price": 26.6
+    },
+    "suumo:r:jnc_000079963123": {
+      "first": "2026-09-07",
+      "first_price": 25.6,
+      "cuts": [],
+      "last_price": 25.6
+    },
+    "suumo:r:jnc_000109389791": {
+      "first": "2026-09-07",
+      "first_price": 26.2,
+      "cuts": [],
+      "last_price": 26.2
+    },
+    "suumo:r:jnc_000108429869": {
+      "first": "2026-09-07",
+      "first_price": 22.6,
+      "cuts": [],
+      "last_price": 22.6
+    },
+    "suumo:r:jnc_000105887793": {
+      "first": "2026-09-07",
+      "first_price": 23.8,
+      "cuts": [],
+      "last_price": 23.8
+    },
+    "suumo:r:jnc_000109533046": {
+      "first": "2026-09-07",
+      "first_price": 26.5,
+      "cuts": [],
+      "last_price": 26.5
+    },
+    "suumo:r:jnc_000109625465": {
+      "first": "2026-09-07",
+      "first_price": 21.3,
+      "cuts": [],
+      "last_price": 21.3
+    },
+    "suumo:r:jnc_000108993369": {
+      "first": "2026-09-07",
+      "first_price": 22.9,
+      "cuts": [],
+      "last_price": 22.9
+    },
+    "suumo:r:jnc_000108046903": {
+      "first": "2026-09-07",
+      "first_price": 23.1,
+      "cuts": [],
+      "last_price": 23.1
+    },
+    "suumo:r:jnc_000109652351": {
+      "first": "2026-09-07",
+      "first_price": 18.4,
+      "cuts": [],
+      "last_price": 18.4
+    },
+    "suumo:r:jnc_000081272277": {
+      "first": "2026-09-07",
+      "first_price": 22.3,
+      "cuts": [],
+      "last_price": 22.3
+    },
+    "suumo:r:jnc_000081272279": {
+      "first": "2026-09-07",
+      "first_price": 22.4,
+      "cuts": [],
+      "last_price": 22.4
+    },
+    "suumo:r:jnc_000109528315": {
+      "first": "2026-09-07",
+      "first_price": 24.9,
+      "cuts": [],
+      "last_price": 24.9
+    },
+    "suumo:r:jnc_000106978295": {
+      "first": "2026-09-07",
+      "first_price": 27.5,
+      "cuts": [],
+      "last_price": 27.5
+    },
+    "suumo:r:jnc_000109396207": {
+      "first": "2026-09-07",
+      "first_price": 19.9,
+      "cuts": [],
+      "last_price": 19.9
+    },
+    "suumo:r:jnc_000107465263": {
+      "first": "2026-09-07",
+      "first_price": 22.7,
+      "cuts": [],
+      "last_price": 22.7
+    },
+    "suumo:r:jnc_000108054902": {
+      "first": "2026-09-07",
+      "first_price": 20.4,
+      "cuts": [],
+      "last_price": 20.4
+    },
+    "suumo:r:jnc_000106747710": {
+      "first": "2026-09-07",
+      "first_price": 12.3,
+      "cuts": [],
+      "last_price": 12.3
+    },
+    "suumo:r:jnc_000106747711": {
+      "first": "2026-09-07",
+      "first_price": 13.1,
+      "cuts": [],
+      "last_price": 13.1
+    },
+    "suumo:r:jnc_000105022759": {
+      "first": "2026-09-07",
+      "first_price": 13.3,
+      "cuts": [],
+      "last_price": 13.3
+    },
+    "suumo:r:jnc_000096099015": {
+      "first": "2026-09-07",
+      "first_price": 13.0,
+      "cuts": [],
+      "last_price": 13.0
+    },
+    "suumo:r:jnc_000109658321": {
+      "first": "2026-09-07",
+      "first_price": 17.5,
+      "cuts": [],
+      "last_price": 17.5
+    },
+    "suumo:r:jnc_000109532818": {
+      "first": "2026-09-07",
+      "first_price": 22.0,
+      "cuts": [],
+      "last_price": 22.0
+    },
+    "suumo:r:jnc_000109547089": {
+      "first": "2026-09-07",
+      "first_price": 23.2,
+      "cuts": [],
+      "last_price": 23.2
+    },
+    "suumo:l:21617837": {
+      "first": "2026-09-08",
+      "first_price": 6480,
+      "cuts": [],
+      "last_price": 6480
+    },
+    "suumo:h:21307308": {
+      "first": "2026-09-08",
+      "first_price": 9090,
+      "cuts": [],
+      "last_price": 9090
+    },
+    "suumo:m:21657889": {
+      "first": "2026-09-08",
+      "first_price": 11999,
+      "cuts": [],
+      "last_price": 11999
+    },
+    "suumo:m:21659489": {
+      "first": "2026-09-08",
+      "first_price": 11580,
+      "cuts": [],
+      "last_price": 11580
+    },
+    "suumo:r:jnc_000080459472": {
+      "first": "2026-09-08",
+      "first_price": 22.5,
+      "cuts": [],
+      "last_price": 22.5
+    },
+    "suumo:r:jnc_000109682587": {
+      "first": "2026-09-08",
+      "first_price": 20.6,
+      "cuts": [],
+      "last_price": 20.6
+    },
+    "suumo:r:jnc_000108774137": {
+      "first": "2026-09-08",
+      "first_price": 24.2,
+      "cuts": [],
+      "last_price": 24.2
+    },
+    "suumo:r:jnc_000109488969": {
+      "first": "2026-09-08",
+      "first_price": 25.0,
+      "cuts": [],
+      "last_price": 25.0
+    },
+    "suumo:r:jnc_000109676015": {
+      "first": "2026-09-08",
+      "first_price": 26.0,
+      "cuts": [],
+      "last_price": 26.0
+    },
+    "athome:l:1150948508": {
+      "first": "2026-09-08",
+      "first_price": 11000,
+      "cuts": [],
+      "last_price": 11000
+    },
+    "suumo:r:jnc_000109415995": {
+      "first": "2026-09-08",
+      "first_price": 28.0,
+      "cuts": [],
+      "last_price": 28.0
+    },
+    "suumo:r:jnc_000107248330": {
+      "first": "2026-09-08",
+      "first_price": 24.8,
+      "cuts": [],
+      "last_price": 24.8
+    },
+    "suumo:r:jnc_000109180560": {
+      "first": "2026-09-08",
+      "first_price": 18.0,
+      "cuts": [],
+      "last_price": 18.0
+    },
+    "suumo:r:jnc_000109470019": {
+      "first": "2026-09-08",
+      "first_price": 25.5,
+      "cuts": [],
+      "last_price": 25.5
+    },
+    "suumo:r:jnc_000109095515": {
+      "first": "2026-09-08",
+      "first_price": 26.0,
+      "cuts": [],
+      "last_price": 26.0
+    },
+    "suumo:r:jnc_000108797169": {
+      "first": "2026-09-08",
+      "first_price": 27.4,
+      "cuts": [],
+      "last_price": 27.4
+    },
+    "suumo:r:jnc_000109395830": {
+      "first": "2026-09-08",
+      "first_price": 20.9,
+      "cuts": [],
+      "last_price": 20.9
+    },
+    "suumo:r:jnc_000109174894": {
+      "first": "2026-09-08",
+      "first_price": 19.3,
+      "cuts": [],
+      "last_price": 19.3
+    },
+    "suumo:r:jnc_000109217623": {
+      "first": "2026-09-08",
+      "first_price": 22.0,
+      "cuts": [],
+      "last_price": 22.0
+    },
+    "suumo:r:jnc_000109350521": {
+      "first": "2026-09-08",
+      "first_price": 13.5,
+      "cuts": [],
+      "last_price": 13.5
+    },
+    "suumo:r:jnc_000109682678": {
+      "first": "2026-09-08",
+      "first_price": 13.96,
+      "cuts": [],
+      "last_price": 13.96
+    },
+    "suumo:r:jnc_000106747712": {
+      "first": "2026-09-08",
+      "first_price": 13.1,
+      "cuts": [],
+      "last_price": 13.1
+    },
+    "suumo:r:jnc_000104840269": {
+      "first": "2026-09-08",
+      "first_price": 13.5,
+      "cuts": [],
+      "last_price": 13.5
+    },
+    "suumo:r:jnc_000106341176": {
+      "first": "2026-09-08",
+      "first_price": 13.6,
+      "cuts": [],
+      "last_price": 13.6
+    },
+    "nomu:m:V8770005": {
+      "first": "2026-09-08",
+      "first_price": 11980,
+      "cuts": [],
+      "last_price": 11980
+    },
+    "suumo:r:jnc_000108978846": {
+      "first": "2026-09-08",
+      "first_price": 24.5,
+      "cuts": [],
+      "last_price": 24.5
+    },
+    "suumo:r:jnc_000089890771": {
+      "first": "2026-09-08",
+      "first_price": 25.3,
+      "cuts": [],
+      "last_price": 25.3
+    },
+    "suumo:r:jnc_000109693957": {
+      "first": "2026-09-08",
+      "first_price": 16.0,
+      "cuts": [],
+      "last_price": 16.0
+    },
+    "suumo:r:jnc_000108416790": {
+      "first": "2026-09-08",
+      "first_price": 22.6,
+      "cuts": [],
+      "last_price": 22.6
+    },
+    "suumo:r:jnc_000109105285": {
+      "first": "2026-09-08",
+      "first_price": 13.5,
+      "cuts": [],
+      "last_price": 13.5
+    },
+    "suumo:r:jnc_000106490063": {
+      "first": "2026-09-08",
+      "first_price": 15.8,
+      "cuts": [],
+      "last_price": 15.8
+    },
+    "suumo:r:jnc_000106576767": {
+      "first": "2026-09-08",
+      "first_price": 24.2,
+      "cuts": [],
+      "last_price": 24.2
+    },
+    "suumo:r:jnc_000109682395": {
+      "first": "2026-09-08",
+      "first_price": 21.0,
+      "cuts": [],
+      "last_price": 21.0
+    },
+    "suumo:r:jnc_000108191240": {
+      "first": "2026-09-08",
+      "first_price": 26.5,
+      "cuts": [],
+      "last_price": 26.5
+    },
+    "suumo:r:jnc_000109687999": {
+      "first": "2026-09-08",
+      "first_price": 26.0,
+      "cuts": [],
+      "last_price": 26.0
+    },
+    "suumo:r:jnc_000107833211": {
+      "first": "2026-09-08",
+      "first_price": 26.6,
+      "cuts": [],
+      "last_price": 26.6
+    },
+    "suumo:r:jnc_000108910693": {
+      "first": "2026-09-08",
+      "first_price": 26.4,
+      "cuts": [],
+      "last_price": 26.4
+    },
+    "suumo:r:jnc_000109533062": {
+      "first": "2026-09-08",
+      "first_price": 26.8,
+      "cuts": [],
+      "last_price": 26.8
+    },
+    "suumo:r:jnc_000108806880": {
+      "first": "2026-09-08",
+      "first_price": 27.4,
+      "cuts": [],
+      "last_price": 27.4
+    },
+    "suumo:r:jnc_000108462250": {
+      "first": "2026-09-08",
+      "first_price": 27.4,
+      "cuts": [],
+      "last_price": 27.4
+    },
+    "suumo:r:jnc_000109494904": {
+      "first": "2026-09-08",
+      "first_price": 22.6,
+      "cuts": [],
+      "last_price": 22.6
+    },
+    "suumo:r:jnc_000109547651": {
+      "first": "2026-09-08",
+      "first_price": 24.05,
+      "cuts": [],
+      "last_price": 24.05
+    },
+    "suumo:r:jnc_000109027663": {
+      "first": "2026-09-08",
+      "first_price": 25.0,
+      "cuts": [],
+      "last_price": 25.0
+    },
+    "suumo:r:jnc_000104903148": {
+      "first": "2026-09-08",
+      "first_price": 25.3,
+      "cuts": [],
+      "last_price": 25.3
+    },
+    "suumo:r:jnc_000106986533": {
+      "first": "2026-09-08",
+      "first_price": 26.5,
+      "cuts": [],
+      "last_price": 26.5
+    },
+    "suumo:r:jnc_000098784392": {
+      "first": "2026-09-08",
+      "first_price": 21.0,
+      "cuts": [],
+      "last_price": 21.0
+    },
+    "suumo:r:jnc_000108960094": {
+      "first": "2026-09-08",
+      "first_price": 24.2,
+      "cuts": [],
+      "last_price": 24.2
+    },
+    "suumo:r:jnc_000108979127": {
+      "first": "2026-09-08",
+      "first_price": 26.6,
+      "cuts": [],
+      "last_price": 26.6
+    },
+    "suumo:r:jnc_000108135158": {
+      "first": "2026-09-08",
+      "first_price": 27.0,
+      "cuts": [],
+      "last_price": 27.0
+    },
+    "suumo:r:jnc_000099377366": {
+      "first": "2026-09-08",
+      "first_price": 27.4,
+      "cuts": [],
+      "last_price": 27.4
+    },
+    "suumo:r:jnc_000108910652": {
+      "first": "2026-09-08",
+      "first_price": 15.3,
+      "cuts": [],
+      "last_price": 15.3
+    },
+    "suumo:r:jnc_000109355761": {
+      "first": "2026-09-08",
+      "first_price": 19.5,
+      "cuts": [],
+      "last_price": 19.5
+    },
+    "suumo:r:jnc_000107443349": {
+      "first": "2026-09-08",
+      "first_price": 21.1,
+      "cuts": [],
+      "last_price": 21.1
+    },
+    "suumo:r:jnc_000109120527": {
+      "first": "2026-09-08",
+      "first_price": 23.5,
+      "cuts": [],
+      "last_price": 23.5
+    },
+    "suumo:r:jnc_000108732304": {
+      "first": "2026-09-08",
+      "first_price": 24.0,
+      "cuts": [],
+      "last_price": 24.0
+    },
+    "suumo:r:jnc_000108666648": {
+      "first": "2026-09-08",
+      "first_price": 24.5,
+      "cuts": [],
+      "last_price": 24.5
+    },
+    "suumo:r:jnc_000109360289": {
+      "first": "2026-09-08",
+      "first_price": 15.82,
+      "cuts": [],
+      "last_price": 15.82
+    },
+    "suumo:r:jnc_000109460237": {
+      "first": "2026-09-08",
+      "first_price": 20.7,
+      "cuts": [],
+      "last_price": 20.7
+    },
+    "suumo:r:jnc_000108438590": {
+      "first": "2026-09-08",
+      "first_price": 21.0,
+      "cuts": [],
+      "last_price": 21.0
+    },
+    "suumo:r:jnc_000109066929": {
+      "first": "2026-09-08",
+      "first_price": 22.8,
+      "cuts": [],
+      "last_price": 22.8
+    },
+    "suumo:r:jnc_000107565289": {
+      "first": "2026-09-08",
+      "first_price": 28.0,
+      "cuts": [],
+      "last_price": 28.0
+    },
+    "suumo:r:jnc_000109558430": {
+      "first": "2026-09-08",
+      "first_price": 18.9,
+      "cuts": [],
+      "last_price": 18.9
+    },
+    "suumo:r:jnc_000109423250": {
+      "first": "2026-09-08",
+      "first_price": 20.0,
+      "cuts": [],
+      "last_price": 20.0
+    },
+    "suumo:r:jnc_000109073864": {
+      "first": "2026-09-08",
+      "first_price": 22.7,
+      "cuts": [],
+      "last_price": 22.7
+    },
+    "suumo:r:jnc_000108613077": {
+      "first": "2026-09-08",
+      "first_price": 26.9,
+      "cuts": [],
+      "last_price": 26.9
+    },
+    "suumo:r:jnc_000108811185": {
+      "first": "2026-09-08",
+      "first_price": 26.8,
+      "cuts": [],
+      "last_price": 26.8
+    },
+    "suumo:r:jnc_000109073540": {
+      "first": "2026-09-08",
+      "first_price": 27.9,
+      "cuts": [],
+      "last_price": 27.9
+    },
+    "suumo:r:jnc_000109470020": {
+      "first": "2026-09-08",
+      "first_price": 25.5,
+      "cuts": [],
+      "last_price": 25.5
+    },
+    "suumo:r:jnc_000109372915": {
+      "first": "2026-09-08",
+      "first_price": 26.3,
+      "cuts": [],
+      "last_price": 26.3
+    },
+    "suumo:r:jnc_000107595696": {
+      "first": "2026-09-08",
+      "first_price": 26.7,
+      "cuts": [],
+      "last_price": 26.7
+    },
+    "nomu:m:F87C7006": {
+      "first": "2026-09-08",
+      "first_price": 10490,
+      "cuts": [],
+      "last_price": 10490
+    },
+    "suumo:r:jnc_000108817115": {
+      "first": "2026-09-08",
+      "first_price": 20.7,
+      "cuts": [],
+      "last_price": 20.7
+    },
+    "suumo:r:jnc_000109532816": {
+      "first": "2026-09-08",
+      "first_price": 21.3,
+      "cuts": [],
+      "last_price": 21.3
+    },
+    "suumo:r:jnc_000109073485": {
+      "first": "2026-09-08",
+      "first_price": 21.5,
+      "cuts": [],
+      "last_price": 21.5
+    },
+    "suumo:r:jnc_000109557819": {
+      "first": "2026-09-08",
+      "first_price": 22.3,
+      "cuts": [],
+      "last_price": 22.3
+    },
+    "suumo:r:jnc_000107924432": {
+      "first": "2026-09-08",
+      "first_price": 22.3,
+      "cuts": [],
+      "last_price": 22.3
+    },
+    "suumo:r:jnc_000109665737": {
+      "first": "2026-09-08",
+      "first_price": 22.9,
+      "cuts": [],
+      "last_price": 22.9
+    },
+    "suumo:r:jnc_000109537857": {
+      "first": "2026-09-08",
+      "first_price": 25.1,
+      "cuts": [],
+      "last_price": 25.1
+    },
+    "suumo:r:jnc_000109369127": {
+      "first": "2026-09-08",
+      "first_price": 26.5,
+      "cuts": [],
+      "last_price": 26.5
+    },
+    "suumo:r:jnc_000109364833": {
+      "first": "2026-09-08",
+      "first_price": 27.0,
+      "cuts": [],
+      "last_price": 27.0
+    },
+    "suumo:r:jnc_000107026476": {
+      "first": "2026-09-08",
+      "first_price": 21.5,
+      "cuts": [],
+      "last_price": 21.5
+    },
+    "suumo:r:jnc_000109701505": {
+      "first": "2026-09-08",
+      "first_price": 20.2,
+      "cuts": [],
+      "last_price": 20.2
+    },
+    "suumo:r:jnc_000106120392": {
+      "first": "2026-09-08",
+      "first_price": 26.6,
+      "cuts": [],
+      "last_price": 26.6
+    },
+    "suumo:r:jnc_000106120400": {
+      "first": "2026-09-08",
+      "first_price": 26.8,
+      "cuts": [],
+      "last_price": 26.8
+    },
+    "suumo:r:jnc_000106120380": {
+      "first": "2026-09-08",
+      "first_price": 26.9,
+      "cuts": [],
+      "last_price": 26.9
+    },
+    "suumo:r:jnc_000109495125": {
+      "first": "2026-09-08",
+      "first_price": 23.0,
+      "cuts": [],
+      "last_price": 23.0
+    },
+    "suumo:r:jnc_000108698010": {
+      "first": "2026-09-08",
+      "first_price": 25.9,
+      "cuts": [],
+      "last_price": 25.9
+    },
+    "suumo:m:20918523": {
+      "first": "2026-09-08",
+      "first_price": 11980,
+      "cuts": [],
+      "last_price": 11980
+    },
+    "suumo:r:jnc_000088512197": {
+      "first": "2026-09-08",
+      "first_price": 25.0,
+      "cuts": [],
+      "last_price": 25.0
+    },
+    "suumo:r:jnc_000109701621": {
+      "first": "2026-09-08",
+      "first_price": 21.75,
+      "cuts": [],
+      "last_price": 21.75
+    },
+    "suumo:r:jnc_000069747839": {
+      "first": "2026-09-08",
+      "first_price": 27.2,
+      "cuts": [],
+      "last_price": 27.2
+    },
+    "suumo:r:jnc_000109148942": {
+      "first": "2026-09-08",
+      "first_price": 27.3,
+      "cuts": [],
+      "last_price": 27.3
+    },
+    "athome:h:6991800318": {
+      "first": "2026-09-09",
+      "first_price": 11480,
+      "cuts": [],
+      "last_price": 11480
+    },
+    "suumo:r:jnc_000106120363": {
+      "first": "2026-09-09",
+      "first_price": 26.7,
+      "cuts": [],
+      "last_price": 26.7
+    },
+    "suumo:r:jnc_000106120373": {
+      "first": "2026-09-09",
+      "first_price": 26.8,
+      "cuts": [],
+      "last_price": 26.8
+    },
+    "livable:l:C13266784": {
+      "first": "2026-09-09",
+      "first_price": 4980,
+      "cuts": [],
+      "last_price": 4980
+    },
+    "suumo:r:jnc_000108506045": {
+      "first": "2026-09-09",
+      "first_price": 25.3,
+      "cuts": [],
+      "last_price": 25.3
+    },
+    "suumo:m:21665549": {
+      "first": "2026-09-09",
+      "first_price": 11580,
+      "cuts": [],
+      "last_price": 11580
+    },
+    "athome:h:1195791721": {
+      "first": "2026-09-09",
+      "first_price": 9500,
+      "cuts": [],
+      "last_price": 9500
+    },
+    "suumo:r:jnc_000106120378": {
+      "first": "2026-09-09",
+      "first_price": 26.9,
+      "cuts": [],
+      "last_price": 26.9
+    },
+    "suumo:r:jnc_000109707805": {
+      "first": "2026-09-09",
+      "first_price": 22.2,
+      "cuts": [],
+      "last_price": 22.2
+    },
+    "suumo:r:jnc_000109707806": {
+      "first": "2026-09-09",
+      "first_price": 22.2,
+      "cuts": [],
+      "last_price": 22.2
+    },
+    "suumo:r:jnc_000108531046": {
+      "first": "2026-09-09",
+      "first_price": 21.9,
+      "cuts": [],
+      "last_price": 21.9
+    },
+    "suumo:r:jnc_000109547653": {
+      "first": "2026-09-09",
+      "first_price": 24.2,
+      "cuts": [],
+      "last_price": 24.2
+    },
+    "suumo:h:21244129": {
+      "first": "2026-09-10",
+      "first_price": 9090,
+      "cuts": [],
+      "last_price": 9090
+    },
+    "suumo:h:21266070": {
+      "first": "2026-09-10",
+      "first_price": 9090,
+      "cuts": [],
+      "last_price": 9090
+    },
+    "suumo:l:21336392": {
+      "first": "2026-09-10",
+      "first_price": 3380,
+      "cuts": [],
+      "last_price": 3380
+    },
+    "suumo:l:20301400": {
+      "first": "2026-09-10",
+      "first_price": 5980,
+      "cuts": [],
+      "last_price": 5980
+    },
+    "suumo:m:20064591": {
+      "first": "2026-09-10",
+      "first_price": 6950,
+      "cuts": [],
+      "last_price": 6950
+    },
+    "rehouse:m:FP7BTA17": {
+      "first": "2026-09-10",
+      "first_price": 10280,
+      "cuts": [],
+      "last_price": 10280
+    },
+    "suumo:r:jnc_000109728227": {
+      "first": "2026-09-10",
+      "first_price": 24.5,
+      "cuts": [],
+      "last_price": 24.5
+    },
+    "suumo:r:jnc_000109713551": {
+      "first": "2026-09-10",
+      "first_price": 24.9,
+      "cuts": [],
+      "last_price": 24.9
+    },
+    "suumo:r:jnc_000108106837": {
+      "first": "2026-09-10",
+      "first_price": 27.5,
+      "cuts": [],
+      "last_price": 27.5
+    },
+    "homes:l:b-35005600000534": {
+      "first": "2026-09-10",
+      "first_price": 9800,
+      "cuts": [],
+      "last_price": 9800
+    },
+    "homes:l:b-1152570002196": {
+      "first": "2026-09-10",
+      "first_price": 12000,
+      "cuts": [],
+      "last_price": 12000
+    },
+    "rehouse:h:FSDAUA07": {
+      "first": "2026-09-10",
+      "first_price": 6980,
+      "cuts": [],
+      "last_price": 6980
+    },
+    "rehouse:m:FSDBBA05": {
+      "first": "2026-09-10",
+      "first_price": 9980,
+      "cuts": [],
+      "last_price": 9980
+    },
+    "suumo:r:jnc_000109328990": {
+      "first": "2026-09-10",
+      "first_price": 25.0,
+      "cuts": [],
+      "last_price": 25.0
+    },
+    "rehouse:m:FXIBRA03": {
+      "first": "2026-09-10",
+      "first_price": 10980,
+      "cuts": [],
+      "last_price": 10980
+    },
+    "rehouse:m:FXIBPA05": {
+      "first": "2026-09-10",
+      "first_price": 11990,
+      "cuts": [],
+      "last_price": 11990
+    },
+    "suumo:r:jnc_000109232159": {
+      "first": "2026-09-10",
+      "first_price": 27.2,
+      "cuts": [],
+      "last_price": 27.2
+    },
+    "rehouse:m:F06BGA87": {
+      "first": "2026-09-10",
+      "first_price": 10990,
+      "cuts": [],
+      "last_price": 10990
+    },
+    "suumo:r:jnc_000109713657": {
+      "first": "2026-09-10",
+      "first_price": 27.3,
+      "cuts": [],
+      "last_price": 27.3
+    },
+    "rehouse:h:F5GBGA2F": {
+      "first": "2026-09-10",
+      "first_price": 6480,
+      "cuts": [],
+      "last_price": 6480
+    },
+    "rehouse:h:FKJBPA14": {
+      "first": "2026-09-10",
+      "first_price": 7200,
+      "cuts": [],
+      "last_price": 7200
+    },
+    "suumo:r:jnc_000109728047": {
+      "first": "2026-09-10",
+      "first_price": 24.0,
+      "cuts": [],
+      "last_price": 24.0
+    },
+    "livable:m:C48262241": {
+      "first": "2026-09-10",
+      "first_price": 10480,
+      "cuts": [],
+      "last_price": 10480
+    },
+    "rehouse:l:FLZBPA03": {
+      "first": "2026-09-10",
+      "first_price": 3380,
+      "cuts": [],
+      "last_price": 3380
+    },
+    "rehouse:l:FXC7DA09": {
+      "first": "2026-09-10",
+      "first_price": 7380,
+      "cuts": [],
+      "last_price": 7380
+    },
+    "rehouse:l:FXC7WA0B": {
+      "first": "2026-09-10",
+      "first_price": 5490,
+      "cuts": [],
+      "last_price": 5490
+    }
+  },
+  "notified_on": "2026-09-10",
+  "page_count": 146
+}
