@@ -2131,15 +2131,20 @@ def collect_station(station, codes):
         for pn in range(1, 7):   # 賃貸は最大の供給源なので深く取る
             # 賃貸もサーバー側で面積と賃料を絞る（実測: 大井町1ページで
             # 45㎡未満が58件→0件。取得枠を狭い部屋に食われなくなる）
-            url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
-                   f"/ek_{codes['suumo']}/?page={pn}"
-                   f"&mb={suumo_mb(RENT_AREA_MIN)}&cb={RENT_MIN}&ct={RENT_MAX}")
-            html = fetch_with_retry(url)
-            page = parse_suumo_rent(html, station)
+            # bs=040 は賃貸戸建。マンション/アパート枠だけだと戸建を
+            # 取りこぼす（実測: 目黒で38件出た）。両方まわす
+            for _bs in ("", "&ar=030&bs=040"):
+                url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
+                       f"/ek_{codes['suumo']}/?page={pn}"
+                       f"&mb={suumo_mb(RENT_AREA_MIN)}&cb={RENT_MIN}&ct={RENT_MAX}"
+                       f"{_bs}")
+                html = fetch_with_retry(url)
+                page = parse_suumo_rent(html, station)
+                if page:
+                    rent_items.extend(page)
+                time.sleep(SLEEP_BETWEEN)
             if not page:
                 break
-            rent_items.extend(page)
-            time.sleep(SLEEP_BETWEEN)
         keep_raw(rent_items)
         kept = [it for it in rent_items if apply_rent_filters(it)]
         # 同一物件の重複部屋を間引き（住所+賃料+面積+間取りで一意化）
