@@ -2528,7 +2528,8 @@ def collect_station(station, codes):
         if _sm:
             _sp, _sl, _sc = _sm
             items = []
-            for pn in range(1, 6):
+            # 実測: 2ページ目で84件、3ページ以降はほぼ0
+            for pn in range(1, 5):
                 # ページ送りは ?page= ではなく /page/N（?page=は無視され
                 # 1ページ目が返る。実測で確認）
                 url = (f"https://smocca.jp/search/{_sp}/line/{_sl}/station/{_sc}"
@@ -2571,8 +2572,9 @@ def collect_station(station, codes):
             # 実測: 4〜7ページ目でも 113/85/74/90件と別物件が出続ける。
             # 並び替え(sort1)でも返る集合が変わる
             # (sort1=1で60件 → 2と8を足すとユニーク366件)
+            # 実測: sort1=8 の6/8/10/12ページ目でも 69/105/76/53件と出続ける
             for _sort in ("1", "2", "8"):
-                for pn in range(1, 7):
+                for pn in range(1, 14):
                     url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
                            f"?sort1={_sort}"
                            + ("" if pn == 1 else f"&page={pn}"))
@@ -2694,8 +2696,9 @@ def collect_station(station, codes):
                 # 実測: 目黒の中古マンションは9ページ目まで別物件が出続ける。
                 # さらに並び替え(sort1)を変えると返る集合が変わる
                 # (sort1=1で49件 → 2と8を足すとユニーク131件)
+                # 実測: sort1=8 の6/8ページ目で 41/44件、10ページ以降は0
                 for _sort in ("1", "2", "8"):
-                    for pn in range(1, 7):
+                    for pn in range(1, 10):
                         _q = f"?sort1={_sort}" + ("" if pn == 1 else f"&page={pn}")
                         url = f"https://sumaity.com/{path}{_q}"
                         html = fetch_with_retry(url, impersonate=True)
