@@ -2008,6 +2008,48 @@ def enrich_from_detail(item):
             if f:
                 item["floor"] = f
 
+    # 画像: 一覧に写真が出ないサイト（ニフティ等）は詳細ページから拾う。
+    # og:image が最も確実で、無ければ本文中のimgを見る。
+    if not item.get("img"):
+        # バナー・ロゴ・SNS用画像は物件写真ではないので除く。
+        # (実測: ニフティの詳細ページは og:image が広告バナーだった)
+        _NG = re.compile(
+            r"(banner|logo|icon|ogp|og_|share|sns|common|noimage|no_image"
+            r"|dummy|spacer|blank|placeholder|1900x94)", re.I)
+
+        def _pick(u):
+            if not u or u.startswith("data:"):
+                return ""
+            return "" if _NG.search(u.split("?")[0]) else u
+
+        u = ""
+        og = soup.find("meta", attrs={"property": "og:image"})
+        if og:
+            u = _pick((og.get("content") or "").strip())
+        if not u:
+            # 物件写真は「間取り」「外観」「物件」などのaltを持つことが多い
+            for img in soup.find_all("img"):
+                alt = img.get("alt") or ""
+                cand = ""
+                for attr in ("data-src", "data-original", "rel", "src"):
+                    v = img.get(attr) or ""
+                    if isinstance(v, list):
+                        v = v[0] if v else ""
+                    cand = _pick(v)
+                    if cand:
+                        break
+                if not cand:
+                    continue
+                if re.search(r"(間取|外観|内観|写真|物件|居室|キッチン|room|photo|madori)",
+                             alt + cand, re.I):
+                    u = cand
+                    break
+                if not u:
+                    u = cand
+        if u:
+            host = re.match(r"(https?://[^/]+)", item.get("url", ""))
+            item["img"] = _abs(u, host.group(1) if host else "")
+
     if not item.get("walks"):
         transit = _row_value(soup, "交通", "駅徒歩", "最寄") or soup.get_text(" ", strip=True)
         if item.get("source") == "ニフティ不動産":
