@@ -2368,9 +2368,8 @@ def collect_station(station, codes):
             # 実測（恵比寿172件/広尾170件/代官山180件を全走査）で通過は1件だけだった。
             # 取りこぼしを無くすため、この駅だけ深いページまで見る。
             # 件数を増やすため深く見る（浅いと候補を取りこぼす）
-            # 面積帯4本×価格帯3本を回すのでページは浅くする
-            # (1ページあたり 4×3=12リクエスト)
-            pages = (1, 2, 3) if station in DEEP_SCAN_STATIONS else (1, 2)
+            # 面積帯2本×価格帯3本=1ページあたり6リクエスト
+            pages = (1, 2, 3, 4, 5) if station in DEEP_SCAN_STATIONS else (1, 2, 3)
             items = []
             for pn in pages:
                 # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
@@ -2379,8 +2378,10 @@ def collect_station(station, codes):
                 # mb(面積下限)は値ごとに返る集合が違う。実測(目黒1ページ):
                 # mb=40→17件 / 50→+5 / 60→+8 / 70→+9 でユニーク39件。
                 # 40だけだと半分以下しか取れていない
-                _mbs = ("",) if kind == "land" else ("&mb=40", "&mb=50",
-                                                     "&mb=60", "&mb=70")
+                # 実測の効率: 価格帯3分割=2.95倍/3req、面積帯4本=2.10倍/4req。
+                # 価格帯のほうが1リクエストあたりの効果が高いので面積帯は
+                # 2本に絞り、そのぶんページを深くする
+                _mbs = ("",) if kind == "land" else ("&mb=40", "&mb=60")
                 # 価格帯を分けても別集合が返る（実測: 目黒1ページで
                 # 全帯20件 → 3分割で合わせてユニーク59件）
                 _bands = ((PRICE_MIN, 6000), (6000, 9000), (9000, PRICE_MAX))
@@ -2793,8 +2794,8 @@ def collect_station(station, codes):
 
         # SUUMO 賃貸（管理費込みRENT_MAX以下）— 2ページまで
         rent_items = []
-        # 面積帯4×賃料帯3×種別2 = 1ページあたり24リクエストになるので浅くする
-        for pn in (1, 2):
+        # 面積帯2×賃料帯3×種別2 = 1ページあたり12リクエスト
+        for pn in (1, 2, 3):
             # 賃貸もサーバー側で面積と賃料を絞る（実測: 大井町1ページで
             # 45㎡未満が58件→0件。取得枠を狭い部屋に食われなくなる）
             # bs=040 は賃貸戸建。マンション/アパート枠だけだと戸建を
@@ -2805,7 +2806,7 @@ def collect_station(station, codes):
             # 賃料帯も分けると別集合が返る（売買のkb/ktと同じ挙動）
             _rb = ((RENT_MIN, 15.0), (15.0, 22.0), (22.0, RENT_MAX))
             for _bs in ("", "&ar=030&bs=040"):
-                for _mb in (40, 50, 60, 70):
+                for _mb in (40, 60):
                     for _cb, _ct in _rb:
                         url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
                                f"/ek_{codes['suumo']}/?page={pn}"
