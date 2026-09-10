@@ -214,7 +214,12 @@ def card_image(node):
                 u = u[0] if u else ""
             if not u or u.startswith("data:"):
                 continue
-            if re.search(r"(spacer|blank|noimage|no_image|logo|icon|dummy|move_\d+_\d+)", u, re.I):
+            # 除外判定はクエリ文字列を除いたパス部分だけで行う。
+            # スマイティの画像URLはクエリに「読み込み失敗時の代替画像」の
+            # パス(nf_path=.../no_image/noimage_640x640.png)を持っており、
+            # URL全体で見ると正常な写真まで no_image と誤判定していた（実測）
+            _path = u.split("?")[0]
+            if re.search(r"(spacer|blank|noimage|no_image|logo|icon|dummy|move_\d+_\d+)", _path, re.I):
                 continue
             if u.endswith(".png") and "/assets/" in u:
                 continue
@@ -795,7 +800,9 @@ def parse_sumaity(html: str, station: str, kind: str):
             floor = parse_floor(gi.get("4", ""), btype)
             items.append({
                 "id": f"sumaity:{btype[0]}:{m.group(1)}",
-                "img": _abs(card_image(grid), "https://sumaity.com"),
+                # 部屋グリッドに画像は無く、建物側にある（実測）
+                "img": _abs(card_image(grid) or card_image(bld) or card_image(est),
+                            "https://sumaity.com"),
                 "station": station,
                 "type": btype,
                 "name": bname or addr or "スマイティ掲載物件",
@@ -1239,7 +1246,9 @@ def parse_sumaity_rent(html: str, station: str):
             seen.add(m.group(1))
             items.append({
                 "id": f"sumaity:r:{m.group(1)}",
-                "img": _abs(card_image(tr), "https://sumaity.com"),
+                # 部屋の行に画像は無く、建物側にある（実測）
+                "img": _abs(card_image(tr) or card_image(bld),
+                            "https://sumaity.com"),
                 "station": station,
                 "type": "rent",
                 "name": name or addr,
@@ -1493,7 +1502,11 @@ def parse_goo_buy(html: str, station: str, kind: str):
         seen.add(key)
         items.append({
             "id": f"goo:{kind[0]}:{key}",
-            "img": _abs(card_image(box), "https://house.goo.ne.jp"),
+            # 中古マンションは box(div.nayose-property-data) に画像が無く、
+            # 親のtdにある（実測）。親を辿って拾う
+            "img": _abs(card_image(box) or card_image(box.parent)
+                        or card_image(box.find_parent(["td", "tr", "table"])),
+                        "https://house.goo.ne.jp"),
             "station": station,
             "type": kind,
             "name": name or addr,
@@ -1727,7 +1740,9 @@ def parse_livable(html: str, station: str, kind: str):
 
         items.append({
             "id": f"livable:{kind[0]}:{pid}",
-            "img": _abs(card_image(a), "https://www.livable.co.jp"),
+            # リンク要素そのものには画像が無い。カード全体から拾う（実測）
+            "img": _abs(card_image(card) or card_image(a),
+                        "https://www.livable.co.jp"),
             "station": station,
             "type": kind,
             "name": name,
