@@ -1258,6 +1258,81 @@ def parse_smocca(html: str, station: str):
     return items
 
 
+# goo住宅・不動産の賃貸。div.name_id が建物、その中の tr(td.property-img を
+# 持つ行)が部屋。列は 階/賃料/管理費/敷礼保証/間取り/広さ（実測）。
+# 駅コードはノムコムと同じ体系で、路線は先頭1桁を落とす（2172→172）。
+def parse_goo(html: str, station: str):
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    items = []
+    seen = set()
+    for bld in soup.select("div.name_id"):
+        btext = re.sub(r"\s+", " ", bld.get_text(" | ", strip=True))
+        addr = parse_addr(btext)
+        if not addr:
+            continue
+        name = ""
+        first = next(bld.stripped_strings, "")
+        if first and "|" not in first:
+            name = first[:40]
+        built = None
+        mb = re.search(r"築\s*(\d{1,3})\s*年", btext)
+        if mb:
+            built = CURRENT_YEAR - int(mb.group(1))
+        elif "新築" in btext:
+            built = CURRENT_YEAR
+        transit = btext.replace("|", " ")
+        walk = parse_walk(transit, station)
+        walks = parse_all_walks(transit)
+        for td in bld.select("td.property-img"):
+            tr = td.find_parent("tr")
+            if tr is None:
+                continue
+            a = tr.find("a", href=lambda h: h and "/rent/ap/detail/" in h)
+            if not a:
+                continue
+            m = re.search(r"/x(\w+)\.html", a["href"])
+            key = m.group(1) if m else a["href"]
+            if key in seen:
+                continue
+            t = re.sub(r"\s+", " ", tr.get_text(" ", strip=True))
+            mr = re.search(r"([\d.]+)\s*万円", t)
+            rent = float(mr.group(1)) if mr else None
+            mk = re.search(r"万円\s*([\d,]+)\s*円", t)
+            kanri = int(mk.group(1).replace(",", "")) if mk else 0
+            total = round(rent + kanri / 10000, 2) if rent is not None else None
+            ms = re.search(r"円\s*([^\s/]+)\s*/\s*([^\s/]+)", t)
+            shikirei = ""
+            if ms:
+                def _f(x):
+                    return "なし" if x in ("-", "－", "なし") else x
+                shikirei = f"敷{_f(ms.group(1))}/礼{_f(ms.group(2))}"
+            seen.add(key)
+            items.append({
+                "id": f"goo:r:{key}",
+                "img": _abs(card_image(tr), "https://house.goo.ne.jp"),
+                "station": station,
+                "type": "rent",
+                "name": name or addr,
+                "price": total,
+                "rent": rent,
+                "kanri": kanri,
+                "area": parse_area(t),
+                "layout": parse_layout(t),
+                "walk": walk,
+                "walks": walks,
+                "built": built,
+                "floor": parse_floor(t, "rent"),
+                "shikirei": shikirei,
+                "addr": addr,
+                "url": _abs(a["href"], "https://house.goo.ne.jp"),
+                "source": "goo住宅",
+                "parking": None,
+            })
+    return items
+
+
 def parse_nomu(html: str, station: str, kind: str):
     if not html:
         return []
@@ -1556,7 +1631,7 @@ def enrich_from_detail(item):
     use_cffi = item.get("source") in ("HOMES", "アットホーム",
                                       "アットホーム賃貸", "三井のリハウス",
                                       "スマイティ", "CHINTAI", "ニフティ不動産",
-                                      "ハウスコム", "賃貸スモッカ")
+                                      "ハウスコム", "賃貸スモッカ", "goo住宅")
     html = fetch_with_retry(item["url"], impersonate=use_cffi)
     if not html:
         return
@@ -1668,6 +1743,7 @@ _HOST_GATE = {
     "www.chintai.net":  (threading.Lock(), 1.5),
     "www.housecom.jp":  (threading.Lock(), 1.5),
     "smocca.jp":        (threading.Lock(), 1.5),
+    "house.goo.ne.jp":  (threading.Lock(), 1.5),
 }
 _HOST_LAST = {}
 
@@ -2006,6 +2082,27 @@ def collect_station(station, codes):
             log.append(f"[アットホーム {kind}] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count[f"アットホーム {kind}"] += len(kept)
+            time.sleep(SLEEP_BETWEEN)
+
+        # goo住宅・不動産の賃貸 — 駅コードはノムコムと同じ体系。
+        # 路線だけ先頭1桁を落とす（2172→172）。実測: 目黒70件・蒲田108件
+        if codes.get("nomu"):
+            _gp, _gl, _gc = codes["nomu"].split("/")
+            items = []
+            for pn in range(1, 4):
+                url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
+                       f"{_gl[1:]}/{_gc}.html"
+                       + ("" if pn == 1 else f"?page={pn}"))
+                html = fetch_with_retry(url, impersonate=True)
+                page_items = parse_goo(html, station)
+                if not page_items:
+                    break
+                items.extend(page_items)
+                time.sleep(SLEEP_BETWEEN)
+            kept = [i for i in items if apply_rent_filters(i)]
+            log.append(f"[goo住宅] {station}: parsed={len(items)} kept={len(kept)}")
+            all_items.extend(kept)
+            portal_count["goo住宅"] += len(kept)
             time.sleep(SLEEP_BETWEEN)
 
         # 賃貸スモッカ — 駅コードはノムコム(国交省体系)をそのまま使える。
