@@ -13,6 +13,10 @@ on:
         description: '強制テスト通知（新着0でも上位3件を通知）'
         type: boolean
         default: false
+      fetch_budget_sec:
+        description: '取得の締切(秒)。空なら既定の6600秒(110分)'
+        required: false
+        default: ''
 
 permissions:
   contents: write  # state.jsonコミット用
@@ -46,6 +50,8 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
           DEBUG_FORCE_NOTIFY: ${{ inputs.force_notify && '1' || '0' }}
+          # 手動実行で取得時間を短くできるようにする（既定は watcher.py の110分）
+          FETCH_BUDGET_SEC: ${{ inputs.fetch_budget_sec }}
         run: python watcher.py
 
       - name: Publish 在庫ページ (GitHub Pages)

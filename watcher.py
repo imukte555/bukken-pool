@@ -52,7 +52,7 @@ SLEEP_BETWEEN = 3.0  # bot検知対策で長め
 WORKERS = 5          # 駅の並列数。上げすぎるとbot検知されるので控えめ
 # 詳細ページの並列数。ホストごとのゲートで同時接続は別途絞られるので、
 # プール全体としてはもう少し並べてよい（500件超を5並列だと長すぎる）
-DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS", 10))
+DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS") or 10)
 # 同一建物から取る最大部屋数。3だと同じマンションの4部屋目以降が
 # 条件を満たしていても捨てられていたので広げた（件数を増やすため）。
 # 同じ部屋の重複掲載は別途 間取り+賃料+面積 の一致で除外している。
@@ -2084,12 +2084,12 @@ BLOCK_COOLDOWN = 300  # 秒
 # 「1サイトが死んでも必ず公開まで届く」ことを最優先にする。
 # 取得元が18系統に増え、取得だけで140分に届くようになった。
 # 詳細取得とページ生成に十分な時間を残すため110分に縮める。
-FETCH_BUDGET_SEC = int(os.environ.get("FETCH_BUDGET_SEC", 6600))   # 110分
+FETCH_BUDGET_SEC = int(os.environ.get("FETCH_BUDGET_SEC") or 6600)   # 110分
 _RUN_STARTED = time.time()
 
 # 同一ホストで通算これだけ弾かれたら、その実行ではもう叩かない。
 # 休憩を挟んでも戻らない＝IP単位で拒否されている状態なので、待つだけ無駄。
-HOST_GIVEUP_FAILS = int(os.environ.get("HOST_GIVEUP_FAILS", 12))
+HOST_GIVEUP_FAILS = int(os.environ.get("HOST_GIVEUP_FAILS") or 12)
 # ホストごとの見切り回数。実測(run 34394910814, 95分):
 #   アットホーム … 弾かれ9回で打ち切り。成功0件。IPごと拒否されている
 #   HOMES        … 弾かれ73回に対し成功7回。320秒休んでも復帰しない
@@ -2101,7 +2101,7 @@ _HOST_GIVEUP = {"www.athome.co.jp": 3, "www.homes.co.jp": 4,
 # 1ホストの休憩の累計上限(秒)。ここを超えたらそのホストは打ち切る。
 # 見積もりでHOMESは休憩だけで208分に達し得るため、1サイトが実行時間を
 # 食い潰さないように上限を設ける。
-HOST_REST_CAP_SEC = int(os.environ.get("HOST_REST_CAP_SEC", 1800))   # 30分
+HOST_REST_CAP_SEC = int(os.environ.get("HOST_REST_CAP_SEC") or 1800)   # 30分
 _HOST_RESTED = {}
 _HOST_DEAD = set()
 
