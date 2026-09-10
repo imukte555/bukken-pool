@@ -898,7 +898,13 @@ def parse_nifty(html: str, station: str, kind: str):
     soup = BeautifulSoup(html, "html.parser")
     items = []
     seen = set()
-    for card in soup.select("div.box.is-padding-lg.is-space-lg"):
+    # 中古は div.box.is-padding-lg.is-space-lg が1建物。新築はページ構造が
+    # 違い div.column.is-mobile-0 が1物件（実測）。中古ページにも前者が
+    # 数個だけ存在して物件を含まないことがあるので両方を見て、
+    # 物件IDの重複は seen で弾く。
+    cards = (soup.select("div.box.is-padding-lg.is-space-lg")
+             + soup.select("div.column.is-mobile-0"))
+    for card in cards:
         links = card.select('a[href*="detail_"]')
         if not links:
             continue
@@ -915,8 +921,11 @@ def parse_nifty(html: str, station: str, kind: str):
             my = re.search(r"築年月\s*\|\s*(\d{4})年", ctext)
             if my:
                 built = int(my.group(1))
+            elif "新築" in ctext:
+                built = CURRENT_YEAR      # 新築は築0年として扱う
 
-        for blk in card.select("div.box.is-mobile-0.is-space-xs"):
+        blks = card.select("div.box.is-mobile-0.is-space-xs") or [card]
+        for blk in blks:
             a = blk.find("a", href=lambda h: h and "detail_" in h)
             if not a:
                 continue
@@ -1800,10 +1809,14 @@ def collect_station(station, codes):
         # ニフティ不動産(横断検索) — SUUMO/HOMES/アットホーム等の在庫が入る。
         # ActionsからHOMES/アットホームを直接叩けない分をここで補う。
         if codes.get("nifty"):
+            # 新築も取る。sho条件の「築20年未満」に確実に合致する上、
+            # 中古だけだと候補が足りない（実測: 新築戸建 目黒で19件）
             for kind, path in [("mansion", f"chuko-mansion/{pref}/{codes['nifty']}_st/"),
                                ("house",   f"chuko-ikkodate/{pref}/{codes['nifty']}_st/"),
                                ("land",    f"tochi/{pref}/{codes['nifty']}_st/"),
-                               ("rent",    f"rent/{pref}/{codes['nifty']}_st/")]:
+                               ("rent",    f"rent/{pref}/{codes['nifty']}_st/"),
+                               ("mansion", f"shinchiku-mansion/{pref}/{codes['nifty']}_st/"),
+                               ("house",   f"shinchiku-ikkodate/{pref}/{codes['nifty']}_st/")]:
                 items = []
                 for pn in (1, 2, 3):
                     url = (f"https://myhome.nifty.com/{path}" if pn == 1
