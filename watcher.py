@@ -2546,16 +2546,20 @@ def collect_station(station, codes):
         if codes.get("sumaity_rent"):
             _sp, _ss = codes["sumaity_rent"].split("/", 1)
             items = []
-            # 実測: 4〜7ページ目でも 113/85/74/90件と別物件が出続ける
-            for pn in range(1, 11):
-                url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
-                       + ("" if pn == 1 else f"?page={pn}"))
-                html = fetch_with_retry(url, impersonate=True)
-                page_items = parse_sumaity_rent(html, station)
-                if not page_items:
-                    break
-                items.extend(page_items)
-                time.sleep(SLEEP_BETWEEN)
+            # 実測: 4〜7ページ目でも 113/85/74/90件と別物件が出続ける。
+            # 並び替え(sort1)でも返る集合が変わる
+            # (sort1=1で60件 → 2と8を足すとユニーク366件)
+            for _sort in ("1", "2", "8"):
+                for pn in range(1, 7):
+                    url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
+                           f"?sort1={_sort}"
+                           + ("" if pn == 1 else f"&page={pn}"))
+                    html = fetch_with_retry(url, impersonate=True)
+                    page_items = parse_sumaity_rent(html, station)
+                    if not page_items:
+                        break
+                    items.extend(page_items)
+                    time.sleep(SLEEP_BETWEEN)
             kept = [i for i in items if apply_rent_filters(i)]
             log.append(f"[スマイティ賃貸] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
@@ -2663,16 +2667,19 @@ def collect_station(station, codes):
             for kind, path in [("mansion", f"mansion/used/{pref}/{codes['sumaity']}-eki/"),
                                ("house",   f"house/used/{pref}/{codes['sumaity']}-eki/")]:
                 items = []
-                # 実測: 目黒の中古マンションは9ページ目まで別物件が出続ける
-                for pn in range(1, 11):
-                    url = (f"https://sumaity.com/{path}" if pn == 1
-                           else f"https://sumaity.com/{path}?page={pn}")
-                    html = fetch_with_retry(url, impersonate=True)
-                    page_items = parse_sumaity(html, station, kind)
-                    if not page_items:
-                        break
-                    items.extend(page_items)
-                    time.sleep(SLEEP_BETWEEN)
+                # 実測: 目黒の中古マンションは9ページ目まで別物件が出続ける。
+                # さらに並び替え(sort1)を変えると返る集合が変わる
+                # (sort1=1で49件 → 2と8を足すとユニーク131件)
+                for _sort in ("1", "2", "8"):
+                    for pn in range(1, 7):
+                        _q = f"?sort1={_sort}" + ("" if pn == 1 else f"&page={pn}")
+                        url = f"https://sumaity.com/{path}{_q}"
+                        html = fetch_with_retry(url, impersonate=True)
+                        page_items = parse_sumaity(html, station, kind)
+                        if not page_items:
+                            break
+                        items.extend(page_items)
+                        time.sleep(SLEEP_BETWEEN)
                 kept = filter_with_walk_rescue(items)
                 log.append(f"[スマイティ {kind}] {station}: parsed={len(items)} kept={len(kept)}")
                 all_items.extend(kept)
