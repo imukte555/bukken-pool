@@ -2090,9 +2090,10 @@ def collect_station(station, codes):
             _gp, _gl, _gc = codes["nomu"].split("/")
             items = []
             for pn in range(1, 4):
+                # ページ送りは ?p=N（?page=は無視される。実測で確認）
                 url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
                        f"{_gl[1:]}/{_gc}.html"
-                       + ("" if pn == 1 else f"?page={pn}"))
+                       + ("" if pn == 1 else f"?p={pn}"))
                 html = fetch_with_retry(url, impersonate=True)
                 page_items = parse_goo(html, station)
                 if not page_items:
@@ -2118,8 +2119,10 @@ def collect_station(station, codes):
             _sp, _sl, _sc = _sm
             items = []
             for pn in range(1, 6):
+                # ページ送りは ?page= ではなく /page/N（?page=は無視され
+                # 1ページ目が返る。実測で確認）
                 url = (f"https://smocca.jp/search/{_sp}/line/{_sl}/station/{_sc}"
-                       + ("" if pn == 1 else f"?page={pn}"))
+                       + ("" if pn == 1 else f"/page/{pn}"))
                 html = fetch_with_retry(url, impersonate=True)
                 page_items = parse_smocca(html, station)
                 if not page_items:
