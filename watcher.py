@@ -1476,15 +1476,18 @@ def parse_goo_buy(html: str, station: str, kind: str):
             else:
                 area_over = float(ms2[0])
         name = ""
-        h_el = None
-        cur2 = box
-        for _ in range(4):
-            cur2 = cur2.parent
-            if cur2 is None:
-                break
-            h_el = cur2.find(["h2", "h3"])
-            if h_el:
-                break
+        # まず自分自身の中のh2を見る。いきなり親から探すと、ページ先頭の
+        # h2を全物件が共有してしまう（実測: 戸建40件すべて同じ名前になった）
+        h_el = box.find(["h2", "h3"])
+        if h_el is None:
+            cur2 = box
+            for _ in range(4):
+                cur2 = cur2.parent
+                if cur2 is None:
+                    break
+                h_el = cur2.find(["h2", "h3"])
+                if h_el:
+                    break
         if h_el:
             name = h_el.get_text(strip=True)[:40]
         seen.add(key)
