@@ -1628,7 +1628,8 @@ def collect_station(station, codes):
             # 恵比寿・広尾・代官山などは条件を満たす物件が極端に少ない。
             # 実測（恵比寿172件/広尾170件/代官山180件を全走査）で通過は1件だけだった。
             # 取りこぼしを無くすため、この駅だけ深いページまで見る。
-            pages = (1, 2, 3, 4, 5, 6) if station in DEEP_SCAN_STATIONS else (1, 2, 3, 4)
+            # 件数を増やすため深く見る（浅いと候補を取りこぼす）
+            pages = tuple(range(1, 11)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 8))
             items = []
             for pn in pages:
                 # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
@@ -1660,7 +1661,7 @@ def collect_station(station, codes):
                             ("house",   f"kodate/chuko/{pref}/{codes['homes']}/list/"),
                             ("land",    f"tochi/{pref}/{codes['homes']}/list/")]):
             items = []
-            for pn in (1,):   # 予算5回に収めるため1ページのみ
+            for pn in (1, 2, 3):   # 休憩を挟むので枠内で深く取る
                 url = f"https://www.homes.co.jp/{path}?page={pn}"
                 html = fetch_with_retry(url, impersonate=True)
                 page_items = parse_homes(html, station, kind)
@@ -1681,7 +1682,7 @@ def collect_station(station, codes):
                             ("land",    f"tochi/{pref}/{codes['athome']}/list/"),
                             ("rent",    f"chintai/{pref}/{codes['athome']}/list/")]):
             items = []
-            for pn in (1,):   # 予算に収めるため1ページのみ
+            for pn in (1, 2, 3):   # 休憩を挟むので枠内で深く取る
                 url = f"https://www.athome.co.jp/{path}?page={pn}"
                 html = fetch_with_retry(url, impersonate=True)
                 page_items = (parse_athome_rent(html, station) if kind == "rent"
@@ -1704,7 +1705,7 @@ def collect_station(station, codes):
                                ("land",    f"tochi/{pref}/{codes['nifty']}_st/"),
                                ("rent",    f"rent/{pref}/{codes['nifty']}_st/")]:
                 items = []
-                for pn in (1, 2):
+                for pn in (1, 2, 3):
                     url = (f"https://myhome.nifty.com/{path}" if pn == 1
                            else f"https://myhome.nifty.com/{path}?page={pn}")
                     html = fetch_with_retry(url, impersonate=True)
@@ -1726,7 +1727,7 @@ def collect_station(station, codes):
             items = []
             # ページ送りは ?page= ではなく /list/pageN/（実測。?page=は無視され
             # 同じ1ページ目が返るため重複していた）
-            pages = (1, 2, 3, 4, 5) if station in DEEP_SCAN_STATIONS else (1, 2, 3)
+            pages = tuple(range(1, 13)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 9))
             for pn in pages:
                 url = (f"https://www.chintai.net/{_pf}/ensen/{_sc}/list/"
                        + ("" if pn == 1 else f"page{pn}/"))
@@ -1747,7 +1748,7 @@ def collect_station(station, codes):
             for kind, path in [("mansion", f"mansion/used/{pref}/{codes['sumaity']}-eki/"),
                                ("house",   f"house/used/{pref}/{codes['sumaity']}-eki/")]:
                 items = []
-                for pn in (1, 2, 3):
+                for pn in range(1, 8):
                     url = (f"https://sumaity.com/{path}" if pn == 1
                            else f"https://sumaity.com/{path}?page={pn}")
                     html = fetch_with_retry(url, impersonate=True)
@@ -1768,7 +1769,7 @@ def collect_station(station, codes):
             _pf, _rw, _st = codes["rehouse"].split("/")
             base = ("https://www.rehouse.co.jp/buy/all-type/prefecture/"
                     f"{_pf}/railway/{_rw}/station/{_st}/")
-            for pn in range(1, 7):
+            for pn in range(1, 11):
                 url = base if pn == 1 else f"{base}?page={pn}"
                 html = fetch_with_retry(url, impersonate=True)
                 page_items = parse_rehouse(html, station)
@@ -1790,7 +1791,7 @@ def collect_station(station, codes):
                             ("house",   f"house/{codes['nomu']}/"),
                             ("land",    f"land/{codes['nomu']}/")]):
             items = []
-            for pn in (1, 2, 3):
+            for pn in range(1, 7):
                 url = f"https://www.nomu.com/{path}?page={pn}"
                 html = fetch(url)
                 page_items = parse_nomu(html, station, kind)
@@ -1810,7 +1811,7 @@ def collect_station(station, codes):
                             ("house",   f"kounyu/kodate/{codes['livable']}/"),
                             ("land",    f"kounyu/tochi/{codes['livable']}/")]):
             items = []
-            for pn in (1, 2, 3):
+            for pn in range(1, 7):
                 url = f"https://www.livable.co.jp/{path}?page={pn}"
                 html = fetch(url)
                 page_items = parse_livable(html, station, kind)
@@ -1826,7 +1827,7 @@ def collect_station(station, codes):
 
         # SUUMO 賃貸（管理費込みRENT_MAX以下）— 2ページまで
         rent_items = []
-        for pn in (1, 2):   # 賃貸は最大の供給源なので2ページ取る
+        for pn in range(1, 7):   # 賃貸は最大の供給源なので深く取る
             # 賃貸もサーバー側で面積と賃料を絞る（実測: 大井町1ページで
             # 45㎡未満が58件→0件。取得枠を狭い部屋に食われなくなる）
             url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
