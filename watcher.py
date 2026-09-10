@@ -1038,6 +1038,82 @@ def parse_housecom(html: str, station: str):
     return items
 
 
+# 東急リバブルの賃貸。div[class*=Card_propertyCardContents] が1部屋で、
+# 名前/賃料/管理費/住所/駅徒歩/敷礼/間取り/面積/築年月/所在階 が全部載る。
+# 賃料は「40 万 5,000 円」のように万と円が分かれて出る（実測）。
+def parse_livable_rent(html: str, station: str):
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    items = []
+    seen = set()
+    for card in soup.select("div[class*=Card_propertyCardContents]"):
+        a = card.find("a", href=lambda h: h and re.match(r"^/chintai/L\d+/?$", h or ""))
+        if not a:
+            continue
+        m = re.search(r"/chintai/(L\d+)/?", a["href"])
+        if not m or m.group(1) in seen:
+            continue
+        t = re.sub(r"\s+", " ", card.get_text(" ", strip=True))
+        # 「40 万 5,000 円」→ 40.5万。「28 万 円」→ 28万
+        rent = None
+        mr = re.search(r"([\d,]+)\s*万\s*(?:([\d,]+)\s*円)?", t)
+        if mr:
+            man = float(mr.group(1).replace(",", ""))
+            yen = float(mr.group(2).replace(",", "")) if mr.group(2) else 0.0
+            rent = round(man + yen / 10000, 2)
+        mk = re.search(r"管理費\s*([\d,]+)\s*円", t)
+        kanri = int(mk.group(1).replace(",", "")) if mk else 0
+        total = round(rent + kanri / 10000, 2) if rent is not None else None
+        addr = parse_addr(t)
+        if not addr:
+            continue
+        built = None
+        mb = re.search(r"(\d{4})年\d{1,2}月築", t)
+        if mb:
+            built = int(mb.group(1))
+        # 「25階建ての16階部分」→ 16階
+        floor = ""
+        mf = re.search(r"階建ての\s*(B?\d+)\s*階", t)
+        if mf:
+            floor = f"{mf.group(1)}階"
+        else:
+            floor = parse_floor(t, "rent")
+        ms = re.search(r"敷金\s*(\S+?)\s*礼金\s*(\S+)", t)
+        shikirei = ""
+        if ms:
+            def _f(x):
+                return "なし" if x in ("-", "－", "―", "0", "0円", "なし") else x
+            shikirei = f"敷{_f(ms.group(1))}/礼{_f(ms.group(2))}"
+        # 物件名は h2。テキストから正規表現で切り出すとUI文言("間取り"
+        # "NEW 9/4" など)を拾ってしまうので必ず h2 から取る（実測）
+        h2 = card.find("h2")
+        name = h2.get_text(strip=True) if h2 else ""
+        seen.add(m.group(1))
+        items.append({
+            "id": f"livable:r:{m.group(1)}",
+            "img": _abs(card_image(card), "https://www.livable.co.jp"),
+            "station": station,
+            "type": "rent",
+            "name": name or addr,
+            "price": total,
+            "rent": rent,
+            "kanri": kanri,
+            "area": parse_area(t),
+            "layout": parse_layout(t),
+            "walk": parse_walk(t, station),
+            "walks": parse_all_walks(t),
+            "built": built,
+            "floor": floor,
+            "shikirei": shikirei,
+            "addr": addr,
+            "url": _abs(a["href"], "https://www.livable.co.jp"),
+            "source": "リバブル賃貸",
+            "parking": None,
+        })
+    return items
+
+
 def parse_nomu(html: str, station: str, kind: str):
     if not html:
         return []
@@ -1785,6 +1861,25 @@ def collect_station(station, codes):
             log.append(f"[アットホーム {kind}] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count[f"アットホーム {kind}"] += len(kept)
+            time.sleep(SLEEP_BETWEEN)
+
+        # 東急リバブルの賃貸 — 売買と同じ駅コードが使える。一覧に
+        # 所在階・敷礼・築年月まで載る（実測: 目黒で30件・欠損0）
+        if codes.get("livable"):
+            items = []
+            for pn in range(1, 6):
+                url = (f"https://www.livable.co.jp/chintai/{codes['livable']}/"
+                       + ("" if pn == 1 else f"?page={pn}"))
+                html = fetch_with_retry(url)
+                page_items = parse_livable_rent(html, station)
+                if not page_items:
+                    break
+                items.extend(page_items)
+                time.sleep(SLEEP_BETWEEN)
+            kept = [i for i in items if apply_rent_filters(i)]
+            log.append(f"[リバブル賃貸] {station}: parsed={len(items)} kept={len(kept)}")
+            all_items.extend(kept)
+            portal_count["リバブル賃貸"] += len(kept)
             time.sleep(SLEEP_BETWEEN)
 
         # ハウスコム(賃貸) — 建物ごとに部屋が並び、階・敷礼・築年まで一覧に載る
