@@ -26,6 +26,13 @@ OUT = BASE / "local_feed.json"
 
 
 def collect():
+    """3サイトを順に取る。レート制限は watcher.py の
+    _HOST_QUOTA / _HOST_COOLDOWN_SEC / take_slot() が面倒を見る。
+    実測の制限:
+      HOMES        … 連続6件で202、240秒で復帰
+      アットホーム … 連続5件で「認証中」ページ、5分待っても戻らない
+      ニフティ     … まとめて叩くと405、約120秒で復帰
+    """
     items = []
     for st, c in W.STATIONS.items():
         pref = c.get("pref", "tokyo")
