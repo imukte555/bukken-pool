@@ -2012,7 +2012,9 @@ BLOCK_COOLDOWN = 300  # 秒
 # 再試行を251回繰り返して3時間を使い切り、ページ生成まで到達せずに
 # タイムアウトで落ちた（2026-09-09 run 34375924565）。
 # 「1サイトが死んでも必ず公開まで届く」ことを最優先にする。
-FETCH_BUDGET_SEC = int(os.environ.get("FETCH_BUDGET_SEC", 8400))   # 140分
+# 取得元が18系統に増え、取得だけで140分に届くようになった。
+# 詳細取得とページ生成に十分な時間を残すため110分に縮める。
+FETCH_BUDGET_SEC = int(os.environ.get("FETCH_BUDGET_SEC", 6600))   # 110分
 _RUN_STARTED = time.time()
 
 # 同一ホストで通算これだけ弾かれたら、その実行ではもう叩かない。
