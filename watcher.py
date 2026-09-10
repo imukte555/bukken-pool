@@ -2404,10 +2404,12 @@ def collect_station(station, codes):
                                ("house",   f"shinchiku-ikkodate/{pref}/{codes['nifty']}_st/")]:
                 items = []
                 # ニフティは6種別あり、枠15件ごとに150秒の休憩が入るので
-                # ページを深くすると実行時間が跳ね上がる。2ページに留める
-                for pn in (1, 2):
+                # ページを深くしすぎない。休憩の累計上限(30分)もあるので3で打つ
+                for pn in (1, 2, 3):
+                    # ページ送りはクエリではなくパス末尾に /N/（実測。
+                    # ?page= は無視され1ページ目が返っていた）
                     url = (f"https://myhome.nifty.com/{path}" if pn == 1
-                           else f"https://myhome.nifty.com/{path}?page={pn}")
+                           else f"https://myhome.nifty.com/{path}{pn}/")
                     html = fetch_with_retry(url, impersonate=True)
                     page_items = parse_nifty(html, station, kind)
                     if not page_items:
