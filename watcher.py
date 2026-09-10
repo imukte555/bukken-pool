@@ -2315,6 +2315,26 @@ def collect_all():
         for line in log:
             print(line)
 
+    # ローカル(Mac)で取ったぶんを取り込む。
+    # HOMES/アットホーム/ニフティはGitHub ActionsのIPから拒否されるが、
+    # ローカルからは普通に取れる（実測: HOMES 32件/athome 30件/nifty 40件）。
+    # local_feed.json があればマージする。無ければ何もしない。
+    feed = BASE_DIR / "local_feed.json"
+    if feed.exists():
+        try:
+            data = json.loads(feed.read_text(encoding="utf-8"))
+            items = data.get("items", [])
+            gen = data.get("generated_at", "")
+            have = {it.get("id") for it in all_items}
+            added = [it for it in items if it.get("id") not in have]
+            all_items.extend(added)
+            for it in added:
+                portal_count[f"{it.get('source','ローカル')} (ローカル)"] += 1
+            print(f"\nローカル取得ぶんを取り込み: {len(added)}件 "
+                  f"(生成 {gen})")
+        except Exception as e:
+            print(f"local_feed.json の取り込みに失敗: {e}", file=sys.stderr)
+
     print("\n=== ポータル別取得 ===")
     for k, v in portal_count.most_common():
         print(f"  {k}: {v}")
