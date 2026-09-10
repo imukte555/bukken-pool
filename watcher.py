@@ -1540,6 +1540,96 @@ def parse_cowcamo(html: str, station: str):
     return items
 
 
+# HOMESの賃貸。div.unitList が建物、tbody.prg-roomList の各行が部屋。
+# 列は 階/部屋番号/賃料/管理費/敷金/礼金/保証/敷引/間取り/専有面積（実測）。
+def parse_homes_rent(html: str, station: str):
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    items = []
+    seen = set()
+    for bld in soup.select("div.unitList"):
+        btext = re.sub(r"\s+", " ", bld.get_text(" | ", strip=True))
+        # 建物情報は上位にあることがあるので親も見る
+        ctext = btext
+        cur = bld
+        for _ in range(4):
+            cur = cur.parent
+            if cur is None:
+                break
+            ct = re.sub(r"\s+", " ", cur.get_text(" | ", strip=True))
+            if parse_addr(ct):
+                ctext = ct
+                break
+        addr = parse_addr(ctext)
+        if not addr:
+            continue
+        name = ""
+        h_el = bld.find(["h2", "h3"]) or (cur.find(["h2", "h3"]) if cur else None)
+        if h_el:
+            name = h_el.get_text(strip=True)[:40]
+        if name.startswith("掲載物件"):
+            name = ""          # 一覧のUI文言。物件名ではない
+        built = None
+        # 「築年数/階数 | 12年 / 7階建」の形（実測）
+        mb = re.search(r"築年数[^|]*\|\s*(\d{1,3})\s*年", ctext)
+        if not mb:
+            mb = re.search(r"築\s*(\d{1,3})\s*年", ctext)
+        if mb:
+            built = CURRENT_YEAR - int(mb.group(1))
+        else:
+            my = re.search(r"(\d{4})年\s*\d{0,2}月?\s*築", ctext)
+            if my:
+                built = int(my.group(1))
+        # 「新築」表記は築0年
+        if built is None and "新築" in ctext:
+            built = CURRENT_YEAR
+        walk = parse_walk(ctext.replace("|", " "), station)
+        walks = parse_all_walks(ctext.replace("|", " "))
+        for tr in bld.select("tbody.prg-roomList tr"):
+            a = tr.find("a", href=lambda h: h and "/chintai/room/" in (h or ""))
+            if not a:
+                continue
+            m = re.search(r"/chintai/room/(\w+)/", a["href"])
+            if not m or m.group(1) in seen:
+                continue
+            t = re.sub(r"\s+", " ", tr.get_text(" ", strip=True))
+            mr = re.search(r"([\d.]+)\s*万円", t)
+            rent = float(mr.group(1)) if mr else None
+            mk = re.search(r"万円\s*/\s*([\d,]+)\s*円", t)
+            kanri = int(mk.group(1).replace(",", "")) if mk else 0
+            total = round(rent + kanri / 10000, 2) if rent is not None else None
+            ms = re.search(r"([^\s/]+)\s*/\s*([^\s/]+)\s*/\s*[^\s/]+\s*/\s*[^\s/]+", t)
+            shikirei = ""
+            if ms:
+                def _f(x):
+                    return "なし" if x in ("-", "－", "無", "なし") else x
+                shikirei = f"敷{_f(ms.group(1))}/礼{_f(ms.group(2))}"
+            seen.add(m.group(1))
+            items.append({
+                "id": f"homes:r:{m.group(1)}",
+                "img": _abs(card_image(tr), "https://www.homes.co.jp"),
+                "station": station,
+                "type": "rent",
+                "name": name or addr,
+                "price": total,
+                "rent": rent,
+                "kanri": kanri,
+                "area": parse_area(t),
+                "layout": parse_layout(t),
+                "walk": walk,
+                "walks": walks,
+                "built": built,
+                "floor": parse_floor(t, "rent"),
+                "shikirei": shikirei,
+                "addr": addr,
+                "url": a["href"] if a["href"].startswith("http") else _abs(a["href"], "https://www.homes.co.jp"),
+                "source": "HOMES賃貸",
+                "parking": None,
+            })
+    return items
+
+
 def parse_nomu(html: str, station: str, kind: str):
     if not html:
         return []
@@ -1839,7 +1929,7 @@ def enrich_from_detail(item):
                                       "アットホーム賃貸", "三井のリハウス",
                                       "スマイティ", "CHINTAI", "ニフティ不動産",
                                       "ハウスコム", "賃貸スモッカ", "goo住宅",
-                                      "カウカモ")
+                                      "カウカモ", "HOMES賃貸")
     html = fetch_with_retry(item["url"], impersonate=use_cffi)
     if not html:
         return
@@ -2284,6 +2374,25 @@ def collect_station(station, codes):
             portal_count[f"HOMES {kind}"] += len(kept)
             time.sleep(SLEEP_BETWEEN)
 
+        # HOMESの賃貸 — 売買と同じ駅スラッグが使える。一覧に階・敷礼・
+        # 築年数まで載る（実測: 目黒66件・主要項目61/66）
+        if use_homes:
+            items = []
+            for pn in (1, 2, 3):
+                url = (f"https://www.homes.co.jp/chintai/{pref}/"
+                       f"{codes['homes']}/list/?page={pn}")
+                html = fetch_with_retry(url, impersonate=True)
+                page_items = parse_homes_rent(html, station)
+                if not page_items:
+                    break
+                items.extend(page_items)
+                time.sleep(SLEEP_BETWEEN)
+            kept = [i for i in items if apply_rent_filters(i)]
+            log.append(f"[HOMES賃貸] {station}: parsed={len(items)} kept={len(kept)}")
+            all_items.extend(kept)
+            portal_count["HOMES賃貸"] += len(kept)
+            time.sleep(SLEEP_BETWEEN)
+
         # アットホーム (3種別) — Cloudflare回避でcurl_cffi使用 + リトライ
         use_athome = bool(codes.get("athome"))
         for kind, path in ([] if not use_athome else
@@ -2541,18 +2650,21 @@ def collect_station(station, codes):
         if codes.get("rehouse"):
             items = []
             _pf, _rw, _st = codes["rehouse"].split("/")
-            base = ("https://www.rehouse.co.jp/buy/all-type/prefecture/"
-                    f"{_pf}/railway/{_rw}/station/{_st}/")
-            for pn in range(1, 11):
-                url = base if pn == 1 else f"{base}?page={pn}"
-                html = fetch_with_retry(url, impersonate=True)
-                page_items = parse_rehouse(html, station)
-                if not page_items:
-                    break
-                items.extend(page_items)
-                if len(page_items) < 30:
-                    break          # 最終ページ
-                time.sleep(SLEEP_BETWEEN)
+            # all-type は中古3種のみ。新築マンション/新築戸建は別URLなので
+            # 追加で取る（実測: 新築戸建 目黒で3件、築2026年）
+            for _seg in ("all-type", "s_mansion", "s_kodate"):
+                base = (f"https://www.rehouse.co.jp/buy/{_seg}/prefecture/"
+                        f"{_pf}/railway/{_rw}/station/{_st}/")
+                for pn in range(1, 11):
+                    url = base if pn == 1 else f"{base}?page={pn}"
+                    html = fetch_with_retry(url, impersonate=True)
+                    page_items = parse_rehouse(html, station)
+                    if not page_items:
+                        break
+                    items.extend(page_items)
+                    if len(page_items) < 30:
+                        break          # 最終ページ
+                    time.sleep(SLEEP_BETWEEN)
             kept = filter_with_walk_rescue(items)
             log.append(f"[リハウス] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
