@@ -892,10 +892,83 @@ def parse_chintai(html: str, station: str):
 # 一覧の徒歩は「ニフティ不動産が独自で判定した利用可能駅」＝推定値なので使わない。
 # walk=None にして、他条件を満たすものだけ詳細ページの「交通機関」欄
 # (元サイトの公式表記が載る)から徒歩を取る。
+def _parse_nifty_rent(soup, station: str):
+    """ニフティの賃貸は tbody.click-area が1部屋。建物情報は上位にある。
+    列は 階/間取り/面積/賃料/管理費/敷/礼（実測）。"""
+    items = []
+    seen = set()
+    for tb in soup.select("tbody.click-area"):
+        a = tb.find("a", href=lambda h: h and "detail_" in h)
+        if not a:
+            continue
+        m = re.search(r"detail_([0-9a-f]{8,})", a["href"])
+        if not m or m.group(1) in seen:
+            continue
+        t = re.sub(r"\s+", " ", tb.get_text(" ", strip=True))
+        # 建物情報を持つ祖先を探す
+        btext = ""
+        cur = tb
+        for _ in range(6):
+            cur = cur.parent
+            if cur is None:
+                break
+            bt = re.sub(r"\s+", " ", cur.get_text(" ", strip=True))
+            if "徒歩" in bt or "歩" in bt:
+                if parse_addr(bt):
+                    btext = bt
+                    break
+        addr = parse_addr(btext)
+        if not addr:
+            continue
+        name = ""
+        mn = re.search(r"^([^|]{2,30}?)の賃貸物件", btext)
+        if mn:
+            name = mn.group(1).strip()
+        built = None
+        mb = re.search(r"築年数\s*(\d{1,3})\s*年", btext)
+        if mb:
+            built = CURRENT_YEAR - int(mb.group(1))
+        mr = re.search(r"([\d.]+)\s*万円", t)
+        rent = float(mr.group(1)) if mr else None
+        mk = re.search(r"万円\s*([\d,]+)\s*円", t)
+        kanri = int(mk.group(1).replace(",", "")) if mk else 0
+        total = round(rent + kanri / 10000, 2) if rent is not None else None
+        ms = re.search(r"敷\s*(\S+)\s*礼\s*(\S+)", t)
+        shikirei = ""
+        if ms:
+            def _f(x):
+                return "なし" if x in ("不要", "-", "－", "なし") else x
+            shikirei = f"敷{_f(ms.group(1))}/礼{_f(ms.group(2))}"
+        seen.add(m.group(1))
+        items.append({
+            "id": f"nifty:r:{m.group(1)}",
+            "img": _abs(card_image(tb), "https://myhome.nifty.com"),
+            "station": station,
+            "type": "rent",
+            "name": name or addr,
+            "price": total,
+            "rent": rent,
+            "kanri": kanri,
+            "area": parse_area(t),
+            "layout": parse_layout(t),
+            "walk": None,      # 一覧の徒歩は独自推定なので使わない
+            "built": built,
+            "floor": parse_floor(t, "rent"),
+            "shikirei": shikirei,
+            "addr": addr,
+            "url": _abs(a["href"], "https://myhome.nifty.com"),
+            "source": "ニフティ不動産",
+            "parking": None,
+        })
+    return items
+
+
 def parse_nifty(html: str, station: str, kind: str):
     if not html:
         return []
     soup = BeautifulSoup(html, "html.parser")
+    if kind == "rent" and soup.select("tbody.click-area"):
+        return _parse_nifty_rent(soup, station)
     items = []
     seen = set()
     # 中古は div.box.is-padding-lg.is-space-lg が1建物。新築はページ構造が
