@@ -1406,6 +1406,97 @@ def parse_goo(html: str, station: str):
     return items
 
 
+# goo住宅・不動産の売買。div.nayose-property-data が1物件で
+# 価格/間取り/広さ/階数/方位 を持ち、住所と徒歩は上位要素にある（実測）。
+def parse_goo_buy(html: str, station: str, kind: str):
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    items = []
+    seen = set()
+    boxes = soup.select("div.nayose-property-data")
+    if not boxes:
+        # 戸建・新築はテーブル行が1物件（実測: div.nayose-property-data が無い）
+        boxes = [tr for tr in soup.select("table.property tr")
+                 if tr.find("a", href=lambda h: h and "/detail/" in (h or ""))]
+    for box in boxes:
+        a = box.find("a", href=lambda h: h and "/detail/" in h)
+        if not a:
+            par = box.parent
+            for _ in range(4):
+                if par is None:
+                    break
+                a = par.find("a", href=lambda h: h and "/buy/" in (h or "") and "/detail/" in h)
+                if a:
+                    break
+                par = par.parent
+        if not a:
+            continue
+        m = re.search(r"/x(\w+)\.html", a["href"])
+        key = m.group(1) if m else a["href"]
+        if key in seen:
+            continue
+        t = re.sub(r"\s+", " ", box.get_text(" ", strip=True))
+        # 住所・徒歩を持つ祖先を探す
+        ctext = t
+        cur = box
+        for _ in range(6):
+            cur = cur.parent
+            if cur is None:
+                break
+            bt = re.sub(r"\s+", " ", cur.get_text(" ", strip=True))
+            if parse_addr(bt):
+                ctext = bt
+                break
+        addr = parse_addr(ctext)
+        if not addr:
+            continue
+        built = None
+        mb = re.search(r"(\d{4})年\d{1,2}月", ctext)
+        if mb:
+            built = int(mb.group(1))
+        else:
+            mc = re.search(r"築\s*(\d{1,3})\s*年", ctext)
+            if mc:
+                built = CURRENT_YEAR - int(mc.group(1))
+            elif "新築" in ctext:
+                built = CURRENT_YEAR
+        mf = re.search(r"階数\s*(B?\d+)\s*階", t)
+        floor = f"{mf.group(1)}階" if mf else parse_floor(t, kind)
+        name = ""
+        h_el = None
+        cur2 = box
+        for _ in range(4):
+            cur2 = cur2.parent
+            if cur2 is None:
+                break
+            h_el = cur2.find(["h2", "h3"])
+            if h_el:
+                break
+        if h_el:
+            name = h_el.get_text(strip=True)[:40]
+        seen.add(key)
+        items.append({
+            "id": f"goo:{kind[0]}:{key}",
+            "img": _abs(card_image(box), "https://house.goo.ne.jp"),
+            "station": station,
+            "type": kind,
+            "name": name or addr,
+            "price": parse_price_man(t),
+            "area": parse_area(t),
+            "layout": parse_layout(t),
+            "walk": parse_walk(ctext, station),
+            "walks": parse_all_walks(ctext),
+            "built": built,
+            "floor": floor,
+            "addr": addr,
+            "url": _abs(a["href"], "https://house.goo.ne.jp"),
+            "source": "goo住宅",
+            "parking": None,
+        })
+    return items
+
+
 def parse_nomu(html: str, station: str, kind: str):
     if not html:
         return []
@@ -2155,6 +2246,27 @@ def collect_station(station, codes):
             log.append(f"[アットホーム {kind}] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count[f"アットホーム {kind}"] += len(kept)
+            time.sleep(SLEEP_BETWEEN)
+
+        # goo住宅・不動産の中古マンション。戸建・新築は同じページ構造でも
+        # 面積や築年が欄に出ず主要項目が埋まらなかった（実測）ので入れない
+        if codes.get("nomu"):
+            _bp, _bl, _bc = codes["nomu"].split("/")
+            items = []
+            for pn in range(1, 4):
+                url = (f"https://house.goo.ne.jp/buy/shuto_um/ensen/"
+                       f"{_bl[1:]}/{_bc}.html"
+                       + ("" if pn == 1 else f"?p={pn}"))
+                html = fetch_with_retry(url, impersonate=True)
+                page_items = parse_goo_buy(html, station, "mansion")
+                if not page_items:
+                    break
+                items.extend(page_items)
+                time.sleep(SLEEP_BETWEEN)
+            kept = filter_with_walk_rescue(items)
+            log.append(f"[goo売買] {station}: parsed={len(items)} kept={len(kept)}")
+            all_items.extend(kept)
+            portal_count["goo住宅 mansion"] += len(kept)
             time.sleep(SLEEP_BETWEEN)
 
         # goo住宅・不動産の賃貸 — 駅コードはノムコムと同じ体系。
