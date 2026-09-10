@@ -2666,7 +2666,11 @@ def collect_station(station, codes):
             _pf, _rw, _st = codes["rehouse"].split("/")
             # all-type は中古3種のみ。新築マンション/新築戸建は別URLなので
             # 追加で取る（実測: 新築戸建 目黒で3件、築2026年）
-            for _seg in ("all-type", "s_mansion", "s_kodate"):
+            # all-type だけだと種別ごとの在庫を取りこぼす。
+            # 実測(目黒): all-type 30件だけ → 全種別を回すと51件
+            #   tochi +5 / kodate +9 / mansion +4 / s_kodate +3
+            for _seg in ("all-type", "mansion", "kodate", "tochi",
+                         "s_mansion", "s_kodate"):
                 base = (f"https://www.rehouse.co.jp/buy/{_seg}/prefecture/"
                         f"{_pf}/railway/{_rw}/station/{_st}/")
                 for pn in range(1, 11):
