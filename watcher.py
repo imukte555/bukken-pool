@@ -2267,7 +2267,8 @@ def collect_station(station, codes):
         if codes.get("nomu"):
             _bp, _bl, _bc = codes["nomu"].split("/")
             items = []
-            for pn in range(1, 4):
+            # 実測: 3〜6ページ目でも 71/62/53/43件と別物件が出続ける
+            for pn in range(1, 9):
                 url = (f"https://house.goo.ne.jp/buy/shuto_um/ensen/"
                        f"{_bl[1:]}/{_bc}.html"
                        + ("" if pn == 1 else f"?p={pn}"))
@@ -2288,7 +2289,8 @@ def collect_station(station, codes):
         if codes.get("nomu"):
             _gp, _gl, _gc = codes["nomu"].split("/")
             items = []
-            for pn in range(1, 4):
+            # 実測: 3〜6ページ目でも 52/64/182/82件と別物件が出続ける
+            for pn in range(1, 9):
                 # ページ送りは ?p=N（?page=は無視される。実測で確認）
                 url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
                        f"{_gl[1:]}/{_gc}.html"
@@ -2338,7 +2340,8 @@ def collect_station(station, codes):
         if codes.get("sumaity_rent"):
             _sp, _ss = codes["sumaity_rent"].split("/", 1)
             items = []
-            for pn in range(1, 6):
+            # 実測: 4〜7ページ目でも 113/85/74/90件と別物件が出続ける
+            for pn in range(1, 11):
                 url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
                        + ("" if pn == 1 else f"?page={pn}"))
                 html = fetch_with_retry(url, impersonate=True)
@@ -2429,7 +2432,8 @@ def collect_station(station, codes):
             items = []
             # ページ送りは ?page= ではなく /list/pageN/（実測。?page=は無視され
             # 同じ1ページ目が返るため重複していた）
-            pages = tuple(range(1, 13)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 9))
+            # 実測: 6/8/10/12ページ目でも 55/50/38/38件と別物件が出続ける
+            pages = tuple(range(1, 21)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 15))
             # 賃貸マンション/アパートに加えて賃貸戸建(list/kodate/)も取る。
             # 戸建は面積が広く45㎡以上の条件に合いやすい（実測: 目黒16件）
             for sub in ("", "kodate/"):
