@@ -50,6 +50,9 @@ HTTP_HEADERS = {
 TIMEOUT = 30
 SLEEP_BETWEEN = 3.0  # bot検知対策で長め
 WORKERS = 5          # 駅の並列数。上げすぎるとbot検知されるので控えめ
+# 詳細ページの並列数。ホストごとのゲートで同時接続は別途絞られるので、
+# プール全体としてはもう少し並べてよい（500件超を5並列だと長すぎる）
+DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS", 10))
 # 同一建物から取る最大部屋数。3だと同じマンションの4部屋目以降が
 # 条件を満たしていても捨てられていたので広げた（件数を増やすため）。
 # 同じ部屋の重複掲載は別途 間取り+賃料+面積 の一致で除外している。
@@ -3599,8 +3602,11 @@ def main():
     # プール全件を1枚のHTMLに出す（毎朝の通知とは別。今ある在庫を全部見るため）
     # 通知30件だけだと、在庫を見終わる前に消える物件が出る＝機会損失になる。
     try:
-        print("在庫ページ用に全件の詳細を取得中…")
-        with ThreadPoolExecutor(max_workers=WORKERS) as ex:
+        print(f"在庫ページ用に全件の詳細を取得中… ({len(items)}件)")
+        # 取得元が増えて500件超になり、5並列だと詳細取得だけで長時間かかる。
+        # ホストごとのゲート(_HOST_GATE)で同時接続は制御されるので、
+        # プール全体の並列数は上げてよい。
+        with ThreadPoolExecutor(max_workers=DETAIL_WORKERS) as ex:
             list(ex.map(enrich_from_detail, items))
         before = len(items)
         items = [i for i in items if revalidate_walk(i)]
