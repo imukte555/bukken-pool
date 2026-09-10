@@ -2453,7 +2453,8 @@ def collect_station(station, codes):
             for kind, path in [("mansion", f"mansion/used/{pref}/{codes['sumaity']}-eki/"),
                                ("house",   f"house/used/{pref}/{codes['sumaity']}-eki/")]:
                 items = []
-                for pn in range(1, 8):
+                # 実測: 目黒の中古マンションは9ページ目まで別物件が出続ける
+                for pn in range(1, 11):
                     url = (f"https://sumaity.com/{path}" if pn == 1
                            else f"https://sumaity.com/{path}?page={pn}")
                     html = fetch_with_retry(url, impersonate=True)
