@@ -2079,7 +2079,9 @@ MAX_INTERVAL = 6.0
 # そこで「N件取ったら休む」方式にして全駅から取り切る。
 # ニフティ不動産は実測で「まとめて叩くと405を返し、約120秒で復帰」。
 # 22駅ぶんの調査(約24リクエスト)は通ったので枠は広め。
-_HOST_QUOTA = {"www.homes.co.jp": 5, "www.athome.co.jp": 15,
+# アットホームは実測で「連続5件成功→6件目から認証中ページ」。
+# 15件枠だと枠を使い切る前に弾かれるので5に合わせる。
+_HOST_QUOTA = {"www.homes.co.jp": 5, "www.athome.co.jp": 5,
                "myhome.nifty.com": 15}
 _HOST_COOLDOWN_SEC = {"www.homes.co.jp": 320, "www.athome.co.jp": 180,
                       "myhome.nifty.com": 150}
