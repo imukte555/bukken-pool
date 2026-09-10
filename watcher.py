@@ -2003,7 +2003,9 @@ def collect_station(station, codes):
                                ("mansion", f"shinchiku-mansion/{pref}/{codes['nifty']}_st/"),
                                ("house",   f"shinchiku-ikkodate/{pref}/{codes['nifty']}_st/")]:
                 items = []
-                for pn in (1, 2, 3):
+                # ニフティは6種別あり、枠15件ごとに150秒の休憩が入るので
+                # ページを深くすると実行時間が跳ね上がる。2ページに留める
+                for pn in (1, 2):
                     url = (f"https://myhome.nifty.com/{path}" if pn == 1
                            else f"https://myhome.nifty.com/{path}?page={pn}")
                     html = fetch_with_retry(url, impersonate=True)
