@@ -3769,8 +3769,12 @@ def main():
         # （実測: アットホームのIPブロックで取得が3時間止まった回がある）
         prev_n = int(_state.get("page_count", 0) or 0)
         globals()["_PAGE_COUNT"] = prev_n   # 生成できなければ前回値を維持
-        if prev_n and len(items) < prev_n * 0.6:
-            print(f"⚠️ 取得件数が前回より大きく減ったため在庫ページを更新しません "
+        # 歯止めの閾値。取得を短く回したい時に環境変数で下げられる。
+        # 0 を指定すると歯止め自体を無効にする
+        _guard = float(os.environ.get("MIN_KEEP_RATIO") or 0.6)
+        if prev_n and _guard > 0 and len(items) < prev_n * _guard:
+            print(f"⚠️ 取得件数が前回の{int(_guard*100)}%を割ったため"
+                  f"在庫ページを更新しません "
                   f"(前回{prev_n}件 → 今回{len(items)}件)。"
                   f"打ち切ったサイト: {'、'.join(sorted(_HOST_DEAD)) or 'なし'}",
                   file=sys.stderr)
