@@ -212,7 +212,14 @@ def card_image(node):
             u = img.get(attr) or ""
             if isinstance(u, list):
                 u = u[0] if u else ""
+            u = u.strip()
             if not u or u.startswith("data:"):
+                continue
+            # 実測: リハウスは data-src="false" を持つ。属性の優先順で
+            # src より先に見るため、文字列 "false" を画像URLとして
+            # 拾ってしまい、開けないURLが混入していた。
+            # URLとして成立しないものは全て捨てる。
+            if not re.match(r"(https?:)?//|^/", u):
                 continue
             # 除外判定はクエリ文字列を除いたパス部分だけで行う。
             # スマイティの画像URLはクエリに「読み込み失敗時の代替画像」の
