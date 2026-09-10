@@ -1185,6 +1185,79 @@ def parse_sumaity_rent(html: str, station: str):
     return items
 
 
+# 賃貸スモッカ。div.item_list01.bukken が建物、table.item_list01_rooms の
+# 各行が部屋で、列は 階/部屋番号/賃料/管理費/敷金/礼金/間取/面積/方位（実測）。
+# 駅コードはノムコムと同じ国交省体系がそのまま使える（22駅で実測確認）。
+def parse_smocca(html: str, station: str):
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    items = []
+    seen = set()
+    for bld in soup.select("div.item_list01.bukken"):
+        btext = re.sub(r"\s+", " ", bld.get_text(" | ", strip=True))
+        addr = parse_addr(btext)
+        if not addr:
+            continue
+        name = ""
+        h_el = bld.find(["h2", "h3", "p"])
+        if h_el:
+            name = h_el.get_text(strip=True)[:40]
+        built = None
+        mb = re.search(r"(\d{4})年\d{1,2}月", btext)
+        if mb:
+            built = int(mb.group(1))
+        elif "新築" in btext:
+            built = CURRENT_YEAR
+        transit = btext.replace("/", " ").replace("|", " ").replace("歩", "徒歩")
+        transit = transit.replace("徒徒歩", "徒歩")
+        walk = parse_walk(transit, station)
+        walks = parse_all_walks(transit)
+        for tr in bld.select("table.item_list01_rooms tr"):
+            a = tr.find("a", href=lambda h: h and "/bukken/detail/" in h)
+            if not a:
+                continue          # ヘッダ行
+            m = re.search(r"/bukken/detail/(\w+)", a["href"])
+            if not m or m.group(1) in seen:
+                continue
+            t = re.sub(r"\s+", " ", tr.get_text(" ", strip=True))
+            mr = re.search(r"([\d.]+)\s*万円", t)
+            rent = float(mr.group(1)) if mr else None
+            mk = re.search(r"万円\s*([\d,]+)\s*円", t)
+            kanri = int(mk.group(1).replace(",", "")) if mk else 0
+            total = round(rent + kanri / 10000, 2) if rent is not None else None
+            # 敷金・礼金は賃料のあとに2つ並ぶ
+            sk = re.findall(r"([\d.]+万円|なし|－|-)", t)
+            shikirei = ""
+            if len(sk) >= 3:
+                def _f(x):
+                    return "なし" if x in ("-", "－", "なし") else x
+                shikirei = f"敷{_f(sk[1])}/礼{_f(sk[2])}"
+            seen.add(m.group(1))
+            items.append({
+                "id": f"smocca:r:{m.group(1)}",
+                "img": _abs(card_image(tr) or card_image(bld), "https://smocca.jp"),
+                "station": station,
+                "type": "rent",
+                "name": name or addr,
+                "price": total,
+                "rent": rent,
+                "kanri": kanri,
+                "area": parse_area(t),
+                "layout": parse_layout(t),
+                "walk": walk,
+                "walks": walks,
+                "built": built,
+                "floor": parse_floor(t, "rent"),
+                "shikirei": shikirei,
+                "addr": addr,
+                "url": a["href"] if a["href"].startswith("http") else _abs(a["href"], "https://smocca.jp"),
+                "source": "賃貸スモッカ",
+                "parking": None,
+            })
+    return items
+
+
 def parse_nomu(html: str, station: str, kind: str):
     if not html:
         return []
@@ -1483,7 +1556,7 @@ def enrich_from_detail(item):
     use_cffi = item.get("source") in ("HOMES", "アットホーム",
                                       "アットホーム賃貸", "三井のリハウス",
                                       "スマイティ", "CHINTAI", "ニフティ不動産",
-                                      "ハウスコム")
+                                      "ハウスコム", "賃貸スモッカ")
     html = fetch_with_retry(item["url"], impersonate=use_cffi)
     if not html:
         return
@@ -1594,6 +1667,7 @@ _HOST_GATE = {
     "sumaity.com":      (threading.Lock(), 1.5),
     "www.chintai.net":  (threading.Lock(), 1.5),
     "www.housecom.jp":  (threading.Lock(), 1.5),
+    "smocca.jp":        (threading.Lock(), 1.5),
 }
 _HOST_LAST = {}
 
@@ -1932,6 +2006,33 @@ def collect_station(station, codes):
             log.append(f"[アットホーム {kind}] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count[f"アットホーム {kind}"] += len(kept)
+            time.sleep(SLEEP_BETWEEN)
+
+        # 賃貸スモッカ — 駅コードはノムコム(国交省体系)をそのまま使える。
+        # 蛍池はノムコム未設定なのでリハウスのコードから導く（22駅で実測確認）
+        _sm = None
+        if codes.get("nomu"):
+            _p, _l, _c = codes["nomu"].split("/")
+            _sm = ("tokyo", _l, _c)
+        elif codes.get("rehouse"):
+            _pf, _rw, _st = codes["rehouse"].split("/")
+            _sm = ("osaka" if _pf == "27" else "tokyo", _rw, _rw + _st)
+        if _sm:
+            _sp, _sl, _sc = _sm
+            items = []
+            for pn in range(1, 6):
+                url = (f"https://smocca.jp/search/{_sp}/line/{_sl}/station/{_sc}"
+                       + ("" if pn == 1 else f"?page={pn}"))
+                html = fetch_with_retry(url, impersonate=True)
+                page_items = parse_smocca(html, station)
+                if not page_items:
+                    break
+                items.extend(page_items)
+                time.sleep(SLEEP_BETWEEN)
+            kept = [i for i in items if apply_rent_filters(i)]
+            log.append(f"[スモッカ] {station}: parsed={len(items)} kept={len(kept)}")
+            all_items.extend(kept)
+            portal_count["賃貸スモッカ"] += len(kept)
             time.sleep(SLEEP_BETWEEN)
 
         # スマイティの賃貸 — 1駅で260件超が取れる最大級の供給源（実測）
