@@ -1883,6 +1883,11 @@ HOST_GIVEUP_FAILS = int(os.environ.get("HOST_GIVEUP_FAILS", 12))
 # （この2サイトはローカル実行だと普通に取れる。実測: HOMES32件/athome60件）
 _HOST_GIVEUP = {"www.athome.co.jp": 3, "www.homes.co.jp": 4,
                 "myhome.nifty.com": 8}
+# 1ホストの休憩の累計上限(秒)。ここを超えたらそのホストは打ち切る。
+# 見積もりでHOMESは休憩だけで208分に達し得るため、1サイトが実行時間を
+# 食い潰さないように上限を設ける。
+HOST_REST_CAP_SEC = int(os.environ.get("HOST_REST_CAP_SEC", 1800))   # 30分
+_HOST_RESTED = {}
 _HOST_DEAD = set()
 
 # 在庫ページに載せた件数。次回の実行で「大きく減っていないか」を見るために
@@ -1944,6 +1949,15 @@ def take_slot(host):
         need_rest = (used % q == 0)
     if need_rest:
         wait = _HOST_COOLDOWN_SEC.get(host, 300)
+        with _BUDGET_LOCK:
+            rested = _HOST_RESTED.get(host, 0)
+        if rested + wait > HOST_REST_CAP_SEC:
+            _HOST_DEAD.add(host)
+            print(f"  {host}: 休憩の累計が上限({HOST_REST_CAP_SEC}秒)に達したため打ち切ります",
+                  file=sys.stderr)
+            return
+        with _BUDGET_LOCK:
+            _HOST_RESTED[host] = rested + wait
         if wait >= budget_left():
             # 休むと締切を割る。ここで待つより他のサイトに時間を回す。
             _HOST_DEAD.add(host)
