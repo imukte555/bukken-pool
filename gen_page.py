@@ -39,9 +39,21 @@ def fmt_parking(it):
     return label
 
 
-def build(items, out_path, station_order=None):
-    """station_order: 駅タブの並び順。左から優先度の高い順に渡す。"""
+def build(items, out_path, station_order=None, reject_tally=None):
+    """station_order: 駅タブの並び順。左から優先度の高い順に渡す。
+    reject_tally: 条件で落とした理由の集計 (Counter)。ページ末尾に出す。"""
     jst = datetime.now(timezone.utc).astimezone(timezone(timedelta(hours=9)))
+    reject_html = ""
+    if reject_tally:
+        rows = "".join(
+            f"<li>{html.escape(str(k))} … {v:,}件</li>"
+            for k, v in reject_tally.most_common(12))
+        total = sum(reject_tally.values())
+        reject_html = (
+            '<details class="rej"><summary>条件で落とした物件 '
+            f'{total:,}件の内訳</summary><ul>{rows}</ul>'
+            '<p>条件: 徒歩7分以内 / 3,000万〜1.2億 / 45㎡以上 / 築20年未満 / '
+            '賃料28万円以下(管理費込)</p></details>')
     present = {it["station"] for it in items}
     if station_order:
         stations = [s for s in station_order if s in present]
@@ -172,6 +184,11 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 @media(prefers-color-scheme:dark){{.hist{{color:#d8b74a}}}}
 @media(prefers-color-scheme:dark){{.down{{color:#ff7a6b}}}}
 .empty{{padding:40px 16px;color:var(--sub);text-align:center;grid-column:1/-1}}
+.rej{{margin:18px 8px;padding:10px 14px;background:var(--card);border:1px solid var(--line);border-radius:10px;font-size:13px;color:var(--sub);grid-column:1/-1}}
+.rej summary{{cursor:pointer;font-weight:600;color:var(--fg)}}
+.rej ul{{margin:8px 0 4px;padding-left:20px}}
+.rej li{{margin:2px 0}}
+.rej p{{margin:6px 0 0;opacity:.8;font-size:12px}}
 /* iPhone: 1カラム、フィルタは横スクロール、余白を詰める */
 @media(max-width:640px){{
   header{{padding:11px 12px 8px;padding-left:max(12px,env(safe-area-inset-left));
@@ -199,6 +216,7 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 <main id="grid">
 {''.join(cards)}
 <div class="empty" id="empty" style="display:none">条件に合う物件がありません</div>
+{reject_html}
 </main>
 <script>
 const active={{}};

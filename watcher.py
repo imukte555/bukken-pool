@@ -3655,7 +3655,7 @@ def main():
         # 駅タブは左から優先順（恵比寿/目黒/中目黒 → 以降はSTATIONS定義順）
         order = PRIORITY_STATIONS + [s for s in STATIONS if s not in PRIORITY_STATIONS]
         n = gen_page.build(items, str(BASE_DIR / "docs" / "index.html"),
-                           station_order=order)
+                           station_order=order, reject_tally=REJECT_TALLY)
         globals()["_PAGE_COUNT"] = n
         print(f"在庫ページ生成: {n}件 → docs/index.html")
     except Exception as e:
