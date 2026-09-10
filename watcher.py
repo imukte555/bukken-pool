@@ -2494,8 +2494,10 @@ def collect_station(station, codes):
                             ("house",   f"house/{codes['nomu']}/"),
                             ("land",    f"land/{codes['nomu']}/")]):
             items = []
+            # ページ送りは ?page= ではなく ?pager_page=（?page=は無視され
+            # 1ページ目が返っていた。実測で確認）
             for pn in range(1, 7):
-                url = f"https://www.nomu.com/{path}?page={pn}"
+                url = f"https://www.nomu.com/{path}?pager_page={pn}"
                 html = fetch(url)
                 page_items = parse_nomu(html, station, kind)
                 if not page_items:
