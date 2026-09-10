@@ -1416,9 +1416,10 @@ def parse_goo_buy(html: str, station: str, kind: str):
     seen = set()
     boxes = soup.select("div.nayose-property-data")
     if not boxes:
-        # 戸建・新築はテーブル行が1物件（実測: div.nayose-property-data が無い）
-        boxes = [tr for tr in soup.select("table.property tr")
-                 if tr.find("a", href=lambda h: h and "/detail/" in (h or ""))]
+        # 戸建・土地・新築は table.tab.property 全体で1物件（実測）。
+        # 価格/間取り/建物面積/土地面積/築年月/所在地/複数駅の徒歩 が入る
+        boxes = [t for t in soup.select("table.tab.property")
+                 if t.find("a", href=lambda h: h and "/detail/" in (h or ""))]
     for box in boxes:
         a = box.find("a", href=lambda h: h and "/detail/" in h)
         if not a:
@@ -1463,6 +1464,14 @@ def parse_goo_buy(html: str, station: str, kind: str):
                 built = CURRENT_YEAR
         mf = re.search(r"階数\s*(B?\d+)\s*階", t)
         floor = f"{mf.group(1)}階" if mf else parse_floor(t, kind)
+        # 「90.09m 2 | 56.61m 2」は 建物面積→土地面積 の順（実測）
+        area_over = None
+        ms2 = re.findall(r"([\d.]+)\s*m\s*2", t)
+        if ms2:
+            if kind == "land" and len(ms2) >= 2:
+                area_over = float(ms2[1])
+            else:
+                area_over = float(ms2[0])
         name = ""
         h_el = None
         cur2 = box
@@ -1483,7 +1492,7 @@ def parse_goo_buy(html: str, station: str, kind: str):
             "type": kind,
             "name": name or addr,
             "price": parse_price_man(t),
-            "area": parse_area(t),
+            "area": area_over if area_over is not None else parse_area(t),
             "layout": parse_layout(t),
             "walk": parse_walk(ctext, station),
             "walks": parse_all_walks(ctext),
@@ -2420,23 +2429,28 @@ def collect_station(station, codes):
         # 面積や築年が欄に出ず主要項目が埋まらなかった（実測）ので入れない
         if codes.get("nomu"):
             _bp, _bl, _bc = codes["nomu"].split("/")
-            items = []
-            # 実測: 3〜6ページ目でも 71/62/53/43件と別物件が出続ける
-            for pn in range(1, 9):
-                url = (f"https://house.goo.ne.jp/buy/shuto_um/ensen/"
-                       f"{_bl[1:]}/{_bc}.html"
-                       + ("" if pn == 1 else f"?p={pn}"))
-                html = fetch_with_retry(url, impersonate=True)
-                page_items = parse_goo_buy(html, station, "mansion")
-                if not page_items:
-                    break
-                items.extend(page_items)
+            # 中古マンション/中古戸建/新築マンションを取る。
+            # 中古戸建は table.tab.property 全体が1物件で、建物面積・築年月・
+            # 複数駅の徒歩まで入る（実測: 目黒40件・主要項目40/40）
+            for _seg, _kind, _lbl in [("um", "mansion", "mansion"),
+                                      ("uh", "house", "house"),
+                                      ("bm", "mansion", "mansion")]:
+                items = []
+                for pn in range(1, 9):
+                    url = (f"https://house.goo.ne.jp/buy/shuto_{_seg}/ensen/"
+                           f"{_bl[1:]}/{_bc}.html"
+                           + ("" if pn == 1 else f"?p={pn}"))
+                    html = fetch_with_retry(url, impersonate=True)
+                    page_items = parse_goo_buy(html, station, _kind)
+                    if not page_items:
+                        break
+                    items.extend(page_items)
+                    time.sleep(SLEEP_BETWEEN)
+                kept = filter_with_walk_rescue(items)
+                log.append(f"[goo売買 {_seg}] {station}: parsed={len(items)} kept={len(kept)}")
+                all_items.extend(kept)
+                portal_count[f"goo住宅 {_lbl}"] += len(kept)
                 time.sleep(SLEEP_BETWEEN)
-            kept = filter_with_walk_rescue(items)
-            log.append(f"[goo売買] {station}: parsed={len(items)} kept={len(kept)}")
-            all_items.extend(kept)
-            portal_count["goo住宅 mansion"] += len(kept)
-            time.sleep(SLEEP_BETWEEN)
 
         # goo住宅・不動産の賃貸 — 駅コードはノムコムと同じ体系。
         # 路線だけ先頭1桁を落とす（2172→172）。実測: 目黒70件・蒲田108件
