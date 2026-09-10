@@ -2343,7 +2343,9 @@ def collect_station(station, codes):
             # 実測（恵比寿172件/広尾170件/代官山180件を全走査）で通過は1件だけだった。
             # 取りこぼしを無くすため、この駅だけ深いページまで見る。
             # 件数を増やすため深く見る（浅いと候補を取りこぼす）
-            pages = tuple(range(1, 11)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 8))
+            # 面積帯4本×価格帯3本を回すのでページは浅くする
+            # (1ページあたり 4×3=12リクエスト)
+            pages = (1, 2, 3) if station in DEEP_SCAN_STATIONS else (1, 2)
             items = []
             for pn in pages:
                 # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
@@ -2354,15 +2356,19 @@ def collect_station(station, codes):
                 # 40だけだと半分以下しか取れていない
                 _mbs = ("",) if kind == "land" else ("&mb=40", "&mb=50",
                                                      "&mb=60", "&mb=70")
+                # 価格帯を分けても別集合が返る（実測: 目黒1ページで
+                # 全帯20件 → 3分割で合わせてユニーク59件）
+                _bands = ((PRICE_MIN, 6000), (6000, 9000), (9000, PRICE_MAX))
                 page_items = []
                 for _mb in _mbs:
-                    url = (f"https://suumo.jp/{path}?et=10&pn={pn}"
-                           f"&kb={PRICE_MIN}&kt={PRICE_MAX}{_mb}")
-                    html = fetch_with_retry(url)
-                    got = parse_suumo(html, station, kind)
-                    if got:
-                        page_items.extend(got)
-                    time.sleep(SLEEP_BETWEEN)
+                    for _kb, _kt in _bands:
+                        url = (f"https://suumo.jp/{path}?et=10&pn={pn}"
+                               f"&kb={_kb}&kt={_kt}{_mb}")
+                        html = fetch_with_retry(url)
+                        got = parse_suumo(html, station, kind)
+                        if got:
+                            page_items.extend(got)
+                        time.sleep(SLEEP_BETWEEN)
                 if not page_items:
                     break  # ページ切れ
                 items.extend(page_items)
@@ -2749,7 +2755,8 @@ def collect_station(station, codes):
 
         # SUUMO 賃貸（管理費込みRENT_MAX以下）— 2ページまで
         rent_items = []
-        for pn in range(1, 7):   # 賃貸は最大の供給源なので深く取る
+        # 面積帯4×賃料帯3×種別2 = 1ページあたり24リクエストになるので浅くする
+        for pn in (1, 2):
             # 賃貸もサーバー側で面積と賃料を絞る（実測: 大井町1ページで
             # 45㎡未満が58件→0件。取得枠を狭い部屋に食われなくなる）
             # bs=040 は賃貸戸建。マンション/アパート枠だけだと戸建を
@@ -2757,16 +2764,19 @@ def collect_station(station, codes):
             # mb(面積下限)は10刻みで、値ごとに返る集合が違う。実測(目黒1ページ):
             #   mb=40 → 45㎡以上16件 / mb=50 → 34件 / mb=60 → 32件
             #   3つ合わせるとユニーク71件。40だけだと4分の1しか取れていない
+            # 賃料帯も分けると別集合が返る（売買のkb/ktと同じ挙動）
+            _rb = ((RENT_MIN, 15.0), (15.0, 22.0), (22.0, RENT_MAX))
             for _bs in ("", "&ar=030&bs=040"):
                 for _mb in (40, 50, 60, 70):
-                    url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
-                           f"/ek_{codes['suumo']}/?page={pn}"
-                           f"&mb={_mb}&cb={RENT_MIN}&ct={RENT_MAX}{_bs}")
-                    html = fetch_with_retry(url)
-                    page = parse_suumo_rent(html, station)
-                    if page:
-                        rent_items.extend(page)
-                    time.sleep(SLEEP_BETWEEN)
+                    for _cb, _ct in _rb:
+                        url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
+                               f"/ek_{codes['suumo']}/?page={pn}"
+                               f"&mb={_mb}&cb={_cb}&ct={_ct}{_bs}")
+                        html = fetch_with_retry(url)
+                        page = parse_suumo_rent(html, station)
+                        if page:
+                            rent_items.extend(page)
+                        time.sleep(SLEEP_BETWEEN)
             if not page:
                 break
         keep_raw(rent_items)
