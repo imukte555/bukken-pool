@@ -226,7 +226,10 @@ def card_image(node):
             # パス(nf_path=.../no_image/noimage_640x640.png)を持っており、
             # URL全体で見ると正常な写真まで no_image と誤判定していた（実測）
             _path = u.split("?")[0]
-            if re.search(r"(spacer|blank|noimage|no_image|logo|icon|dummy|move_\d+_\d+)", _path, re.I):
+            if re.search(r"(spacer|blank|noimage|no_image|nophoto|no_photo"
+                         r"|logo|icon|dummy|appli|bnr|banner|badge|btn_"
+                         r"|/img/common/|/img/appli/|move_\d+_\d+)",
+                         _path, re.I):
                 continue
             if u.endswith(".png") and "/assets/" in u:
                 continue
@@ -2022,7 +2025,12 @@ def enrich_from_detail(item):
         # (実測: ニフティの詳細ページは og:image が広告バナーだった)
         _NG = re.compile(
             r"(banner|logo|icon|ogp|og_|share|sns|common|noimage|no_image"
-            r"|dummy|spacer|blank|placeholder|1900x94)", re.I)
+            r"|dummy|spacer|blank|placeholder|1900x94"
+            # 実測でサムネに紛れ込んでいたもの:
+            # goo住宅のアプリ宣伝バナー cmn_appli_header.png
+            # goo住宅の「画像はありません」 nophoto_80.gif
+            r"|appli|nophoto|no_photo|/img/common/|/img/appli/"
+            r"|header|footer|badge|btn_|bnr)", re.I)
 
         def _pick(u):
             if not u or u.startswith("data:"):
