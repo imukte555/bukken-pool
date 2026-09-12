@@ -68,11 +68,21 @@ jobs:
           touch .nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html .nojekyll state.json
+          # docs/index.html も必ずコミットする。取り残すと次の
+          # git pull --rebase が「unstaged changes」で止まり、
+          # 518件取れていても公開できずに失敗していた（2日連続で発生）
+          git add -A index.html .nojekyll state.json docs/index.html
           git diff --cached --quiet && echo "変更なし" || \
             git commit -q -m "在庫ページ更新 $(date -u +%Y-%m-%dT%H:%M)"
           for i in 1 2 3; do
-            git pull --rebase -q origin main && git push origin HEAD:main && break
+            # 念のため毎回残った変更を退避してからpullする
+            git stash -u -q || true
+            git pull --rebase -q origin main || true
+            git stash pop -q 2>/dev/null || true
+            git add -A index.html .nojekyll state.json docs/index.html
+            git diff --cached --quiet || \
+              git commit -q -m "在庫ページ更新 $(date -u +%Y-%m-%dT%H:%M)"
+            git push origin HEAD:main && break
             sleep 5
           done
           WANT=$(grep -oE '<title>物件在庫 [0-9]+件' index.html | head -1)
