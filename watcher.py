@@ -1438,10 +1438,14 @@ def parse_goo_buy(html: str, station: str, kind: str):
     seen = set()
     boxes = soup.select("div.nayose-property-data")
     if not boxes:
-        # 戸建・土地・新築は table.tab.property 全体で1物件（実測）。
+        # 戸建・土地は table.tab.property 全体で1物件（実測）。
         # 価格/間取り/建物面積/土地面積/築年月/所在地/複数駅の徒歩 が入る
         boxes = [t for t in soup.select("table.tab.property")
                  if t.find("a", href=lambda h: h and "/detail/" in (h or ""))]
+    if not boxes:
+        # 新築戸建は div.property が1物件（実測: shuto_bh）
+        boxes = [d for d in soup.select("div.property")
+                 if d.find("a", href=lambda h: h and "/detail/" in (h or ""))]
     for box in boxes:
         a = box.find("a", href=lambda h: h and "/detail/" in h)
         if not a:
@@ -2549,9 +2553,12 @@ def collect_station(station, codes):
             # 中古マンション/中古戸建/新築マンションを取る。
             # 中古戸建は table.tab.property 全体が1物件で、建物面積・築年月・
             # 複数駅の徒歩まで入る（実測: 目黒40件・主要項目40/40）
+            # bh(新築戸建)は div.property が1物件という別構造。
+            # 実測: 目黒で24件・主要項目24/24・画像24/24
             for _seg, _kind, _lbl in [("um", "mansion", "mansion"),
                                       ("uh", "house", "house"),
-                                      ("bm", "mansion", "mansion")]:
+                                      ("bm", "mansion", "mansion"),
+                                      ("bh", "house", "house")]:
                 items = []
                 for pn in range(1, 9):
                     url = (f"https://house.goo.ne.jp/buy/shuto_{_seg}/ensen/"
