@@ -1993,14 +1993,31 @@ def parse_suumo_rent(html: str, station: str):
 
 
 def _row_value(soup, *labels):
-    """<th>ラベル</th><td>値</td> / <dt>/<dd> から値を取る"""
+    """<th>ラベル</th><td>値</td> / <dt>/<dd> から値を取る。
+    同じラベルが複数回出るページがあるので、凡例・ツールチップ
+    （「建物の完成年月が表示されます。」等）は値として採らず、
+    数字を含む実際の値を優先する。
+    実測: ノムコムの詳細は「築年月」行が説明文と実値の2つあり、
+    説明文を返して築年が取れていなかった。
+    """
+    first = ""
     for tag in soup.find_all(["th", "dt"]):
         t = tag.get_text(" ", strip=True)
-        if any(t.startswith(l) for l in labels):
-            nxt = tag.find_next_sibling()
-            if nxt:
-                return nxt.get_text(" | ", strip=True)
-    return ""
+        if not any(t.startswith(l) for l in labels):
+            continue
+        nxt = tag.find_next_sibling()
+        if not nxt:
+            continue
+        v = nxt.get_text(" | ", strip=True)
+        if not v:
+            continue
+        if re.search(r"(表示されます|してください|場合は|については|とは$)", v):
+            continue
+        if not first:
+            first = v
+        if re.search(r"\d", v):
+            return v
+    return first
 
 
 PARK_PRICE_RE = re.compile(
