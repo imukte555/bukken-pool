@@ -78,7 +78,7 @@ PRICE_MIN = 3000     # 3000万
 WATCH_PRICE_MAX = 25000   # 2.5億まで監視対象（売買）
 WATCH_RENT_MAX = 45.0     # 45万円/月まで監視対象（賃貸）
 PRICE_MAX = 12000    # 1.2億（建物込みの予算上限）
-BUILT_MAX_AGE = 30
+BUILT_MAX_AGE = int(os.environ.get("BUILT_MAX_AGE") or 20)
 CURRENT_YEAR = 2026
 
 # .github/workflows/daily.yml の cron '37 21 * * *' = 06:37 JST と揃える
@@ -389,6 +389,17 @@ def parse_built(text: str):
     matches = re.findall(r"(19[5-9]\d|20[0-2]\d)年\d{1,2}月", text)
     if matches:
         return int(matches[-1])
+    # 「築年数 築30年1ヶ月」「築年 築2年」（CHINTAI・SUUMO賃貸の詳細は
+    # 築年月ではなく築年数で持っている。実測でここが取れず一覧の誤った
+    # 築年がそのまま残っていた）。
+    # 同じ建物の複数部屋で表記が割れることがあるので、安全側に古い方を採る。
+    ns = re.findall(r"(?:築年数|築年)[^\d]{0,6}築?\s*(\d{1,3})\s*年", text)
+    if ns and len(text) <= 80:
+        # ラベル行だけを渡された場合は、同じ行に並ぶ築N年も全部見る。
+        # ページ本文全体では別物件の築年を拾うので短い入力に限る。
+        ns += re.findall(r"築\s*(\d{1,3})\s*年", text)
+    if ns:
+        return CURRENT_YEAR - max(int(x) for x in ns)
     # ここまで年が1つも取れなかった場合にだけ「新築」を見る。
     # 築年の欄に隣接しているときだけ採用する（バナーやナビの
     # 「新築マンション」「新築戸建を探す」を拾わないため）
@@ -1544,11 +1555,17 @@ def parse_goo_buy(html: str, station: str, kind: str):
         if not addr:
             continue
         built = None
-        mb = re.search(r"(\d{4})年\d{1,2}月", ctext)
+        # 祖先要素のテキストから裸の「YYYY年M月」を拾うと、別物件の築年や
+        # 情報公開日を築年にしてしまう（実測: シャンボール第２目黒は
+        # 1972年10月築なのに築3年と表示されていた）。
+        # ラベルに紐づいた表記だけを採用し、無ければ None のまま
+        # 詳細ページ補完に任せる。
+        mb = re.search(r"(?:築年月|建築年月|完成時期|竣工)[^\d]{0,8}"
+                       r"(\d{4})年\d{1,2}月", ctext)
         if mb:
             built = int(mb.group(1))
         else:
-            mc = re.search(r"築\s*(\d{1,3})\s*年", ctext)
+            mc = re.search(r"(?:築年数)?[^\d]{0,4}築\s*(\d{1,3})\s*年", ctext)
             if mc:
                 built = CURRENT_YEAR - int(mc.group(1))
             elif is_shinchiku_label(ctext):
@@ -2060,12 +2077,30 @@ def enrich_from_detail(item):
         item["parking_price"] = parking_price(raw)
 
     # 築年: 一覧に無くても詳細の「完成時期（築年月）」「築年月」に必ず載っている
-    if not item.get("built") and item.get("type") in ("mansion", "house", "rent"):
+    if item.get("type") in ("mansion", "house", "rent"):
         # 本文全体から拾うと無関係な日付(引渡し時期など)を築年と誤認するので、
-        # 「築年月」等のラベル行からのみ取る
-        row = _row_value(soup, "完成時期", "築年月", "建築年月", "竣工", "築年数")
+        # 「築年月」等のラベル行からのみ取る。
+        # ここで取れた値は一覧のどの表記より正しいので、
+        # 一覧側に値が入っていても必ず上書きする。
+        # （実測: goo住宅の一覧は築年を持たない代わりに祖先要素の
+        #  最初の4桁年を拾っていて、1972年10月築の物件が築3年と出ていた）
+        row = _row_value(soup, "完成時期", "築年月", "建築年月", "竣工年月",
+                         "竣工", "築年数", "完成年月", "建築年", "築年")
         b = parse_built(row) if row else None
+        if b is None:
+            # ラベルと値が別構造で _row_value が空を返すページ用
+            # （実測: CHINTAI「築年 2024年03月」、SUUMO賃貸「築年数 築4年」）
+            _t = re.sub(r"\s+", " ", soup.get_text(" ", strip=True))
+            m2 = re.search(r"(?:築年月|築年数|築年|建築年|完成年月|竣工年月)"
+                           r"[^\d]{0,8}((?:19|20)\d\d年\s?\d{1,2}月"
+                           r"|築?\s?\d{1,3}\s?年)", _t)
+            if m2:
+                b = parse_built("築年月 " + m2.group(1)
+                                if "年" in m2.group(1) and "月" in m2.group(1)
+                                else "築年数 " + m2.group(1))
         if b:
+            if item.get("built") and item["built"] != b:
+                item["built_listed"] = item["built"]   # 差異の記録用
             item["built"] = b
 
     # 所在階: SUUMOの売買一覧には階の表記が無いので詳細から必ず埋める
