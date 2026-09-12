@@ -2696,16 +2696,22 @@ def collect_station(station, codes):
         if codes.get("housecom"):
             _hp, _hc = codes["housecom"].split("/")
             items = []
-            # 実測: 9/11/13ページ目でも 15/18/19件、15以降は0
-            for pn in range(1, 15):
-                url = (f"https://www.housecom.jp/{_hp}/{_hc}-st/"
-                       + ("" if pn == 1 else f"?page={pn}"))
-                html = fetch_with_retry(url, impersonate=True)
-                page_items = parse_housecom(html, station)
-                if not page_items:
-                    break
-                items.extend(page_items)
-                time.sleep(SLEEP_BETWEEN)
+            # 実測: 9/11/13ページ目でも 15/18/19件、15以降は0。
+            # さらに並び替え(sort)で別集合が返る
+            # （なし35件 → sort=1で+37 / sort=3で+24 でユニーク101件）
+            for _so in ("", "1", "2", "3"):
+                for pn in range(1, 15):
+                    _q = ([] if not _so else [f"sort={_so}"])
+                    if pn != 1:
+                        _q.append(f"page={pn}")
+                    url = (f"https://www.housecom.jp/{_hp}/{_hc}-st/"
+                           + ("?" + "&".join(_q) if _q else ""))
+                    html = fetch_with_retry(url, impersonate=True)
+                    page_items = parse_housecom(html, station)
+                    if not page_items:
+                        break
+                    items.extend(page_items)
+                    time.sleep(SLEEP_BETWEEN)
             kept = [i for i in items if apply_rent_filters(i)]
             log.append(f"[ハウスコム] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
