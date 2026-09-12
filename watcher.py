@@ -2581,8 +2581,8 @@ def collect_station(station, codes):
         if codes.get("nomu"):
             _gp, _gl, _gc = codes["nomu"].split("/")
             items = []
-            # 実測: 8/10/12/14ページ目でも 98/93/92/78件と別物件が出続ける
-            for pn in range(1, 16):
+            # 実測: 15/18/21/24ページ目でも 160/81/104/70件と出続ける
+            for pn in range(1, 26):
                 # ページ送りは ?p=N（?page=は無視される。実測で確認）
                 url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
                        f"{_gl[1:]}/{_gc}.html"
@@ -2655,9 +2655,9 @@ def collect_station(station, codes):
             # 実測: 4〜7ページ目でも 113/85/74/90件と別物件が出続ける。
             # 並び替え(sort1)でも返る集合が変わる
             # (sort1=1で60件 → 2と8を足すとユニーク366件)
-            # 実測: sort1=8 の6/8/10/12ページ目でも 69/105/76/53件と出続ける
+            # 実測: sort1=8 の13/15/17/19ページ目でも 70/34/81/96件と出続ける
             for _sort in ("1", "2", "8"):
-                for pn in range(1, 14):
+                for pn in range(1, 21):
                     url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
                            f"?sort1={_sort}"
                            + ("" if pn == 1 else f"&page={pn}"))
@@ -2696,8 +2696,8 @@ def collect_station(station, codes):
         if codes.get("housecom"):
             _hp, _hc = codes["housecom"].split("/")
             items = []
-            # 実測: 5〜8ページ目でも 16/44/15/26件と別物件が出続ける
-            for pn in range(1, 10):
+            # 実測: 9/11/13ページ目でも 15/18/19件、15以降は0
+            for pn in range(1, 15):
                 url = (f"https://www.housecom.jp/{_hp}/{_hc}-st/"
                        + ("" if pn == 1 else f"?page={pn}"))
                 html = fetch_with_retry(url, impersonate=True)
@@ -2753,7 +2753,8 @@ def collect_station(station, codes):
             # 同じ1ページ目が返るため重複していた）
             # 実測: 6/8/10/12ページ目でも 55/50/38/38件と別物件が出続ける
             # 実測: 14/16/18/20ページ目でも 45/36/45/53件と別物件が出続ける
-            pages = tuple(range(1, 31)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 22))
+            # 実測: 21/24ページ目でも39/37件、27以降は0
+            pages = tuple(range(1, 31)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 26))
             # 賃貸マンション/アパートに加えて賃貸戸建(list/kodate/)も取る。
             # 戸建は面積が広く45㎡以上の条件に合いやすい（実測: 目黒16件）
             for sub in ("", "kodate/"):
