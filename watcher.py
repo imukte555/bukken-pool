@@ -2816,7 +2816,8 @@ def collect_station(station, codes):
                         f"{_pf}/railway/{_rw}/station/{_st}/")
                 # all-type は在庫が厚いので深く、種別別は1〜2ページで尽きる
                 # （実測: tochi 8件・kodate 13件・s_kodate 3件）
-                _last = 11 if _seg == "all-type" else 3
+                # 実測: mansionの2ページ目でも+8件出るので種別別も4ページ見る
+                _last = 11 if _seg == "all-type" else 5
                 for pn in range(1, _last):
                     url = base if pn == 1 else f"{base}?page={pn}"
                     html = fetch_with_retry(url, impersonate=True)
