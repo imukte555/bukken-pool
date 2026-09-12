@@ -365,8 +365,10 @@ def parse_built(text: str):
     """築年(西暦)を返す。SUUMO/ノムコム/リバブル/HOMES/アットホーム対応。
     新築/未築の場合は CURRENT_YEAR を返す。
     """
-    if re.search(r"新築", text):
-        return CURRENT_YEAR
+    # 「新築」の文字はページ内のバナー・ナビ・別物件枠にも出るため、
+    # 先に判定すると築30年の物件まで築0年になる（実測: goo住宅の
+    # マイキャッスル目黒は1996年9月築なのに新築扱いで条件をすり抜けた）。
+    # 明示の築年月を全部試したあと、最後に厳しめの条件だけで見る。
     # 「築年月 ... YYYY年M月」 (SUUMO/ノムコム/リバブル詳細)
     m = re.search(r"築年月[^\d]{0,15}(\d{4})年\d{1,2}月", text)
     if m:
@@ -387,7 +389,29 @@ def parse_built(text: str):
     matches = re.findall(r"(19[5-9]\d|20[0-2]\d)年\d{1,2}月", text)
     if matches:
         return int(matches[-1])
+    # ここまで年が1つも取れなかった場合にだけ「新築」を見る。
+    # 築年の欄に隣接しているときだけ採用する（バナーやナビの
+    # 「新築マンション」「新築戸建を探す」を拾わないため）
+    if re.search(r"(築年月|築年数|築年|完成時期|竣工|完成)"
+                 r"[^\d年]{0,8}新築", text) or re.fullmatch(
+                     r"\s*新築\s*", text or ""):
+        return CURRENT_YEAR
     return None
+
+
+def is_shinchiku_label(text: str) -> bool:
+    """カード本文の「新築」が本当にその物件の築年表記かを判定する。
+    一覧ページには「新築マンションを探す」等のリンクが必ず入っているため、
+    単純な in 判定では築30年の物件まで築0年になる（実測）。
+    """
+    if not text:
+        return False
+    t = text.replace("　", " ")
+    if re.search(r"(築年月|築年数|築年|完成時期|竣工)[^\d年]{0,8}新築", t):
+        return False if False else True
+    # 「新築」単独トークン（前後が区切り記号）。「新築マンション」等は除く
+    return bool(re.search(r"(?:^|[\s/｜|・,、(（\[【])新築"
+                          r"(?:$|[\s/｜|・,、)）\]】])", t))
 
 
 def fetch_built_from_detail(url: str, source: str):
@@ -1055,7 +1079,7 @@ def parse_nifty(html: str, station: str, kind: str):
             my = re.search(r"築年月\s*\|\s*(\d{4})年", ctext)
             if my:
                 built = int(my.group(1))
-            elif "新築" in ctext:
+            elif is_shinchiku_label(ctext):
                 built = CURRENT_YEAR      # 新築は築0年として扱う
 
         blks = card.select("div.box.is-mobile-0.is-space-xs") or [card]
@@ -1270,7 +1294,7 @@ def parse_sumaity_rent(html: str, station: str):
         mb = re.search(r"築年数\s*\|\s*築\s*(\d{1,3})\s*年", btext)
         if mb:
             built = CURRENT_YEAR - int(mb.group(1))
-        elif "新築" in btext:
+        elif is_shinchiku_label(btext):
             built = CURRENT_YEAR
         transit = btext.replace("|", " ")
         walk = parse_walk(transit, station)
@@ -1343,7 +1367,7 @@ def parse_smocca(html: str, station: str):
         mb = re.search(r"(\d{4})年\d{1,2}月", btext)
         if mb:
             built = int(mb.group(1))
-        elif "新築" in btext:
+        elif is_shinchiku_label(btext):
             built = CURRENT_YEAR
         transit = btext.replace("/", " ").replace("|", " ").replace("歩", "徒歩")
         transit = transit.replace("徒徒歩", "徒歩")
@@ -1416,7 +1440,7 @@ def parse_goo(html: str, station: str):
         mb = re.search(r"築\s*(\d{1,3})\s*年", btext)
         if mb:
             built = CURRENT_YEAR - int(mb.group(1))
-        elif "新築" in btext:
+        elif is_shinchiku_label(btext):
             built = CURRENT_YEAR
         transit = btext.replace("|", " ")
         walk = parse_walk(transit, station)
@@ -1527,7 +1551,7 @@ def parse_goo_buy(html: str, station: str, kind: str):
             mc = re.search(r"築\s*(\d{1,3})\s*年", ctext)
             if mc:
                 built = CURRENT_YEAR - int(mc.group(1))
-            elif "新築" in ctext:
+            elif is_shinchiku_label(ctext):
                 built = CURRENT_YEAR
         mf = re.search(r"階数\s*(B?\d+)\s*階", t)
         floor = f"{mf.group(1)}階" if mf else parse_floor(t, kind)
@@ -1665,7 +1689,7 @@ def parse_homes_rent(html: str, station: str):
             if my:
                 built = int(my.group(1))
         # 「新築」表記は築0年
-        if built is None and "新築" in ctext:
+        if built is None and is_shinchiku_label(ctext):
             built = CURRENT_YEAR
         walk = parse_walk(ctext.replace("|", " "), station)
         walks = parse_all_walks(ctext.replace("|", " "))
@@ -1853,7 +1877,7 @@ def parse_suumo_rent(html: str, station: str):
         mb = re.search(r"築\s*(\d+)\s*年", col3_text)
         if mb:
             built = CURRENT_YEAR - int(mb.group(1))
-        elif "新築" in col3_text:
+        elif is_shinchiku_label(col3_text):
             built = CURRENT_YEAR
 
         # --- 部屋単位 ---
