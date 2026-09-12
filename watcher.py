@@ -83,6 +83,9 @@ CURRENT_YEAR = 2026
 
 # .github/workflows/daily.yml の cron '37 21 * * *' = 06:37 JST と揃える
 SCHEDULE_JST = (6, 37)
+# local_feed.json（Macで取るHOMES/アットホーム/ニフティ）の許容鮮度。
+# ローカル実行が止まったとき、成約済みの在庫が残り続けないように切る。
+LOCAL_FEED_MAX_AGE_DAYS = int(os.environ.get("LOCAL_FEED_MAX_AGE_DAYS") or 3)
 
 # === フィルタ（賃貸） ===
 RENT_MAX = 28.0      # 管理費込み上限(万円)
@@ -2461,6 +2464,19 @@ def collect_all():
             data = json.loads(feed.read_text(encoding="utf-8"))
             items = data.get("items", [])
             gen = data.get("generated_at", "")
+            # ローカル取得が止まっても古い在庫が延々と残らないように、
+            # 3日より古いフィードは無視する（成約済みを出さないため）
+            from datetime import date as _date, datetime as _dtn, \
+                timezone as _tzn, timedelta as _tdn
+            mg = re.match(r"(\d{4})-(\d{2})-(\d{2})", gen)
+            if mg:
+                _today = _dtn.now(_tzn(_tdn(hours=9))).date()
+                age = (_today - _date(int(mg.group(1)), int(mg.group(2)),
+                                      int(mg.group(3)))).days
+                if age > LOCAL_FEED_MAX_AGE_DAYS:
+                    print(f"\nlocal_feed.json は {age}日前の取得なので無視します "
+                          f"(生成 {gen})")
+                    items = []
             have = {it.get("id") for it in all_items}
             added = [it for it in items if it.get("id") not in have]
             all_items.extend(added)
