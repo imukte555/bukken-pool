@@ -2886,7 +2886,9 @@ def collect_station(station, codes):
             # 賃料帯も分けると別集合が返る（売買のkb/ktと同じ挙動）
             _rb = ((RENT_MIN, 15.0), (15.0, 22.0), (22.0, RENT_MAX))
             for _bs in ("", "&ar=030&bs=040"):
-                for _mb in (40, 60):
+                # 実測(目黒): 面積帯2本(40/60)で137件 → 4本で183件(+46)。
+                # 賃貸は最大の供給源なので4本まわす
+                for _mb in (40, 50, 60, 70):
                     for _cb, _ct in _rb:
                         url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
                                f"/ek_{codes['suumo']}/?page={pn}"
