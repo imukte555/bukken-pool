@@ -2757,7 +2757,10 @@ def collect_station(station, codes):
             pages = tuple(range(1, 31)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 26))
             # 賃貸マンション/アパートに加えて賃貸戸建(list/kodate/)も取る。
             # 戸建は面積が広く45㎡以上の条件に合いやすい（実測: 目黒16件）
-            for sub in ("", "kodate/"):
+            # 種別ごとに別集合が返る。実測(目黒1ページ):
+            #   なし57件 → kodate +15 / apart +38 / terrace +6
+            #   （mansionは「なし」と同じ集合なので入れない）
+            for sub in ("", "kodate/", "apart/", "terrace/"):
                 for pn in pages:
                     url = (f"https://www.chintai.net/{_pf}/ensen/{_sc}/list/{sub}"
                            + ("" if pn == 1 else f"page{pn}/"))
