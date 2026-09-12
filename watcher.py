@@ -389,6 +389,13 @@ def parse_built(text: str):
     matches = re.findall(r"(19[5-9]\d|20[0-2]\d)年\d{1,2}月", text)
     if matches:
         return int(matches[-1])
+    # 「完成時期 '27年1月予定」のような2桁年（新築の完成予定。実測: goo住宅）
+    m = re.search(r"(?:完成時期|竣工|築年月)[^\d]{0,8}[\'’]?(\d{2})年\s?\d{1,2}月",
+                  text)
+    if m:
+        y = 2000 + int(m.group(1))
+        if CURRENT_YEAR - 5 <= y <= CURRENT_YEAR + 5:
+            return y
     # 「築年数 築30年1ヶ月」「築年 築2年」（CHINTAI・SUUMO賃貸の詳細は
     # 築年月ではなく築年数で持っている。実測でここが取れず一覧の誤った
     # 築年がそのまま残っていた）。
@@ -412,17 +419,25 @@ def parse_built(text: str):
 
 def is_shinchiku_label(text: str) -> bool:
     """カード本文の「新築」が本当にその物件の築年表記かを判定する。
-    一覧ページには「新築マンションを探す」等のリンクが必ず入っているため、
-    単純な in 判定では築30年の物件まで築0年になる（実測）。
+    一覧ページには「新築マンションを探す」「新築マンション情報」等の
+    リンク文言が必ず入っており、単純な in 判定では築30年の物件まで
+    築0年になる（実測: goo住宅のマイキャッスル目黒は1996年9月築）。
+    逆に「新築一戸建て」は物件そのものの表記なので拾う必要がある。
+    そこで「新築」の直後を見て、探す/一覧/情報 等の導線文言のときだけ捨てる。
     """
     if not text:
         return False
     t = text.replace("　", " ")
     if re.search(r"(築年月|築年数|築年|完成時期|竣工)[^\d年]{0,8}新築", t):
-        return False if False else True
-    # 「新築」単独トークン（前後が区切り記号）。「新築マンション」等は除く
-    return bool(re.search(r"(?:^|[\s/｜|・,、(（\[【])新築"
-                          r"(?:$|[\s/｜|・,、)）\]】])", t))
+        return True
+    _NAV = re.compile(r"(?:[ぁ-んァ-ヴー一-龥]{0,8})?"
+                      r"(?:を探す|から探す|を検索|検索|一覧|情報|特集|"
+                      r"を見る|ランキング|まとめ|ガイド|相場)")
+    for m in re.finditer(r"新築", t):
+        if _NAV.match(t[m.end():m.end() + 16]):
+            continue
+        return True
+    return False
 
 
 def fetch_built_from_detail(url: str, source: str):
