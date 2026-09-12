@@ -2847,15 +2847,19 @@ def collect_station(station, codes):
                             ("land",    f"land/{codes['nomu']}/")]):
             items = []
             # ページ送りは ?page= ではなく ?pager_page=（?page=は無視され
-            # 1ページ目が返っていた。実測で確認）
-            for pn in range(1, 7):
-                url = f"https://www.nomu.com/{path}?pager_page={pn}"
-                html = fetch(url)
-                page_items = parse_nomu(html, station, kind)
-                if not page_items:
-                    break
-                items.extend(page_items)
-                time.sleep(1.0)
+            # 1ページ目が返っていた。実測で確認）。
+            # さらに order で別集合が返る（なし40件 → 1〜4で+18/+20/+16/+10、
+            # 合わせてユニーク104件）
+            for _od in ("", "1", "2", "3", "4"):
+                for pn in range(1, 7):
+                    url = (f"https://www.nomu.com/{path}?pager_page={pn}"
+                           + ("" if not _od else f"&order={_od}"))
+                    html = fetch(url)
+                    page_items = parse_nomu(html, station, kind)
+                    if not page_items:
+                        break
+                    items.extend(page_items)
+                    time.sleep(1.0)
             kept = filter_with_walk_rescue(items)
             log.append(f"[ノムコム {kind}] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
