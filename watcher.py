@@ -226,8 +226,14 @@ def card_image(node):
             # パス(nf_path=.../no_image/noimage_640x640.png)を持っており、
             # URL全体で見ると正常な写真まで no_image と誤判定していた（実測）
             _path = u.split("?")[0]
+            # 実測で写真として拾われた広告: ニフティの
+            #   /buy/assets/pc/img/osusume/202209_jibunbank_480x320.png
+            #   /cms_image/myhome/onayami-column/...
+            #   /cms_image/myhome/random-banner/...
             if re.search(r"(spacer|blank|noimage|no_image|nophoto|no_photo"
                          r"|logo|icon|dummy|appli|bnr|banner|badge|btn_"
+                         r"|osusume|cms_image|random-banner|campaign|topcamp"
+                         r"|jibun|onayami|/assets/img/|/assets/pc/"
                          r"|/img/common/|/img/appli/|move_\d+_\d+)",
                          _path, re.I):
                 continue
@@ -983,6 +989,38 @@ def _parse_nifty_rent(soup, station: str):
     return items
 
 
+def card_image_climb(blk, base: str = "", anchor=None, max_up: int = 4) -> str:
+    """ブロック自身に写真が無ければ、掲載リンクから親へ登って探す。
+    ニフティは種別ごとにDOMが違い、
+      中古マンション … 掲載枠の1段上に img.thumbnail
+      中古戸建/土地  … 掲載リンクの直上(box.is-bg-grey)に img.thumbnail
+    と別なので、枠固定のセレクタでは片方が必ず空になる。
+    登る途中で別物件のdetail_idが混ざったら隣を巻き込むので止める。
+    """
+    u = card_image(blk)
+    if u:
+        return _abs(u, base) if base else u
+    p = anchor if anchor is not None else blk
+    for _ in range(max_up):
+        p = getattr(p, "parent", None)
+        if p is None or getattr(p, "name", None) in (None, "body", "html"):
+            break
+        ids = set()
+        try:
+            for a in p.select('a[href*="detail_"]'):
+                m = re.search(r"detail_([0-9a-f]{8,})", a.get("href") or "")
+                if m:
+                    ids.add(m.group(1))
+        except Exception:
+            break
+        if len(ids) > 1:
+            break
+        u = card_image(p)
+        if u:
+            return _abs(u, base) if base else u
+    return ""
+
+
 def parse_nifty(html: str, station: str, kind: str):
     if not html:
         return []
@@ -1037,7 +1075,7 @@ def parse_nifty(html: str, station: str, kind: str):
             seen.add(m.group(1))
             items.append({
                 "id": f"nifty:{kind[0]}:{m.group(1)}",
-                "img": _abs(card_image(blk), "https://myhome.nifty.com"),
+                "img": card_image_climb(blk, "https://myhome.nifty.com", anchor=a),
                 "station": station,
                 "type": kind,
                 "name": addr,          # ニフティの一覧に建物名は出ない
@@ -2034,6 +2072,9 @@ def enrich_from_detail(item):
             # goo住宅のアプリ宣伝バナー cmn_appli_header.png
             # goo住宅の「画像はありません」 nophoto_80.gif
             r"|appli|nophoto|no_photo|/img/common/|/img/appli/"
+            # ニフティ詳細ページの広告枠（実測でog:imageと本文imgの両方に出た）
+            r"|osusume|cms_image|random-banner|campaign|topcamp"
+            r"|jibun|onayami|/assets/img/|/assets/pc/"
             r"|header|footer|badge|btn_|bnr)", re.I)
 
         def _pick(u):
@@ -2045,6 +2086,11 @@ def enrich_from_detail(item):
         og = soup.find("meta", attrs={"property": "og:image"})
         if og:
             u = _pick((og.get("content") or "").strip())
+        cdn_u = ""
+        # 画像専用ホスト/パスから配信されている画像。スマイティは alt が空で
+        # sumaity.k-img.com/cachedimg/ から来るため、キーワードでは拾えない（実測）
+        _CDN = re.compile(r"(k-img|cachedimg|/gazo/|/photo|/pics?/"
+                          r"|//img[\w.-]*\.|//image[\w.-]*\.|\.cdn\.)", re.I)
         if not u:
             # 物件写真は「間取り」「外観」「物件」などのaltを持つことが多い
             for img in soup.find_all("img"):
@@ -2063,8 +2109,17 @@ def enrich_from_detail(item):
                              alt + cand, re.I):
                     u = cand
                     break
-                if not u:
-                    u = cand
+                if not cdn_u and _CDN.search(cand):
+                    cdn_u = cand
+            # 以前はここで「とりあえずページ最初の画像」を採用していたが、
+            # ニフティの土地詳細は自前の写真を持たず、ページ内の
+            # 「この駅の物件」枠の写真を4物件すべてが拾って
+            # 同じ写真が並んでいた（実測）。別物件の写真を出すのは
+            # 画像なしより悪いので、無条件のフォールバックはやめ、
+            # 画像CDN配信のものだけを代わりに使う。
+            # ニフティはそのCDN写真自体が他物件なので対象外。
+            if not u and cdn_u and "myhome.nifty.com" not in item.get("url", ""):
+                u = cdn_u
         if u:
             host = re.match(r"(https?://[^/]+)", item.get("url", ""))
             item["img"] = _abs(u, host.group(1) if host else "")
