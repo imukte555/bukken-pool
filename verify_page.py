@@ -92,25 +92,36 @@ def main(path):
             ok(f"代表カードの間取り図 {plans}/{len(sample)}件 ({rate:.0%})")
 
     # --- 条件 ---
-    areas = [float(x) for x in re.findall(r"([\d.]+)㎡", h)]
+    # ページ末尾の「条件で落とした内訳」には「面積が47.01㎡未満」
+    # 「築20年以上」といった条件説明が入る。これを物件の値として
+    # 数えると常に違反扱いになるので、カード部分だけを見る
+    body = "".join(cards)
+    areas = [float(x) for x in re.findall(r"([\d.]+)㎡", body)]
     if areas and min(areas) <= W.AREA_MIN - 0.01:
         ng(f"面積の下限違反: 最小 {min(areas)}㎡ (下限 {W.AREA_MIN})")
-    ages = [int(x) for x in re.findall(r"築(\d+)年", h)]
+    ages = [int(x) for x in re.findall(r"築(\d+)年", body)]
     if ages and max(ages) >= W.MANSION_MAX_AGE if hasattr(W, "MANSION_MAX_AGE") else False:
         pass
     if ages and max(ages) >= W.BUILT_MAX_AGE:
         ng(f"築年の違反: 最大 築{max(ages)}年 (上限 {W.BUILT_MAX_AGE}年未満)")
+    # 徒歩はカードに複数駅が並ぶ（「目黒 徒歩5分 / 白金台 徒歩22分」）。
+    # 対象駅ぶんだけを見る。他駅が遠いのは違反ではない
     walks = []
     for c in cards:
+        st = re.search(r'data-station="([^"]+)"', c)
+        if not st:
+            continue
         seg = c[:c.find("</a>") if c.find("</a>") > 0 else len(c)]
-        walks += [int(x) for x in re.findall(r"徒歩(\d+)分", seg)]
+        m = re.search(re.escape(st.group(1)) + r"\s*徒歩(\d+)分", seg)
+        if m:
+            walks.append(int(m.group(1)))
     if walks and max(walks) > W.WALK_MAX:
-        ng(f"徒歩の違反: 最大 {max(walks)}分 (上限 {W.WALK_MAX}分)")
-    rents = [float(x) for x in re.findall(r"([\d.]+)万円/月", h)]
+        ng(f"徒歩の違反: 対象駅で最大 {max(walks)}分 (上限 {W.WALK_MAX}分)")
+    rents = [float(x) for x in re.findall(r"([\d.]+)万円/月", body)]
     if rents and max(rents) > W.RENT_MAX:
         ng(f"賃料の違反: 最大 {max(rents)}万円 (上限 {W.RENT_MAX}万円)")
     prices = []
-    for m in re.finditer(r'class="price">(?:(\d+)億)?([\d,]*)万円(?!/月)', h):
+    for m in re.finditer(r'class="price">(?:(\d+)億)?([\d,]*)万円(?!/月)', body):
         v = (int(m.group(1)) * 10000 if m.group(1) else 0)
         v += int(m.group(2).replace(",", "")) if m.group(2) else 0
         prices.append(v)

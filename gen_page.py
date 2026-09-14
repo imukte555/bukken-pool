@@ -183,7 +183,10 @@ def build(items, out_path, station_order=None, reject_tally=None):
             '賃料28万円以下(管理費込)</p></details>')
     present = {it["station"] for it in items}
     if station_order:
-        stations = [s for s in station_order if s in present]
+        # 指定された駅は物件が0件でもタブを出す（sho指示: 蛍池のタブは
+        # 作っておく）。その日たまたま0件でも、タブが消えると
+        # 「対象から外れた」ように見えてしまう
+        stations = list(station_order)
         stations += sorted(present - set(stations))   # 順序指定に無い駅は末尾
     else:
         stations = sorted(present)
