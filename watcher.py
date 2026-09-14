@@ -58,6 +58,13 @@ DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS") or 10)
 # 一覧に無い徒歩・築年・住所を詳細から補うときの並列数。
 # 直列だと1駅80件級のサイトで締切を使い切っていた
 RESCUE_WORKERS = int(os.environ.get("RESCUE_WORKERS") or 8)
+# 一覧サムネが間取り図のとき詳細ページまで写真を探しに行く回数の上限。
+# goo住宅の賃貸は一覧が全件図面なので、無制限だと全件ぶん余計に
+# 取りに行くことになる。同じ建物の別掲載に写真があれば代表はそちらに
+# なるので、上限を切っても見た目はほぼ保たれる
+PHOTO_LOOKUP_MAX = int(os.environ.get("PHOTO_LOOKUP_MAX") or 400)
+_PHOTO_LOOKUPS = [0]
+_PHOTO_LOCK = threading.Lock()
 # HOMES・アットホーム・ニフティは GitHub Actions のIPから弾かれる。
 # それでも叩くと1ホストあたり数分の待機が発生し、取得の締切を食って
 # 取れるサイトまで落ちる。Actions上では最初から飛ばす。
@@ -3977,7 +3984,11 @@ def verify_images(items, workers: int = 12):
             it["img_is_plan"] = image_is_floorplan(u)
             if it["img_is_plan"]:
                 # 一覧サムネが図面なら詳細ページから外観写真を探す
-                photo = fetch_photo_from_detail(it)
+                with _PHOTO_LOCK:
+                    allowed = _PHOTO_LOOKUPS[0] < PHOTO_LOOKUP_MAX
+                    if allowed:
+                        _PHOTO_LOOKUPS[0] += 1
+                photo = fetch_photo_from_detail(it) if allowed else ""
                 if photo:
                     it["img"] = photo
                     it["img_is_plan"] = False
@@ -4000,8 +4011,10 @@ def verify_images(items, workers: int = 12):
 
     with ThreadPoolExecutor(max_workers=workers) as ex:
         list(ex.map(one, items))
+    plans = sum(1 for i in items if i.get("img_is_plan"))
     print(f"写真の実表示チェック: そのまま{ok}件 / 取り直して復旧{fixed}件 / "
-          f"取れず{dead}件")
+          f"取れず{dead}件 / 間取り図のまま{plans}件 "
+          f"(詳細から写真を探した回数 {_PHOTO_LOOKUPS[0]})")
     return ok, fixed, dead
 
 def audit_items(items, label=""):
