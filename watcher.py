@@ -3071,14 +3071,20 @@ def collect_station(station, codes):
             # 実測: 6/8/10/12ページ目でも 55/50/38/38件と別物件が出続ける
             # 実測: 14/16/18/20ページ目でも 45/36/45/53件と別物件が出続ける
             # 実測: 21/24ページ目でも39/37件、27以降は0
-            pages = (tuple(range(1, 71)) if station in DEEP_SCAN_STATIONS
-                     else tuple(range(1, 56)))
+            # サブパスを8本に増やしたぶんページ数を抑える
+            pages = (tuple(range(1, 41)) if station in DEEP_SCAN_STATIONS
+                     else tuple(range(1, 31)))
             # 賃貸マンション/アパートに加えて賃貸戸建(list/kodate/)も取る。
             # 戸建は面積が広く45㎡以上の条件に合いやすい（実測: 目黒16件）
             # 種別ごとに別集合が返る。実測(目黒1ページ):
             #   なし57件 → kodate +15 / apart +38 / terrace +6
             #   （mansionは「なし」と同じ集合なので入れない）
-            for sub in ("", "kodate/", "apart/", "terrace/"):
+            # 種別・こだわりのサブパスごとに別集合が返る。
+            # 実測(目黒): 現行4本で110件。さらに designers/ が+40件、
+            # tower/ が+41件、pet/ が+34件、loft/ が+9件を持っていた
+            # （mansion/ と new/ は新規0件なので入れない）
+            for sub in ("", "kodate/", "apart/", "terrace/",
+                        "designers/", "tower/", "pet/", "loft/"):
                 for pn in pages:
                     url = (f"https://www.chintai.net/{_pf}/ensen/{_sc}/list/{sub}"
                            + ("" if pn == 1 else f"page{pn}/"))
