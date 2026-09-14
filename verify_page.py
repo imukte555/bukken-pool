@@ -28,7 +28,15 @@ def ok(msg):
 
 def main(path):
     h = Path(path).read_text(encoding="utf-8")
-    cards = re.split(r'(?=<div class="card")', h)[1:]
+    # カードを切り出す前に、ページ末尾の「条件で落とした内訳」を外す。
+    # lookahead分割だと最後のカードの断片がページ末尾まで飲み込み、
+    # 説明文の「面積が47.01㎡未満」「築20年以上」を物件の値として
+    # 数えてしまう（verifier指摘・実際に誤検知が出た）
+    body_html = h.split('<details class="rej"')[0]
+    cards = re.split(r'(?=<div class="card")', body_html)[1:]
+    # 最後のカードは </main> などが後ろに付くので、そこで切る
+    if cards:
+        cards[-1] = re.split(r'<div class="empty"|</main>', cards[-1])[0]
 
     # --- 構造 ---
     if not cards:
