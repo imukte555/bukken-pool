@@ -2086,7 +2086,16 @@ def _row_value(soup, *labels):
     説明文を返して築年が取れていなかった。
     """
     first = ""
-    for tag in soup.find_all(["th", "dt"]):
+    # ラベルが <th>/<dt> ではなく <td> のテーブルがある
+    # （実測: 三井のリハウスの詳細は <td>交通</td><td>…</td> で、
+    #  これを見ていなかったため全駅の徒歩・駐車場・築年が取れず、
+    #  対象駅が最寄りに無い扱いで大量に捨てていた）
+    for tag in soup.find_all(["th", "dt", "td"]):
+        if tag.name == "td":
+            _t = tag.get_text(" ", strip=True)
+            # 値のセルを誤ってラベル扱いしないよう、短いセルだけ見る
+            if len(_t) > 10 or not any(_t.startswith(l) for l in labels):
+                continue
         t = tag.get_text(" ", strip=True)
         if not any(t.startswith(l) for l in labels):
             continue
@@ -2150,7 +2159,16 @@ def classify_parking(v: str):
     return None
 
 
-WALK_RE = re.compile(r"[「/]\s*([^「」/｜|]{1,12}?)駅?」?\s*歩\s*(\d{1,3})\s*分")
+# 「山手線 目黒駅 徒歩7分」「JR山手線/目黒駅 徒歩7分」「目黒駅徒歩7分」
+# のどれでも拾う。以前は駅名の前に「/」か「「」が無いとマッチせず、
+# 交通欄が空白区切りのサイトで徒歩が1件も取れていなかった（実測:
+# 三井のリハウスは詳細の交通欄が「東急大井町線 等々力駅 徒歩6分」形式で全滅）。
+# 「バス36分 ◯◯停 停歩3分」のバス停は歩きではないので除く。
+WALK_RE = re.compile(
+    r"(?:^|[\s　/／｜|「『（(【\[、,])"
+    r"([^\s　/／｜|「」『』（）()【】\[\]、,]{1,14}?)"
+    r"[」』]?\s*駅?[」』]?\s*(?:から|より)?\s*(?<!停)(?:徒)?歩"
+    r"\s*(\d{1,3})\s*分")
 
 
 def parse_all_walks(text: str):
@@ -2311,9 +2329,18 @@ def enrich_from_detail(item):
             # その前にある元サイトの公式表記だけを使う（実測で確認）
             transit = re.split(r"（ニフティ不動産調べ）|\(ニフティ不動産調べ\)",
                                transit)[0]
+        # _row_value はセルの区切りを「|」で返す。
+        # 「山手線 | 目黒駅 | 徒歩7分」のままだと駅名と徒歩の間で
+        # 正規表現が切れて1件も取れない（実測: リハウスで全件0件）
+        transit = re.sub(r"\s*\|\s*", " ", transit)
         walks = parse_all_walks(transit)
         if walks:
             item["walks"] = walks
+        if item.get("walk") is None and walks:
+            st = item.get("station")
+            d = dict(walks)
+            if st in d:
+                item["walk"] = d[st]
 
 
 # === コレクター ===
