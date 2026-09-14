@@ -2161,14 +2161,19 @@ def _row_value(soup, *labels):
 
 
 PARK_PRICE_RE = re.compile(
-    r"(\d[\d,]*\s*万?\s*\d*\s*円(?:\s*[~〜ー-]\s*\d[\d,]*\s*万?\s*\d*\s*円)?)")
+    r"(\d[\d,]*\s*万?\s*[\d,]*\s*円"
+    r"(?:\s*[~〜ー-]\s*\d[\d,]*\s*万?\s*[\d,]*\s*円)?)")
 
 
 def parking_price(v: str):
     """駐車場欄から金額表記を抜く。'2万円～2万3000円／月' などをそのまま返す"""
     if not v:
         return ""
-    t = v.replace(" ", "").translate(str.maketrans("０１２３４５６７８９", "0123456789"))
+    # 実測: goo住宅は「近有\xa038,000円」のようにNBSPで区切る。
+    # 全角の波ダッシュ・読点もそろえてから拾う
+    t = (v.replace("\xa0", " ").replace("\u3000", " ")
+          .replace("～", "〜").replace("~", "〜").replace("／", "/"))
+    t = t.replace(" ", "").translate(str.maketrans("０１２３４５６７８９", "0123456789"))
     for m in PARK_PRICE_RE.finditer(t):
         price = m.group(1)
         # 「0万円」「0円」など無意味な値は採用しない
@@ -2184,11 +2189,22 @@ def parking_price(v: str):
     return ""
 
 
+# 駐車場欄に紛れ込む導線リンクの文言。値ではないので判定前に落とす。
+# 実測: goo住宅は「無 | 近くの駐車場を探す」と出る。これを「近隣」と
+# 誤判定し、駐車場が無い物件を18件も「あり(近隣)」と表示していた
+_PARK_LINK_RE = re.compile(
+    r"(近くの駐車場を探す|駐車場を探す|駐車場について聞く|駐車場情報を見る"
+    r"|周辺の駐車場|駐車場検索|について聞く|を探す)")
+
+
 def classify_parking(v: str):
     """駐車場欄の値を 有/近隣/空無/無 に分類。判定不能は None"""
     if not v:
         return None
-    v = v.strip()
+    v = _PARK_LINK_RE.sub(" ", v)
+    v = re.sub(r"[|｜]\s*$", "", v).strip(" |｜\u3000").strip()
+    if not v:
+        return None
     # 「-」は未記載ではなく「駐車場なし」の意味で使われている。
     # 実測: 公開中の105件のうち45件がこれで判定不能になり、
     # 「駐車場あり」フィルタが0件になっていた
@@ -2196,7 +2212,8 @@ def classify_parking(v: str):
         return "無"
     if "駐輪" in v and "駐車" not in v:
         return "無"                      # 駐輪場は自転車。車の駐車場ではない
-    if "近隣" in v or "近く" in v:
+    # 「近有」はgoo住宅の表記で「近隣に有り」の意味（実測）
+    if "近隣" in v or "近く" in v or "近有" in v or "近隣有" in v:
         return "近隣"
     if "空無" in v or "空き無" in v or "満車" in v:
         return "空無"
