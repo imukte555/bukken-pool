@@ -13,6 +13,7 @@ import base64
 import json
 import os
 import re
+from urllib.parse import unquote
 import sys
 import time
 import random
@@ -208,6 +209,24 @@ def _abs(u, host):
     return host + u if u.startswith("/") else u
 
 
+def unwrap_image_url(u: str) -> str:
+    """画像配信のラッパーURLを、中に入っている実URLに開く。
+    実測: SUUMOの img01.suumo.com/jj/resizeImage?src=gazo%2F... は
+    外部ページから読むと必ず失敗し（117枚中34枚が真っ白だった）、
+    中身の suumo.jp/front/gazo/... に直せば表示できる。
+    goo住宅の img.house.goo.ne.jp/… も二重URLエンコードで実URLを持つ。
+    """
+    if not u:
+        return u
+    m = re.search(r"[?&]src=([^&]+)", u)
+    if m and "suumo" in u:
+        raw = unquote(m.group(1))
+        if raw.startswith("http"):
+            return raw
+        if raw.startswith("gazo/"):
+            return "https://suumo.jp/front/" + raw
+    return u
+
 def card_image(node):
     """カード要素から物件写真のURLを取る。lazy-load属性も見る。"""
     if node is None:
@@ -249,7 +268,7 @@ def card_image(node):
                 u = "https:" + u
             elif u.startswith("/"):
                 return u          # 呼び出し側でホストを足す
-            return u
+            return unwrap_image_url(u)
     return ""
 
 
@@ -2226,7 +2245,8 @@ def enrich_from_detail(item):
                 u = cdn_u
         if u:
             host = re.match(r"(https?://[^/]+)", item.get("url", ""))
-            item["img"] = _abs(u, host.group(1) if host else "")
+            item["img"] = unwrap_image_url(
+                _abs(u, host.group(1) if host else ""))
 
     if not item.get("walks"):
         transit = _row_value(soup, "交通", "駅徒歩", "最寄") or soup.get_text(" ", strip=True)
