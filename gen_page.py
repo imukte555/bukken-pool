@@ -100,10 +100,15 @@ def group_items(items):
 
 
 def _img_rank(it):
-    """代表に出す写真の良さ。間取り図・画像なしを後ろに回す。"""
+    """代表に出す写真の良さ。間取り図・画像なしを後ろに回す。
+    URLの文字列では判別できないので、watcher 側が画像そのものを見て
+    付けた img_is_plan を最優先で使う。
+    """
     u = it.get("img") or ""
     if not u.startswith("http"):
         return 9
+    if it.get("img_is_plan"):
+        return 5
     if _re.search(r"(madori|間取|floor_?plan|zumen|/fp/|_fp[._])", u, _re.I):
         return 5
     return 0

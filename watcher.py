@@ -3864,6 +3864,102 @@ def image_alive(url: str, timeout: int = 12) -> bool:
         return False
 
 
+_IMG_KIND_CACHE = {}
+_IMG_KIND_LOCK = threading.Lock()
+
+
+def image_is_floorplan(url: str) -> bool:
+    """画像そのものを見て間取り図かどうかを判定する。
+    URLの文字列では判別できない（goo住宅もスマイティも間取り図と外観が
+    同じ形式のURLで配信される）。
+    間取り図は白地に細い線なので「ほぼ白の画素が多く彩度が低い」。
+    実測: 間取り図 白率0.86/彩度0.00、外観写真 白率0.04/彩度0.24
+    """
+    if not url or not url.startswith("http"):
+        return False
+    with _IMG_KIND_LOCK:
+        if url in _IMG_KIND_CACHE:
+            return _IMG_KIND_CACHE[url]
+    val = False
+    try:
+        from PIL import Image
+        import io as _io
+        try:
+            r = requests.get(url, headers=HTTP_HEADERS, timeout=15)
+            if r.status_code != 200:
+                raise RuntimeError(r.status_code)
+            content = r.content
+        except Exception:
+            from curl_cffi import requests as _creq
+            content = _creq.get(url, impersonate="chrome", timeout=15).content
+        im = Image.open(_io.BytesIO(content)).convert("RGB")
+        im.thumbnail((80, 80))
+        px = list(im.getdata())
+        n = max(len(px), 1)
+        white = sum(1 for r_, g_, b_ in px
+                    if r_ > 230 and g_ > 230 and b_ > 230) / n
+        sat = sum((max(p) - min(p)) for p in px) / n / 255
+        val = white > 0.45 and sat < 0.12
+    except Exception:
+        val = False
+    with _IMG_KIND_LOCK:
+        _IMG_KIND_CACHE[url] = val
+    return val
+
+def fetch_photo_from_detail(item, max_try: int = 8):
+    """一覧のサムネイルが間取り図のとき、詳細ページから外観写真を探す。
+    実測: goo住宅の賃貸は一覧サムネイルが全件間取り図で、
+    そのままだと代表カードが図面だらけになる。
+    altに「外観」等がある画像を優先し、無ければ図面でないものを順に試す。
+    """
+    url = item.get("url") or ""
+    if not url:
+        return ""
+    use_cffi = item.get("source") in ("HOMES", "アットホーム", "アットホーム賃貸",
+                                      "三井のリハウス", "スマイティ", "CHINTAI",
+                                      "ニフティ不動産", "ハウスコム", "賃貸スモッカ",
+                                      "goo住宅", "カウカモ", "HOMES賃貸")
+    html = fetch(url, impersonate=use_cffi)
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "html.parser")
+    host = re.match(r"(https?://[^/]+)", url)
+    host = host.group(1) if host else ""
+    cands = []
+    for im in soup.find_all("img"):
+        alt = im.get("alt") or ""
+        u = ""
+        for attr in ("data-src", "data-original", "rel", "src"):
+            v = im.get(attr) or ""
+            if isinstance(v, list):
+                v = v[0] if v else ""
+            v = (v or "").strip()
+            if v and not v.startswith("data:"):
+                u = v
+                break
+        if not u:
+            continue
+        u = unwrap_image_url(_abs(u, host))
+        if not u.startswith("http"):
+            continue
+        if re.search(r"(nophoto|noimage|no_image|/appli|bnr|banner|osusume"
+                     r"|cms_image|jibun|logo|icon|spacer)", u.split("?")[0], re.I):
+            continue
+        if "間取" in alt or "madori" in u.lower():
+            continue
+        score = 0 if re.search(r"(外観|建物|エントランス|共用|室内|居室|リビング)", alt) else 1
+        cands.append((score, u))
+    seen = set()
+    for _, u in sorted(cands, key=lambda x: x[0]):
+        if u in seen:
+            continue
+        seen.add(u)
+        if len(seen) > max_try:
+            break
+        if image_alive(u) and not image_is_floorplan(u):
+            return u
+    return ""
+
 def verify_images(items, workers: int = 12):
     """全物件の写真が実際に開けるか確かめ、駄目なら詳細ページから取り直す。
     それでも駄目なら空にして「画像なし」と正直に出す。
@@ -3877,6 +3973,14 @@ def verify_images(items, workers: int = 12):
         u = unwrap_image_url(it.get("img") or "")
         it["img"] = u
         if image_alive(u):
+            # 代表カードに間取り図が出ないよう、写真か図面かを覚えておく
+            it["img_is_plan"] = image_is_floorplan(u)
+            if it["img_is_plan"]:
+                # 一覧サムネが図面なら詳細ページから外観写真を探す
+                photo = fetch_photo_from_detail(it)
+                if photo:
+                    it["img"] = photo
+                    it["img_is_plan"] = False
             with lock:
                 ok += 1
             return
@@ -3887,6 +3991,7 @@ def verify_images(items, workers: int = 12):
             pass
         u2 = unwrap_image_url(it.get("img") or "")
         it["img"] = u2 if image_alive(u2) else ""
+        it["img_is_plan"] = image_is_floorplan(it["img"]) if it["img"] else False
         with lock:
             if it["img"]:
                 fixed += 1
