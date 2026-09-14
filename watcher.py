@@ -5,7 +5,7 @@
 
 フィルタ:
   共通  : 駅徒歩 ≤7分・駅ごとの許容エリア内
-  売買  : 面積 ≥45㎡ ・ 3000万 ≤ 価格 ≤ 1.5億
+  売買  : 面積 ≥48㎡ ・ 3000万 ≤ 価格 ≤ 1.5億
   賃貸  : 面積 ≥30㎡ ・ 8万 ≤ 管理費込み賃料 ≤ 28万
 通知  : 毎日30件目安（新着が少ない日は既出から補充）、駐車場ありを最優先で並べる
 """
@@ -71,7 +71,7 @@ WALK_MAX_BY_STATION = {}
 
 # 条件を満たす物件が極端に少ないエリア。取りこぼさないよう深くまで見る。
 DEEP_SCAN_STATIONS = ("恵比寿", "広尾", "代官山", "中目黒", "目黒", "大井町")
-AREA_MIN = 45.0      # 専有/建物面積 下限(㎡)
+AREA_MIN = float(os.environ.get("AREA_MIN") or 48.0)  # 専有/建物面積 下限(㎡)
 PRICE_MIN = 3000     # 3000万
 # 予算オーバーでも「価格以外は条件を満たす」物件は捨てずに価格を追い続ける。
 # 不況で値下がりして予算内に入ってきた瞬間を捕まえるため。
@@ -90,7 +90,8 @@ LOCAL_FEED_MAX_AGE_DAYS = int(os.environ.get("LOCAL_FEED_MAX_AGE_DAYS") or 3)
 # === フィルタ（賃貸） ===
 RENT_MAX = 28.0      # 管理費込み上限(万円)
 RENT_MIN = 8.0       # 下限(万円) 安すぎる1Rを除外
-RENT_AREA_MIN = 45.0 # 賃貸の面積下限(㎡) ※売買と同じ45㎡に統一(2026-09-08)
+RENT_AREA_MIN = float(os.environ.get("RENT_AREA_MIN") or 48.0)
+# 賃貸の面積下限(㎡)。売買と同じ値に揃える(2026-09-14に45→48)
 RENT_WALK_MAX = 7    # 賃貸の駅徒歩上限(分) ※売買と同じ7分
 RENT_MAX_AGE = 20    # 賃貸の築年数上限(年) ※20年未満のみ
 HOUSE_MAX_AGE = 20   # 戸建の築年数上限(年) ※20年未満のみ
@@ -1712,19 +1713,24 @@ def parse_homes_rent(html: str, station: str):
         if name.startswith("掲載物件"):
             name = ""          # 一覧のUI文言。物件名ではない
         built = None
-        # 「築年数/階数 | 12年 / 7階建」の形（実測）
-        mb = re.search(r"築年数[^|]*\|\s*(\d{1,3})\s*年", ctext)
-        if not mb:
-            mb = re.search(r"築\s*(\d{1,3})\s*年", ctext)
-        if mb:
-            built = CURRENT_YEAR - int(mb.group(1))
-        else:
-            my = re.search(r"(\d{4})年\s*\d{0,2}月?\s*築", ctext)
+        # 築年は建物ブロック自身(btext)を先に見る。祖先(ctext)を先に見ると
+        # 祖先が複数建物を含む場合に先頭の築年が全件に付く
+        # （goo中古戸建で実際に40件すべて同じ築年になっていた）
+        for _src in (btext, ctext):
+            # 「築年数/階数 | 12年 / 7階建」の形（実測）
+            mb = re.search(r"築年数[^|]*\|\s*(\d{1,3})\s*年", _src)
+            if not mb:
+                mb = re.search(r"築\s*(\d{1,3})\s*年", _src)
+            if mb:
+                built = CURRENT_YEAR - int(mb.group(1))
+                break
+            my = re.search(r"(\d{4})年\s*\d{0,2}月?\s*築", _src)
             if my:
                 built = int(my.group(1))
-        # 「新築」表記は築0年
-        if built is None and is_shinchiku_label(ctext):
-            built = CURRENT_YEAR
+                break
+            if is_shinchiku_label(_src):
+                built = CURRENT_YEAR
+                break
         walk = parse_walk(ctext.replace("|", " "), station)
         walks = parse_all_walks(ctext.replace("|", " "))
         for tr in bld.select("tbody.prg-roomList tr"):

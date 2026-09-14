@@ -174,7 +174,7 @@ def build(items, out_path, station_order=None, reject_tally=None):
         reject_html = (
             '<details class="rej"><summary>条件で落とした物件 '
             f'{total:,}件の内訳</summary><ul>{rows}</ul>'
-            '<p>条件: 徒歩7分以内 / 3,000万〜1.2億 / 45㎡以上 / 築20年未満 / '
+            '<p>条件: 徒歩7分以内 / 3,000万〜1.2億 / 48㎡以上 / 築20年未満 / '
             '賃料28万円以下(管理費込)</p></details>')
     present = {it["station"] for it in items}
     if station_order:
