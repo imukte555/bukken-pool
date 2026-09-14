@@ -55,6 +55,9 @@ WORKERS = 5          # 駅の並列数。上げすぎるとbot検知されるの
 # 詳細ページの並列数。ホストごとのゲートで同時接続は別途絞られるので、
 # プール全体としてはもう少し並べてよい（500件超を5並列だと長すぎる）
 DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS") or 10)
+# 一覧に無い徒歩・築年・住所を詳細から補うときの並列数。
+# 直列だと1駅80件級のサイトで締切を使い切っていた
+RESCUE_WORKERS = int(os.environ.get("RESCUE_WORKERS") or 8)
 # 同一建物から取る最大部屋数。3だと同じマンションの4部屋目以降が
 # 条件を満たしていても捨てられていたので広げた（件数を増やすため）。
 # 同じ部屋の重複掲載は別途 間取り+賃料+面積 の一致で除外している。
@@ -3243,62 +3246,86 @@ def collect_station(station, codes):
 # === フィルタ ===
 
 def filter_with_walk_rescue(items):
-    """フィルタ適用。walk=Noneでも他条件を満たす物件は詳細ページからwalkを取得して救済"""
+    """フィルタ適用。walk/築年/住所が一覧に無いだけの物件は詳細ページから
+    補完して再判定する。
+    以前は1件ずつ time.sleep(1.0) を挟む直列処理だったため、
+    goo住宅の売買のように一覧に築年が出ないサイトでは1駅80件×13駅ぶん
+    直列に待つことになり、取得の締切を食い潰して後続のサイトが
+    丸ごと取れなくなっていた。ホストごとの間隔制御は fetch 側にあるので
+    ここは並列にしてよい。
+    """
     keep_raw(items)
-    kept = []
+    kept, todo = [], []
     for it in items:
         if apply_filters(it):
             kept.append(it)
             continue
-        # walk か addr が欠損 & 他条件OK → 詳細ページから補完して再判定
-        # addr は駅ごとの区チェックに必須。欠損のまま通すと一覧の広告枠を拾う。
         needs_walk = it.get("walk") is None
         needs_addr = not it.get("addr") and STATION_AREAS.get(it.get("station"))
-        # 築年が一覧に出ないサイト（カウカモ等）は築年も詳細から補う。
+        # 築年が一覧に出ないサイト（カウカモ・goo住宅の売買等）は築年も補う。
         # 補わないと「築年不明」で全件落ちる（実測: カウカモが全駅0件だった）
         needs_built = (not it.get("built")
                        and it.get("type") in ("mansion", "house", "rent"))
         if (needs_walk or needs_addr or needs_built) and passes_except_walk(it):
-            use_cffi = it["source"] in ("HOMES", "アットホーム", "三井のリハウス",
-                                        "スマイティ", "CHINTAI", "ニフティ不動産",
-                                        "ハウスコム", "賃貸スモッカ", "goo住宅",
-                                        "カウカモ")
-            html = fetch(it["url"], impersonate=use_cffi)
-            if html:
-                soup = BeautifulSoup(html, "html.parser")
-                text = soup.get_text(" ", strip=True)
-                if needs_walk:
-                    w = parse_walk(text, it["station"])
-                    if w is not None:
-                        it["walk"] = w
-                if needs_built:
-                    row = _row_value(soup, "完成時期", "築年月", "建築年月",
-                                     "竣工", "築年数", "築年")
-                    b = parse_built(row) if row else None
-                    if not b:
-                        mb2 = re.search(r"(\d{4})年\s*\d{0,2}月?\s*築|築年[^0-9]{0,4}(\d{4})年", text)
-                        if mb2:
-                            b = int(mb2.group(1) or mb2.group(2))
-                    if not b:
-                        # 「築年月 築55年」のように築年数で書くサイトがある
-                        mb3 = re.search(r"築年月?\s*築\s*(\d{1,3})\s*年", text)
-                        if mb3:
-                            b = CURRENT_YEAR - int(mb3.group(1))
-                    if b:
-                        it["built"] = b
-                if needs_addr:
-                    a = parse_addr(text) if "parse_addr" in globals() else None
-                    if a:
-                        it["addr"] = a
-                    else:
-                        m = re.search(r"(東京都[^\s、,]{1,4}区[^\s、,]{0,12})", text)
-                        if m:
-                            it["addr"] = m.group(1)
-                if apply_filters(it):
-                    kept.append(it)
-            time.sleep(1.0)
-    return kept
+            todo.append((it, needs_walk, needs_addr, needs_built))
 
+    def _one(job):
+        it, needs_walk, needs_addr, needs_built = job
+        use_cffi = it["source"] in ("HOMES", "アットホーム", "三井のリハウス",
+                                    "スマイティ", "CHINTAI", "ニフティ不動産",
+                                    "ハウスコム", "賃貸スモッカ", "goo住宅",
+                                    "カウカモ")
+        html = fetch(it["url"], impersonate=use_cffi)
+        if not html:
+            return None
+        soup = BeautifulSoup(html, "html.parser")
+        text = soup.get_text(" ", strip=True)
+        if needs_walk:
+            transit = _row_value(soup, "交通", "駅徒歩", "最寄", "アクセス")
+            transit = re.sub(r"\s*\|\s*", " ", transit) if transit else ""
+            walks = parse_all_walks(transit) if transit else []
+            if not walks:
+                walks = parse_all_walks(text)
+            if walks:
+                it["walks"] = walks
+                d = dict(walks)
+                if it["station"] in d:
+                    it["walk"] = d[it["station"]]
+            if it.get("walk") is None:
+                w = parse_walk(transit or text, it["station"])
+                if w is not None:
+                    it["walk"] = w
+        if needs_built:
+            row = _row_value(soup, "完成時期", "築年月", "建築年月",
+                             "竣工", "築年数", "築年")
+            b = parse_built(row) if row else None
+            if not b:
+                mb2 = re.search(r"(\d{4})年\s*\d{0,2}月?\s*築|築年[^0-9]{0,4}(\d{4})年", text)
+                if mb2:
+                    b = int(mb2.group(1) or mb2.group(2))
+            if not b:
+                # 「築年月 築55年」のように築年数で書くサイトがある
+                mb3 = re.search(r"築年月?\s*築\s*(\d{1,3})\s*年", text)
+                if mb3:
+                    b = CURRENT_YEAR - int(mb3.group(1))
+            if b:
+                it["built"] = b
+        if needs_addr:
+            a = parse_addr(text)
+            if a:
+                it["addr"] = a
+            else:
+                m = re.search(r"(東京都[^\s、,]{1,4}区[^\s、,]{0,12})", text)
+                if m:
+                    it["addr"] = m.group(1)
+        return it if apply_filters(it) else None
+
+    if todo:
+        with ThreadPoolExecutor(max_workers=RESCUE_WORKERS) as ex:
+            for r in ex.map(_one, todo):
+                if r is not None:
+                    kept.append(r)
+    return kept
 
 def apply_rent_filters(item):
     """賃貸用フィルタ: 管理費込み賃料・面積・徒歩"""
