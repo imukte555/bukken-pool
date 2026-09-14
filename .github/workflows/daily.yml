@@ -59,8 +59,21 @@ jobs:
           MIN_KEEP_RATIO: ${{ inputs.min_keep_ratio }}
         run: python watcher.py
 
-      - name: Publish 在庫ページ (GitHub Pages)
+      # 公開する前に自分で全部確かめる（sho指示 2026-09-14）
+      # 写真が開けない・条件違反・駅が違う・HTMLが壊れている のどれかが
+      # あれば失敗させ、壊れたページを公開しない
+      - name: 公開前チェック
+        id: verify
         if: always()
+        timeout-minutes: 20
+        run: |
+          if [ ! -f docs/index.html ]; then echo "ページ未生成のためスキップ"; exit 0; fi
+          python verify_page.py docs/index.html
+
+      - name: Publish 在庫ページ (GitHub Pages)
+        # watcherが途中で失敗しても公開はする。ただし公開前チェックに
+        # 落ちたページは公開しない
+        if: always() && steps.verify.outcome == 'success'
         timeout-minutes: 12
         run: |
           if [ ! -f docs/index.html ]; then echo "no page, skip"; exit 0; fi

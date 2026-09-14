@@ -14,6 +14,7 @@ import json
 import os
 import re
 from urllib.parse import unquote
+import html as _html
 import sys
 import time
 import random
@@ -79,8 +80,11 @@ AREA_MIN = float(os.environ.get("AREA_MIN") or 47.01)
 PRICE_MIN = 3000     # 3000万
 # 予算オーバーでも「価格以外は条件を満たす」物件は捨てずに価格を追い続ける。
 # 不況で値下がりして予算内に入ってきた瞬間を捕まえるため。
-WATCH_PRICE_MAX = 25000   # 2.5億まで監視対象（売買）
-WATCH_RENT_MAX = 45.0     # 45万円/月まで監視対象（賃貸）
+WATCH_PRICE_MAX = int(os.environ.get("WATCH_PRICE_MAX") or 14000)
+# 値下がり待ちで監視する上限(万円)。2.5億まで見ていたが「高すぎ」と
+# 指摘されたので1.4億に下げた(2026-09-14)。予算1.2億まで下がりうる幅だけ見る
+WATCH_RENT_MAX = float(os.environ.get("WATCH_RENT_MAX") or 33.0)
+# 値下がり待ちで監視する賃料上限(万円/月)。45万は予算28万から離れすぎ
 PRICE_MAX = 12000    # 1.2億（建物込みの予算上限）
 BUILT_MAX_AGE = int(os.environ.get("BUILT_MAX_AGE") or 20)
 CURRENT_YEAR = 2026
@@ -208,6 +212,10 @@ def unwrap_image_url(u: str) -> str:
     """
     if not u:
         return u
+    # 一覧HTMLの属性値に &amp; が入ったまま取り込むと、ページ生成で
+    # もう一度エスケープされて &amp;amp; になり、ブラウザからは
+    # 壊れたURLになる（実測: スモッカの image.smocca.jp/filter/?...）
+    u = _html.unescape(_html.unescape(u))
     m = re.search(r"[?&]src=([^&]+)", u)
     if m and "suumo" in u:
         raw = unquote(m.group(1))
@@ -3659,6 +3667,75 @@ def dedupe_items(items, label=""):
         print(f"同一物件の重複を除外{label}: {len(items)} → {len(uniq)}件")
     return uniq
 
+def image_alive(url: str, timeout: int = 12) -> bool:
+    """画像URLが実際に開けるかを確かめる。
+    HTMLにURLが入っていても外部から読めないことがある
+    （実測: SUUMOの img01.suumo.com/jj/resizeImage は必ず失敗し、
+    117枚中35枚が真っ白だった）。HEADを拒むホストがあるのでGETで
+    先頭だけ取る。
+    """
+    if not url or not url.startswith("http"):
+        return False
+    # サーバからは取れてもブラウザからは読めないURL。
+    # 実測: img01.suumo.com/jj/resizeImage は curl では200が返るのに
+    # 外部ページの<img>では必ず失敗する（Edgeで117枚中34枚が真っ白）
+    if re.search(r"img01\.suumo\.com/jj/", url):
+        return False
+    try:
+        r = requests.get(url, headers=HTTP_HEADERS, timeout=timeout,
+                         stream=True)
+        ok = (r.status_code == 200
+              and "image" in (r.headers.get("Content-Type") or ""))
+        r.close()
+        if ok:
+            return True
+    except Exception:
+        pass
+    # requestsを弾くホスト向けにChromeを名乗って再試行
+    try:
+        from curl_cffi import requests as _creq
+        r = _creq.get(url, impersonate="chrome", timeout=timeout)
+        return (r.status_code == 200
+                and "image" in (r.headers.get("Content-Type") or ""))
+    except Exception:
+        return False
+
+
+def verify_images(items, workers: int = 12):
+    """全物件の写真が実際に開けるか確かめ、駄目なら詳細ページから取り直す。
+    それでも駄目なら空にして「画像なし」と正直に出す。
+    戻り値: (確認できた数, 取り直して直った数, どうしても取れなかった数)
+    """
+    ok = fixed = dead = 0
+    lock = threading.Lock()
+
+    def one(it):
+        nonlocal ok, fixed, dead
+        u = unwrap_image_url(it.get("img") or "")
+        it["img"] = u
+        if image_alive(u):
+            with lock:
+                ok += 1
+            return
+        it["img"] = ""
+        try:
+            enrich_from_detail(it)
+        except Exception:
+            pass
+        u2 = unwrap_image_url(it.get("img") or "")
+        it["img"] = u2 if image_alive(u2) else ""
+        with lock:
+            if it["img"]:
+                fixed += 1
+            else:
+                dead += 1
+
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        list(ex.map(one, items))
+    print(f"写真の実表示チェック: そのまま{ok}件 / 取り直して復旧{fixed}件 / "
+          f"取れず{dead}件")
+    return ok, fixed, dead
+
 def audit_items(items, label=""):
     """送信・公開の直前に、全件が全条件を満たしているか数える。
     「条件を実装したか」ではなく「出てきた物件が条件を満たすか」を見る。
@@ -3987,6 +4064,9 @@ def main():
         # 一覧の時点では住所が空のポータルがあり、1回目では突き合わせ
         # られなかったぶんがここで消える。
         items = dedupe_items(items, "(詳細取得後)")
+        # 「写真がない」「写真が真っ白」を無くす。URLがあるだけでは
+        # 表示できているとは限らないので実際に開いて確かめる
+        verify_images(items)
         # 再判定“後”のリストをプールとして使う。
         # 前に代入すると、徒歩超過で弾いた物件がメールに残ってしまう。
         # 全件を全条件と突き合わせる。違反は載せない（見つけ次第ログに出す）
