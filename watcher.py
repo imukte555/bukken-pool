@@ -58,6 +58,12 @@ DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS") or 10)
 # 一覧に無い徒歩・築年・住所を詳細から補うときの並列数。
 # 直列だと1駅80件級のサイトで締切を使い切っていた
 RESCUE_WORKERS = int(os.environ.get("RESCUE_WORKERS") or 8)
+# HOMES・アットホーム・ニフティは GitHub Actions のIPから弾かれる。
+# それでも叩くと1ホストあたり数分の待機が発生し、取得の締切を食って
+# 取れるサイトまで落ちる。Actions上では最初から飛ばす。
+# ローカル実行では今までどおり取りにいく（環境変数で上書き可）。
+SKIP_BLOCKED_HOSTS = (os.environ.get("SKIP_BLOCKED_HOSTS")
+                      or ("1" if os.environ.get("GITHUB_ACTIONS") else "0")) == "1"
 # 同一建物から取る最大部屋数。3だと同じマンションの4部屋目以降が
 # 条件を満たしていても捨てられていたので広げた（件数を増やすため）。
 # 同じ部屋の重複掲載は別途 間取り+賃料+面積 の一致で除外している。
@@ -2747,8 +2753,8 @@ def collect_station(station, codes):
             # 件数を増やすため深く見る（浅いと候補を取りこぼす）
             # 面積帯2本×価格帯3本=1ページあたり6リクエスト
             # 駅を13に絞ったぶん1駅あたりを深く掘る（2026-09-14）
-            pages = (tuple(range(1, 16)) if station in DEEP_SCAN_STATIONS
-                     else tuple(range(1, 11)))
+            pages = (tuple(range(1, 26)) if station in DEEP_SCAN_STATIONS
+                     else tuple(range(1, 19)))
             items = []
             for pn in pages:
                 # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
@@ -2788,7 +2794,7 @@ def collect_station(station, codes):
         # 予算5回に収める。マンションはSUUMO/ノムコムで足りているが、
         # 土地は掲載自体が少ないので、この枠は土地に使う。
         # 休憩を挟めば全駅から取れる
-        use_homes = bool(codes.get("homes"))
+        use_homes = bool(codes.get("homes")) and not SKIP_BLOCKED_HOSTS
         for kind, path in ([] if not use_homes else
                            [("mansion", f"mansion/chuko/{pref}/{codes['homes']}/list/"),
                             ("house",   f"kodate/chuko/{pref}/{codes['homes']}/list/"),
@@ -2827,7 +2833,7 @@ def collect_station(station, codes):
             time.sleep(SLEEP_BETWEEN)
 
         # アットホーム (3種別) — Cloudflare回避でcurl_cffi使用 + リトライ
-        use_athome = bool(codes.get("athome"))
+        use_athome = bool(codes.get("athome")) and not SKIP_BLOCKED_HOSTS
         for kind, path in ([] if not use_athome else
                            [("mansion", f"mansion/chuko/{pref}/{codes['athome']}/list/"),
                             ("house",   f"kodate/{pref}/{codes['athome']}/list/"),
@@ -2865,7 +2871,7 @@ def collect_station(station, codes):
                                       # 土地も見る（sho指示。実測: 目黒40件）
                                       ("la", "land", "land")]:
                 items = []
-                for pn in range(1, 31):
+                for pn in range(1, 46):
                     url = (f"https://house.goo.ne.jp/buy/shuto_{_seg}/ensen/"
                            f"{_bl[1:]}/{_bc}.html"
                            + ("" if pn == 1 else f"?p={pn}"))
@@ -2887,7 +2893,7 @@ def collect_station(station, codes):
             _gp, _gl, _gc = codes["nomu"].split("/")
             items = []
             # 実測: 15/18/21/24ページ目でも 160/81/104/70件と出続ける
-            for pn in range(1, 61):
+            for pn in range(1, 91):
                 # ページ送りは ?p=N（?page=は無視される。実測で確認）
                 url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
                        f"{_gl[1:]}/{_gc}.html"
@@ -2962,7 +2968,7 @@ def collect_station(station, codes):
             # (sort1=1で60件 → 2と8を足すとユニーク366件)
             # 実測: sort1=8 の13/15/17/19ページ目でも 70/34/81/96件と出続ける
             for _sort in ("1", "2", "8"):
-                for pn in range(1, 41):
+                for pn in range(1, 61):
                     url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
                            f"?sort1={_sort}"
                            + ("" if pn == 1 else f"&page={pn}"))
@@ -3005,7 +3011,7 @@ def collect_station(station, codes):
             # さらに並び替え(sort)で別集合が返る
             # （なし35件 → sort=1で+37 / sort=3で+24 でユニーク101件）
             for _so in ("", "1", "2", "3"):
-                for pn in range(1, 31):
+                for pn in range(1, 46):
                     _q = ([] if not _so else [f"sort={_so}"])
                     if pn != 1:
                         _q.append(f"page={pn}")
@@ -3025,7 +3031,7 @@ def collect_station(station, codes):
 
         # ニフティ不動産(横断検索) — SUUMO/HOMES/アットホーム等の在庫が入る。
         # ActionsからHOMES/アットホームを直接叩けない分をここで補う。
-        if codes.get("nifty"):
+        if codes.get("nifty") and not SKIP_BLOCKED_HOSTS:
             # 新築も取る。sho条件の「築20年未満」に確実に合致する上、
             # 中古だけだと候補が足りない（実測: 新築戸建 目黒で19件）
             for kind, path in [("mansion", f"chuko-mansion/{pref}/{codes['nifty']}_st/"),
@@ -3065,8 +3071,8 @@ def collect_station(station, codes):
             # 実測: 6/8/10/12ページ目でも 55/50/38/38件と別物件が出続ける
             # 実測: 14/16/18/20ページ目でも 45/36/45/53件と別物件が出続ける
             # 実測: 21/24ページ目でも39/37件、27以降は0
-            pages = (tuple(range(1, 46)) if station in DEEP_SCAN_STATIONS
-                     else tuple(range(1, 36)))
+            pages = (tuple(range(1, 71)) if station in DEEP_SCAN_STATIONS
+                     else tuple(range(1, 56)))
             # 賃貸マンション/アパートに加えて賃貸戸建(list/kodate/)も取る。
             # 戸建は面積が広く45㎡以上の条件に合いやすい（実測: 目黒16件）
             # 種別ごとに別集合が返る。実測(目黒1ページ):
@@ -3098,7 +3104,7 @@ def collect_station(station, codes):
                 # (sort1=1で49件 → 2と8を足すとユニーク131件)
                 # 実測: sort1=8 の6/8ページ目で 41/44件、10ページ以降は0
                 for _sort in ("1", "2", "8"):
-                    for pn in range(1, 25):
+                    for pn in range(1, 37):
                         _q = f"?sort1={_sort}" + ("" if pn == 1 else f"&page={pn}")
                         url = f"https://sumaity.com/{path}{_q}"
                         html = fetch_with_retry(url, impersonate=True)
