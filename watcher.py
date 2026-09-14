@@ -125,7 +125,7 @@ STATIONS = {
     "JR蒲田": {"suumo": "08940", "homes": "kamata_00605-st",      "nomu": "ensen_tokyo/2196/2196290", "livable": "tokyo/s2196290", "athome": "kamata-st", "rehouse": "13/2196/290", "sumaity": "kamata", "chintai": "tokyo/000000039", "nifty": "kamata", "housecom": "tokyo/21960290", "sumaity_rent": "tokyo/ota_ku_kamata", "cowcamo": "1755"},
     "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st", "rehouse": "13/2327/230", "sumaity": "musashikoyama", "chintai": "tokyo/000005103", "nifty": "musashikoyama", "housecom": "tokyo/23270230", "sumaity_rent": "tokyo/shinagawa_ku_musashikoyama", "cowcamo": "1123"},
     "東日本橋": {"suumo": "32170", "homes": "higashinihombashi_06405-st",                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st", "rehouse": "13/2351/060", "sumaity": None, "chintai": "tokyo/000005347", "nifty": "higashinihombashi", "housecom": "tokyo/23510060", "sumaity_rent": None, "cowcamo": None},
-    "蛍池": {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st", "rehouse": "27/6668/100", "sumaity": "hotarugaike", "chintai": "osaka/000006365", "nifty": "hotarugaike", "housecom": "osaka/66680100", "sumaity_rent": "osaka/toyonaka_hotarugaike", "cowcamo": None},
+    "蛍池": {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": "ensen_osaka/6668/6668100", "livable": None, "athome": "hotarugaike-st", "rehouse": "27/6668/100", "sumaity": "hotarugaike", "chintai": "osaka/000006365", "nifty": "hotarugaike", "housecom": "osaka/66680100", "sumaity_rent": "osaka/toyonaka_hotarugaike", "cowcamo": None},
 }
 
 # 駅ごとに許容する区（これ以外の区の物件は弾く）
@@ -1703,6 +1703,64 @@ def parse_cowcamo(html: str, station: str):
 
 # HOMESの賃貸。div.unitList が建物、tbody.prg-roomList の各行が部屋。
 # 列は 階/部屋番号/賃料/管理費/敷金/礼金/保証/敷引/間取り/専有面積（実測）。
+def parse_able(html: str, station: str):
+    """エイブルの駅別賃貸一覧。section.m-list_cassette が1建物で、
+    中に部屋行が並ぶ（実測: 恵比寿で106掲載）。
+    外観写真は img.photo の alt に「の外観」、間取り図は「の間取り」が入る。
+    """
+    if not html:
+        return []
+    soup = BeautifulSoup(html, "html.parser")
+    items, seen = [], set()
+    for box in soup.select("section.m-list_cassette"):
+        a = box.find("a", href=re.compile(r"/detail/Detail\.do"))
+        if not a:
+            continue
+        m = re.search(r"bk=([A-Za-z0-9]+)", a["href"])
+        if not m or m.group(1) in seen:
+            continue
+        t = re.sub(r"\s+", " ", box.get_text(" ", strip=True))
+        name = (box.find(["h2", "h3"]).get_text(strip=True)[:40]
+                if box.find(["h2", "h3"]) else "")
+        name = re.sub(r"^(賃貸マンション|賃貸アパート|賃貸戸建|マンション|アパート)", "", name).strip()
+        addr = parse_addr(t)
+        built = parse_built(t)
+        # 「8階 即入居可 10.5 万円 13,000円 1ヶ月 1ヶ月 1K 21.77㎡」
+        mr = re.search(r"(\d+)\s*階[^0-9]{0,12}?([\d.]+)\s*万円", t)
+        floor = f"{mr.group(1)}階" if mr else parse_floor(t, "rent")
+        price = float(mr.group(2)) if mr else parse_rent_man(t)
+        # 管理費を足して「管理費込み」に揃える
+        mk = re.search(r"万円\s*([\d,]+)\s*円", t)
+        if price is not None and mk:
+            price = round(price + int(mk.group(1).replace(",", "")) / 10000.0, 2)
+        area = parse_area(t)
+        layout = parse_layout(t)
+        img = ""
+        for im in box.select("img.photo"):
+            alt = im.get("alt") or ""
+            u = (im.get("src") or "").strip()
+            if not u:
+                continue
+            if "間取" in alt:          # 間取り図より外観を優先
+                img = img or u
+                continue
+            img = u
+            break
+        if price is None or area is None:
+            continue
+        seen.add(m.group(1))
+        items.append({
+            "id": f"able:r:{m.group(1)}",
+            "img": unwrap_image_url(_abs(img, "https://www.able.co.jp")),
+            "station": station, "type": "rent",
+            "name": name or addr, "price": price, "area": area,
+            "layout": layout, "floor": floor, "built": built,
+            "walk": parse_walk(t, station), "walks": parse_all_walks(t),
+            "addr": addr, "url": _abs(a["href"], "https://www.able.co.jp"),
+            "source": "エイブル",
+        })
+    return items
+
 def parse_homes_rent(html: str, station: str):
     if not html:
         return []
@@ -2635,7 +2693,9 @@ def collect_station(station, codes):
             # 取りこぼしを無くすため、この駅だけ深いページまで見る。
             # 件数を増やすため深く見る（浅いと候補を取りこぼす）
             # 面積帯2本×価格帯3本=1ページあたり6リクエスト
-            pages = (1, 2, 3, 4, 5) if station in DEEP_SCAN_STATIONS else (1, 2, 3)
+            # 駅を13に絞ったぶん1駅あたりを深く掘る（2026-09-14）
+            pages = (tuple(range(1, 16)) if station in DEEP_SCAN_STATIONS
+                     else tuple(range(1, 11)))
             items = []
             for pn in pages:
                 # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
@@ -2750,7 +2810,7 @@ def collect_station(station, codes):
                                       ("bm", "mansion", "mansion"),
                                       ("bh", "house", "house")]:
                 items = []
-                for pn in range(1, 9):
+                for pn in range(1, 31):
                     url = (f"https://house.goo.ne.jp/buy/shuto_{_seg}/ensen/"
                            f"{_bl[1:]}/{_bc}.html"
                            + ("" if pn == 1 else f"?p={pn}"))
@@ -2772,7 +2832,7 @@ def collect_station(station, codes):
             _gp, _gl, _gc = codes["nomu"].split("/")
             items = []
             # 実測: 15/18/21/24ページ目でも 160/81/104/70件と出続ける
-            for pn in range(1, 26):
+            for pn in range(1, 61):
                 # ページ送りは ?p=N（?page=は無視される。実測で確認）
                 url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
                        f"{_gl[1:]}/{_gc}.html"
@@ -2802,7 +2862,7 @@ def collect_station(station, codes):
             _sp, _sl, _sc = _sm
             items = []
             # 実測: 2ページ目で84件、3ページ以降はほぼ0
-            for pn in range(1, 5):
+            for pn in range(1, 7):
                 # ページ送りは ?page= ではなく /page/N（?page=は無視され
                 # 1ページ目が返る。実測で確認）
                 url = (f"https://smocca.jp/search/{_sp}/line/{_sl}/station/{_sc}"
@@ -2823,7 +2883,7 @@ def collect_station(station, codes):
         # 他条件を満たすものだけ詳細ページから築年を補完する
         if codes.get("cowcamo"):
             items = []
-            for pn in range(1, 4):
+            for pn in range(1, 6):
                 url = (f"https://cowcamo.jp/station/{codes['cowcamo']}"
                        + ("" if pn == 1 else f"?page={pn}"))
                 html = fetch_with_retry(url, impersonate=True)
@@ -2847,7 +2907,7 @@ def collect_station(station, codes):
             # (sort1=1で60件 → 2と8を足すとユニーク366件)
             # 実測: sort1=8 の13/15/17/19ページ目でも 70/34/81/96件と出続ける
             for _sort in ("1", "2", "8"):
-                for pn in range(1, 21):
+                for pn in range(1, 41):
                     url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
                            f"?sort1={_sort}"
                            + ("" if pn == 1 else f"&page={pn}"))
@@ -2867,7 +2927,7 @@ def collect_station(station, codes):
         # 所在階・敷礼・築年月まで載る（実測: 目黒で30件・欠損0）
         if codes.get("livable"):
             items = []
-            for pn in range(1, 6):
+            for pn in range(1, 9):
                 url = (f"https://www.livable.co.jp/chintai/{codes['livable']}/"
                        + ("" if pn == 1 else f"?page={pn}"))
                 html = fetch_with_retry(url)
@@ -2890,7 +2950,7 @@ def collect_station(station, codes):
             # さらに並び替え(sort)で別集合が返る
             # （なし35件 → sort=1で+37 / sort=3で+24 でユニーク101件）
             for _so in ("", "1", "2", "3"):
-                for pn in range(1, 15):
+                for pn in range(1, 31):
                     _q = ([] if not _so else [f"sort={_so}"])
                     if pn != 1:
                         _q.append(f"page={pn}")
@@ -2950,7 +3010,8 @@ def collect_station(station, codes):
             # 実測: 6/8/10/12ページ目でも 55/50/38/38件と別物件が出続ける
             # 実測: 14/16/18/20ページ目でも 45/36/45/53件と別物件が出続ける
             # 実測: 21/24ページ目でも39/37件、27以降は0
-            pages = tuple(range(1, 31)) if station in DEEP_SCAN_STATIONS else tuple(range(1, 26))
+            pages = (tuple(range(1, 46)) if station in DEEP_SCAN_STATIONS
+                     else tuple(range(1, 36)))
             # 賃貸マンション/アパートに加えて賃貸戸建(list/kodate/)も取る。
             # 戸建は面積が広く45㎡以上の条件に合いやすい（実測: 目黒16件）
             # 種別ごとに別集合が返る。実測(目黒1ページ):
@@ -2982,7 +3043,7 @@ def collect_station(station, codes):
                 # (sort1=1で49件 → 2と8を足すとユニーク131件)
                 # 実測: sort1=8 の6/8ページ目で 41/44件、10ページ以降は0
                 for _sort in ("1", "2", "8"):
-                    for pn in range(1, 10):
+                    for pn in range(1, 25):
                         _q = f"?sort1={_sort}" + ("" if pn == 1 else f"&page={pn}")
                         url = f"https://sumaity.com/{path}{_q}"
                         html = fetch_with_retry(url, impersonate=True)
@@ -3041,7 +3102,7 @@ def collect_station(station, codes):
             # さらに order で別集合が返る（なし40件 → 1〜4で+18/+20/+16/+10、
             # 合わせてユニーク104件）
             for _od in ("", "1", "2", "3", "4"):
-                for pn in range(1, 7):
+                for pn in range(1, 10):
                     url = (f"https://www.nomu.com/{path}?pager_page={pn}"
                            + ("" if not _od else f"&order={_od}"))
                     html = fetch(url)
@@ -3062,7 +3123,7 @@ def collect_station(station, codes):
                             ("house",   f"kounyu/kodate/{codes['livable']}/"),
                             ("land",    f"kounyu/tochi/{codes['livable']}/")]):
             items = []
-            for pn in range(1, 7):
+            for pn in range(1, 10):
                 url = f"https://www.livable.co.jp/{path}?page={pn}"
                 html = fetch(url)
                 page_items = parse_livable(html, station, kind)
@@ -3227,6 +3288,12 @@ def apply_rent_filters(item):
     # 築20年未満のみ。築年が取れない物件は条件を検証できないので通さない
     b = item.get("built")
     if not b or (CURRENT_YEAR - b) >= RENT_MAX_AGE:
+        return False
+    # 間取り: 賃貸は1LDK以上（売買は2LDK以上）。sho指示 2026-09-14
+    # 1K/1DK/1R/ワンルームだけを弾く。1DK+S や 1SLDK は部屋が2つなので通す
+    lay = re.sub(r"[\s　]", "", (item.get("layout") or "").upper())
+    if re.fullmatch(r"1(K|R|DK)", lay) or "ワンルーム" in lay:
+        note_reject("間取りが1K/1DK/1R(賃貸)")
         return False
     # 駅ごとの許容エリア
     addr = item.get("addr", "")
