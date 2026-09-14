@@ -252,23 +252,40 @@ def build(items, out_path, station_order=None, reject_tally=None):
         layout = html.escape(it.get("layout") or "")
         if not layout:
             layout = "" if it.get("type") == "land" else "間取り記載なし"
+        rooms_note = ""
         note = html.escape(it.get("_dup_note") or "")
         pnote = html.escape(it.get("_price_note") or "")
         sr = html.escape(it.get("shikirei") or "") if it.get("type") == "rent" else ""
         hnote = html.escape(it.get("_hist_note") or "")
         # 同じ物件の他の掲載。値段・階が違うので畳んで全部出す
-        prices = [x.get("price") for x in ([it] + sibs) if x.get("price") is not None]
-        if sibs and prices and min(prices) != max(prices):
-            unit = "万円/月" if it.get("type") == "rent" else "万円"
-            rng = f"（{min(prices)}〜{max(prices)}{unit}）"
-        else:
-            rng = ""
+        allx = [it] + sibs
+        prices = [x.get("price") for x in allx if x.get("price") is not None]
+        unit = "万円/月" if it.get("type") == "rent" else "万円"
+        # 同じ建物でも階や面積が違えば別の部屋。何部屋ぶんあるか出さないと
+        # 代表カードの面積・階が全体を代表しているように見えてしまう
+        rooms = {(round(x["area"], 1) if x.get("area") else None,
+                  x.get("floor") or "", x.get("price")) for x in allx}
+        bits = []
+        if len(rooms) > 1:
+            bits.append(f"{len(rooms)}部屋")
+        if prices and min(prices) != max(prices):
+            bits.append(f"{min(prices)}〜{max(prices)}{unit}")
+        rng = f"（{'・'.join(bits)}）" if bits else ""
         more = ""
         if sibs:
-            more = ('<details class="more"><summary>同じ物件の掲載 '
-                    f'{len(sibs) + 1}件{rng}</summary><div class="subs">'
-                    + "".join(_sub_row(x) for x in [it] + sibs)
+            label = "同じ建物の掲載" if len(rooms) > 1 else "同じ物件の掲載"
+            # 階→価格の順に並べると部屋ごとに読める
+            def _ord(x):
+                import re as _r
+                m = _r.search(r"(\d+)", x.get("floor") or "")
+                return (int(m.group(1)) if m else 999,
+                        x.get("price") if x.get("price") is not None else 9e9)
+            more = (f'<details class="more"><summary>{label} '
+                    f'{len(allx)}件{rng}</summary><div class="subs">'
+                    + "".join(_sub_row(x) for x in sorted(allx, key=_ord))
                     + "</div></details>")
+        if len(rooms) > 1:
+            rooms_note = f'<span class="rooms">＋他{len(rooms) - 1}部屋</span>'
         cards.append(f"""<div class="card"
    data-station="{html.escape(it['station'])}" data-type="{it.get('type','')}"
    data-parking="{'1' if it.get('parking') in ('有','近隣') else '0'}"
@@ -284,7 +301,7 @@ def build(items, out_path, station_order=None, reject_tally=None):
       <span class="src">{html.escape(it.get('source',''))}</span></div>
     <div class="name">{html.escape((it.get('name') or '')[:44])}</div>
     <div class="price">{fmt_price(it)}</div>
-    <div class="meta">{"・".join(x for x in (layout, area, floor, age) if x)}</div>
+    <div class="meta">{"・".join(x for x in (layout, area, floor, age) if x)}{rooms_note}</div>
     <div class="meta">{fmt_walk(it)}</div>
     {f'<div class="meta">{sr}</div>' if sr else ''}
     <div class="meta pk">{fmt_parking(it)}</div>
@@ -366,6 +383,7 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 .meta{{font-size:11.5px;color:var(--sub)}}
 .pk{{color:var(--fg)}}
 .dup{{color:var(--accent)}}
+.rooms{{color:var(--accent);font-weight:600;margin-left:5px}}
 .down{{color:#c0392b;font-weight:600}}
 .hist{{color:#8a6d1f}}
 @media(prefers-color-scheme:dark){{.hist{{color:#d8b74a}}}}
