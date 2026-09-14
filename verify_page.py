@@ -48,8 +48,13 @@ def main(path):
 
     # --- 画像 ---
     noimg = len(re.findall(r"class='noimg'", h))
-    if noimg:
-        ng(f"画像なしのカードが {noimg} 件")
+    # 写真が1枚も無い物件（更地の土地など）は現実に存在する。
+    # 1件で公開全体を止めると在庫が出せなくなるので、割合で見る。
+    limit = max(2, int(len(cards) * 0.03))
+    if noimg > limit:
+        ng(f"画像なしのカードが {noimg} 件（許容 {limit} 件まで）")
+    elif noimg:
+        ok(f"画像なし {noimg} 件（許容 {limit} 件以内）")
     srcs = list(dict.fromkeys(re.findall(r"<img[^>]+src='([^']+)'", h)))
     bad_pat = re.compile(r"nophoto|noimage|no_image|/appli|bnr|banner|osusume"
                          r"|cms_image|jibun|img01\.suumo\.com/jj/", re.I)
