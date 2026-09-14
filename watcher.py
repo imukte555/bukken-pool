@@ -2270,15 +2270,23 @@ def enrich_from_detail(item):
     if item.get("parking") is None:
         raw = _row_value(soup, "駐車場", "駐車", "駐輪・駐車")
         pk = classify_parking(raw)
-        if pk is None:
-            # 表に無い/"-" の場合は本文（備考・設備欄）から拾う
+        if pk is None and item.get("type") != "land":
+            # 表に無い/"-" の場合は本文（備考・設備欄）から拾う。
+            # ただし不動産会社の宣伝文は物件の駐車場ではない
+            # （実測: SUUMOの土地2件が「◆◆無料駐車場・キッズルーム完備◆◆
+            #  無料駐車場がございますので…」という来店案内を拾って
+            #  「駐車場あり」と表示されていた）
             body = soup.get_text(" ", strip=True)
-            m = re.search(r"駐車場[:：\s]{0,3}([^。\n]{1,40})", body)
-            if m:
+            for m in re.finditer(r"駐車場[:：\s]{0,3}([^。\n]{1,40})", body):
                 raw2 = m.group(1)
+                ctx = body[max(0, m.start() - 30):m.end() + 10]
+                if re.search(r"(来店|ご来店|キッズルーム|当社|弊社|店舗|"
+                             r"無料駐車場がございます|お車でお越し)", ctx):
+                    continue
                 pk2 = classify_parking(raw2)
                 if pk2:
                     pk, raw = pk2, raw2
+                    break
         if pk is None:
             # 駐車場は「ある」か「ない」の2択で、「取得できず」という
             # 状態は無い。詳細ページに記載が無ければ「なし」と言い切る。
