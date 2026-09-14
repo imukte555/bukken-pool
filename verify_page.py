@@ -70,6 +70,27 @@ def main(path):
         ng(f"開けない画像が {len(dead)} 件: {dead[0][:90]}")
     ok(f"画像 {len(srcs)} 件すべて実際に開けた" if not dead else "")
 
+    # 代表カードが間取り図になっていないか（sho指示: 外観写真をトップに）
+    reps = []
+    for c in cards:
+        m = re.search(r"<div class=\"thumb\">.*?</div>", c, re.S)
+        if not m:
+            continue
+        mi = re.search(r"src='([^']+)'", m.group(0))
+        if mi:
+            reps.append(H.unescape(mi.group(1)))
+    sample = reps[:60]
+    plans = 0
+    if sample:
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            plans = sum(1 for r in ex.map(W.image_is_floorplan, sample) if r)
+        rate = plans / len(sample)
+        if rate > 0.2:
+            ng(f"代表カードの写真が間取り図: {plans}/{len(sample)}件 "
+               f"({rate:.0%}、許容20%まで)")
+        else:
+            ok(f"代表カードの間取り図 {plans}/{len(sample)}件 ({rate:.0%})")
+
     # --- 条件 ---
     areas = [float(x) for x in re.findall(r"([\d.]+)㎡", h)]
     if areas and min(areas) <= W.AREA_MIN - 0.01:
