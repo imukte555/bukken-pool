@@ -60,7 +60,7 @@ DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS") or 10)
 MAX_ROOMS_PER_BUILDING = 8
 
 # 優先して通知する駅（枠の半分をここに確保し、通知の先頭に置く）
-PRIORITY_STATIONS = ["恵比寿", "目黒", "中目黒"]
+PRIORITY_STATIONS = ["恵比寿", "大井町", "目黒"]  # sho指定の並びの先頭3駅
 PRIORITY_RESERVED = 15   # 30件中この数までを優先駅に確保
 PRIORITY_PER_TYPE = 4    # 各種別の枠のうち優先駅に回す上限
 
@@ -71,7 +71,8 @@ WALK_MAX = 7         # 駅徒歩上限(分) ※売買（マンション/戸建/�
 WALK_MAX_BY_STATION = {}
 
 # 条件を満たす物件が極端に少ないエリア。取りこぼさないよう深くまで見る。
-DEEP_SCAN_STATIONS = ("恵比寿", "広尾", "代官山", "中目黒", "目黒", "大井町")
+DEEP_SCAN_STATIONS = ("恵比寿", "大井町", "目黒", "五反田", "代官山", "中目黒")
+# 深く掘る駅。sho指定の並びの上位6駅（2026-09-14に広尾を外した）
 AREA_MIN = float(os.environ.get("AREA_MIN") or 47.01)
 # 専有/建物面積の下限(㎡)。「47平米超えてたらいい」(2026-09-14)なので
 # 47.0ちょうどは含めず47.01を下限にする
@@ -106,32 +107,21 @@ TARGET_MAX_ITEMS = 30
 
 # === 駅コード ===
 STATIONS = {
-    "大井町": {"suumo": "05480", "homes": "oimachi_00603-st",    "nomu": "ensen_tokyo/2196/2196270", "livable": "tokyo/s2196270", "athome": "oimachi-st", "rehouse": "13/2196/270", "sumaity": "oimachi", "chintai": "tokyo/000000037", "nifty": "oimachi", "housecom": "tokyo/21960270", "sumaity_rent": "tokyo/shinagawa_ku_oimachi", "cowcamo": "1378"},
+    # 監視する駅。shoさん指定の13駅のみ（2026-09-14）。この順で表示する。
+    # 「JR蒲田」は京急蒲田ではなくJR線の蒲田。蛍池のみ大阪。
     "恵比寿": {"suumo": "05050", "homes": "ebisu_00577-st",       "nomu": "ensen_tokyo/2172/2172100", "livable": "tokyo/s2172100", "athome": "ebisu-st", "rehouse": "13/2172/100", "sumaity": "ebisu", "chintai": "tokyo/000000066", "nifty": "ebisu", "housecom": "tokyo/21590470", "sumaity_rent": "tokyo/shibuya_ku_ebisu", "cowcamo": "1332"},
-    "広尾":   {"suumo": "33410", "homes": "hiro_06347-st",        "nomu": "ensen_tokyo/2344/2344190", "livable": "tokyo/s2344190", "athome": "hiro-st", "rehouse": "13/2344/190", "sumaity": "hiroo", "chintai": "tokyo/000005286", "nifty": "hiroo", "housecom": "tokyo/23440190", "sumaity_rent": "tokyo/shibuya_ku_hiroo", "cowcamo": "931"},
-    "代官山": {"suumo": "21850", "homes": "daikanyama_05050-st",  "nomu": "ensen_tokyo/2321/2321020", "livable": "tokyo/s2321020", "athome": "daikanyama-st", "rehouse": "13/2321/020", "sumaity": "daikanyama", "chintai": "tokyo/000005086", "nifty": "daikanyama", "housecom": "tokyo/23210020", "sumaity_rent": "tokyo/shibuya_ku_daikanyama", "cowcamo": "489"},
-    "目黒":   {"suumo": "39110", "homes": "meguro_00576-st",      "nomu": "ensen_tokyo/2172/2172090", "livable": "tokyo/s2172090", "athome": "meguro-st", "rehouse": "13/2172/090", "sumaity": "meguro", "chintai": "tokyo/000000065", "nifty": "meguro", "housecom": "tokyo/21720090", "sumaity_rent": "tokyo/shinagawa_ku_meguro", "cowcamo": "1149"},
-    "中目黒": {"suumo": "27580", "homes": "nakameguro_05051-st",  "nomu": "ensen_tokyo/2321/2321030", "livable": "tokyo/s2321030", "athome": "nakameguro-st", "rehouse": "13/2344/210", "sumaity": "nakameguro", "chintai": "tokyo/000005087", "nifty": "nakameguro", "housecom": "tokyo/23210030", "sumaity_rent": "tokyo/meguro_ku_nakameguro", "cowcamo": "696"},
+    "大井町": {"suumo": "05480", "homes": "oimachi_00603-st",    "nomu": "ensen_tokyo/2196/2196270", "livable": "tokyo/s2196270", "athome": "oimachi-st", "rehouse": "13/2196/270", "sumaity": "oimachi", "chintai": "tokyo/000000037", "nifty": "oimachi", "housecom": "tokyo/21960270", "sumaity_rent": "tokyo/shinagawa_ku_oimachi", "cowcamo": "1378"},
+    "目黒": {"suumo": "39110", "homes": "meguro_00576-st",      "nomu": "ensen_tokyo/2172/2172090", "livable": "tokyo/s2172090", "athome": "meguro-st", "rehouse": "13/2172/090", "sumaity": "meguro", "chintai": "tokyo/000000065", "nifty": "meguro", "housecom": "tokyo/21720090", "sumaity_rent": "tokyo/shinagawa_ku_meguro", "cowcamo": "1149"},
     "五反田": {"suumo": "14970", "homes": "gotanda_00575-st",     "nomu": "ensen_tokyo/2172/2172080", "livable": "tokyo/s2172080", "athome": "gotanda-st", "rehouse": "13/2172/080", "sumaity": "gotanda", "chintai": "tokyo/000000064", "nifty": "gotanda", "housecom": "tokyo/21720080", "sumaity_rent": "tokyo/shinagawa_ku_gotanda", "cowcamo": "201"},
-    "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st", "rehouse": "13/2327/230", "sumaity": "musashikoyama", "chintai": "tokyo/000005103", "nifty": "musashikoyama", "housecom": "tokyo/23270230", "sumaity_rent": "tokyo/shinagawa_ku_musashikoyama", "cowcamo": "1123"},
-    "不動前": {"suumo": "34410", "homes": "fudomae_05068-st",     "nomu": "ensen_tokyo/2327/2327220", "livable": "tokyo/s2327220", "athome": "fudomae-st", "rehouse": "13/2327/220", "sumaity": "fudomae", "chintai": "tokyo/000005102", "nifty": "fudomae", "housecom": "tokyo/23270220", "sumaity_rent": "tokyo/shinagawa_ku_fudomae", "cowcamo": "969"},
-    "戸越":   {"suumo": "26080", "homes": "togoshi_06400-st",     "nomu": "ensen_tokyo/2351/2351170", "livable": "tokyo/s2351170", "athome": "togoshi-st", "rehouse": "13/2351/170", "sumaity": "togoshi", "chintai": "tokyo/000005352", "nifty": "togoshi", "housecom": "tokyo/23510170", "sumaity_rent": "tokyo/shinagawa_ku_togoshi", "cowcamo": "642"},
-    "蒲田":   {"suumo": "08940", "homes": "kamata_00605-st",      "nomu": "ensen_tokyo/2196/2196290", "livable": "tokyo/s2196290", "athome": "kamata-st", "rehouse": "13/2196/290", "sumaity": "kamata", "chintai": "tokyo/000000039", "nifty": "kamata", "housecom": "tokyo/21960290", "sumaity_rent": "tokyo/ota_ku_kamata", "cowcamo": "1755"},
-    "京急蒲田": {"suumo": "13410", "homes": "keikyukamata_05144-st", "nomu": "ensen_tokyo/2331/2331120", "livable": "tokyo/s2331120", "athome": "keikyukamata-st", "rehouse": "13/2331/120", "sumaity": "keikyukamata", "chintai": "tokyo/000005182", "nifty": "keikyukamata", "housecom": "tokyo/23310120", "sumaity_rent": "tokyo/ota_ku_keikyukamata", "cowcamo": "115"},
-    "泉岳寺": {"suumo": "21340", "homes": "sengakuji_05181-st",  "nomu": "ensen_tokyo/2351/2351140", "livable": "tokyo/s2351140", "athome": "sengakuji-st", "rehouse": "13/2351/140", "sumaity": "sengakuji", "chintai": "tokyo/000005172", "nifty": "sengakuji", "housecom": "tokyo/23310010", "sumaity_rent": "tokyo/minato_ku_sengakuji", "cowcamo": "464"},
+    "代官山": {"suumo": "21850", "homes": "daikanyama_05050-st",  "nomu": "ensen_tokyo/2321/2321020", "livable": "tokyo/s2321020", "athome": "daikanyama-st", "rehouse": "13/2321/020", "sumaity": "daikanyama", "chintai": "tokyo/000005086", "nifty": "daikanyama", "housecom": "tokyo/23210020", "sumaity_rent": "tokyo/shibuya_ku_daikanyama", "cowcamo": "489"},
+    "中目黒": {"suumo": "27580", "homes": "nakameguro_05051-st",  "nomu": "ensen_tokyo/2321/2321030", "livable": "tokyo/s2321030", "athome": "nakameguro-st", "rehouse": "13/2344/210", "sumaity": "nakameguro", "chintai": "tokyo/000005087", "nifty": "nakameguro", "housecom": "tokyo/23210030", "sumaity_rent": "tokyo/meguro_ku_nakameguro", "cowcamo": "696"},
+    "田町": {"suumo": "23500", "homes": "tamachi_00573-st", "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": "tamachi-st", "rehouse": "13/2172/050", "sumaity": "tamachi", "chintai": "tokyo/000000035", "nifty": "tamachi", "housecom": "tokyo/21720050", "sumaity_rent": "tokyo/minato_ku_tamachi", "cowcamo": "551"},
     "高輪ゲートウェイ": {"suumo": "84570", "homes": "takanawagateway_10177-st", "nomu": "ensen_tokyo/2172/2172056", "livable": "tokyo/s2172056", "athome": "takanawagateway-st", "rehouse": "13/2172/056", "sumaity": "takanawagateway", "chintai": "tokyo/000020260", "nifty": "takanawagateway", "housecom": "tokyo/21720056", "sumaity_rent": "tokyo/minato_ku_takanawagateway", "cowcamo": "1802"},
-    "三田":   {"suumo": "36860", "homes": "mita_06402-st",       "nomu": "ensen_tokyo/2351/2351130", "livable": "tokyo/s2351130", "athome": "mita-st", "rehouse": "13/2352/240", "sumaity": "mita", "chintai": "tokyo/000005350", "nifty": "mita", "housecom": "tokyo/23510130", "sumaity_rent": "tokyo/minato_ku_mita", "cowcamo": "1047"},
-    "大門":   {"suumo": "22090", "homes": "daimon_06403-st",                  "nomu": "ensen_tokyo/2351/2351120", "livable": "tokyo/s2351120", "athome": "daimon-st", "rehouse": "13/2358/410", "sumaity": "daimon", "chintai": "tokyo/000005349", "nifty": "daimon", "housecom": "tokyo/23510120", "sumaity_rent": "tokyo/minato_ku_daimon", "cowcamo": None},
-    "新橋":   {"suumo": "20110", "homes": "shimbashi_00558-st",                  "nomu": "ensen_tokyo/2351/2351110", "livable": "tokyo/s2351110", "athome": "shimbashi-st", "rehouse": "13/2172/030", "sumaity": "shimbashi", "chintai": "tokyo/000000033", "nifty": "shimbashi", "housecom": "tokyo/21020007", "sumaity_rent": "tokyo/minato_ku_shimbashi", "cowcamo": None},
-    "日本橋": {"suumo": "29710", "homes": "nihombashi_06309-st",                  "nomu": "ensen_tokyo/2351/2351080", "livable": "tokyo/s2351080", "athome": "nihombashi-st", "rehouse": "13/2341/090", "sumaity": "nihombashi", "chintai": "tokyo/000005246", "nifty": "nihombashi", "housecom": "tokyo/23410090", "sumaity_rent": "tokyo/chuo_ku_nihombashi", "cowcamo": None},
+    "不動前": {"suumo": "34410", "homes": "fudomae_05068-st",     "nomu": "ensen_tokyo/2327/2327220", "livable": "tokyo/s2327220", "athome": "fudomae-st", "rehouse": "13/2327/220", "sumaity": "fudomae", "chintai": "tokyo/000005102", "nifty": "fudomae", "housecom": "tokyo/23270220", "sumaity_rent": "tokyo/shinagawa_ku_fudomae", "cowcamo": "969"},
+    "JR蒲田": {"suumo": "08940", "homes": "kamata_00605-st",      "nomu": "ensen_tokyo/2196/2196290", "livable": "tokyo/s2196290", "athome": "kamata-st", "rehouse": "13/2196/290", "sumaity": "kamata", "chintai": "tokyo/000000039", "nifty": "kamata", "housecom": "tokyo/21960290", "sumaity_rent": "tokyo/ota_ku_kamata", "cowcamo": "1755"},
+    "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st", "rehouse": "13/2327/230", "sumaity": "musashikoyama", "chintai": "tokyo/000005103", "nifty": "musashikoyama", "housecom": "tokyo/23270230", "sumaity_rent": "tokyo/shinagawa_ku_musashikoyama", "cowcamo": "1123"},
     "東日本橋": {"suumo": "32170", "homes": "higashinihombashi_06405-st",                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st", "rehouse": "13/2351/060", "sumaity": None, "chintai": "tokyo/000005347", "nifty": "higashinihombashi", "housecom": "tokyo/23510060", "sumaity_rent": None, "cowcamo": None},
-    # --- 大井町・蒲田の周辺と目黒線沿い（2026-08-29 追加。コードは実URLで検証済み）---
-    # --- 2026-08-31 追加。大井町/戸越/蒲田の周辺と浅草線沿い。
-    #     コードはSUUMO・ノムコムとも実URLで1駅ずつ検証済み ---
-    "浜松町":   {"suumo": "31160", "homes": "hamamatsucho_00572-st", "nomu": "ensen_tokyo/2196/2196240", "livable": "tokyo/s2196240", "athome": "hamamatsucho-st", "rehouse": "13/2172/040", "sumaity": "hamamatsucho", "chintai": "tokyo/000000034", "nifty": "hamamatsucho", "housecom": "tokyo/21720040", "sumaity_rent": "tokyo/minato_ku_hamamatsucho", "cowcamo": None},
-    # 伊丹空港の最寄り（大阪府豊中市）
-    "蛍池":   {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st", "rehouse": "27/6668/100", "sumaity": "hotarugaike", "chintai": "osaka/000006365", "nifty": "hotarugaike", "housecom": "osaka/66680100", "sumaity_rent": "osaka/toyonaka_hotarugaike", "cowcamo": None},
-    "田町":     {"suumo": "23500", "homes": "tamachi_00573-st", "nomu": "ensen_tokyo/2196/2196250", "livable": "tokyo/s2196250", "athome": "tamachi-st", "rehouse": "13/2172/050", "sumaity": "tamachi", "chintai": "tokyo/000000035", "nifty": "tamachi", "housecom": "tokyo/21720050", "sumaity_rent": "tokyo/minato_ku_tamachi", "cowcamo": "551"},
+    "蛍池": {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": None, "livable": None, "athome": "hotarugaike-st", "rehouse": "27/6668/100", "sumaity": "hotarugaike", "chintai": "osaka/000006365", "nifty": "hotarugaike", "housecom": "osaka/66680100", "sumaity_rent": "osaka/toyonaka_hotarugaike", "cowcamo": None},
 }
 
 # 駅ごとに許容する区（これ以外の区の物件は弾く）
