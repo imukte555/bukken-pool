@@ -78,6 +78,16 @@ MAX_ROOMS_PER_BUILDING = 8
 
 # 優先して通知する駅（枠の半分をここに確保し、通知の先頭に置く）
 PRIORITY_STATIONS = ["恵比寿", "大井町", "目黒"]  # sho指定の並びの先頭3駅
+# タブに出す名前と、掲載に書かれている駅名が違う場合の対応表。
+# 「JR蒲田」は表示用の名前で、物件情報には「蒲田駅」としか書かれない。
+# これを合わせないと徒歩の駅名照合が全部外れる（実測: 京急蒲田の
+# 距離が出ていると指摘を受けた。実際は蒲田の徒歩が取れず素通りしていた）
+STATION_ALIAS = {"JR蒲田": "蒲田"}
+
+
+def station_match_name(st: str) -> str:
+    """掲載側の表記に合わせた駅名を返す"""
+    return STATION_ALIAS.get(st, st)
 PRIORITY_RESERVED = 15   # 30件中この数までを優先駅に確保
 PRIORITY_PER_TYPE = 4    # 各種別の枠のうち優先駅に回す上限
 
@@ -356,7 +366,7 @@ def parse_walk(text: str, station: str = None):
     """
     # 駅指定: 駅名直後の徒歩X分のみ
     if station:
-        s = re.escape(station)
+        s = re.escape(STATION_ALIAS.get(station, station))
         # 駅名の直前が駅名の一部になる文字だと別の駅を拾ってしまう。
         # 実測: 「中目黒駅 徒歩5分」を目黒として、
         #       「東日本橋駅 徒歩2分」を日本橋として誤って採っていた。
@@ -3786,7 +3796,7 @@ def revalidate_walk(item):
     walks = item.get("walks")
     if not walks:
         return True                      # 検証材料が無い場合は一覧の値を信じる
-    st = item.get("station")
+    st = station_match_name(item.get("station"))
     d = dict(walks)
     if st not in d:
         return False                     # 対象駅が最寄りに存在しない
@@ -4046,11 +4056,12 @@ def audit_items(items, label=""):
         # 駅徒歩（詳細の walks があればそれを正とする）
         limit = WALK_MAX_BY_STATION.get(st, RENT_WALK_MAX if t == "rent" else WALK_MAX)
         walks = dict(it.get("walks") or [])
+        _mn = station_match_name(st)
         if walks:
-            if st not in walks:
+            if _mn not in walks:
                 ng(it, f"{st}が最寄り駅に無い({'/'.join(walks)})")
-            elif walks[st] > limit:
-                ng(it, f"徒歩{walks[st]}分 > 上限{limit}分")
+            elif walks[_mn] > limit:
+                ng(it, f"徒歩{walks[_mn]}分 > 上限{limit}分")
         elif it.get("walk") is None:
             ng(it, "徒歩が不明")
         elif it["walk"] > limit:
