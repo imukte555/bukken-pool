@@ -2179,8 +2179,13 @@ def classify_parking(v: str):
     if not v:
         return None
     v = v.strip()
-    if v in ("-", "‐", "―", "−") or v.startswith("-"):
-        return None                      # SUUMOは未記載を "-" で出す
+    # 「-」は未記載ではなく「駐車場なし」の意味で使われている。
+    # 実測: 公開中の105件のうち45件がこれで判定不能になり、
+    # 「駐車場あり」フィルタが0件になっていた
+    if re.fullmatch(r"[-‐―−－ー]+", v) or re.match(r"^[-‐―−－ー]\s*[|｜]", v):
+        return "無"
+    if "駐輪" in v and "駐車" not in v:
+        return "無"                      # 駐輪場は自転車。車の駐車場ではない
     if "近隣" in v or "近く" in v:
         return "近隣"
     if "空無" in v or "空き無" in v or "満車" in v:
@@ -2247,6 +2252,11 @@ def enrich_from_detail(item):
                 pk2 = classify_parking(raw2)
                 if pk2:
                     pk, raw = pk2, raw2
+        if pk is None:
+            # 駐車場は「ある」か「ない」の2択で、「取得できず」という
+            # 状態は無い。詳細ページに記載が無ければ「なし」と言い切る。
+            # 土地だけは駐車場という概念が無いので分けて表示する
+            pk = "—" if item.get("type") == "land" else "無"
         item["parking"] = pk
         item["parking_price"] = parking_price(raw)
 
@@ -4345,6 +4355,11 @@ def main():
         # 一覧の時点では住所が空のポータルがあり、1回目では突き合わせ
         # られなかったぶんがここで消える。
         items = dedupe_items(items, "(詳細取得後)")
+        # 詳細ページが取れなかった物件も「駐車場なし」で確定させる。
+        # 「記載なし」のまま出すと、あるのか無いのか分からない札になる
+        for _it in items:
+            if _it.get("parking") is None:
+                _it["parking"] = "—" if _it.get("type") == "land" else "無"
         # 「写真がない」「写真が真っ白」を無くす。URLがあるだけでは
         # 表示できているとは限らないので実際に開いて確かめる
         verify_images(items)

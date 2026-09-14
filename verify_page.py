@@ -140,6 +140,14 @@ def main(path):
        f"徒歩最大{max(walks) if walks else '-'}分 / 賃料最大{max(rents) if rents else '-'}万 / "
        f"売買{min(prices) if prices else '-'}〜{max(prices) if prices else '-'}万")
 
+    # 駐車場は「ある/ない」の2択。「記載なし」が残っていたら取りこぼし
+    pk_none = len(re.findall(r'class="meta pk">駐車場記載なし', body))
+    if pk_none:
+        ng(f"駐車場が「記載なし」のカードが {pk_none} 件（ある/ないで確定させる）")
+    else:
+        ari = len(re.findall(r'data-parking="1"', body))
+        ok(f"駐車場: 記載なし0件 / あり{ari}件")
+
     # --- 駅 ---
     tabs = re.findall(r"data-f='station' data-v='([^']+)'", h)
     want = W.PRIORITY_STATIONS + [s for s in W.STATIONS
