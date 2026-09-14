@@ -1,12 +1,134 @@
 """プール全件を1枚のHTMLにする（毎朝の通知とは別。今ある在庫を全部見るため）"""
 import html
 import json
+import re as _re
 from datetime import datetime, timezone, timedelta
 
 TYPE_LABEL = {"mansion": "マンション", "house": "戸建", "land": "土地", "rent": "賃貸"}
 TYPE_ICON = {"mansion": "🏢", "house": "🏠", "land": "🏞", "rent": "🔑"}
 CURRENT_YEAR = 2026
 
+
+_FW = str.maketrans(
+    "０１２３４５６７８９"
+    "ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"
+    "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ",
+    "0123456789"
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz")
+
+
+def _norm_name(name: str) -> str:
+    """建物名の表記ゆれを吸収する。
+    実測で同じ建物が
+      「戸越Ｂ．Ｉ．Ｇ．　ＲＥＳＩＤＥＮＣＥ」「戸越B.I.G　RESIDENCE」
+      「戸越BIG RESIDENCE」「戸越Ｂ．ＩＧ．　ＲＥＳＩＤＥＮＣＥ」
+    と4通りに割れていた。記号・空白・かっこ書きを落として突き合わせる。
+    """
+    if not name:
+        return ""
+    t = name.translate(_FW)
+    t = _re.sub(r"[（(\[【].*?[）)\]】]", "", t)       # かっこ書き(読み仮名など)
+    t = _re.sub(r"(新築|中古|分譲|賃貸|マンション情報)", "", t)
+    t = _re.sub(r"[^0-9A-Za-zぁ-んァ-ヴ一-龥]", "", t)   # 記号・空白を全部落とす
+    return t.lower()
+
+
+def _norm_addr(a: str) -> str:
+    if not a:
+        return ""
+    t = a.translate(_FW).replace("東京都", "")
+    t = _re.sub(r"[\s　]", "", t)
+    t = _re.sub(r"[‐‑‒–—―ーｰ−\-]", "-", t)
+    t = t.replace("丁目", "-").replace("番地", "-").replace("番", "-").replace("号", "")
+    return _re.sub(r"-+", "-", t).strip("-")[:14]
+
+
+def _is_building_name(n: str) -> bool:
+    """住所や説明文が名前欄に入っているケースを弾く。
+    実測: スマイティは「都営浅草線戸越駅まで徒歩5分」が名前に入る。
+    """
+    if len(n) < 3:
+        return False
+    if _re.search(r"(徒歩\d|駅まで|階建|万円|築\d+年)", n):
+        return False
+    if _re.match(r"^(東京都)?[^\d]{2,6}[区市][^\d]{0,8}\d", n):
+        return False          # 「目黒区下目黒6」のような住所そのもの
+    return True
+
+
+def group_items(items):
+    """同じ物件の掲載をまとめる。名前と「住所＋面積」の2つのキーで
+    ゆるく繋ぐ（片方しか取れないポータルがあるため）。
+    戻り値: [(代表, [同じ物件の全掲載])]
+    """
+    parent = {}
+
+    def find(x):
+        while parent.get(x, x) != x:
+            parent[x] = parent.get(parent[x], parent[x])
+            x = parent[x]
+        return x
+
+    def union(a, b):
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[ra] = rb
+
+    keys_of = []
+    for i, it in enumerate(items):
+        me = ("I", i)
+        parent.setdefault(me, me)
+        ks = []
+        nn = _norm_name(it.get("name") or "")
+        if _is_building_name(nn):
+            ks.append(("N", it.get("station"), it.get("type"), nn))
+        na = _norm_addr(it.get("addr") or "")
+        ar = it.get("area")
+        if na and _re.search(r"\d", na) and ar:
+            ks.append(("A", it.get("station"), it.get("type"), na, round(ar, 1)))
+        for k in ks:
+            parent.setdefault(k, k)
+            union(me, k)
+        keys_of.append(ks)
+
+    buckets = {}
+    for i, it in enumerate(items):
+        root = find(("I", i)) if keys_of[i] else ("I", i)
+        buckets.setdefault(root, []).append(it)
+    return list(buckets.values())
+
+
+def _img_rank(it):
+    """代表に出す写真の良さ。間取り図・画像なしを後ろに回す。"""
+    u = it.get("img") or ""
+    if not u.startswith("http"):
+        return 9
+    if _re.search(r"(madori|間取|floor_?plan|zumen|/fp/|_fp[._])", u, _re.I):
+        return 5
+    return 0
+
+
+_SRC_RANK = {"SUUMO": 0, "SUUMO賃貸": 0, "三井のリハウス": 1, "ノムコム": 1,
+             "リバブル": 1, "リバブル賃貸": 1, "HOMES": 2, "HOMES賃貸": 2,
+             "goo住宅": 3, "CHINTAI": 4, "ハウスコム": 4, "スマイティ": 5,
+             "スマイティ賃貸": 5, "賃貸スモッカ": 5}
+
+
+def pick_rep(group):
+    """写真が分かりやすいものを代表にする。写真の質が同じなら
+    情報が埋まっているもの→安いものの順。"""
+    def key(it):
+        # 写真の分かりやすさが最優先。次に建物名が実名で入っているもの
+        # （スマイティは「◯◯駅まで徒歩5分」、SUUMOは「品川区大井２ 賃貸」
+        #  のように名前欄が説明文・住所になることがある）
+        return (_img_rank(it),
+                0 if _is_building_name(_norm_name(it.get("name") or "")) else 1,
+                _SRC_RANK.get(it.get("source"), 6),
+                0 if it.get("floor") else 1,
+                0 if it.get("parking") else 1,
+                it.get("price") if it.get("price") is not None else 9e9)
+    return sorted(group, key=key)[0]
 
 def fmt_price(it):
     p = it.get("price")
@@ -81,8 +203,35 @@ def build(items, out_path, station_order=None, reject_tally=None):
                 0 if it.get("parking") in ("有", "近隣") else 1,
                 it.get("walk") or 99)
 
+    groups = group_items(items)
+    reps = []
+    for g in groups:
+        rep = pick_rep(g)
+        rep["_siblings"] = [x for x in g if x is not rep]
+        reps.append(rep)
+
+    def _sub_row(x):
+        """見開きに出す1掲載ぶんの行。値段・階・敷礼が掲載ごとに違う。"""
+        if x.get("type") == "land":
+            fl = "階なし(土地)"
+        else:
+            fl = html.escape(x.get("floor") or "") or "階記載なし"
+        sr = html.escape(x.get("shikirei") or "") if x.get("type") == "rent" else ""
+        im = x.get("img") or ""
+        th = (f"<img loading='lazy' src='{html.escape(im)}' alt=''>"
+              if im.startswith("http") else "<span class='sub-noimg'>画像なし</span>")
+        return (f"<a class='sub-row' href=\"{html.escape(x['url'])}\" target=\"_blank\" "
+                f"rel=\"noopener\"><span class='sub-th'>{th}</span>"
+                f"<span class='sub-b'><b>{fmt_price(x)}</b>"
+                f"<span class='sub-m'>{fl}"
+                + (f"・{sr}" if sr else "")
+                + f"・{html.escape(x.get('source',''))}</span>"
+                f"<span class='sub-n'>{html.escape((x.get('name') or '')[:38])}</span>"
+                "</span></a>")
+
     cards = []
-    for it in sorted(items, key=sort_key):
+    for it in sorted(reps, key=sort_key):
+        sibs = it.get("_siblings") or []
         img = it.get("img") or ""
         thumb = (f"<img loading='lazy' src='{html.escape(img)}' alt=''>"
                  if img else "<div class='noimg'>画像なし</div>")
@@ -107,13 +256,27 @@ def build(items, out_path, station_order=None, reject_tally=None):
         pnote = html.escape(it.get("_price_note") or "")
         sr = html.escape(it.get("shikirei") or "") if it.get("type") == "rent" else ""
         hnote = html.escape(it.get("_hist_note") or "")
-        cards.append(f"""<a class="card" href="{html.escape(it['url'])}" target="_blank" rel="noopener"
+        # 同じ物件の他の掲載。値段・階が違うので畳んで全部出す
+        prices = [x.get("price") for x in ([it] + sibs) if x.get("price") is not None]
+        if sibs and prices and min(prices) != max(prices):
+            unit = "万円/月" if it.get("type") == "rent" else "万円"
+            rng = f"（{min(prices)}〜{max(prices)}{unit}）"
+        else:
+            rng = ""
+        more = ""
+        if sibs:
+            more = ('<details class="more"><summary>同じ物件の掲載 '
+                    f'{len(sibs) + 1}件{rng}</summary><div class="subs">'
+                    + "".join(_sub_row(x) for x in [it] + sibs)
+                    + "</div></details>")
+        cards.append(f"""<div class="card"
    data-station="{html.escape(it['station'])}" data-type="{it.get('type','')}"
    data-parking="{'1' if it.get('parking') in ('有','近隣') else '0'}"
    data-down="{'1' if it.get('_price_down') else '0'}"
    data-cut="{'1' if (it.get('_cuts') or 0) >= 1 else '0'}"
    data-rooms="{'1' if _rooms(it) >= 2 else '0'}"
    data-stale="{'1' if (it.get('_days') or 0) >= 90 else '0'}">
+ <a class="lnk" href="{html.escape(it['url'])}" target="_blank" rel="noopener">
   <div class="thumb">{thumb}</div>
   <div class="body">
     <div class="tag">{TYPE_ICON.get(it.get('type'),'')} {TYPE_LABEL.get(it.get('type'),'')}
@@ -130,7 +293,9 @@ def build(items, out_path, station_order=None, reject_tally=None):
     {f'<div class="meta hist">{hnote}</div>' if hnote else ''}
     {f'<div class="meta dup">{note}</div>' if note else ''}
   </div>
-</a>""")
+ </a>
+ {more}
+</div>""")
 
     chips = "".join(
         f"<button class='chip' data-f='station' data-v='{html.escape(s)}'>{html.escape(s)}</button>"
@@ -145,7 +310,7 @@ def build(items, out_path, station_order=None, reject_tally=None):
 <meta name="apple-mobile-web-app-title" content="物件在庫">
 <meta name="theme-color" content="#faf9f7" media="(prefers-color-scheme:light)">
 <meta name="theme-color" content="#141413" media="(prefers-color-scheme:dark)">
-<title>物件在庫 {len(items)}件</title>
+<title>物件在庫 {len(cards)}件</title>
 <style>
 :root{{--bg:#faf9f7;--fg:#1c1b19;--sub:#6b6862;--line:#e6e3dd;--card:#fff;--accent:#1a5d3a}}
 @media(prefers-color-scheme:dark){{:root{{--bg:#141413;--fg:#f0eee9;--sub:#a3a099;--line:#2c2b28;--card:#1c1b19}}}}
@@ -161,9 +326,31 @@ h1{{margin:0 0 2px;font-size:17px;letter-spacing:.02em}}
   padding:5px 11px;font-size:12.5px;cursor:pointer;font-family:inherit}}
 .chip.on{{background:var(--accent);color:#fff;border-color:var(--accent)}}
 main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:12px;padding:16px}}
-.card{{display:flex;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:12px;
-  overflow:hidden;text-decoration:none;color:inherit}}
+.card{{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  overflow:hidden;color:inherit}}
 .card:hover{{border-color:var(--accent)}}
+.lnk{{display:flex;gap:11px;text-decoration:none;color:inherit}}
+/* 同じ物件の別掲載。値段・階が違うので畳んで全部出す */
+.more{{border-top:1px solid var(--line)}}
+.more summary{{cursor:pointer;font-size:11.5px;color:var(--accent);
+  padding:7px 11px;font-weight:600;list-style:none}}
+.more summary::-webkit-details-marker{{display:none}}
+.more summary::before{{content:"▸ ";font-weight:400}}
+.more[open] summary::before{{content:"▾ "}}
+.subs{{padding:0 8px 8px}}
+.sub-row{{display:flex;gap:8px;align-items:center;padding:6px;border-radius:8px;
+  text-decoration:none;color:inherit}}
+.sub-row:hover{{background:var(--bg)}}
+.sub-th{{width:52px;height:40px;flex:none;background:var(--line);border-radius:5px;
+  overflow:hidden;display:flex;align-items:center;justify-content:center}}
+.sub-th img{{width:52px;height:40px;object-fit:cover;display:block}}
+.sub-noimg{{font-size:9px;color:var(--sub)}}
+.sub-b{{min-width:0;flex:1;display:flex;flex-direction:column;line-height:1.35}}
+.sub-b b{{font-size:13px}}
+.sub-b .sub{{font-size:10px}}
+.sub-m{{font-size:11px;color:var(--sub)}}
+.sub-n{{font-size:10.5px;color:var(--sub);opacity:.75;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}}
 .thumb{{width:104px;flex:none;background:var(--line)}}
 .thumb img{{width:104px;height:100%;object-fit:cover;display:block}}
 .noimg{{width:104px;height:100%;min-height:120px;display:flex;align-items:center;justify-content:center;
@@ -207,7 +394,7 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 </style></head><body>
 <header>
   <h1>物件在庫</h1>
-  <div class="count"><span id="shown">{len(items)}</span> / {len(items)}件　{jst:%Y-%m-%d %H:%M} JST時点</div>
+  <div class="count"><span id="shown">{len(cards)}</span> / {len(cards)}物件（掲載{len(items)}件）　{jst:%Y-%m-%d %H:%M} JST時点</div>
   <div class="filters">
     <button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="rooms" data-v="1">2LDK以上</button><button class="chip" data-f="cut" data-v="1">値下げ実績</button><button class="chip" data-f="stale" data-v="1">90日以上</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button>{tchips}
   </div>
@@ -238,4 +425,4 @@ document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{{
 </script></body></html>"""
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(doc)
-    return len(items)
+    return len(cards)
