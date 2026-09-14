@@ -3590,6 +3590,55 @@ def revalidate_walk(item):
     return True
 
 
+_FW_DIGITS = str.maketrans("０１２３４５６７８９", "0123456789")
+
+
+def norm_addr_key(a: str) -> str:
+    """住所をポータル間で突き合わせられる形に正規化する。
+    実測: 同じ部屋が「目黒区中目黒１丁目」「目黒区中目黒1丁目」
+    「東京都目黒区中目黒１」と表記され、重複判定が効いていなかった。
+    """
+    if not a:
+        return ""
+    t = a.translate(_FW_DIGITS).replace("東京都", "")
+    t = t.replace(" ", "").replace("　", "")
+    t = re.sub(r"[‐‑‒–—―ーｰ−\-]", "-", t)
+    t = t.replace("丁目", "-").replace("番地", "-").replace("番", "-")
+    t = t.replace("号", "")
+    return re.sub(r"-+", "-", t).strip("-")[:16]
+
+
+def norm_layout_key(l: str) -> str:
+    """間取りの表記ゆれを吸収する（1SLDK と 1LDK+S を同一視）"""
+    if not l:
+        return ""
+    t = l.upper().replace("＋", "+").replace(" ", "")
+    t = t.replace("+S", "S").replace("+", "")
+    m = re.match(r"(\d+)([SLDKR]*)", t)
+    return (m.group(1) + "".join(sorted(set(m.group(2))))) if m else t
+
+
+def dedupe_items(items, label=""):
+    """別ポータル・別掲載で同じ部屋が並ぶのを1枚にまとめる。
+    住所と間取りは表記ゆれがあるので正規化してから突き合わせる。
+    実測: 正規化前は434件中182件が同じ部屋の重複（最大8枚）だった。
+    """
+    seen, uniq = set(), []
+    # 実名が入るソースを優先して残す
+    for it in sorted(items, key=lambda x: (0 if x.get("source") == "SUUMO" else 1)):
+        a = it.get("area")
+        key = (it.get("station"), it.get("type"), it.get("price"),
+               round(a, 1) if a else None,
+               norm_layout_key(it.get("layout") or ""),
+               norm_addr_key(it.get("addr") or ""))
+        if key in seen:
+            continue
+        seen.add(key)
+        uniq.append(it)
+    if len(uniq) < len(items):
+        print(f"同一物件の重複を除外{label}: {len(items)} → {len(uniq)}件")
+    return uniq
+
 def audit_items(items, label=""):
     """送信・公開の直前に、全件が全条件を満たしているか数える。
     「条件を実装したか」ではなく「出てきた物件が条件を満たすか」を見る。
@@ -3897,23 +3946,7 @@ def main():
 
     # 同一物件の重複除外（別ポータル/別掲載で同じ物件が並ぶのを防ぐ）
     # 判定キー: 駅 + 種別 + 価格 + 面積（小数1桁）
-    seen_prop = set()
-    uniq_items = []
-    # 情報量の多いソース(実名がある)を優先して残す
-    for it in sorted(items, key=lambda x: (0 if x.get("source") == "SUUMO" else 1)):
-        a = it.get("area")
-        # 住所を入れないと「同じ駅・同じ価格・同じ面積の別の土地」を
-        # 同一物件として消してしまう（土地は間取りが空なので特に起きる）
-        key = (it.get("station"), it.get("type"), it.get("price"),
-               round(a, 1) if a else None, it.get("layout"),
-               (it.get("addr") or "")[:14])
-        if key in seen_prop:
-            continue
-        seen_prop.add(key)
-        uniq_items.append(it)
-    if len(uniq_items) < len(items):
-        print(f"同一物件の重複を除外: {len(items)} → {len(uniq_items)}件")
-    items = uniq_items
+    items = dedupe_items(items)
 
     global _ALL_ITEMS
 
@@ -3930,6 +3963,10 @@ def main():
         items = [i for i in items if revalidate_walk(i)]
         if len(items) < before:
             print(f"徒歩の再判定で除外: {before} → {len(items)}件")
+        # 詳細取得で住所・間取りが埋まったので、もう一度重複を落とす。
+        # 一覧の時点では住所が空のポータルがあり、1回目では突き合わせ
+        # られなかったぶんがここで消える。
+        items = dedupe_items(items, "(詳細取得後)")
         # 再判定“後”のリストをプールとして使う。
         # 前に代入すると、徒歩超過で弾いた物件がメールに残ってしまう。
         # 全件を全条件と突き合わせる。違反は載せない（見つけ次第ログに出す）
