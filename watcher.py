@@ -2753,8 +2753,8 @@ def collect_station(station, codes):
             # 件数を増やすため深く見る（浅いと候補を取りこぼす）
             # 面積帯2本×価格帯3本=1ページあたり6リクエスト
             # 駅を13に絞ったぶん1駅あたりを深く掘る（2026-09-14）
-            pages = (tuple(range(1, 26)) if station in DEEP_SCAN_STATIONS
-                     else tuple(range(1, 19)))
+            pages = (tuple(range(1, 11)) if station in DEEP_SCAN_STATIONS
+                     else tuple(range(1, 8)))
             items = []
             for pn in pages:
                 # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
@@ -3211,9 +3211,14 @@ def collect_station(station, codes):
             #   3つ合わせるとユニーク71件。40だけだと4分の1しか取れていない
             # 賃料帯も分けると別集合が返る（売買のkb/ktと同じ挙動）
             _rb = ((RENT_MIN, 15.0), (15.0, 22.0), (22.0, RENT_MAX))
-            for _bs in ("", "&ar=030&bs=040"):
+            # 種別でも別集合が返る。実測(目黒1ページ): 既定185件・
+            # bs=040で+34件に対し、ts=2(アパート)が+33件、ts=3(一戸建て)が
+            # +32件と、どちらも既存の分割では取れていない
+            for _bs in ("", "&ar=030&bs=040", "&ts=2", "&ts=3"):
                 # 実測(目黒): 面積帯2本(40/60)で137件 → 4本で183件(+46)。
                 # 賃貸は最大の供給源なので4本まわす
+                # 面積帯は4本必要。実測(目黒1ページ・47㎡超): 
+                # 4本(40/50/60/70)で67件に対し2本(40/60)は41件で26件取りこぼす
                 for _mb in (40, 50, 60, 70):
                     for _cb, _ct in _rb:
                         url = (f"https://suumo.jp/chintai/{codes.get('pref', 'tokyo')}"
