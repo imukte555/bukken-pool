@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#141413" media="(prefers-color-scheme:dark)">
 <title>物件在庫 85件</title>
 <style>
-:root{--bg:#faf9f7;--fg:#1c1b19;--sub:#6b6862;--line:#e6e3dd;--card:#fff;--accent:#1a5d3a}
-@media(prefers-color-scheme:dark){:root{--bg:#141413;--fg:#f0eee9;--sub:#a3a099;--line:#2c2b28;--card:#1c1b19}}
+:root{--bg:#faf9f7;--fg:#1c1b19;--sub:#6b6862;--line:#e6e3dd;--card:#fff;--accent:#1a5d3a;--buy:#1a5d3a;--rent:#b4560a}
+@media(prefers-color-scheme:dark){:root{--bg:#141413;--fg:#f0eee9;--sub:#a3a099;--line:#2c2b28;--card:#1c1b19;--buy:#4ea87a;--rent:#e59a4d}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);
   font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;line-height:1.6}
@@ -23,6 +23,12 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
   overflow:hidden;color:inherit}
 .card:hover{border-color:var(--accent)}
+/* 駅で絞ったとき、賃貸と売買を一目で見分けられるように左端で色分けする */
+.card{border-left:4px solid var(--buy)}
+.card[data-type="rent"]{border-left-color:var(--rent)}
+.tag{font-weight:600}
+.card[data-type="rent"] .tag{color:var(--rent)}
+.card:not([data-type="rent"]) .tag{color:var(--buy)}
 .lnk{display:flex;gap:11px;text-decoration:none;color:inherit}
 /* 同じ物件の別掲載。値段・階が違うので畳んで全部出す */
 .more{border-top:1px solid var(--line)}
@@ -89,7 +95,8 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
 </style></head><body>
 <header>
   <h1>物件在庫</h1>
-  <div class="count"><span id="shown">85</span> / 85物件（掲載101件）　2026-09-15 01:32 JST時点</div>
+  <div class="count"><span id="shown">85</span> / 85物件
+    <span id="bd"></span>（掲載101件）　2026-09-15 01:41 JST時点</div>
   <div class="filters">
     <button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="rooms" data-v="1">2LDK以上</button><button class="chip" data-f="cut" data-v="1">値下げ実績</button><button class="chip" data-f="stale" data-v="1">90日以上</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button><button class='chip' data-f='type' data-v='mansion'>🏢マンション</button><button class='chip' data-f='type' data-v='house'>🏠戸建</button><button class='chip' data-f='type' data-v='land'>🏞土地</button><button class='chip' data-f='type' data-v='rent'>🔑賃貸</button>
   </div>
@@ -144,6 +151,32 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
     <div class="meta addr">品川区東大井５丁目</div>
     
     
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="大井町" data-type="mansion"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="0"
+   data-stale="0">
+ <a class="lnk" href="https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_20837457/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/457/20837457/20837457_0030.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏢 マンション
+      <span class="stn">大井町</span>
+      <span class="src">SUUMO</span></div>
+    <div class="name">東大井５（大井町駅） 1億1880万円</div>
+    <div class="price">1億1,880万円</div>
+    <div class="meta">1LDK+S・54.72㎡・5階・築4年</div>
+    <div class="meta">大井町 徒歩3分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">品川区東大井５</div>
+    
+    <div class="meta hist">掲載8日</div>
     
   </div>
  </a>
@@ -253,32 +286,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
  </a>
  
 </div><div class="card"
-   data-station="大井町" data-type="mansion"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="0"
-   data-stale="0">
- <a class="lnk" href="https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_20837457/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/457/20837457/20837457_0030.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏢 マンション
-      <span class="stn">大井町</span>
-      <span class="src">SUUMO</span></div>
-    <div class="name">東大井５（大井町駅） 1億1880万円</div>
-    <div class="price">1億1,880万円</div>
-    <div class="meta">1LDK+S・54.72㎡・5階・築4年</div>
-    <div class="meta">大井町 徒歩3分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">品川区東大井５</div>
-    
-    <div class="meta hist">掲載8日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
    data-station="大井町" data-type="rent"
    data-parking="0"
    data-down="0"
@@ -300,32 +307,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
     <div class="meta addr">品川区東大井５</div>
     
     <div class="meta hist">掲載1日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="目黒" data-type="land"
-   data-parking="1"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://suumo.jp/tochi/tokyo/sc_shinagawa/nc_79109850/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/850/79109850/79109850_0015.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏞 土地
-      <span class="stn">目黒</span>
-      <span class="src">SUUMO</span></div>
-    <div class="name">■花房山の高台♪■西側隣地より高台のため日当たり眺望良好♪</div>
-    <div class="price">1億1,000万円</div>
-    <div class="meta">88.52㎡・88.52㎡・階なし(土地)・更地/土地</div>
-    <div class="meta">目黒 徒歩7分</div>
-    
-    <div class="meta pk">🚗駐車場あり</div>
-    <div class="meta addr">品川区上大崎３</div>
-    
-    <div class="meta hist">掲載8日</div>
     
   </div>
  </a>
@@ -378,6 +359,32 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
     <div class="meta addr">目黒区目黒１</div>
     
     <div class="meta hist">掲載6日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="目黒" data-type="land"
+   data-parking="1"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://suumo.jp/tochi/tokyo/sc_shinagawa/nc_79109850/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/850/79109850/79109850_0015.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏞 土地
+      <span class="stn">目黒</span>
+      <span class="src">SUUMO</span></div>
+    <div class="name">■花房山の高台♪■西側隣地より高台のため日当たり眺望良好♪</div>
+    <div class="price">1億1,000万円</div>
+    <div class="meta">88.52㎡・88.52㎡・階なし(土地)・更地/土地</div>
+    <div class="meta">目黒 徒歩7分</div>
+    
+    <div class="meta pk">🚗駐車場あり</div>
+    <div class="meta addr">品川区上大崎３</div>
+    
+    <div class="meta hist">掲載8日</div>
     
   </div>
  </a>
@@ -903,32 +910,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
  </a>
  <details class="more"><summary>同じ建物の掲載 2件（2部屋・26.3〜26.7万円/月）</summary><div class="subs"><a class='sub-row' href="https://sumaity.com/chintai/tokyo_prop/prop_412204298/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://sumaity02.k-img.com/optimized/?img_path=https%3A%2F%2Fimg.apamanshop.com%2Ffs%2FOriginal%2Fimg%2Fimages%2F5134760700%2F20418660_G1.jpg%3Fsr.dw%3D431%26sr.dh%3D431&amp;estate_id=408166094&amp;estate_company_id=1575887618&amp;width=180' alt=''></span><span class='sub-b'><b>26.3万円/月<span class='sub'>(管理費込)</span></b><span class='sub-m'>6階・敷1ヶ月/礼1ヶ月・スマイティ賃貸</span><span class='sub-n'>パークハビオ芝浦</span></span></a><a class='sub-row' href="https://sumaity.com/chintai/tokyo_prop/prop_408233012/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://sumaity02.k-img.com/optimized/?img_path=https%3A%2F%2Fimg.apamanshop.com%2Ffs%2FOriginal%2Fimg%2Fimages%2F5134760700%2F20418660_G1.jpg%3Fsr.dw%3D431%26sr.dh%3D431&amp;estate_id=408166094&amp;estate_company_id=1575887618&amp;width=180' alt=''></span><span class='sub-b'><b>26.7万円/月<span class='sub'>(管理費込)</span></b><span class='sub-m'>9階・敷1ヶ月/礼1ヶ月・スマイティ賃貸</span><span class='sub-n'>パークハビオ芝浦</span></span></a></div></details>
 </div><div class="card"
-   data-station="不動前" data-type="land"
-   data-parking="1"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://suumo.jp/tochi/tokyo/sc_shinagawa/nc_21525571/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/571/21525571/21525571_0012.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏞 土地
-      <span class="stn">不動前</span>
-      <span class="src">SUUMO</span></div>
-    <div class="name">■スクエアな３階建が建築可能♪■お好きなハウスメーカーで建築可能♪</div>
-    <div class="price">1億750万円</div>
-    <div class="meta">57.15㎡・57.15㎡・階なし(土地)・更地/土地</div>
-    <div class="meta">不動前 徒歩3分</div>
-    
-    <div class="meta pk">🚗駐車場あり</div>
-    <div class="meta addr">品川区西五反田５</div>
-    
-    <div class="meta hist">掲載8日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
    data-station="不動前" data-type="mansion"
    data-parking="0"
    data-down="0"
@@ -1000,6 +981,58 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
     
     <div class="meta pk">🚗駐車場あり(空きなし)</div>
     <div class="meta addr">品川区小山１</div>
+    
+    <div class="meta hist">掲載8日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="不動前" data-type="house"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="0"
+   data-stale="0">
+ <a class="lnk" href="https://suumo.jp/chukoikkodate/tokyo/sc_shinagawa/nc_21434232/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/232/21434232/21434232_0016.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">不動前</span>
+      <span class="src">SUUMO</span></div>
+    <div class="name">浴室乾燥機や食洗機など設備充実。ルーフバルコニー付き中古戸建てです。</div>
+    <div class="price">5,880万円</div>
+    <div class="meta">1LDK+S・51.34㎡・階記載なし・築2年</div>
+    <div class="meta">不動前 徒歩6分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">品川区西五反田６</div>
+    
+    <div class="meta hist">掲載8日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="不動前" data-type="land"
+   data-parking="1"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://suumo.jp/tochi/tokyo/sc_shinagawa/nc_21525571/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/571/21525571/21525571_0012.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏞 土地
+      <span class="stn">不動前</span>
+      <span class="src">SUUMO</span></div>
+    <div class="name">■スクエアな３階建が建築可能♪■お好きなハウスメーカーで建築可能♪</div>
+    <div class="price">1億750万円</div>
+    <div class="meta">57.15㎡・57.15㎡・階なし(土地)・更地/土地</div>
+    <div class="meta">不動前 徒歩3分</div>
+    
+    <div class="meta pk">🚗駐車場あり</div>
+    <div class="meta addr">品川区西五反田５</div>
     
     <div class="meta hist">掲載8日</div>
     
@@ -1163,32 +1196,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
  </a>
  
 </div><div class="card"
-   data-station="不動前" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="0"
-   data-stale="0">
- <a class="lnk" href="https://suumo.jp/chukoikkodate/tokyo/sc_shinagawa/nc_21434232/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/232/21434232/21434232_0016.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">不動前</span>
-      <span class="src">SUUMO</span></div>
-    <div class="name">浴室乾燥機や食洗機など設備充実。ルーフバルコニー付き中古戸建てです。</div>
-    <div class="price">5,880万円</div>
-    <div class="meta">1LDK+S・51.34㎡・階記載なし・築2年</div>
-    <div class="meta">不動前 徒歩6分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">品川区西五反田６</div>
-    
-    <div class="meta hist">掲載8日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
    data-station="不動前" data-type="rent"
    data-parking="0"
    data-down="0"
@@ -1319,25 +1326,259 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
  </a>
  
 </div><div class="card"
-   data-station="武蔵小山" data-type="rent"
-   data-parking="1"
+   data-station="武蔵小山" data-type="house"
+   data-parking="0"
    data-down="0"
    data-cut="0"
    data-rooms="1"
    data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13110/1517680011124/151768/x41517680011124.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage4.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttp%25253A%25252F%25252Fimg.homes.jp%25252F151768%25252Frent%25252F11124%25252F1%25252F1%25252F32mc.jpg%2526width%253D500%2526height%253D500?100' alt=''></div>
+ <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z78899384/006050838/x1030Z78899384.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F384%252F78899384%252F78899384_0079.jpg?100' alt=''></div>
   <div class="body">
-    <div class="tag">🔑 賃貸
+    <div class="tag">🏠 戸建
       <span class="stn">武蔵小山</span>
       <span class="src">goo住宅</span></div>
-    <div class="name">カーサ　イ　ティーリ　エ　イル　ミーチョ</div>
-    <div class="price">24.2万円/月<span class='sub'>(管理費込)</span></div>
-    <div class="meta">2LDK・62.18㎡・1階・築5年</div>
+    <div class="name">東京都品川区小山２ 6,980万円 2DK</div>
+    <div class="price">6,980万円</div>
+    <div class="meta">2DK・55.68㎡・3階建・築5年</div>
     <div class="meta">武蔵小山 徒歩6分</div>
-    <div class="meta">敷1ヶ月/礼1ヶ月</div>
-    <div class="meta pk">🚗駐車場あり(近隣)</div>
-    <div class="meta addr">目黒区目黒本町５丁目</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">目黒区目黒本町５</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21425622/000389861/x1030Z21425622.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F622%252F21425622%252F21425622_0001.jpg?100' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">東京都目黒区目黒本町５ 8,780万円 2DK</div>
+    <div class="price">8,780万円</div>
+    <div class="meta">2DK・78.49㎡・3階建・築13年</div>
+    <div class="meta">武蔵小山 徒歩6分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">目黒区目黒本町５</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z79057510/000232048/x1030Z79057510.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F510%252F79057510%252F79057510_0001.jpg?100' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">東京都品川区荏原３ 8,200万円 2SLDK</div>
+    <div class="price">8,200万円</div>
+    <div class="meta">2SLDK・63.12㎡・3階建・築5年</div>
+    <div class="meta">武蔵小山 徒歩6分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">目黒区目黒本町５</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://myhome.nifty.com/chuko-ikkodate/tokyo/shinagawaku_ct/detail_d0e253a1af4c3ca28afea973c59b61a3/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/384/78899384/78899384_0078.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">ニフティ不動産</span></div>
+    <div class="name">品川区小山</div>
+    <div class="price">6,980万円</div>
+    <div class="meta">2DK・55.68㎡・3階建・築5年<span class="rooms">＋他1部屋</span></div>
+    <div class="meta">武蔵小山 徒歩6分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">品川区小山</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ <details class="more"><summary>同じ建物の掲載 2件（2部屋・6980〜10990万円）</summary><div class="subs"><a class='sub-row' href="https://myhome.nifty.com/chuko-ikkodate/tokyo/shinagawaku_ct/detail_d0e253a1af4c3ca28afea973c59b61a3/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/384/78899384/78899384_0078.jpg' alt=''></span><span class='sub-b'><b>6,980万円</b><span class='sub-m'>3階建・ニフティ不動産</span><span class='sub-n'>品川区小山</span></span></a><a class='sub-row' href="https://myhome.nifty.com/chuko-ikkodate/tokyo/shinagawaku_ct/detail_736a8dac402e324589dc79da09a1d231/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/621/21697621/21697621_0001.jpg' alt=''></span><span class='sub-b'><b>1億990万円</b><span class='sub-m'>階記載なし・ニフティ不動産</span><span class='sub-n'>品川区小山</span></span></a></div></details>
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://www.rehouse.co.jp/buy/kodate/bkdetail/FSDAUA07/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img2-direct.miraie-net.com/orgt/20015_21859/12/1065098/378363899_pcLongHight.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">三井のリハウス</span></div>
+    <div class="name">品川区小山2丁目 中古戸建</div>
+    <div class="price">6,980万円</div>
+    <div class="meta">2DK・55.68㎡・3階建・築5年</div>
+    <div class="meta">武蔵小山 徒歩6分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">品川区小山2丁目</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://suumo.jp/chukoikkodate/tokyo/sc_meguro/nc_21425622/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/622/21425622/21425622_0001.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">SUUMO</span></div>
+    <div class="name">目黒本町５（武蔵小山駅） 8780万円</div>
+    <div class="price">8,780万円</div>
+    <div class="meta">2DK・70.27㎡・3階建・築13年</div>
+    <div class="meta">武蔵小山 徒歩7分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">目黒区目黒本町５</div>
+    
+    <div class="meta hist">掲載8日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://suumo.jp/ikkodate/tokyo/sc_shinagawa/nc_21064438/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/438/21064438/21064438_0021.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">SUUMO</span></div>
+    <div class="name">「武蔵小山駅」徒歩7分の新築戸建分譲交通アクセス、生活利便性の良い立地</div>
+    <div class="price">9,980万円</div>
+    <div class="meta">3LDK・60.5㎡・3階建・新築<span class="rooms">＋他1部屋</span></div>
+    <div class="meta">武蔵小山 徒歩7分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">品川区小山台１</div>
+    
+    <div class="meta hist">掲載8日</div>
+    
+  </div>
+ </a>
+ <details class="more"><summary>同じ建物の掲載 2件（2部屋・9980〜10880万円）</summary><div class="subs"><a class='sub-row' href="https://suumo.jp/ikkodate/tokyo/sc_shinagawa/nc_21064438/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/438/21064438/21064438_0021.jpg' alt=''></span><span class='sub-b'><b>9,980万円</b><span class='sub-m'>3階建・SUUMO</span><span class='sub-n'>「武蔵小山駅」徒歩7分の新築戸建分譲交通アクセス、生活利便性の良い立地</span></span></a><a class='sub-row' href="https://suumo.jp/ikkodate/tokyo/sc_shinagawa/nc_21342505/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/505/21342505/21342505_0024.jpg' alt=''></span><span class='sub-b'><b>1億880万円</b><span class='sub-m'>階記載なし・SUUMO</span><span class='sub-n'>「武蔵小山駅」徒歩7分の新築戸建分譲交通アクセス、生活利便性の良い立地</span></span></a></div></details>
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://myhome.nifty.com/chuko-ikkodate/tokyo/meguroku_ct/detail_d6ec21fd7df932838a1b6fe1cb6b8ed2/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/622/21425622/21425622_0001.jpg' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">ニフティ不動産</span></div>
+    <div class="name">目黒区目黒本町</div>
+    <div class="price">8,780万円</div>
+    <div class="meta">2DK・78.49㎡・3階建・築13年</div>
+    <div class="meta">武蔵小山 徒歩7分</div>
+    
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">目黒区目黒本町</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="1"
+   data-down="0"
+   data-cut="0"
+   data-rooms="0"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z21697621/164614001/x1030Z21697621.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F621%252F21697621%252F21697621_0001.jpg?100' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">東京都品川区小山４ 1億990万円 1SLDK</div>
+    <div class="price">1億990万円</div>
+    <div class="meta">1SLDK・70.46㎡・3階建・築8年</div>
+    <div class="meta">武蔵小山 徒歩6分</div>
+    
+    <div class="meta pk">🚗駐車場あり</div>
+    <div class="meta addr">目黒区目黒本町５</div>
+    
+    <div class="meta hist">掲載1日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="house"
+   data-parking="1"
+   data-down="0"
+   data-cut="0"
+   data-rooms="0"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21619843/184026001/x1030Z21619843.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F843%252F21619843%252F21619843_0002.jpg?100' alt=''></div>
+  <div class="body">
+    <div class="tag">🏠 戸建
+      <span class="stn">武蔵小山</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">東京都目黒区目黒本町４ 8,500万円 1SLDK</div>
+    <div class="price">8,500万円</div>
+    <div class="meta">1SLDK・72.28㎡・3階建・築6年</div>
+    <div class="meta">武蔵小山 徒歩6分</div>
+    
+    <div class="meta pk">🚗駐車場あり</div>
+    <div class="meta addr">目黒区目黒本町５</div>
     
     <div class="meta hist">掲載4日</div>
     
@@ -1501,214 +1742,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
  </a>
  <details class="more"><summary>同じ建物の掲載 2件（2部屋・4980〜8800万円）</summary><div class="subs"><a class='sub-row' href="https://myhome.nifty.com/tochi/tokyo/meguroku_ct/detail_9e81f6edd4b13e5ebbe6f5f9e30ae4ab/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://img01.suumo.com/front/gazo/bukken/030/N010000/img/673/21046673/21046673_0003.jpg' alt=''></span><span class='sub-b'><b>4,980万円</b><span class='sub-m'>階なし(土地)・ニフティ不動産</span><span class='sub-n'>目黒区目黒本町</span></span></a><a class='sub-row' href="https://myhome.nifty.com/tochi/tokyo/meguroku_ct/detail_3ef54582c11b3784a6b0746e09deac2c/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/499/21694499/21694499_0001.jpg' alt=''></span><span class='sub-b'><b>8,800万円</b><span class='sub-m'>階なし(土地)・ニフティ不動産</span><span class='sub-n'>目黒区目黒本町</span></span></a></div></details>
 </div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z78899384/006050838/x1030Z78899384.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F384%252F78899384%252F78899384_0079.jpg?100' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">東京都品川区小山２ 6,980万円 2DK</div>
-    <div class="price">6,980万円</div>
-    <div class="meta">2DK・55.68㎡・3階建・築5年</div>
-    <div class="meta">武蔵小山 徒歩6分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">目黒区目黒本町５</div>
-    
-    <div class="meta hist">掲載4日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21425622/000389861/x1030Z21425622.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F622%252F21425622%252F21425622_0001.jpg?100' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">東京都目黒区目黒本町５ 8,780万円 2DK</div>
-    <div class="price">8,780万円</div>
-    <div class="meta">2DK・78.49㎡・3階建・築13年</div>
-    <div class="meta">武蔵小山 徒歩6分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">目黒区目黒本町５</div>
-    
-    <div class="meta hist">掲載4日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z79057510/000232048/x1030Z79057510.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F510%252F79057510%252F79057510_0001.jpg?100' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">東京都品川区荏原３ 8,200万円 2SLDK</div>
-    <div class="price">8,200万円</div>
-    <div class="meta">2SLDK・63.12㎡・3階建・築5年</div>
-    <div class="meta">武蔵小山 徒歩6分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">目黒区目黒本町５</div>
-    
-    <div class="meta hist">掲載4日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="武蔵小山" data-type="rent"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13109/1157100165993/115710/x41157100165993.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage2.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttps%25253A%25252F%25252Fcdn-lambda-img.cloud.ielove.jp%25252Fimage%25252Frent%25252F58985a24%25252F32056_3606876_1_132000_132000.jpg%25253Ft%25253D20260908110906%2526width%253D500%2526height%253D500?100' alt=''></div>
-  <div class="body">
-    <div class="tag">🔑 賃貸
-      <span class="stn">武蔵小山</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">Ｇｒａｚｉａ武蔵小山</div>
-    <div class="price">21.3万円/月<span class='sub'>(管理費込)</span></div>
-    <div class="meta">2DK・48.38㎡・B1階・築2年</div>
-    <div class="meta">武蔵小山 徒歩6分</div>
-    <div class="meta">敷1ヶ月/礼1ヶ月</div>
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">品川区小山４</div>
-    
-    <div class="meta hist">掲載4日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://myhome.nifty.com/chuko-ikkodate/tokyo/shinagawaku_ct/detail_d0e253a1af4c3ca28afea973c59b61a3/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/384/78899384/78899384_0078.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">ニフティ不動産</span></div>
-    <div class="name">品川区小山</div>
-    <div class="price">6,980万円</div>
-    <div class="meta">2DK・55.68㎡・3階建・築5年<span class="rooms">＋他1部屋</span></div>
-    <div class="meta">武蔵小山 徒歩6分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">品川区小山</div>
-    
-    <div class="meta hist">掲載4日</div>
-    
-  </div>
- </a>
- <details class="more"><summary>同じ建物の掲載 2件（2部屋・6980〜10990万円）</summary><div class="subs"><a class='sub-row' href="https://myhome.nifty.com/chuko-ikkodate/tokyo/shinagawaku_ct/detail_d0e253a1af4c3ca28afea973c59b61a3/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/384/78899384/78899384_0078.jpg' alt=''></span><span class='sub-b'><b>6,980万円</b><span class='sub-m'>3階建・ニフティ不動産</span><span class='sub-n'>品川区小山</span></span></a><a class='sub-row' href="https://myhome.nifty.com/chuko-ikkodate/tokyo/shinagawaku_ct/detail_736a8dac402e324589dc79da09a1d231/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/621/21697621/21697621_0001.jpg' alt=''></span><span class='sub-b'><b>1億990万円</b><span class='sub-m'>階記載なし・ニフティ不動産</span><span class='sub-n'>品川区小山</span></span></a></div></details>
-</div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://www.rehouse.co.jp/buy/kodate/bkdetail/FSDAUA07/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img2-direct.miraie-net.com/orgt/20015_21859/12/1065098/378363899_pcLongHight.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">三井のリハウス</span></div>
-    <div class="name">品川区小山2丁目 中古戸建</div>
-    <div class="price">6,980万円</div>
-    <div class="meta">2DK・55.68㎡・3階建・築5年</div>
-    <div class="meta">武蔵小山 徒歩6分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">品川区小山2丁目</div>
-    
-    <div class="meta hist">掲載4日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://suumo.jp/chukoikkodate/tokyo/sc_meguro/nc_21425622/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/622/21425622/21425622_0001.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">SUUMO</span></div>
-    <div class="name">目黒本町５（武蔵小山駅） 8780万円</div>
-    <div class="price">8,780万円</div>
-    <div class="meta">2DK・70.27㎡・3階建・築13年</div>
-    <div class="meta">武蔵小山 徒歩7分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">目黒区目黒本町５</div>
-    
-    <div class="meta hist">掲載8日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://suumo.jp/ikkodate/tokyo/sc_shinagawa/nc_21064438/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/438/21064438/21064438_0021.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">SUUMO</span></div>
-    <div class="name">「武蔵小山駅」徒歩7分の新築戸建分譲交通アクセス、生活利便性の良い立地</div>
-    <div class="price">9,980万円</div>
-    <div class="meta">3LDK・60.5㎡・3階建・新築<span class="rooms">＋他1部屋</span></div>
-    <div class="meta">武蔵小山 徒歩7分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">品川区小山台１</div>
-    
-    <div class="meta hist">掲載8日</div>
-    
-  </div>
- </a>
- <details class="more"><summary>同じ建物の掲載 2件（2部屋・9980〜10880万円）</summary><div class="subs"><a class='sub-row' href="https://suumo.jp/ikkodate/tokyo/sc_shinagawa/nc_21064438/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/438/21064438/21064438_0021.jpg' alt=''></span><span class='sub-b'><b>9,980万円</b><span class='sub-m'>3階建・SUUMO</span><span class='sub-n'>「武蔵小山駅」徒歩7分の新築戸建分譲交通アクセス、生活利便性の良い立地</span></span></a><a class='sub-row' href="https://suumo.jp/ikkodate/tokyo/sc_shinagawa/nc_21342505/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/505/21342505/21342505_0024.jpg' alt=''></span><span class='sub-b'><b>1億880万円</b><span class='sub-m'>階記載なし・SUUMO</span><span class='sub-n'>「武蔵小山駅」徒歩7分の新築戸建分譲交通アクセス、生活利便性の良い立地</span></span></a></div></details>
-</div><div class="card"
    data-station="武蔵小山" data-type="land"
    data-parking="0"
    data-down="0"
@@ -1762,6 +1795,58 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
  
 </div><div class="card"
    data-station="武蔵小山" data-type="rent"
+   data-parking="1"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13110/1517680011124/151768/x41517680011124.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage4.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttp%25253A%25252F%25252Fimg.homes.jp%25252F151768%25252Frent%25252F11124%25252F1%25252F1%25252F32mc.jpg%2526width%253D500%2526height%253D500?100' alt=''></div>
+  <div class="body">
+    <div class="tag">🔑 賃貸
+      <span class="stn">武蔵小山</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">カーサ　イ　ティーリ　エ　イル　ミーチョ</div>
+    <div class="price">24.2万円/月<span class='sub'>(管理費込)</span></div>
+    <div class="meta">2LDK・62.18㎡・1階・築5年</div>
+    <div class="meta">武蔵小山 徒歩6分</div>
+    <div class="meta">敷1ヶ月/礼1ヶ月</div>
+    <div class="meta pk">🚗駐車場あり(近隣)</div>
+    <div class="meta addr">目黒区目黒本町５丁目</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="rent"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13109/1157100165993/115710/x41157100165993.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage2.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttps%25253A%25252F%25252Fcdn-lambda-img.cloud.ielove.jp%25252Fimage%25252Frent%25252F58985a24%25252F32056_3606876_1_132000_132000.jpg%25253Ft%25253D20260908110906%2526width%253D500%2526height%253D500?100' alt=''></div>
+  <div class="body">
+    <div class="tag">🔑 賃貸
+      <span class="stn">武蔵小山</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">Ｇｒａｚｉａ武蔵小山</div>
+    <div class="price">21.3万円/月<span class='sub'>(管理費込)</span></div>
+    <div class="meta">2DK・48.38㎡・B1階・築2年</div>
+    <div class="meta">武蔵小山 徒歩6分</div>
+    <div class="meta">敷1ヶ月/礼1ヶ月</div>
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">品川区小山４</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="武蔵小山" data-type="rent"
    data-parking="0"
    data-down="0"
    data-cut="0"
@@ -1782,32 +1867,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
     <div class="meta addr">目黒区目黒本町５丁目</div>
     
     
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://myhome.nifty.com/chuko-ikkodate/tokyo/meguroku_ct/detail_d6ec21fd7df932838a1b6fe1cb6b8ed2/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://suumo.jp/front/gazo/bukken/030/N010000/img/622/21425622/21425622_0001.jpg' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">ニフティ不動産</span></div>
-    <div class="name">目黒区目黒本町</div>
-    <div class="price">8,780万円</div>
-    <div class="meta">2DK・78.49㎡・3階建・築13年</div>
-    <div class="meta">武蔵小山 徒歩7分</div>
-    
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">目黒区目黒本町</div>
-    
-    <div class="meta hist">掲載4日</div>
     
   </div>
  </a>
@@ -1865,110 +1924,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
  </a>
  
 </div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="1"
-   data-down="0"
-   data-cut="0"
-   data-rooms="0"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z21697621/164614001/x1030Z21697621.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F621%252F21697621%252F21697621_0001.jpg?100' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">東京都品川区小山４ 1億990万円 1SLDK</div>
-    <div class="price">1億990万円</div>
-    <div class="meta">1SLDK・70.46㎡・3階建・築8年</div>
-    <div class="meta">武蔵小山 徒歩6分</div>
-    
-    <div class="meta pk">🚗駐車場あり</div>
-    <div class="meta addr">目黒区目黒本町５</div>
-    
-    <div class="meta hist">掲載1日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="武蔵小山" data-type="house"
-   data-parking="1"
-   data-down="0"
-   data-cut="0"
-   data-rooms="0"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21619843/184026001/x1030Z21619843.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/uh/1/https%253A%252F%252Fsuumo.jp%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F843%252F21619843%252F21619843_0002.jpg?100' alt=''></div>
-  <div class="body">
-    <div class="tag">🏠 戸建
-      <span class="stn">武蔵小山</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">東京都目黒区目黒本町４ 8,500万円 1SLDK</div>
-    <div class="price">8,500万円</div>
-    <div class="meta">1SLDK・72.28㎡・3階建・築6年</div>
-    <div class="meta">武蔵小山 徒歩6分</div>
-    
-    <div class="meta pk">🚗駐車場あり</div>
-    <div class="meta addr">目黒区目黒本町５</div>
-    
-    <div class="meta hist">掲載4日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="東日本橋" data-type="rent"
-   data-parking="1"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13102/1445520050513/144552/x41445520050513.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage2.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttp%25253A%25252F%25252Fimg.homes.jp%25252F144552%25252Frent%25252F50513%25252F2%25252F1%25252F80cn.jpg%2526width%253D500%2526height%253D500?91x91' alt=''></div>
-  <div class="body">
-    <div class="tag">🔑 賃貸
-      <span class="stn">東日本橋</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">東京都中央区日本橋横山町 築7年7ヶ月 10階建</div>
-    <div class="price">27.2万円/月<span class='sub'>(管理費込)</span></div>
-    <div class="meta">2LDK・53.18㎡・2階・築7年</div>
-    <div class="meta">東日本橋 徒歩2分</div>
-    <div class="meta">敷なし/礼なし</div>
-    <div class="meta pk">🚗駐車場あり(近隣)</div>
-    <div class="meta addr">中央区日本橋横山町</div>
-    
-    <div class="meta hist">掲載4日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="東日本橋" data-type="rent"
-   data-parking="1"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13102/1206970499971/120697/x41206970499971.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttp%25253A%25252F%25252Fimg.homes.jp%25252F120697%25252Frent%25252F499971%25252F2%25252F2%25252Fdegw.jpg%2526width%253D500%2526height%253D500?91x91' alt=''></div>
-  <div class="body">
-    <div class="tag">🔑 賃貸
-      <span class="stn">東日本橋</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">アクラス日本橋</div>
-    <div class="price">25.1万円/月<span class='sub'>(管理費込)</span></div>
-    <div class="meta">2LDK・50.21㎡・6階・築10年</div>
-    <div class="meta">東日本橋 徒歩3分</div>
-    
-    <div class="meta pk">🚗駐車場あり(近隣)</div>
-    <div class="meta addr">中央区東日本橋３丁目</div>
-    
-    
-    
-  </div>
- </a>
- 
-</div><div class="card"
    data-station="東日本橋" data-type="mansion"
    data-parking="1"
    data-down="0"
@@ -1990,32 +1945,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
     <div class="meta addr">中央区日本橋横山町</div>
     
     <div class="meta hist">掲載8日</div>
-    
-  </div>
- </a>
- 
-</div><div class="card"
-   data-station="東日本橋" data-type="rent"
-   data-parking="1"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://www.chintai.net/detail/bk-C010104960000021250168410001/" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.chintai.net/evorg/org/481_2125/32/36353277/1075571396.jpg?interpolation=lanczos-none&amp;resize=115:*' alt=''></div>
-  <div class="body">
-    <div class="tag">🔑 賃貸
-      <span class="stn">東日本橋</span>
-      <span class="src">CHINTAI</span></div>
-    <div class="name">レジディア日本橋馬喰町II</div>
-    <div class="price">27.0万円/月<span class='sub'>(管理費込)</span></div>
-    <div class="meta">2LDK・50.6㎡・12階・築12年</div>
-    <div class="meta">東日本橋 徒歩6分</div>
-    <div class="meta">敷1ヶ月/礼1ヶ月</div>
-    <div class="meta pk">🚗駐車場あり</div>
-    <div class="meta addr">東京都中央区日本橋馬喰町２丁目</div>
-    
-    
     
   </div>
  </a>
@@ -2151,32 +2080,6 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
  </a>
  <details class="more"><summary>同じ建物の掲載 2件（2部屋・10480〜12000万円）</summary><div class="subs"><a class='sub-row' href="https://www.livable.co.jp/mansion/C48262241/" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://img.livable.co.jp/?url=https%3A%2F%2Fwww.livable.co.jp%2Frue_image%2Fphoto%2FC48262241.jpg%3F20260404121225&amp;w=718&amp;h=538' alt=''></span><span class='sub-b'><b>1億480万円</b><span class='sub-m'>7階・リバブル</span><span class='sub-n'>ＧＲＥＥＮ　ＰＡＲＫ　東日本橋　Ｒｉｖｅｒ　Ｔｅｒｒａｃｅ</span></span></a><a class='sub-row' href="https://house.goo.ne.jp/buy/um/detail/1/13102/030Z21228514/000232002/x1030Z21228514.html" target="_blank" rel="noopener"><span class='sub-th'><img loading='lazy' src='https://img.house.goo.ne.jp/um/1/https%253A%252F%252Fimg01.suumo.com%252Ffront%252Fgazo%252Fbukken%252F030%252FN010000%252Fimg%252F514%252F21228514%252F21228514_0001.jpg?400x400' alt=''></span><span class='sub-b'><b>1億2,000万円</b><span class='sub-m'>10階・goo住宅</span><span class='sub-n'>ＧＲＥＥＮ　ＰＡＲＫ　東日本橋　Ｒｉｖｅｒ　Ｔｅｒｒａｃｅ</span></span></a></div></details>
 </div><div class="card"
-   data-station="東日本橋" data-type="rent"
-   data-parking="0"
-   data-down="0"
-   data-cut="0"
-   data-rooms="1"
-   data-stale="0">
- <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13102/1564900023028/156490/x41564900023028.html" target="_blank" rel="noopener">
-  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage3.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttps%25253A%25252F%25252Fcdn-lambda-img.cloud.ielove.jp%25252Fimage%25252Frent%25252F28d619ac%25252F51706_1051971_1_132000_132000.jpg%25253Ft%25253D20260722180211%2526width%253D500%2526height%253D500?91x91' alt=''></div>
-  <div class="body">
-    <div class="tag">🔑 賃貸
-      <span class="stn">東日本橋</span>
-      <span class="src">goo住宅</span></div>
-    <div class="name">東京都中央区日本橋浜町１丁目 築5年11ヶ月 10階建</div>
-    <div class="price">25.9万円/月<span class='sub'>(管理費込)</span></div>
-    <div class="meta">2LDK・47.3㎡・6階・築6年</div>
-    <div class="meta">東日本橋 徒歩5分</div>
-    <div class="meta">敷1ヶ月/礼1ヶ月</div>
-    <div class="meta pk">駐車場なし</div>
-    <div class="meta addr">中央区日本橋浜町１丁目</div>
-    
-    
-    
-  </div>
- </a>
- 
-</div><div class="card"
    data-station="東日本橋" data-type="mansion"
    data-parking="0"
    data-down="0"
@@ -2224,6 +2127,110 @@ main{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:
     <div class="meta addr">中央区日本橋堀留町２</div>
     
     <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="東日本橋" data-type="rent"
+   data-parking="1"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13102/1445520050513/144552/x41445520050513.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage2.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttp%25253A%25252F%25252Fimg.homes.jp%25252F144552%25252Frent%25252F50513%25252F2%25252F1%25252F80cn.jpg%2526width%253D500%2526height%253D500?91x91' alt=''></div>
+  <div class="body">
+    <div class="tag">🔑 賃貸
+      <span class="stn">東日本橋</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">東京都中央区日本橋横山町 築7年7ヶ月 10階建</div>
+    <div class="price">27.2万円/月<span class='sub'>(管理費込)</span></div>
+    <div class="meta">2LDK・53.18㎡・2階・築7年</div>
+    <div class="meta">東日本橋 徒歩2分</div>
+    <div class="meta">敷なし/礼なし</div>
+    <div class="meta pk">🚗駐車場あり(近隣)</div>
+    <div class="meta addr">中央区日本橋横山町</div>
+    
+    <div class="meta hist">掲載4日</div>
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="東日本橋" data-type="rent"
+   data-parking="1"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13102/1206970499971/120697/x41206970499971.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttp%25253A%25252F%25252Fimg.homes.jp%25252F120697%25252Frent%25252F499971%25252F2%25252F2%25252Fdegw.jpg%2526width%253D500%2526height%253D500?91x91' alt=''></div>
+  <div class="body">
+    <div class="tag">🔑 賃貸
+      <span class="stn">東日本橋</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">アクラス日本橋</div>
+    <div class="price">25.1万円/月<span class='sub'>(管理費込)</span></div>
+    <div class="meta">2LDK・50.21㎡・6階・築10年</div>
+    <div class="meta">東日本橋 徒歩3分</div>
+    
+    <div class="meta pk">🚗駐車場あり(近隣)</div>
+    <div class="meta addr">中央区東日本橋３丁目</div>
+    
+    
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="東日本橋" data-type="rent"
+   data-parking="1"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://www.chintai.net/detail/bk-C010104960000021250168410001/" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.chintai.net/evorg/org/481_2125/32/36353277/1075571396.jpg?interpolation=lanczos-none&amp;resize=115:*' alt=''></div>
+  <div class="body">
+    <div class="tag">🔑 賃貸
+      <span class="stn">東日本橋</span>
+      <span class="src">CHINTAI</span></div>
+    <div class="name">レジディア日本橋馬喰町II</div>
+    <div class="price">27.0万円/月<span class='sub'>(管理費込)</span></div>
+    <div class="meta">2LDK・50.6㎡・12階・築12年</div>
+    <div class="meta">東日本橋 徒歩6分</div>
+    <div class="meta">敷1ヶ月/礼1ヶ月</div>
+    <div class="meta pk">🚗駐車場あり</div>
+    <div class="meta addr">東京都中央区日本橋馬喰町２丁目</div>
+    
+    
+    
+  </div>
+ </a>
+ 
+</div><div class="card"
+   data-station="東日本橋" data-type="rent"
+   data-parking="0"
+   data-down="0"
+   data-cut="0"
+   data-rooms="1"
+   data-stale="0">
+ <a class="lnk" href="https://house.goo.ne.jp/rent/ap/detail/4/13102/1564900023028/156490/x41564900023028.html" target="_blank" rel="noopener">
+  <div class="thumb"><img loading='lazy' src='https://img.house.goo.ne.jp/ap/4/https%253A%252F%252Fimage3.homes.jp%252Fsmallimg%252Fimage.php%253Ffile%253Dhttps%25253A%25252F%25252Fcdn-lambda-img.cloud.ielove.jp%25252Fimage%25252Frent%25252F28d619ac%25252F51706_1051971_1_132000_132000.jpg%25253Ft%25253D20260722180211%2526width%253D500%2526height%253D500?91x91' alt=''></div>
+  <div class="body">
+    <div class="tag">🔑 賃貸
+      <span class="stn">東日本橋</span>
+      <span class="src">goo住宅</span></div>
+    <div class="name">東京都中央区日本橋浜町１丁目 築5年11ヶ月 10階建</div>
+    <div class="price">25.9万円/月<span class='sub'>(管理費込)</span></div>
+    <div class="meta">2LDK・47.3㎡・6階・築6年</div>
+    <div class="meta">東日本橋 徒歩5分</div>
+    <div class="meta">敷1ヶ月/礼1ヶ月</div>
+    <div class="meta pk">駐車場なし</div>
+    <div class="meta addr">中央区日本橋浜町１丁目</div>
+    
+    
     
   </div>
  </a>
@@ -2325,6 +2332,21 @@ document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
     el.style.display=ok?'':'none'; if(ok)n++;
   });
   document.getElementById('shown').textContent=n;
+  // 絞り込み中の内訳（売買/賃貸）を出す
+  let buy=0,rent=0;
+  document.querySelectorAll('.card').forEach(el=>{
+    if(el.style.display==='none')return;
+    if(el.dataset.type==='rent')rent++;else buy++;
+  });
+  document.getElementById('bd').textContent=
+    (buy||rent)?` ｜ 売買${buy} / 賃貸${rent}`:'';
   document.getElementById('empty').style.display=n?'none':'';
 });
+(function(){
+  let buy=0,rent=0;
+  document.querySelectorAll('.card').forEach(el=>{
+    if(el.dataset.type==='rent')rent++;else buy++;
+  });
+  document.getElementById('bd').textContent=` ｜ 売買${buy} / 賃貸${rent}`;
+})();
 </script></body></html>

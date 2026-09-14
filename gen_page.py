@@ -205,10 +205,13 @@ def build(items, out_path, station_order=None, reject_tally=None):
         return n + 0.5 if "S" in (it.get("layout") or "").upper() else n
 
     def sort_key(it):
+        # 駅で絞ったときに賃貸と売買が混ざらないよう、駅の中では
+        # 売買（マンション→戸建→土地）を先に、賃貸を後ろにまとめる
+        type_rank = {"mansion": 0, "house": 1, "land": 2, "rent": 3}
         return (0 if it.get("_price_down") else 1,
                 rank.get(it.get("station"), 999),
+                type_rank.get(it.get("type"), 9),
                 0 if _rooms(it) >= 2 else 1,   # 2LDK以上を上に
-
                 0 if it.get("parking") in ("有", "近隣") else 1,
                 it.get("walk") or 99)
 
@@ -338,8 +341,8 @@ def build(items, out_path, station_order=None, reject_tally=None):
 <meta name="theme-color" content="#141413" media="(prefers-color-scheme:dark)">
 <title>物件在庫 {len(cards)}件</title>
 <style>
-:root{{--bg:#faf9f7;--fg:#1c1b19;--sub:#6b6862;--line:#e6e3dd;--card:#fff;--accent:#1a5d3a}}
-@media(prefers-color-scheme:dark){{:root{{--bg:#141413;--fg:#f0eee9;--sub:#a3a099;--line:#2c2b28;--card:#1c1b19}}}}
+:root{{--bg:#faf9f7;--fg:#1c1b19;--sub:#6b6862;--line:#e6e3dd;--card:#fff;--accent:#1a5d3a;--buy:#1a5d3a;--rent:#b4560a}}
+@media(prefers-color-scheme:dark){{:root{{--bg:#141413;--fg:#f0eee9;--sub:#a3a099;--line:#2c2b28;--card:#1c1b19;--buy:#4ea87a;--rent:#e59a4d}}}}
 *{{box-sizing:border-box}}
 body{{margin:0;background:var(--bg);color:var(--fg);
   font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif;line-height:1.6}}
@@ -355,6 +358,12 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 .card{{background:var(--card);border:1px solid var(--line);border-radius:12px;
   overflow:hidden;color:inherit}}
 .card:hover{{border-color:var(--accent)}}
+/* 駅で絞ったとき、賃貸と売買を一目で見分けられるように左端で色分けする */
+.card{{border-left:4px solid var(--buy)}}
+.card[data-type="rent"]{{border-left-color:var(--rent)}}
+.tag{{font-weight:600}}
+.card[data-type="rent"] .tag{{color:var(--rent)}}
+.card:not([data-type="rent"]) .tag{{color:var(--buy)}}
 .lnk{{display:flex;gap:11px;text-decoration:none;color:inherit}}
 /* 同じ物件の別掲載。値段・階が違うので畳んで全部出す */
 .more{{border-top:1px solid var(--line)}}
@@ -421,7 +430,8 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 </style></head><body>
 <header>
   <h1>物件在庫</h1>
-  <div class="count"><span id="shown">{len(cards)}</span> / {len(cards)}物件（掲載{len(items)}件）　{jst:%Y-%m-%d %H:%M} JST時点</div>
+  <div class="count"><span id="shown">{len(cards)}</span> / {len(cards)}物件
+    <span id="bd"></span>（掲載{len(items)}件）　{jst:%Y-%m-%d %H:%M} JST時点</div>
   <div class="filters">
     <button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="rooms" data-v="1">2LDK以上</button><button class="chip" data-f="cut" data-v="1">値下げ実績</button><button class="chip" data-f="stale" data-v="1">90日以上</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button>{tchips}
   </div>
@@ -447,8 +457,23 @@ document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{{
     el.style.display=ok?'':'none'; if(ok)n++;
   }});
   document.getElementById('shown').textContent=n;
+  // 絞り込み中の内訳（売買/賃貸）を出す
+  let buy=0,rent=0;
+  document.querySelectorAll('.card').forEach(el=>{{
+    if(el.style.display==='none')return;
+    if(el.dataset.type==='rent')rent++;else buy++;
+  }});
+  document.getElementById('bd').textContent=
+    (buy||rent)?` ｜ 売買${{buy}} / 賃貸${{rent}}`:'';
   document.getElementById('empty').style.display=n?'none':'';
 }});
+(function(){{
+  let buy=0,rent=0;
+  document.querySelectorAll('.card').forEach(el=>{{
+    if(el.dataset.type==='rent')rent++;else buy++;
+  }});
+  document.getElementById('bd').textContent=` ｜ 売買${{buy}} / 賃貸${{rent}}`;
+}})();
 </script></body></html>"""
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(doc)
