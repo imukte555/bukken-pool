@@ -550,6 +550,9 @@ def parse_suumo(html: str, station: str, kind: str):
             "area": parse_area(text),
             "layout": parse_layout(text),
             "walk": parse_walk(text, station),
+            # カードに複数駅が並ぶので全部拾う。対象駅が2番目以降に
+            # 書かれていると walk だけでは取りこぼす（実測: ノムコム）
+            "walks": parse_all_walks(text),
             "addr": parse_addr(text),
             "built": parse_built(text),
             "url": href,
@@ -1883,6 +1886,20 @@ def parse_nomu(html: str, station: str, kind: str):
         name = name_el.get_text(strip=True)[:50] if name_el else a.get_text(strip=True)[:50]
 
         text = card.get_text(" ", strip=True)
+        # 交通がカードの外（親要素）にあることがある。対象駅を取り逃すと
+        # 「徒歩が不明」で捨ててしまうので、徒歩表記を持つ親まで広げる
+        if "徒歩" not in text:
+            _cur = card
+            for _ in range(4):
+                _cur = getattr(_cur, "parent", None)
+                if _cur is None:
+                    break
+                if len(_cur.select('a[href*="/id/"]')) > 1:
+                    break
+                _t = _cur.get_text(" ", strip=True)
+                if "徒歩" in _t:
+                    text = _t
+                    break
         items.append({
             "id": f"nomu:{kind[0]}:{pid}",
             "img": _abs(card_image(card), "https://www.nomu.com"),
@@ -1893,6 +1910,9 @@ def parse_nomu(html: str, station: str, kind: str):
             "area": parse_area(text),
             "layout": parse_layout(text),
             "walk": parse_walk(text, station),
+            # カードに複数駅が並ぶ。対象駅が2番目以降だと walk だけでは
+            # 取りこぼすので全駅を拾っておく（実測: ノムコム）
+            "walks": parse_all_walks(text),
             "addr": parse_addr(text),
             "built": parse_built(text),
             "url": href,
