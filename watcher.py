@@ -2198,7 +2198,10 @@ def parse_all_walks(text: str):
     """交通欄から (駅名, 分) を全部拾う。近い順、駅名重複は最短を採用。"""
     best = {}
     for m in WALK_RE.finditer(text):
-        name = m.group(1).strip().rstrip("駅")
+        name = m.group(1).strip()
+        # 「目黒駅まで徒歩7分」の「まで」など、駅名に付く助詞を落とす
+        name = re.sub(r"(駅)?(まで|から|より)$", "", name).strip()
+        name = name.rstrip("駅")
         mins = int(m.group(2))
         if not name:
             continue
