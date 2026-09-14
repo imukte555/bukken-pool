@@ -2027,11 +2027,16 @@ def parse_suumo_rent(html: str, station: str):
 
         # 対象駅の徒歩分（「大井町駅 歩5分」形式）
         walk = None
-        m = re.search(rf"{re.escape(station)}駅\s*歩\s*(\d+)\s*分", station_text)
+        m = re.search(rf"{re.escape(STATION_ALIAS.get(station, station))}駅"
+                      rf"\s*歩\s*(\d+)\s*分", station_text)
         if m:
             walk = int(m.group(1))
         else:
-            m = re.search(r"歩\s*(\d+)\s*分", station_text)
+            # 対象駅の表記が無いときに先頭の「歩◯分」を使うと、別駅の
+            # 徒歩を対象駅のものとして出してしまう（実測: コルヌイエ八雲は
+            # 都立大学6分・目黒はバス18分なのに「目黒 徒歩6分」と出ていた）。
+            # ここでは決めず、詳細ページの交通欄で判断する
+            m = None
             if m:
                 walk = int(m.group(1))
 
@@ -2406,7 +2411,9 @@ def enrich_from_detail(item):
             item["img"] = unwrap_image_url(
                 _abs(u, host.group(1) if host else ""))
 
-    if not item.get("walks"):
+    # 交通は一覧より詳細ページが正しい。一覧で入っていても必ず上書きする
+    # （実測: 一覧の「歩6分」は都立大学のもので、目黒はバス18分だった）
+    if True:
         transit = _row_value(soup, "交通", "駅徒歩", "最寄") or soup.get_text(" ", strip=True)
         if item.get("source") == "ニフティ不動産":
             # 「利用可能駅（ニフティ不動産調べ）」以降は独自推定なので切り捨て、
@@ -2420,11 +2427,10 @@ def enrich_from_detail(item):
         walks = parse_all_walks(transit)
         if walks:
             item["walks"] = walks
-        if item.get("walk") is None and walks:
-            st = item.get("station")
+            st = station_match_name(item.get("station"))
             d = dict(walks)
-            if st in d:
-                item["walk"] = d[st]
+            # 対象駅が交通欄に無ければ徒歩圏ではない。一覧の値は捨てる
+            item["walk"] = d.get(st)
 
 
 # === コレクター ===
