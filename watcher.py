@@ -1570,20 +1570,22 @@ def parse_goo_buy(html: str, station: str, kind: str):
         if not addr:
             continue
         built = None
-        # 祖先要素のテキストから裸の「YYYY年M月」を拾うと、別物件の築年や
-        # 情報公開日を築年にしてしまう（実測: シャンボール第２目黒は
-        # 1972年10月築なのに築3年と表示されていた）。
-        # ラベルに紐づいた表記だけを採用し、無ければ None のまま
-        # 詳細ページ補完に任せる。
+        # 築年は「掲載枠自身のテキスト(t)」からだけ取る。
+        # 祖先(ctext)はページ全体に及ぶことがあり、実測で中古戸建40件が
+        # 全部ページ先頭の「2010年12月(築15年)」を拾って築15年になっていた。
+        # 枠に無ければ None のままにして詳細ページ補完に任せる。
         mb = re.search(r"(?:築年月|建築年月|完成時期|竣工)[^\d]{0,8}"
-                       r"(\d{4})年\d{1,2}月", ctext)
+                       r"(\d{4})年\d{1,2}月", t)
+        if not mb:
+            # 「2010年12月(築15年10ヶ月)」形式（goo売買一覧の実表記）
+            mb = re.search(r"(\d{4})年\d{1,2}月\s*[（(]\s*築", t)
         if mb:
             built = int(mb.group(1))
         else:
-            mc = re.search(r"(?:築年数)?[^\d]{0,4}築\s*(\d{1,3})\s*年", ctext)
+            mc = re.search(r"築年数[^\d]{0,6}築?\s*(\d{1,3})\s*年", t)
             if mc:
                 built = CURRENT_YEAR - int(mc.group(1))
-            elif is_shinchiku_label(ctext):
+            elif is_shinchiku_label(t):
                 built = CURRENT_YEAR
         mf = re.search(r"階数\s*(B?\d+)\s*階", t)
         floor = f"{mf.group(1)}階" if mf else parse_floor(t, kind)
