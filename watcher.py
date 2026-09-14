@@ -2861,7 +2861,9 @@ def collect_station(station, codes):
             for _seg, _kind, _lbl in [("um", "mansion", "mansion"),
                                       ("uh", "house", "house"),
                                       ("bm", "mansion", "mansion"),
-                                      ("bh", "house", "house")]:
+                                      ("bh", "house", "house"),
+                                      # 土地も見る（sho指示。実測: 目黒40件）
+                                      ("la", "land", "land")]:
                 items = []
                 for pn in range(1, 31):
                     url = (f"https://house.goo.ne.jp/buy/shuto_{_seg}/ensen/"
