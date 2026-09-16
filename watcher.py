@@ -69,6 +69,10 @@ _PHOTO_LOCK = threading.Lock()
 # それでも叩くと1ホストあたり数分の待機が発生し、取得の締切を食って
 # 取れるサイトまで落ちる。Actions上では最初から飛ばす。
 # ローカル実行では今までどおり取りにいく（環境変数で上書き可）。
+# リンクを開けないサイト。掲載は取れてもクリックで403になるので載せない。
+# 復活したら空にする（環境変数 DEAD_LINK_HOSTS で上書き可）
+DEAD_LINK_HOSTS = [h for h in (os.environ.get("DEAD_LINK_HOSTS")
+                               or "").split(",") if h.strip()]
 SKIP_BLOCKED_HOSTS = (os.environ.get("SKIP_BLOCKED_HOSTS")
                       or ("1" if os.environ.get("GITHUB_ACTIONS") else "0")) == "1"
 # 同一建物から取る最大部屋数。3だと同じマンションの4部屋目以降が
@@ -2961,7 +2965,9 @@ def collect_station(station, codes):
             _gp, _gl, _gc = codes["nomu"].split("/")
             items = []
             # 実測: 15/18/21/24ページ目でも 160/81/104/70件と出続ける
-            for pn in range(1, 91):
+            # 90ページ×13駅×種別で叩きすぎてgooにIPを弾かれた（403）。
+            # 1駅あたりの取得量を戻す（2026-09-16）
+            for pn in range(1, 26):
                 # ページ送りは ?p=N（?page=は無視される。実測で確認）
                 url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
                        f"{_gl[1:]}/{_gc}.html"
@@ -4431,6 +4437,18 @@ def main():
         # 一覧の時点では住所が空のポータルがあり、1回目では突き合わせ
         # られなかったぶんがここで消える。
         items = dedupe_items(items, "(詳細取得後)")
+        # リンクを開けないサイトの掲載は出さない。
+        # 実測: goo住宅はブラウザでも403を返す状態で、代表カード139件中
+        # 96件がgooリンクだったため「何も開けない」ページになっていた。
+        # 同じ物件が他サイトにもあれば dedupe_items でそちらが残る。
+        _dead_hosts = tuple(h for h in DEAD_LINK_HOSTS if h)
+        if _dead_hosts:
+            _before = len(items)
+            items = [i for i in items
+                     if not any(h in (i.get("url") or "") for h in _dead_hosts)]
+            if len(items) < _before:
+                print(f"リンクを開けないサイトを除外: {_before} → {len(items)}件 "
+                      f"({'、'.join(_dead_hosts)})")
         # 詳細ページが取れなかった物件も「駐車場なし」で確定させる。
         # 「記載なし」のまま出すと、あるのか無いのか分からない札になる
         _unk = 0

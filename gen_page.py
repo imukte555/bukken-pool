@@ -114,10 +114,14 @@ def _img_rank(it):
     return 0
 
 
+# 代表カードのリンク先に使うソースの優先順。
+# goo住宅は他社の掲載を中継しているだけで、gooが弾くとリンクを開けない
+# （実測: goo詳細は403、SUUMOは200）。開けるサイトを優先し、gooは最後にする
 _SRC_RANK = {"SUUMO": 0, "SUUMO賃貸": 0, "三井のリハウス": 1, "ノムコム": 1,
              "リバブル": 1, "リバブル賃貸": 1, "HOMES": 2, "HOMES賃貸": 2,
-             "goo住宅": 3, "CHINTAI": 4, "ハウスコム": 4, "スマイティ": 5,
-             "スマイティ賃貸": 5, "賃貸スモッカ": 5}
+             "CHINTAI": 3, "ハウスコム": 3, "スマイティ": 4,
+             "スマイティ賃貸": 4, "賃貸スモッカ": 4, "カウカモ": 4,
+             "ニフティ不動産": 5, "goo住宅": 9}
 
 
 def pick_rep(group):
@@ -127,9 +131,9 @@ def pick_rep(group):
         # 写真の分かりやすさが最優先。次に建物名が実名で入っているもの
         # （スマイティは「◯◯駅まで徒歩5分」、SUUMOは「品川区大井２ 賃貸」
         #  のように名前欄が説明文・住所になることがある）
-        return (_img_rank(it),
+        return (_SRC_RANK.get(it.get("source"), 6),
+                _img_rank(it),
                 0 if _is_building_name(_norm_name(it.get("name") or "")) else 1,
-                _SRC_RANK.get(it.get("source"), 6),
                 0 if it.get("floor") else 1,
                 0 if it.get("parking") else 1,
                 it.get("price") if it.get("price") is not None else 9e9)
