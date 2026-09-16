@@ -139,6 +139,30 @@ def pick_rep(group):
                 it.get("price") if it.get("price") is not None else 9e9)
     return sorted(group, key=key)[0]
 
+# クリックしても開けないサイト。ここへのリンクは検索リンクに差し替える。
+# 実測(2026-09-16): house.goo.ne.jp と www.chintai.net が403を返し、
+# 代表カード139件中96件がgooリンクだったため「何も開けない」状態だった。
+UNOPENABLE_HOSTS = ("house.goo.ne.jp", "www.chintai.net")
+
+
+def openable_url(it):
+    """開けるURLを返す。開けないサイトなら物件名で検索するリンクにする。
+    戻り値: (url, 検索リンクに差し替えたか)
+    """
+    import urllib.parse as _up
+    u = it.get("url") or ""
+    if not any(h in u for h in UNOPENABLE_HOSTS):
+        return u, False
+    kw = (it.get("name") or "").strip()
+    if not kw or _re.search(r"(徒歩\d|駅まで|万円|築\d+年)", kw):
+        kw = (it.get("addr") or "").strip()
+    kw = _re.sub(r"[　\s]+", " ", kw)[:40]
+    stn = it.get("station") or ""
+    kind = {"rent": "賃貸", "mansion": "中古マンション",
+            "house": "中古一戸建て", "land": "土地"}.get(it.get("type"), "")
+    q = _up.quote(f"{kw} {stn} {kind}".strip())
+    return f"https://www.google.com/search?q={q}", True
+
 def fmt_price(it):
     p = it.get("price")
     if p is None:
@@ -236,7 +260,8 @@ def build(items, out_path, station_order=None, reject_tally=None):
         im = x.get("img") or ""
         th = (f"<img loading='lazy' src='{html.escape(im)}' alt=''>"
               if im.startswith("http") else "<span class='sub-noimg'>画像なし</span>")
-        return (f"<a class='sub-row' href=\"{html.escape(x['url'])}\" target=\"_blank\" "
+        _u2, _s2 = openable_url(x)
+        return (f"<a class='sub-row' href=\"{html.escape(_u2)}\" target=\"_blank\" "
                 f"rel=\"noopener\"><span class='sub-th'>{th}</span>"
                 f"<span class='sub-b'><b>{fmt_price(x)}</b>"
                 f"<span class='sub-m'>{fl}"
@@ -302,6 +327,7 @@ def build(items, out_path, station_order=None, reject_tally=None):
                     + "</div></details>")
         if len(rooms) > 1:
             rooms_note = f'<span class="rooms">＋他{len(rooms) - 1}部屋</span>'
+        _url, _searched = openable_url(it)
         cards.append(f"""<div class="card"
    data-station="{html.escape(it['station'])}" data-type="{it.get('type','')}"
    data-parking="{'1' if it.get('parking') in ('有','近隣') else '0'}"
@@ -309,7 +335,7 @@ def build(items, out_path, station_order=None, reject_tally=None):
    data-cut="{'1' if (it.get('_cuts') or 0) >= 1 else '0'}"
    data-rooms="{'1' if _rooms(it) >= 2 else '0'}"
    data-stale="{'1' if (it.get('_days') or 0) >= 90 else '0'}">
- <a class="lnk" href="{html.escape(it['url'])}" target="_blank" rel="noopener">
+ <a class="lnk" href="{html.escape(_url)}" target="_blank" rel="noopener">
   <div class="thumb">{thumb}</div>
   <div class="body">
     <div class="tag">{TYPE_ICON.get(it.get('type'),'')} {TYPE_LABEL.get(it.get('type'),'')}
@@ -322,6 +348,7 @@ def build(items, out_path, station_order=None, reject_tally=None):
     {f'<div class="meta">{sr}</div>' if sr else ''}
     <div class="meta pk">{fmt_parking(it)}</div>
     <div class="meta addr">{html.escape(it.get('addr') or '住所記載なし')}</div>
+    {'<div class="meta dup">※掲載元(' + html.escape(it.get('source','')) + ')が開けないため検索リンク</div>' if _searched else ''}
     {f'<div class="meta down">{pnote}</div>' if pnote else ''}
     {f'<div class="meta hist">{hnote}</div>' if hnote else ''}
     {f'<div class="meta dup">{note}</div>' if note else ''}
