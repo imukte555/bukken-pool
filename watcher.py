@@ -2528,7 +2528,7 @@ _PAGE_COUNT = 0
 # 一覧集めに使ってよい割合。残りは詳細ページ（駐車場・築年・全駅の徒歩・
 # 写真）の取得に取っておく。ここを分けないと、締切ぎりぎりまで一覧を
 # 集めたあと詳細が1件も取れず、駐車場が全件「未確認」になる（実測）
-COLLECT_BUDGET_RATIO = float(os.environ.get("COLLECT_BUDGET_RATIO") or 0.6)
+COLLECT_BUDGET_RATIO = float(os.environ.get("COLLECT_BUDGET_RATIO") or 0.5)
 _IN_DETAIL_PHASE = [False]
 
 

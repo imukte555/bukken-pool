@@ -1,6 +1,7 @@
 """プール全件を1枚のHTMLにする（毎朝の通知とは別。今ある在庫を全部見るため）"""
 import html
 import json
+import os as _os
 import re as _re
 from datetime import datetime, timezone, timedelta
 
@@ -143,7 +144,13 @@ def pick_rep(group):
 # 実測(2026-09-16): house.goo.ne.jp と www.chintai.net が403を返す。
 # 検索リンクで代用したが「googleじゃ意味ねえだろ」と却下されたので、
 # 物件ページに繋げないものは載せない方針にした。
-UNOPENABLE_HOSTS = ("house.goo.ne.jp", "www.chintai.net")
+# 環境変数 UNOPENABLE_HOSTS で指定したホストの掲載はページに出さない。
+# 2026-09-16に goo/CHINTAI が403を返した時だけ一時的に使った。
+# 復旧を実測(2026-09-17: 一覧・詳細とも200)したので既定は空にする。
+# 恒久的に塞がったサイトが出たら、そのホストをここに足す。
+UNOPENABLE_HOSTS = tuple(
+    h.strip() for h in (_os.environ.get("UNOPENABLE_HOSTS") or "").split(",")
+    if h.strip())
 
 
 def is_openable(it):
