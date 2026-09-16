@@ -289,7 +289,7 @@ def card_image(node):
             #   /cms_image/myhome/random-banner/...
             if re.search(r"(spacer|blank|noimage|no_image|nophoto|no_photo"
                          r"|logo|icon|dummy|appli|bnr|banner|badge|btn_"
-                         r"|osusume|cms_image|random-banner|campaign|topcamp"
+                         r"|osusume|cms_image|random-banner|campaign|topcamp|clear\\.gif|/clear"
                          r"|jibun|onayami|/assets/img/|/assets/pc/"
                          r"|/img/common/|/img/appli/|move_\d+_\d+)",
                          _path, re.I):
@@ -3898,6 +3898,26 @@ def dedupe_items(items, label=""):
         print(f"同一物件の重複を除外{label}: {len(items)} → {len(uniq)}件")
     return uniq
 
+def _too_small_image(content: bytes) -> bool:
+    """1x1の透過ピクセルなど、見えない画像を弾く。
+    実測: goo住宅は写真が無い物件に house.goo.ne.jp/img/clear.gif
+    （1x1の透明GIF）を返す。Content-Typeは image/gif で200なので
+    「生きている画像」と誤判定し、カードが空白のまま公開されていた。
+    """
+    if not content:
+        return True
+    if len(content) < 1024:
+        return True
+    try:
+        from PIL import Image
+        import io as _io
+        im = Image.open(_io.BytesIO(content))
+        w, h = im.size
+        return w < 40 or h < 40
+    except Exception:
+        return False
+
+
 def image_alive(url: str, timeout: int = 12) -> bool:
     """画像URLが実際に開けるかを確かめる。
     HTMLにURLが入っていても外部から読めないことがある
@@ -3917,7 +3937,10 @@ def image_alive(url: str, timeout: int = 12) -> bool:
                          stream=True)
         ok = (r.status_code == 200
               and "image" in (r.headers.get("Content-Type") or ""))
+        body = r.content if ok else b""
         r.close()
+        if ok and _too_small_image(body):
+            return False
         if ok:
             return True
     except Exception:
@@ -3927,7 +3950,8 @@ def image_alive(url: str, timeout: int = 12) -> bool:
         from curl_cffi import requests as _creq
         r = _creq.get(url, impersonate="chrome", timeout=timeout)
         return (r.status_code == 200
-                and "image" in (r.headers.get("Content-Type") or ""))
+                and "image" in (r.headers.get("Content-Type") or "")
+                and not _too_small_image(r.content))
     except Exception:
         return False
 

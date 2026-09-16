@@ -69,7 +69,7 @@ def main(path):
     # 中の実URLに開いてから出すこと
     bad_pat = re.compile(r"nophoto|noimage|no_image|/appli|bnr|banner|osusume"
                          r"|cms_image|jibun|img01\.suumo\.com/jj/"
-                         r"|img\.house\.goo\.ne\.jp/", re.I)
+                         r"|img\.house\.goo\.ne\.jp/|clear\.gif|/img/clear", re.I)
     banners = [u for u in srcs if bad_pat.search(u.split("?")[0])]
     if banners:
         ng(f"広告・表示できない画像URLが {len(banners)} 件: {banners[0][:80]}")

@@ -22,7 +22,8 @@ document.querySelectorAll('img').forEach(i=>i.loading='eager');
 await new Promise(r=>setTimeout(r,9000));
 const rep=[...document.querySelectorAll('.thumb img')];
 const sub=[...document.querySelectorAll('.sub-th img')];
-const dead=a=>a.filter(i=>!i.complete||i.naturalWidth===0);
+// 1x1の透過ピクセルは naturalWidth が 1 なので 0 判定では拾えない
+const dead=a=>a.filter(i=>!i.complete||i.naturalWidth<40||i.naturalHeight<40);
 const host=u=>{try{return new URL(u).host}catch(e){return '?'}};
 const bh={};
 dead(rep.concat(sub)).forEach(i=>{bh[host(i.src)]=(bh[host(i.src)]||0)+1});
@@ -50,7 +51,8 @@ def http_check():
     print("画像ホスト:", dict(sorted(hosts.items(), key=lambda kv: -kv[1])))
     # 中継ホストが残っていたらブラウザで表示できない
     bad = [u for u in srcs
-           if re.search(r"img\.house\.goo\.ne\.jp/|img01\.suumo\.com/jj/", u)]
+           if re.search(r"img\.house\.goo\.ne\.jp/|img01\.suumo\.com/jj/"
+                        r"|clear\.gif|/img/clear", u)]
     if bad:
         print(f"NG: ブラウザで表示できない中継URLが {len(bad)}件 残っている")
         return 1
