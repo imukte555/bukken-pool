@@ -2525,8 +2525,18 @@ _HOST_DEAD = set()
 _PAGE_COUNT = 0
 
 
+# 一覧集めに使ってよい割合。残りは詳細ページ（駐車場・築年・全駅の徒歩・
+# 写真）の取得に取っておく。ここを分けないと、締切ぎりぎりまで一覧を
+# 集めたあと詳細が1件も取れず、駐車場が全件「未確認」になる（実測）
+COLLECT_BUDGET_RATIO = float(os.environ.get("COLLECT_BUDGET_RATIO") or 0.6)
+_IN_DETAIL_PHASE = [False]
+
+
 def budget_left():
-    return FETCH_BUDGET_SEC - (time.time() - _RUN_STARTED)
+    used = time.time() - _RUN_STARTED
+    if _IN_DETAIL_PHASE[0]:
+        return FETCH_BUDGET_SEC - used
+    return FETCH_BUDGET_SEC * COLLECT_BUDGET_RATIO - used
 
 # bot検知が厳しいサイトは「同時1本 + 最低間隔」で叩く。
 # 並列化した状態で普通に投げると即ブロックされるため。
@@ -4460,7 +4470,10 @@ def main():
     # プール全件を1枚のHTMLに出す（毎朝の通知とは別。今ある在庫を全部見るため）
     # 通知30件だけだと、在庫を見終わる前に消える物件が出る＝機会損失になる。
     try:
-        print(f"在庫ページ用に全件の詳細を取得中… ({len(items)}件)")
+        _IN_DETAIL_PHASE[0] = True     # ここからは締切いっぱいまで使ってよい
+        _HOST_DEAD.clear()             # 一覧集めで見捨てたホストも詳細では試す
+        print(f"在庫ページ用に全件の詳細を取得中… ({len(items)}件) "
+              f"残り{budget_left() / 60:.0f}分")
         # 取得元が増えて500件超になり、5並列だと詳細取得だけで長時間かかる。
         # ホストごとのゲート(_HOST_GATE)で同時接続は制御されるので、
         # プール全体の並列数は上げてよい。
