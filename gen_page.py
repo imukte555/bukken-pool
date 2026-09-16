@@ -160,7 +160,7 @@ def fmt_parking(it):
     pk = it.get("parking")
     label = {"有": "🚗駐車場あり", "近隣": "🚗駐車場あり(近隣)",
              "空無": "🚗駐車場あり(空きなし)", "無": "駐車場なし",
-             "—": "駐車場なし(土地)"}.get(pk, "駐車場なし")
+             "—": "駐車場なし(土地)"}.get(pk, "駐車場 未確認")
     pp = it.get("parking_price")
     if pp and pk in ("有", "近隣", "空無"):
         label += f" {html.escape(pp)}"

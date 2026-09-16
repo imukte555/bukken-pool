@@ -64,8 +64,12 @@ def main(path):
     elif noimg:
         ok(f"画像なし {noimg} 件（許容 {limit} 件以内）")
     srcs = list(dict.fromkeys(re.findall(r"<img[^>]+src='([^']+)'", h)))
+    # img.house.goo.ne.jp は他社画像の中継で、gooが弾くとブラウザでは
+    # 表示できない（実測: 138枚中92枚がこれで真っ白だった）。
+    # 中の実URLに開いてから出すこと
     bad_pat = re.compile(r"nophoto|noimage|no_image|/appli|bnr|banner|osusume"
-                         r"|cms_image|jibun|img01\.suumo\.com/jj/", re.I)
+                         r"|cms_image|jibun|img01\.suumo\.com/jj/"
+                         r"|img\.house\.goo\.ne\.jp/", re.I)
     banners = [u for u in srcs if bad_pat.search(u.split("?")[0])]
     if banners:
         ng(f"広告・表示できない画像URLが {len(banners)} 件: {banners[0][:80]}")
@@ -142,8 +146,13 @@ def main(path):
 
     # 駐車場は「ある/ない」の2択。「記載なし」が残っていたら取りこぼし
     pk_none = len(re.findall(r'class="meta pk">駐車場記載なし', body))
+    pk_unk = len(re.findall(r'class="meta pk">駐車場 未確認', body))
     if pk_none:
         ng(f"駐車場が「記載なし」のカードが {pk_none} 件（ある/ないで確定させる）")
+    elif pk_unk > max(3, int(len(cards) * 0.25)):
+        ng(f"駐車場が未確認のカードが {pk_unk} 件（詳細ページを読めていない）")
+    elif pk_unk:
+        ok(f"駐車場が未確認 {pk_unk} 件（詳細ページを読めなかったぶん）")
     else:
         ari = len(re.findall(r'data-parking="1"', body))
         ok(f"駐車場: 記載なし0件 / あり{ari}件")

@@ -242,6 +242,14 @@ def unwrap_image_url(u: str) -> str:
     # もう一度エスケープされて &amp;amp; になり、ブラウザからは
     # 壊れたURLになる（実測: スモッカの image.smocca.jp/filter/?...）
     u = _html.unescape(_html.unescape(u))
+    # goo住宅は img.house.goo.ne.jp/<種別>/<n>/<二重エンコードした実URL>
+    # という形で他社の画像を中継する。gooが落ちる/弾くと全部表示できなく
+    # なるので、中の実URLに開く（実測: 公開ページの画像122件がこれだった）
+    mg = re.match(r"https?://img\.house\.goo\.ne\.jp/[a-z]+/\d+/(.+)$", u)
+    if mg:
+        inner = unquote(unquote(mg.group(1)))
+        if inner.startswith("http"):
+            u = inner
     m = re.search(r"[?&]src=([^&]+)", u)
     if m and "suumo" in u:
         raw = unquote(m.group(1))
@@ -2269,7 +2277,9 @@ def enrich_from_detail(item):
                                       "カウカモ", "HOMES賃貸")
     html = fetch_with_retry(item["url"], impersonate=use_cffi)
     if not html:
+        item["_detail_ok"] = False      # 読めなかったことを残す
         return
+    item["_detail_ok"] = True
     soup = BeautifulSoup(html, "html.parser")
 
     if item.get("parking") is None:
@@ -2293,10 +2303,10 @@ def enrich_from_detail(item):
                     pk, raw = pk2, raw2
                     break
         if pk is None:
-            # 駐車場は「ある」か「ない」の2択で、「取得できず」という
-            # 状態は無い。詳細ページに記載が無ければ「なし」と言い切る。
-            # 土地だけは駐車場という概念が無いので分けて表示する
-            pk = "—" if item.get("type") == "land" else "無"
+            # 詳細ページを実際に読めたなら、記載が無い＝「なし」と言い切る。
+            # 読めなかった場合に「なし」と書くのは嘘なので未確認のままにする
+            if item.get("_detail_ok"):
+                pk = "—" if item.get("type") == "land" else "無"
         item["parking"] = pk
         item["parking_price"] = parking_price(raw)
 
@@ -4399,9 +4409,15 @@ def main():
         items = dedupe_items(items, "(詳細取得後)")
         # 詳細ページが取れなかった物件も「駐車場なし」で確定させる。
         # 「記載なし」のまま出すと、あるのか無いのか分からない札になる
+        _unk = 0
         for _it in items:
             if _it.get("parking") is None:
-                _it["parking"] = "—" if _it.get("type") == "land" else "無"
+                if _it.get("_detail_ok"):
+                    _it["parking"] = "—" if _it.get("type") == "land" else "無"
+                else:
+                    _unk += 1
+        if _unk:
+            print(f"駐車場が未確認のまま: {_unk}件（詳細ページを読めなかった）")
         # 「写真がない」「写真が真っ白」を無くす。URLがあるだけでは
         # 表示できているとは限らないので実際に開いて確かめる
         verify_images(items)
