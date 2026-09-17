@@ -2272,43 +2272,6 @@ def parse_all_walks(text: str):
     return sorted(best.items(), key=lambda kv: kv[1])
 
 
-# goo住宅は他社の掲載を中継しているだけで、goo自身のURLは
-# こちらのネットワークから403で開けない（実測2026-09-16）。
-# 詳細ページには元サイトの物件ページへのリンクが載っているので、
-# それを拾ってカードのリンク先にする。
-_ORIGIN_HOSTS = ("suumo.jp", "www.homes.co.jp", "www.athome.co.jp",
-                 "www.chintai.net", "sumaity.com", "smocca.jp",
-                 "www.housecom.jp", "www.rehouse.co.jp", "www.livable.co.jp",
-                 "www.nomu.com")
-
-
-def resolve_origin_url(item):
-    """goo住宅の掲載を、元サイトの物件ページURLに置き換える。
-    取れなければ元のURLのまま返す。
-    """
-    u = item.get("url") or ""
-    if "house.goo.ne.jp" not in u:
-        return u
-    html = fetch(u, impersonate=True)
-    if not html:
-        return u
-    # 1) 本文中の元サイトへのリンク
-    for m in re.finditer(r'href="(https?://[^"]+)"', html):
-        cand = m.group(1)
-        host = re.sub(r"https?://([^/]+).*", r"\1", cand)
-        if host in _ORIGIN_HOSTS and re.search(
-                r"/(detail|bkdetail|bukken|nc_|jnc_|prop_|room_|b-|id/)", cand):
-            return cand
-    # 2) 画像URLに元サイトの物件コードが入っている
-    #    例 img01.suumo.com/front/gazo/fr/bukken/850/100514804850/...
-    m = re.search(r"suumo\.[a-z.]+/front/gazo/fr/bukken/\d+/(\d{10,})/", html)
-    if m:
-        return f"https://suumo.jp/chintai/bc_{m.group(1)}/"
-    m = re.search(r"suumo\.jp/front/gazo/bukken/\d+/[A-Z0-9]+/img/\d+/(\d{6,})/", html)
-    if m:
-        return f"https://suumo.jp/ms/chuko/tokyo/nc_{m.group(1)}/"
-    return u
-
 def enrich_from_detail(item):
     """詳細ページを1回だけ取得し、駐車場と『全駅からの徒歩』を埋める"""
     use_cffi = item.get("source") in ("HOMES", "アットホーム",
@@ -4486,16 +4449,6 @@ def main():
         # 詳細取得で住所・間取りが埋まったので、もう一度重複を落とす。
         # 一覧の時点では住所が空のポータルがあり、1回目では突き合わせ
         # られなかったぶんがここで消える。
-        # goo住宅の掲載は元サイトのURLに置き換える（gooは開けないため）
-        _goo = [i for i in items if "house.goo.ne.jp" in (i.get("url") or "")]
-        if _goo:
-            with ThreadPoolExecutor(max_workers=RESCUE_WORKERS) as ex:
-                for it_, newu in zip(_goo, ex.map(resolve_origin_url, _goo)):
-                    if newu and "house.goo.ne.jp" not in newu:
-                        it_["url"] = newu
-                        it_["source"] = "goo住宅(元サイト)"
-            _left = sum(1 for i in _goo if "house.goo.ne.jp" in i.get("url", ""))
-            print(f"goo掲載を元サイトのURLに置換: {len(_goo) - _left}/{len(_goo)}件")
         items = dedupe_items(items, "(詳細取得後)")
         # リンクを開けないサイトの掲載は出さない。
         # 実測: goo住宅はブラウザでも403を返す状態で、代表カード139件中
