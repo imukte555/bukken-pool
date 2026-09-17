@@ -3,6 +3,9 @@
     "suumo:m:21369582",
     "suumo:m:21709869",
     "suumo:m:20837457",
+    "suumo:m:21643103",
+    "suumo:m:21695796",
+    "suumo:l:21483914",
     "suumo:h:21425622",
     "suumo:l:21017451",
     "suumo:l:21021265",
@@ -13,18 +16,9 @@
     "suumo:l:21694499",
     "suumo:h:21064438",
     "suumo:h:21342505",
-    "suumo:m:21643103",
-    "suumo:m:21695796",
-    "suumo:l:21483914",
-    "suumo:m:20326787",
-    "suumo:m:21229075",
-    "suumo:m:20858542",
-    "suumo:h:21434232",
-    "suumo:l:21640200",
-    "suumo:l:21525571",
     "suumo:m:20918523",
-    "suumo:l:79178891",
     "suumo:l:79109850",
+    "suumo:l:79178891",
     "suumo:l:20863072",
     "goo:r:41424700060093",
     "goo:r:41337780127065",
@@ -33,6 +27,12 @@
     "goo:r:1030H100526174126",
     "sumaity:r:410398864",
     "sumaity:r:405190382",
+    "goo:m:1030Z21643103",
+    "goo:l:1030Z21483914",
+    "goo:r:41493000043872",
+    "goo:r:41413710086287",
+    "smocca:r:z_2_dca33bd60f58f2a87d634efca095ea00",
+    "sumaity:r:411788730",
     "goo:h:1030Z78899384",
     "goo:h:1030Z21425622",
     "goo:h:1030Z21697621",
@@ -40,25 +40,15 @@
     "goo:l:1030Z21694499",
     "goo:l:1030Z21578921",
     "goo:l:1030Z78229550",
-    "goo:l:1030Z21529082",
     "goo:l:1030Z21021265",
     "goo:l:1030Z21603398",
-    "goo:l:1030Z21046673",
     "goo:r:41157100165993",
     "goo:r:1030H100527026157",
     "goo:r:41517680011124",
     "goo:r:1030H100526385774",
     "goo:r:1030H100525038993",
-    "smocca:r:z_2_cea5c0ae3d6ff823ce23c193c2ff8efe",
+    "smocca:r:z_2_b9a2d4c4d6fc63a8aad2cbcd159d6f7b",
     "sumaity:r:406765372",
-    "rehouse:h:FSDAUA07",
-    "goo:m:1030Z21643103",
-    "goo:l:1030Z21483914",
-    "goo:r:41493000043872",
-    "goo:r:41413710086287",
-    "sumaity:r:411788730",
-    "goo:r:320260825028839",
-    "goo:r:41559940011739",
     "goo:r:41325080153493",
     "goo:r:41537890048983",
     "goo:r:41574450010245",
@@ -66,11 +56,14 @@
     "chintai:r:bk-C010099991111590073711610001",
     "livable:m:C48262241"
   ],
-  "last_run": 1789564294,
+  "last_run": 1789604871,
   "prices": {
     "suumo:m:21369582": 11980,
     "suumo:m:21709869": 11500,
     "suumo:m:20837457": 11880,
+    "suumo:m:21643103": 8980,
+    "suumo:m:21695796": 10990,
+    "suumo:l:21483914": 9580,
     "suumo:h:21425622": 8780,
     "suumo:l:21017451": 4980,
     "suumo:l:21021265": 4980,
@@ -81,18 +74,9 @@
     "suumo:l:21694499": 8800,
     "suumo:h:21064438": 9980,
     "suumo:h:21342505": 10880,
-    "suumo:m:21643103": 8980,
-    "suumo:m:21695796": 10990,
-    "suumo:l:21483914": 9580,
-    "suumo:m:20326787": 9980,
-    "suumo:m:21229075": 11850,
-    "suumo:m:20858542": 11500,
-    "suumo:h:21434232": 5880,
-    "suumo:l:21640200": 8900,
-    "suumo:l:21525571": 10750,
     "suumo:m:20918523": 11980,
-    "suumo:l:79178891": 11000,
     "suumo:l:79109850": 11000,
+    "suumo:l:79178891": 11000,
     "suumo:l:20863072": 11000,
     "goo:r:41424700060093": 26.6,
     "goo:r:41337780127065": 25.8,
@@ -101,6 +85,12 @@
     "goo:r:1030H100526174126": 26.0,
     "sumaity:r:410398864": 25.1,
     "sumaity:r:405190382": 26.6,
+    "goo:m:1030Z21643103": 8980,
+    "goo:l:1030Z21483914": 9580,
+    "goo:r:41493000043872": 26.9,
+    "goo:r:41413710086287": 18.9,
+    "smocca:r:z_2_dca33bd60f58f2a87d634efca095ea00": 25.9,
+    "sumaity:r:411788730": 22.0,
     "goo:h:1030Z78899384": 6980,
     "goo:h:1030Z21425622": 8780,
     "goo:h:1030Z21697621": 10990,
@@ -108,25 +98,15 @@
     "goo:l:1030Z21694499": 8800,
     "goo:l:1030Z21578921": 6480,
     "goo:l:1030Z78229550": 6480,
-    "goo:l:1030Z21529082": 4980,
     "goo:l:1030Z21021265": 4980,
     "goo:l:1030Z21603398": 6480,
-    "goo:l:1030Z21046673": 4980,
     "goo:r:41157100165993": 21.3,
     "goo:r:1030H100527026157": 21.3,
     "goo:r:41517680011124": 24.2,
     "goo:r:1030H100526385774": 25.0,
     "goo:r:1030H100525038993": 22.6,
-    "smocca:r:z_2_cea5c0ae3d6ff823ce23c193c2ff8efe": 27.0,
+    "smocca:r:z_2_b9a2d4c4d6fc63a8aad2cbcd159d6f7b": 27.8,
     "sumaity:r:406765372": 26.5,
-    "rehouse:h:FSDAUA07": 6980,
-    "goo:m:1030Z21643103": 8980,
-    "goo:l:1030Z21483914": 9580,
-    "goo:r:41493000043872": 26.9,
-    "goo:r:41413710086287": 18.9,
-    "sumaity:r:411788730": 22.0,
-    "goo:r:320260825028839": 25.0,
-    "goo:r:41559940011739": 27.8,
     "goo:r:41325080153493": 27.9,
     "goo:r:41537890048983": 26.0,
     "goo:r:41574450010245": 28.0,
@@ -143,15 +123,6 @@
       "url": "https://house.goo.ne.jp/buy/um/detail/1/13113/030Z20960492/145835007/x1030Z20960492.html",
       "area": 57.5,
       "first": 12080
-    },
-    "goo:h:1030Z21670808": {
-      "price": 13980,
-      "name": "東京都目黒区目黒本町５ 1億3,980万円 2SLDK",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21670808/042873000/x1030Z21670808.html",
-      "area": 107.4,
-      "first": 13980
     },
     "goo:h:1030Z21657708": {
       "price": 14000,
@@ -171,14 +142,14 @@
       "area": 104.87,
       "first": 13500
     },
-    "goo:h:1030Z21713218": {
-      "price": 13480,
-      "name": "東京都目黒区原町１ 1億3,480万円 3SLDK",
+    "goo:h:1030Z21670808": {
+      "price": 13980,
+      "name": "東京都目黒区目黒本町５ 1億3,980万円 2SLDK",
       "station": "武蔵小山",
       "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21713218/110225001/x1030Z21713218.html",
-      "area": 98.52,
-      "first": 13480
+      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21670808/042873000/x1030Z21670808.html",
+      "area": 107.4,
+      "first": 13980
     },
     "goo:h:1030Z21458697": {
       "price": 13480,
@@ -186,6 +157,15 @@
       "station": "武蔵小山",
       "type": "house",
       "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21458697/121135004/x1030Z21458697.html",
+      "area": 98.52,
+      "first": 13480
+    },
+    "goo:h:1030Z21713218": {
+      "price": 13480,
+      "name": "東京都目黒区原町１ 1億3,480万円 3SLDK",
+      "station": "武蔵小山",
+      "type": "house",
+      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21713218/110225001/x1030Z21713218.html",
       "area": 98.52,
       "first": 13480
     },
@@ -198,14 +178,14 @@
       "area": 88.0,
       "first": 13280
     },
-    "goo:l:1030Z21618572": {
-      "price": 13480,
-      "name": "東京都目黒区目黒本町５ 土地",
+    "goo:l:1030Z21415979": {
+      "price": 12980,
+      "name": "東京都品川区西五反田４ 土地",
       "station": "武蔵小山",
       "type": "land",
-      "url": "https://house.goo.ne.jp/buy/la/detail/1/13110/030Z21618572/153780008/x1030Z21618572.html",
-      "area": 71.23,
-      "first": 13480
+      "url": "https://house.goo.ne.jp/buy/la/detail/1/13109/030Z21415979/132354001/x1030Z21415979.html",
+      "area": 88.28,
+      "first": 12980
     },
     "goo:l:1030Z21134610": {
       "price": 12900,
@@ -224,6 +204,15 @@
       "url": "https://house.goo.ne.jp/buy/la/detail/1/13110/030Z21560224/083983030/x1030Z21560224.html",
       "area": 84.97,
       "first": 13880
+    },
+    "goo:l:1030Z21618572": {
+      "price": 13480,
+      "name": "東京都目黒区目黒本町５ 土地",
+      "station": "武蔵小山",
+      "type": "land",
+      "url": "https://house.goo.ne.jp/buy/la/detail/1/13110/030Z21618572/153780008/x1030Z21618572.html",
+      "area": 71.23,
+      "first": 13480
     },
     "goo:l:1030Z20425512": {
       "price": 13980,
@@ -252,14 +241,14 @@
       "area": 88.28,
       "first": 12980
     },
-    "goo:l:1030Z21415979": {
-      "price": 12980,
-      "name": "東京都品川区西五反田４ 土地",
+    "goo:l:41576240000055": {
+      "price": 13880,
+      "name": "東京都目黒区目黒本町４丁目 土地",
       "station": "武蔵小山",
       "type": "land",
-      "url": "https://house.goo.ne.jp/buy/la/detail/1/13109/030Z21415979/132354001/x1030Z21415979.html",
-      "area": 88.28,
-      "first": 12980
+      "url": "https://house.goo.ne.jp/buy/la/detail/4/13110/1576240000055/157624/x41576240000055.html",
+      "area": 84.97,
+      "first": 13880
     },
     "goo:m:1030Z20772367": {
       "price": 12500,
@@ -269,6 +258,15 @@
       "url": "https://house.goo.ne.jp/buy/um/detail/1/13110/030Z20772367/000232657/x1030Z20772367.html",
       "area": 63.97,
       "first": 12500
+    },
+    "goo:h:1030Z21258994": {
+      "price": 13980,
+      "name": "東京都目黒区目黒４ 1億3,980万円 2SLDK",
+      "station": "目黒",
+      "type": "house",
+      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13110/030Z21258994/100451081/x1030Z21258994.html",
+      "area": 118.72,
+      "first": 13980
     },
     "goo:h:1030Z20607536": {
       "price": 13980,
@@ -285,15 +283,6 @@
       "station": "目黒",
       "type": "house",
       "url": "https://house.goo.ne.jp/buy/bh/detail/1/13110/030Z21699720/170634001/x1030Z21699720.html",
-      "area": 118.72,
-      "first": 13980
-    },
-    "goo:h:1030Z21258994": {
-      "price": 13980,
-      "name": "東京都目黒区目黒４ 1億3,980万円 2SLDK",
-      "station": "目黒",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13110/030Z21258994/100451081/x1030Z21258994.html",
       "area": 118.72,
       "first": 13980
     },
@@ -323,6 +312,15 @@
       "url": "https://house.goo.ne.jp/buy/bh/detail/4/13110/35007020000233/3500702/x435007020000233.html",
       "area": 118.72,
       "first": 13980
+    },
+    "nomu:m:RB470517": {
+      "price": 13498,
+      "name": "オーベル目黒",
+      "station": "目黒",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/RB470517/",
+      "area": 56.44,
+      "first": 13498
     },
     "suumo:r:jnc_000107645228": {
       "price": 29.3,
@@ -365,7 +363,7 @@
       "name": "ＳＯＬＡＳＩＡｒｅｓｉｄｅｎｃｅ大井町",
       "station": "大井町",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000105344272/?bc=100493187552",
+      "url": "https://suumo.jp/chintai/jnc_000105344272/?bc=100497417033",
       "area": 52.9,
       "first": 29.6
     },
@@ -414,42 +412,6 @@
       "area": 51.14,
       "first": 29.3
     },
-    "goo:m:1030Z21447388": {
-      "price": 12480,
-      "name": "ジェイパーク目黒Ⅳ【毎週土日オープンルーム開催中！】",
-      "station": "不動前",
-      "type": "mansion",
-      "url": "https://house.goo.ne.jp/buy/um/detail/1/13110/030Z21447388/182769001/x1030Z21447388.html",
-      "area": 60.83,
-      "first": 12480
-    },
-    "sumaity:m:20702513": {
-      "price": 12700,
-      "name": "パークホームズ武蔵小山",
-      "station": "武蔵小山",
-      "type": "mansion",
-      "url": "https://sumaity.com/mansion/used/tokyo_prop/prop_20702513/",
-      "area": 53.08,
-      "first": 12700
-    },
-    "sumaity:m:20760841": {
-      "price": 12480,
-      "name": "アトラス目黒本町",
-      "station": "武蔵小山",
-      "type": "mansion",
-      "url": "https://sumaity.com/mansion/used/tokyo_prop/prop_20760841/",
-      "area": 57.01,
-      "first": 12480
-    },
-    "goo:l:1030Z21634761": {
-      "price": 13000,
-      "name": "東京都目黒区下目黒４ 土地",
-      "station": "不動前",
-      "type": "land",
-      "url": "https://house.goo.ne.jp/buy/la/detail/1/13110/030Z21634761/006050446/x1030Z21634761.html",
-      "area": 249.17,
-      "first": 13000
-    },
     "nomu:m:R8670761": {
       "price": 12380,
       "name": "ザ・パークワンズ目黒不動前",
@@ -458,15 +420,6 @@
       "url": "https://www.nomu.com/mansion/id/R8670761/",
       "area": 54.8,
       "first": 12380
-    },
-    "nomu:m:RB470517": {
-      "price": 13498,
-      "name": "オーベル目黒",
-      "station": "目黒",
-      "type": "mansion",
-      "url": "https://www.nomu.com/mansion/id/RB470517/",
-      "area": 56.44,
-      "first": 13498
     },
     "livable:m:C48267270": {
       "price": 13740,
@@ -7653,8 +7606,14 @@
       "first_price": 25.6,
       "cuts": [],
       "last_price": 25.6
+    },
+    "smocca:r:z_2_b9a2d4c4d6fc63a8aad2cbcd159d6f7b": {
+      "first": "2026-09-17",
+      "first_price": 27.8,
+      "cuts": [],
+      "last_price": 27.8
     }
   },
-  "notified_on": "2026-09-16",
-  "page_count": 31
+  "notified_on": "2026-09-17",
+  "page_count": 43
 }
