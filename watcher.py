@@ -2447,6 +2447,13 @@ def enrich_from_detail(item):
             d = dict(walks)
             # 対象駅が交通欄に無ければ徒歩圏ではない。一覧の値は捨てる
             item["walk"] = d.get(st)
+        elif transit and re.search(r"バス\s*\d+\s*分", transit):
+            # 交通欄は読めたのに徒歩が1件も無い＝バスでしか行けない。
+            # 実測: 蒲田駅 バス12分/「西六郷一丁目」バス停 停歩3分 の土地が
+            # walks=None のまま素通りしてJR蒲田に載っていた
+            item["walks"] = []
+            item["walk"] = None
+            item["_bus_only"] = True
 
 
 # === コレクター ===
@@ -3491,6 +3498,30 @@ def apply_rent_filters(item):
     return True
 
 
+def layout_is_2ldk_or_more(layout: str) -> bool:
+    """売買の間取りが「2LDK相当以上」かを判定する。
+    以前は「1で始まる間取り」だけを弾いていたので、2DK・1SLDK・1LDK+S が
+    通っていた（実測: 戸建7件中6件がこれで載っていた）。
+    ・居室数2以上 かつ LDK（またはDK+S等でLDK相当）を満たすものを通す
+    ・1SLDK / 1LDK+S は居室2だがLDKが1つ分なので2LDK相当とみなす
+    ・2DK は LDK が無いので対象外
+    ・土地・賃貸はこの関数を使わない
+    """
+    if not layout:
+        return False
+    t = re.sub(r"[\s　]", "", layout.upper()).replace("＋", "+")
+    t = t.replace("+S", "S").replace("+", "")
+    m = re.match(r"^(\d+)([A-Z]*)$", t)
+    if not m:
+        return False
+    rooms, kind = int(m.group(1)), m.group(2)
+    if "LDK" not in kind:
+        return False                      # 2DK・3DK などは対象外
+    # 1SLDK は納戸ぶんを1部屋と数えて2LDK相当
+    if rooms == 1:
+        return "S" in kind
+    return rooms >= 2
+
 def passes_except_walk(item):
     """walk以外の条件判定。walk=Noneの物件を詳細fetchすべきか決めるために使う。
     賃貸の price は月額なので、売買の価格レンジ(3000〜12000万)で判定すると
@@ -3516,8 +3547,7 @@ def passes_except_walk(item):
     if area is None or area < AREA_MIN:
         return False
     if item.get("type") in ("mansion", "house"):
-        layout = item.get("layout", "")
-        if re.match(r"^1[LDKR]+$", layout):
+        if not layout_is_2ldk_or_more(item.get("layout", "")):
             return False
     return True
 
@@ -3620,10 +3650,10 @@ def apply_filters(item):
         note_reject(f"面積が{AREA_MIN}㎡未満"); return False
 
     if kind in ("mansion", "house"):
-        layout = item.get("layout", "")
-        # 1LDK/1DK/1Kは除外。1SLDKや+S付きはOK
-        if re.match(r"^1[LDKR]+$", layout):
-            note_reject("間取りが1LDK/1DK/1K"); return False
+        # 売買は2LDK相当以上。2DK・3DK・1LDK は対象外
+        # （1SLDK / 1LDK+S は納戸ぶんを1部屋と数えて2LDK相当として通す）
+        if not layout_is_2ldk_or_more(item.get("layout", "")):
+            note_reject("間取りが2LDK相当未満(売買)"); return False
     # 戸建・マンションは築20年未満のみ。
     # 築年が取れない物件は「築20年以下」を検証できないので通さない。
     # （通すと築50年の物件が「築年記載なし」として紛れ込む。実際に発生した）
@@ -3905,6 +3935,8 @@ def revalidate_walk(item):
     （例: 日本橋の検索結果に、最寄りが水天宮前/茅場町の物件が混ざる）。
     True=残す / False=除外。
     """
+    if item.get("_bus_only"):
+        return False                     # 交通欄に徒歩が無くバスのみ
     walks = item.get("walks")
     if not walks:
         return True                      # 検証材料が無い場合は一覧の値を信じる
