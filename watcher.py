@@ -2462,7 +2462,10 @@ BLOCK_COOLDOWN = 300  # 秒
 # 「1サイトが死んでも必ず公開まで届く」ことを最優先にする。
 # 取得元が18系統に増え、取得だけで140分に届くようになった。
 # 詳細取得とページ生成に十分な時間を残すため110分に縮める。
-FETCH_BUDGET_SEC = int(os.environ.get("FETCH_BUDGET_SEC") or 6600)   # 110分
+FETCH_BUDGET_SEC = int(os.environ.get("FETCH_BUDGET_SEC") or 15000)
+# 取得の締切(秒)。ジョブ枠は340分あるのに110分しか使っておらず、
+# さらに一覧フェーズはその半分だったため取得量が落ちていた。
+# 250分にして一覧125分・詳細125分を確保する(2026-09-19)
 _RUN_STARTED = time.time()
 
 # 同一ホストで通算これだけ弾かれたら、その実行ではもう叩かない。
@@ -2977,7 +2980,7 @@ def collect_station(station, codes):
             # 実測: 15/18/21/24ページ目でも 160/81/104/70件と出続ける
             # 90ページ×13駅×種別で叩きすぎてgooにIPを弾かれた（403）。
             # 1駅あたりの取得量を戻す（2026-09-16）
-            for pn in range(1, 26):
+            for pn in range(1, 61):
                 # ページ送りは ?p=N（?page=は無視される。実測で確認）
                 url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
                        f"{_gl[1:]}/{_gc}.html"
@@ -3487,9 +3490,25 @@ def apply_rent_filters(item):
 
 
 def passes_except_walk(item):
-    """walk以外の条件判定。walk=Noneの物件を詳細fetchすべきか決めるために使う"""
+    """walk以外の条件判定。walk=Noneの物件を詳細fetchすべきか決めるために使う。
+    賃貸の price は月額なので、売買の価格レンジ(3000〜12000万)で判定すると
+    必ず False になり、徒歩が一覧に無いだけの賃貸が1件も救済されず
+    捨てられていた（実測: 「徒歩が不明」1,631件）。種別ごとに見る。
+    """
     price = item.get("price")
-    if price is None or price < PRICE_MIN or price > PRICE_MAX:
+    if price is None:
+        return False
+    if item.get("type") == "rent":
+        if not (RENT_MIN <= price <= RENT_MAX):
+            return False
+        area = item.get("area")
+        if area is None or area < RENT_AREA_MIN:
+            return False
+        lay = re.sub(r"[\s　]", "", (item.get("layout") or "").upper())
+        if re.fullmatch(r"1(K|R|DK)", lay) or "ワンルーム" in lay:
+            return False
+        return True
+    if price < PRICE_MIN or price > PRICE_MAX:
         return False
     area = item.get("area")
     if area is None or area < AREA_MIN:
