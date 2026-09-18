@@ -54,7 +54,9 @@ SLEEP_BETWEEN = 3.0  # bot検知対策で長め
 WORKERS = 5          # 駅の並列数。上げすぎるとbot検知されるので控えめ
 # 詳細ページの並列数。ホストごとのゲートで同時接続は別途絞られるので、
 # プール全体としてはもう少し並べてよい（500件超を5並列だと長すぎる）
-DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS") or 10)
+DETAIL_WORKERS = int(os.environ.get("DETAIL_WORKERS") or 5)
+# 詳細取得の並列数。10だとレート制限で中身が欠けたページが返り、
+# 交通欄が取れずに条件を満たす物件まで落ちていた(2026-09-19実測)
 # 一覧に無い徒歩・築年・住所を詳細から補うときの並列数。
 # 直列だと1駅80件級のサイトで締切を使い切っていた
 RESCUE_WORKERS = int(os.environ.get("RESCUE_WORKERS") or 8)
@@ -3863,6 +3865,40 @@ def ensure_station_coverage(selected, pool, already):
     return trimmed + added
 
 
+def recheck_missing_walks(items, workers: int = 2, pause: float = 2.0):
+    """対象駅の徒歩が取れなかった物件を、間隔を空けて取り直す。
+    並列で詳細ページを叩くとレート制限で中身が欠けたページが返り、
+    交通欄が空 or 別ブロックだけになって「対象駅が最寄りに無い」と
+    判定され、条件を満たす物件まで落ちていた。
+    実測(2026-09-19): 取れなかった10件を1件ずつ3秒間隔で取り直したら
+    10件とも対象駅の徒歩が取れた。
+    """
+    todo = [it for it in items
+            if it.get("walk") is None
+            and it.get("type") in ("mansion", "house", "land", "rent")]
+    if not todo:
+        return 0
+    print(f"徒歩が取れなかった{len(todo)}件を間隔を空けて取り直します")
+    fixed = 0
+    lock = threading.Lock()
+
+    def one(it):
+        nonlocal fixed
+        time.sleep(pause)
+        it.pop("walks", None)
+        try:
+            enrich_from_detail(it)
+        except Exception:
+            return
+        if it.get("walk") is not None:
+            with lock:
+                fixed += 1
+
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        list(ex.map(one, todo))
+    print(f"  取り直しで徒歩が取れた: {fixed}/{len(todo)}件")
+    return fixed
+
 def revalidate_walk(item):
     """詳細ページから全駅の徒歩(walks)が取れた物件を再判定する。
     一覧の徒歩は当てにならず、対象駅が最寄りに入っていないことすらある
@@ -4461,6 +4497,9 @@ def main():
         # プール全体の並列数は上げてよい。
         with ThreadPoolExecutor(max_workers=DETAIL_WORKERS) as ex:
             list(ex.map(enrich_from_detail, items))
+        # 落とす前にもう一度だけ取り直す。レート制限で欠けたページを
+        # 「対象駅が最寄りに無い」と誤判定して捨てないため
+        recheck_missing_walks(items)
         before = len(items)
         items = [i for i in items if revalidate_walk(i)]
         if len(items) < before:
