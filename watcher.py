@@ -3490,7 +3490,8 @@ def apply_rent_filters(item):
     if not lay:
         note_reject("間取りが不明(賃貸)")
         return False
-    if "ワンルーム" in lay or re.fullmatch(r"1(K|R|DK)(\+?S)?", lay):
+    # 1DK+S は部屋が2つあるので通す（sho判断 2026-09-21）
+    if "ワンルーム" in lay or re.fullmatch(r"1(K|R|DK)", lay):
         note_reject("間取りが1K/1DK/1R(賃貸)")
         return False
     # 駅ごとの許容エリア

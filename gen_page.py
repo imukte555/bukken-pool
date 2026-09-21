@@ -158,6 +158,25 @@ def is_openable(it):
     return bool(u) and not any(h in u for h in UNOPENABLE_HOSTS)
 
 
+# 全角英数の物件名（Ｒｅｓｉｄｅｎｃｅ　Ｃａｒｉｔａｓ など）はスマホで
+# 文字が間延びして2行に割れる。半角に直して読めるようにする。
+_FW2HW = str.maketrans(
+    "０１２３４５６７８９"
+    "ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"
+    "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"
+    "　（）［］／－",
+    "0123456789"
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz"
+    " ()[]/-")
+
+
+def tidy_name(n: str) -> str:
+    if not n:
+        return n
+    t = n.translate(_FW2HW)
+    return _re.sub(r"\s{2,}", " ", t).strip()
+
 def fmt_price(it):
     p = it.get("price")
     if p is None:
@@ -266,7 +285,7 @@ def build(items, out_path, station_order=None, reject_tally=None):
                 f"<span class='sub-m'>{fl}"
                 + (f"・{sr}" if sr else "")
                 + f"・{html.escape(x.get('source',''))}</span>"
-                f"<span class='sub-n'>{html.escape((x.get('name') or '')[:38])}</span>"
+                f"<span class='sub-n'>{html.escape(tidy_name(x.get('name') or '')[:38])}</span>"
                 "</span></a>")
 
     cards = []
@@ -339,7 +358,7 @@ def build(items, out_path, station_order=None, reject_tally=None):
     <div class="tag">{TYPE_ICON.get(it.get('type'),'')} {TYPE_LABEL.get(it.get('type'),'')}
       <span class="stn">{html.escape(it['station'])}</span>
       <span class="src">{html.escape(it.get('source',''))}</span></div>
-    <div class="name">{html.escape((it.get('name') or '')[:44])}</div>
+    <div class="name">{html.escape(tidy_name(it.get('name') or '')[:44])}</div>
     <div class="price">{fmt_price(it)}</div>
     <div class="meta">{"・".join(x for x in (layout, area, floor, age) if x)}{rooms_note}</div>
     <div class="meta">{fmt_walk(it)}</div>
@@ -444,16 +463,31 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 @media(max-width:640px){{
   header{{padding:11px 12px 8px;padding-left:max(12px,env(safe-area-inset-left));
     padding-right:max(12px,env(safe-area-inset-right))}}
-  h1{{font-size:15px}}
+  h1{{font-size:16px}}
+  .count{{font-size:11.5px;line-height:1.5}}
   .filters{{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
     scrollbar-width:none;margin-top:8px;padding-bottom:2px}}
   .filters::-webkit-scrollbar{{display:none}}
-  .chip{{flex:none;padding:6px 12px;font-size:13px}}
-  main{{grid-template-columns:1fr;gap:9px;padding:12px;
+  /* 指で押せる大きさにする（44px） */
+  .chip{{flex:none;padding:10px 14px;font-size:13.5px;min-height:40px}}
+  main{{grid-template-columns:1fr;gap:12px;padding:12px;
     padding-bottom:max(12px,env(safe-area-inset-bottom))}}
-  .thumb,.thumb img,.noimg{{width:92px}}
-  .price{{font-size:15px}}
-  .name{{font-size:12.5px}}
+  /* スマホは写真を上に大きく出す。横並びだと写真が92pxで中身が見えない */
+  .lnk{{display:block;gap:0}}
+  .thumb{{width:100%;height:190px}}
+  .thumb img{{width:100%;height:190px;object-fit:cover}}
+  .noimg{{width:100%;height:120px;min-height:120px}}
+  .body{{padding:11px 13px 12px}}
+  .name{{font-size:15px;line-height:1.35;letter-spacing:0;
+    word-break:break-word;overflow-wrap:anywhere}}
+  .price{{font-size:19px;margin-bottom:5px}}
+  .meta{{font-size:12.5px;line-height:1.6}}
+  .tag{{font-size:12px}}
+  .src{{font-size:11px}}
+  .more summary{{padding:12px 13px;font-size:13px}}
+  .sub-row{{padding:10px 13px}}
+  .sub-n{{font-size:12.5px}}
+  .sub-m{{font-size:11.5px}}
 }}
 </style></head><body>
 <header>
