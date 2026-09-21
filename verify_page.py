@@ -103,6 +103,10 @@ def main(path):
         else:
             ok(f"代表カードの間取り図 {plans}/{len(sample)}件 ({rate:.0%})")
 
+    # ページ末尾の「条件で落とした内訳」には条件の説明文が入る。
+    # 物件の値として数えないよう、カード部分だけを見る
+    body = "".join(cards)
+
     # --- リンクが開けるか（掲載終了を出さない） ---
     import subprocess as _sp
     links = list(dict.fromkeys(
@@ -126,10 +130,6 @@ def main(path):
            f"（503/403は {sum(1 for c in codes if c in ('403', '503'))} 件）")
 
     # --- 条件 ---
-    # ページ末尾の「条件で落とした内訳」には「面積が47.01㎡未満」
-    # 「築20年以上」といった条件説明が入る。これを物件の値として
-    # 数えると常に違反扱いになるので、カード部分だけを見る
-    body = "".join(cards)
     areas = [float(x) for x in re.findall(r"([\d.]+)㎡", body)]
     if areas and min(areas) <= W.AREA_MIN - 0.01:
         ng(f"面積の下限違反: 最小 {min(areas)}㎡ (下限 {W.AREA_MIN})")
