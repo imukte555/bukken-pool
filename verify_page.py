@@ -103,6 +103,28 @@ def main(path):
         else:
             ok(f"代表カードの間取り図 {plans}/{len(sample)}件 ({rate:.0%})")
 
+    # --- リンクが開けるか（掲載終了を出さない） ---
+    import subprocess as _sp
+    links = list(dict.fromkeys(
+        H.unescape(u) for u in re.findall(r'<a class="lnk" href="([^"]+)"', body)))
+
+    def _code(u):
+        try:
+            r = _sp.run(["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
+                         "-A", W.UA, "-L", "--max-time", "20", u],
+                        capture_output=True, text=True, timeout=40)
+            return r.stdout.strip()
+        except Exception:
+            return "000"
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        codes = list(ex.map(_code, links))
+    gone = [(u, c) for u, c in zip(links, codes) if c in ("404", "410")]
+    if gone:
+        ng(f"掲載が消えたリンクが {len(gone)} 件: {gone[0][0][:70]}")
+    else:
+        ok(f"リンク {len(links)} 件に404なし"
+           f"（503/403は {sum(1 for c in codes if c in ('403', '503'))} 件）")
+
     # --- 条件 ---
     # ページ末尾の「条件で落とした内訳」には「面積が47.01㎡未満」
     # 「築20年以上」といった条件説明が入る。これを物件の値として

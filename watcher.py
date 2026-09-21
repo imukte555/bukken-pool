@@ -3481,10 +3481,16 @@ def apply_rent_filters(item):
     b = item.get("built")
     if not b or (CURRENT_YEAR - b) >= RENT_MAX_AGE:
         return False
-    # 間取り: 賃貸は1LDK以上（売買は2LDK以上）。sho指示 2026-09-14
-    # 1K/1DK/1R/ワンルームだけを弾く。1DK+S や 1SLDK は部屋が2つなので通す
+    # 間取り: 賃貸は1LDK以上（売買は2LDK相当以上）。sho指示 2026-09-14
+    # 1K/1DK/1R/ワンルームは除外。1DK+S も居間が無いので除外する
+    # （verifierの指摘: 1DK+S が「1DKを含む」まま通っていた）
+    # 間取りが読めないものは条件を検証できないので通さない
     lay = re.sub(r"[\s　]", "", (item.get("layout") or "").upper())
-    if re.fullmatch(r"1(K|R|DK)", lay) or "ワンルーム" in lay:
+    lay = lay.replace("＋", "+")
+    if not lay:
+        note_reject("間取りが不明(賃貸)")
+        return False
+    if "ワンルーム" in lay or re.fullmatch(r"1(K|R|DK)(\+?S)?", lay):
         note_reject("間取りが1K/1DK/1R(賃貸)")
         return False
     # 駅ごとの許容エリア
@@ -3928,6 +3934,49 @@ def recheck_missing_walks(items, workers: int = 2, pause: float = 2.0):
         list(ex.map(one, todo))
     print(f"  取り直しで徒歩が取れた: {fixed}/{len(todo)}件")
     return fixed
+
+def drop_dead_links(items, workers: int = 3, pause: float = 1.0):
+    """掲載が消えた物件（リンクが404/410）をページに出す前に落とす。
+    実測(2026-09-21): 公開94件のうち2件が404で、クリックしても
+    「ページがありません」になっていた。
+    403は www.chintai.net のようにサーバがこちらを弾くだけで掲載は
+    生きている場合があるので落とさない。
+    """
+    if not items:
+        return items
+    lock = threading.Lock()
+    dead = []
+
+    def chk(it):
+        u = it.get("url") or ""
+        if not u.startswith("http"):
+            return
+        time.sleep(pause)
+        code = 0
+        try:
+            r = requests.head(u, headers=HTTP_HEADERS, timeout=15,
+                              allow_redirects=True)
+            code = r.status_code
+            if code in (405, 403, 0) or code >= 500:
+                r = requests.get(u, headers=HTTP_HEADERS, timeout=20,
+                                 stream=True)
+                code = r.status_code
+                r.close()
+        except Exception:
+            return                      # 取得できない＝判断できないので残す
+        if code in (404, 410):
+            with lock:
+                dead.append(it)
+
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        list(ex.map(chk, items))
+    if dead:
+        bad = {id(x) for x in dead}
+        items = [i for i in items if id(i) not in bad]
+        print(f"掲載が消えた物件を除外: {len(dead)}件")
+        for d in dead[:5]:
+            print(f"   404 {(d.get('name') or '')[:22]} {d.get('url','')[:70]}")
+    return items
 
 def revalidate_walk(item):
     """詳細ページから全駅の徒歩(walks)が取れた物件を再判定する。
@@ -4566,6 +4615,8 @@ def main():
         # 「写真がない」「写真が真っ白」を無くす。URLがあるだけでは
         # 表示できているとは限らないので実際に開いて確かめる
         verify_images(items)
+        # クリックして開けない物件は出さない
+        items = drop_dead_links(items)
         # 再判定“後”のリストをプールとして使う。
         # 前に代入すると、徒歩超過で弾いた物件がメールに残ってしまう。
         # 全件を全条件と突き合わせる。違反は載せない（見つけ次第ログに出す）
