@@ -256,6 +256,15 @@ def unwrap_image_url(u: str) -> str:
         inner = unquote(unquote(mg.group(1)))
         if inner.startswith("http"):
             u = inner
+    # 元サイト名をパスに持つ形。エンコードされていないので上の分岐に入らない
+    # 実測: img.house.goo.ne.jp/suumo/gazo/bukken/030/... が2件残って
+    # 公開前チェックで止まった
+    mg2 = re.match(r"https?://img\.house\.goo\.ne\.jp/suumo/(gazo/.+)$", u)
+    if mg2:
+        u = "https://suumo.jp/front/" + mg2.group(1)
+    mg3 = re.match(r"https?://img\.house\.goo\.ne\.jp/homes/(.+)$", u)
+    if mg3:
+        u = "https://image.homes.jp/" + mg3.group(1)
     m = re.search(r"[?&]src=([^&]+)", u)
     if m and "suumo" in u:
         raw = unquote(m.group(1))

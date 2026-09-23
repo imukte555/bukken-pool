@@ -72,7 +72,8 @@ def main(path):
                          r"|img\.house\.goo\.ne\.jp/|clear\.gif|/img/clear", re.I)
     banners = [u for u in srcs if bad_pat.search(u.split("?")[0])]
     if banners:
-        ng(f"広告・表示できない画像URLが {len(banners)} 件: {banners[0][:80]}")
+        ng(f"展開できていない中継URL/広告画像が {len(banners)} 件: "
+           f"{banners[0][:80]}")
     dead = []
     with ThreadPoolExecutor(max_workers=12) as ex:
         for u, alive in zip(srcs, ex.map(W.image_alive, srcs)):
