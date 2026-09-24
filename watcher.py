@@ -208,8 +208,17 @@ _HOST_TIMEOUT = {"www.rehouse.co.jp": 120}
 _NOT_FOUND = "\x00notfound"
 
 
+# サイト別のアクセス数（実際に投げたリクエスト）と成否。毎回の実行で報告する
+_HOST_REQ = Counter()
+_HOST_OK = Counter()
+_REQ_LOCK = threading.Lock()
+
+
 def fetch(url: str, impersonate: bool = False) -> str:
     """通常はrequests。impersonate=True でChrome TLS指紋偽装 (Cloudflare突破)"""
+    _h = _host_of(url)
+    with _REQ_LOCK:
+        _HOST_REQ[_h] += 1
     tmo = TIMEOUT
     for h, t in _HOST_TIMEOUT.items():
         if h in url:
@@ -221,6 +230,8 @@ def fetch(url: str, impersonate: bool = False) -> str:
         else:
             r = requests.get(url, headers=HTTP_HEADERS, timeout=tmo)
         if r.status_code == 200 and r.text:
+            with _REQ_LOCK:
+                _HOST_OK[_h] += 1
             return r.text
         print(f"  HTTP {r.status_code} (len={len(r.text)}): {url}", file=sys.stderr)
         if r.status_code in (404, 410):
@@ -2830,6 +2841,7 @@ def collect_all():
         except Exception as e:
             print(f"local_feed.json の取り込みに失敗: {e}", file=sys.stderr)
 
+    print_site_stats()
     print("\n=== ポータル別取得 ===")
     for k, v in portal_count.most_common():
         print(f"  {k}: {v}")
@@ -2860,8 +2872,8 @@ def collect_station(station, codes):
             # 件数を増やすため深く見る（浅いと候補を取りこぼす）
             # 面積帯2本×価格帯3本=1ページあたり6リクエスト
             # 駅を13に絞ったぶん1駅あたりを深く掘る（2026-09-14）
-            pages = (tuple(range(1, 11)) if station in DEEP_SCAN_STATIONS
-                     else tuple(range(1, 8)))
+            pages = (tuple(range(1, 17)) if station in DEEP_SCAN_STATIONS
+                     else tuple(range(1, 12)))
             items = []
             for pn in pages:
                 # mb で面積下限をサーバー側に渡す（実測: 大井町の中古マンションで
@@ -2978,7 +2990,7 @@ def collect_station(station, codes):
                                       # 土地も見る（sho指示。実測: 目黒40件）
                                       ("la", "land", "land")]:
                 items = []
-                for pn in range(1, 46):
+                for pn in range(1, 71):
                     url = (f"https://house.goo.ne.jp/buy/shuto_{_seg}/ensen/"
                            f"{_bl[1:]}/{_bc}.html"
                            + ("" if pn == 1 else f"?p={pn}"))
@@ -3002,7 +3014,7 @@ def collect_station(station, codes):
             # 実測: 15/18/21/24ページ目でも 160/81/104/70件と出続ける
             # 90ページ×13駅×種別で叩きすぎてgooにIPを弾かれた（403）。
             # 1駅あたりの取得量を戻す（2026-09-16）
-            for pn in range(1, 61):
+            for pn in range(1, 101):
                 # ページ送りは ?p=N（?page=は無視される。実測で確認）
                 url = (f"https://house.goo.ne.jp/rent/shuto_ap/ensen/"
                        f"{_gl[1:]}/{_gc}.html"
@@ -3032,7 +3044,7 @@ def collect_station(station, codes):
             _sp, _sl, _sc = _sm
             items = []
             # 実測: 2ページ目で84件、3ページ以降はほぼ0
-            for pn in range(1, 7):
+            for pn in range(1, 11):
                 # ページ送りは ?page= ではなく /page/N（?page=は無視され
                 # 1ページ目が返る。実測で確認）
                 url = (f"https://smocca.jp/search/{_sp}/line/{_sl}/station/{_sc}"
@@ -3053,7 +3065,7 @@ def collect_station(station, codes):
         # 他条件を満たすものだけ詳細ページから築年を補完する
         if codes.get("cowcamo"):
             items = []
-            for pn in range(1, 6):
+            for pn in range(1, 9):
                 url = (f"https://cowcamo.jp/station/{codes['cowcamo']}"
                        + ("" if pn == 1 else f"?page={pn}"))
                 html = fetch_with_retry(url, impersonate=True)
@@ -3077,7 +3089,7 @@ def collect_station(station, codes):
             # (sort1=1で60件 → 2と8を足すとユニーク366件)
             # 実測: sort1=8 の13/15/17/19ページ目でも 70/34/81/96件と出続ける
             for _sort in ("1", "2", "8"):
-                for pn in range(1, 61):
+                for pn in range(1, 101):
                     url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
                            f"?sort1={_sort}"
                            + ("" if pn == 1 else f"&page={pn}"))
@@ -3097,7 +3109,7 @@ def collect_station(station, codes):
         # 所在階・敷礼・築年月まで載る（実測: 目黒で30件・欠損0）
         if codes.get("livable"):
             items = []
-            for pn in range(1, 9):
+            for pn in range(1, 14):
                 url = (f"https://www.livable.co.jp/chintai/{codes['livable']}/"
                        + ("" if pn == 1 else f"?page={pn}"))
                 html = fetch_with_retry(url)
@@ -3120,7 +3132,7 @@ def collect_station(station, codes):
             # さらに並び替え(sort)で別集合が返る
             # （なし35件 → sort=1で+37 / sort=3で+24 でユニーク101件）
             for _so in ("", "1", "2", "3"):
-                for pn in range(1, 46):
+                for pn in range(1, 71):
                     _q = ([] if not _so else [f"sort={_so}"])
                     if pn != 1:
                         _q.append(f"page={pn}")
@@ -3181,8 +3193,8 @@ def collect_station(station, codes):
             # 実測: 14/16/18/20ページ目でも 45/36/45/53件と別物件が出続ける
             # 実測: 21/24ページ目でも39/37件、27以降は0
             # サブパスを8本に増やしたぶんページ数を抑える
-            pages = (tuple(range(1, 41)) if station in DEEP_SCAN_STATIONS
-                     else tuple(range(1, 31)))
+            pages = (tuple(range(1, 65)) if station in DEEP_SCAN_STATIONS
+                     else tuple(range(1, 49)))
             # 賃貸マンション/アパートに加えて賃貸戸建(list/kodate/)も取る。
             # 戸建は面積が広く45㎡以上の条件に合いやすい（実測: 目黒16件）
             # 種別ごとに別集合が返る。実測(目黒1ページ):
@@ -3219,7 +3231,7 @@ def collect_station(station, codes):
                 # (sort1=1で49件 → 2と8を足すとユニーク131件)
                 # 実測: sort1=8 の6/8ページ目で 41/44件、10ページ以降は0
                 for _sort in ("1", "2", "8"):
-                    for pn in range(1, 37):
+                    for pn in range(1, 55):
                         _q = f"?sort1={_sort}" + ("" if pn == 1 else f"&page={pn}")
                         url = f"https://sumaity.com/{path}{_q}"
                         html = fetch_with_retry(url, impersonate=True)
@@ -3278,7 +3290,7 @@ def collect_station(station, codes):
             # さらに order で別集合が返る（なし40件 → 1〜4で+18/+20/+16/+10、
             # 合わせてユニーク104件）
             for _od in ("", "1", "2", "3", "4"):
-                for pn in range(1, 10):
+                for pn in range(1, 16):
                     url = (f"https://www.nomu.com/{path}?pager_page={pn}"
                            + ("" if not _od else f"&order={_od}"))
                     html = fetch(url)
@@ -3299,7 +3311,7 @@ def collect_station(station, codes):
                             ("house",   f"kounyu/kodate/{codes['livable']}/"),
                             ("land",    f"kounyu/tochi/{codes['livable']}/")]):
             items = []
-            for pn in range(1, 10):
+            for pn in range(1, 16):
                 url = f"https://www.livable.co.jp/{path}?page={pn}"
                 html = fetch(url)
                 page_items = parse_livable(html, station, kind)
@@ -4010,6 +4022,21 @@ def mark_deals(items):
     if n:
         print(f"目玉物件（賃料{DEAL_RENT_MAX}万以下・{DEAL_AREA_MIN}㎡超）: {n}件")
     return n
+
+def print_site_stats(portal_count=None):
+    """サイト別のアクセス数・成功数・取得件数を出す（sho指示 2026-09-25）"""
+    if not _HOST_REQ:
+        return
+    print("\n=== サイト別アクセス数 ===")
+    print(f"  {'サイト':<22}{'訪問':>6}{'成功':>6}{'成功率':>7}")
+    tot_r = tot_o = 0
+    for h, n in _HOST_REQ.most_common():
+        o = _HOST_OK.get(h, 0)
+        tot_r += n
+        tot_o += o
+        print(f"  {h:<22}{n:>6}{o:>6}{(o * 100 // n if n else 0):>6}%")
+    print(f"  {'合計':<22}{tot_r:>6}{tot_o:>6}"
+          f"{(tot_o * 100 // tot_r if tot_r else 0):>6}%")
 
 def revalidate_walk(item):
     """詳細ページから全駅の徒歩(walks)が取れた物件を再判定する。
