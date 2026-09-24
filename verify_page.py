@@ -38,6 +38,19 @@ def main(path):
     if cards:
         cards[-1] = re.split(r'<div class="empty"|</main>', cards[-1])[0]
 
+    # --- gitのコンフリクトマーカー（実測2026-09-25: rebaseの解決漏れで
+    # 243箇所が公開され、shownが92と93の二重表示になっていた） ---
+    conflicts = len(re.findall(r"^(<<<<<<< |=======$|>>>>>>> )", h, re.M))
+    if conflicts:
+        ng(f"gitのコンフリクトマーカーが {conflicts} 箇所残っている")
+
+    # --- 件数の整合 ---
+    _t = re.search(r"<title>物件在庫 (\d+)件", h)
+    _s = re.search(r'<span id="shown">(\d+)</span>\s*/\s*(\d+)物件', h)
+    _shown_tags = len(re.findall(r'id="shown"', h))
+    if _shown_tags != 1:
+        ng(f'id="shown" が {_shown_tags} 個ある（1個であるべき）')
+
     # --- 構造 ---
     if not cards:
         ng("カードが1件も無い")
@@ -52,6 +65,11 @@ def main(path):
             bad_nest += 1
     if bad_nest:
         ng(f"<a> の中に <details> が入っているカードが {bad_nest} 件")
+    if _t and _s:
+        nums = {int(_t.group(1)), int(_s.group(1)), int(_s.group(2)), len(cards)}
+        if len(nums) != 1:
+            ng(f"件数が食い違う: タイトル{_t.group(1)} / 表示{_s.group(1)} / "
+               f"{_s.group(2)}物件 / 実カード{len(cards)}")
     ok(f"カード {len(cards)} 件 / 見開き {len(re.findall(chr(60) + 'details class=', h))} 件")
 
     # --- 画像 ---

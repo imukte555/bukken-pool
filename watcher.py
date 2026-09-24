@@ -3231,7 +3231,7 @@ def collect_station(station, codes):
                 # (sort1=1で49件 → 2と8を足すとユニーク131件)
                 # 実測: sort1=8 の6/8ページ目で 41/44件、10ページ以降は0
                 for _sort in ("1", "2", "8"):
-                    for pn in range(1, 55):
+                    for pn in range(1, 91):
                         _q = f"?sort1={_sort}" + ("" if pn == 1 else f"&page={pn}")
                         url = f"https://sumaity.com/{path}{_q}"
                         html = fetch_with_retry(url, impersonate=True)
