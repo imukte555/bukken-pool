@@ -4728,6 +4728,11 @@ def main():
                   file=sys.stderr)
             raise RuntimeError(f"件数が前回の6割未満 ({len(items)}/{prev_n})")
         import gen_page
+        # ページを書く直前にもう一度リンクを確認する。
+        # 収集〜詳細取得で数十分かかるため、除外したあとに掲載が
+        # 終了することがある（実測2026-09-25: 公開前チェックが
+        # 「掲載が消えたリンクが2件」で公開を止めた）
+        items = drop_dead_links(items)
         # 駅タブは左から優先順（恵比寿/目黒/中目黒 → 以降はSTATIONS定義順）
         order = PRIORITY_STATIONS + [s for s in STATIONS if s not in PRIORITY_STATIONS]
         n = gen_page.build(items, str(BASE_DIR / "docs" / "index.html"),
