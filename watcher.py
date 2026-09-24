@@ -116,6 +116,10 @@ WATCH_PRICE_MAX = int(os.environ.get("WATCH_PRICE_MAX") or 14000)
 # 値下がり待ちで監視する上限(万円)。2.5億まで見ていたが「高すぎ」と
 # 指摘されたので1.4億に下げた(2026-09-14)。予算1.2億まで下がりうる幅だけ見る
 WATCH_RENT_MAX = float(os.environ.get("WATCH_RENT_MAX") or 33.0)
+# 目玉物件の線引き（sho指示 2026-09-24）。賃貸で賃料この値以下かつ
+# 面積この値超えなら、ページの先頭に出して通知にも入れる
+DEAL_RENT_MAX = float(os.environ.get("DEAL_RENT_MAX") or 23.0)
+DEAL_AREA_MIN = float(os.environ.get("DEAL_AREA_MIN") or 55.0)
 # 値下がり待ちで監視する賃料上限(万円/月)。45万は予算28万から離れすぎ
 PRICE_MAX = 12000    # 1.2億（建物込みの予算上限）
 BUILT_MAX_AGE = int(os.environ.get("BUILT_MAX_AGE") or 20)
@@ -3988,6 +3992,25 @@ def drop_dead_links(items, workers: int = 3, pause: float = 1.0):
             print(f"   404 {(d.get('name') or '')[:22]} {d.get('url','')[:70]}")
     return items
 
+def is_deal(it) -> bool:
+    """目玉物件か。賃貸で 23万円以下 かつ 55㎡超（sho指示 2026-09-24）"""
+    if it.get("type") != "rent":
+        return False
+    p, a = it.get("price"), it.get("area")
+    return (p is not None and a is not None
+            and p <= DEAL_RENT_MAX and a > DEAL_AREA_MIN)
+
+
+def mark_deals(items):
+    n = 0
+    for it in items:
+        if is_deal(it):
+            it["_deal"] = True
+            n += 1
+    if n:
+        print(f"目玉物件（賃料{DEAL_RENT_MAX}万以下・{DEAL_AREA_MIN}㎡超）: {n}件")
+    return n
+
 def revalidate_walk(item):
     """詳細ページから全駅の徒歩(walks)が取れた物件を再判定する。
     一覧の徒歩は当てにならず、対象駅が最寄りに入っていないことすらある
@@ -4392,6 +4415,11 @@ def notify(new_items):
 
     by_station = Counter(it["station"] for it in new_items)
     summary = " / ".join(f"{s}{n}件" for s, n in by_station.most_common())
+    _deals = [i for i in new_items if i.get("_deal")]
+    if _deals:
+        summary = f"⭐目玉{len(_deals)}件 / " + summary
+        # 目玉は先頭に出す
+        new_items = _deals + [i for i in new_items if not i.get("_deal")]
 
     # 全件本文に含める。長くなりすぎる場合は複数通知に分割
     TYPE_ICON = {"mansion": "🏢", "house": "🏠", "land": "🏞", "rent": "🔑"}
@@ -4406,7 +4434,8 @@ def notify(new_items):
                 mark = "★" if cur_station in PRIORITY_STATIONS else ""
                 lines.append(f"───── {mark}{cur_station} ─────")
             icon = TYPE_ICON.get(it.get("type"), "・")
-            head = f"{icon}[{it['station']}] {it['name'][:24]}"
+            deal = "⭐目玉 " if it.get("_deal") else ""
+            head = f"{deal}{icon}[{it['station']}] {it['name'][:24]}"
 
             def fmt(v, suffix=""):
                 if v is None or v == "" or v == 0:
@@ -4627,6 +4656,7 @@ def main():
         verify_images(items)
         # クリックして開けない物件は出さない
         items = drop_dead_links(items)
+        mark_deals(items)
         # 再判定“後”のリストをプールとして使う。
         # 前に代入すると、徒歩超過で弾いた物件がメールに残ってしまう。
         # 全件を全条件と突き合わせる。違反は載せない（見つけ次第ログに出す）

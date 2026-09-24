@@ -247,10 +247,12 @@ def build(items, out_path, station_order=None, reject_tally=None):
         return n + 0.5 if "S" in (it.get("layout") or "").upper() else n
 
     def sort_key(it):
+        # 目玉物件（賃料23万以下・55㎡超の賃貸）は最優先で先頭に出す
         # 駅で絞ったときに賃貸と売買が混ざらないよう、駅の中では
         # 売買（マンション→戸建→土地）を先に、賃貸を後ろにまとめる
         type_rank = {"mansion": 0, "house": 1, "land": 2, "rent": 3}
-        return (0 if it.get("_price_down") else 1,
+        return (0 if it.get("_deal") else 1,
+                0 if it.get("_price_down") else 1,
                 rank.get(it.get("station"), 999),
                 type_rank.get(it.get("type"), 9),
                 0 if _rooms(it) >= 2 else 1,   # 2LDK以上を上に
@@ -351,13 +353,15 @@ def build(items, out_path, station_order=None, reject_tally=None):
    data-down="{'1' if it.get('_price_down') else '0'}"
    data-cut="{'1' if (it.get('_cuts') or 0) >= 1 else '0'}"
    data-rooms="{'1' if _rooms(it) >= 2 else '0'}"
-   data-stale="{'1' if (it.get('_days') or 0) >= 90 else '0'}">
+   data-stale="{'1' if (it.get('_days') or 0) >= 90 else '0'}"
+   data-deal="{'1' if it.get('_deal') else '0'}">
  <a class="lnk" href="{html.escape(it['url'])}" target="_blank" rel="noopener">
   <div class="thumb">{thumb}</div>
   <div class="body">
     <div class="tag">{TYPE_ICON.get(it.get('type'),'')} {TYPE_LABEL.get(it.get('type'),'')}
       <span class="stn">{html.escape(it['station'])}</span>
       <span class="src">{html.escape(it.get('source',''))}</span></div>
+    {'<div class="deal">⭐ 目玉物件</div>' if it.get('_deal') else ''}
     <div class="name">{html.escape(tidy_name(it.get('name') or '')[:44])}</div>
     <div class="price">{fmt_price(it)}</div>
     <div class="meta">{"・".join(x for x in (layout, area, floor, age) if x)}{rooms_note}</div>
@@ -409,6 +413,10 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
 .card{{border-left:4px solid var(--buy)}}
 .card[data-type="rent"]{{border-left-color:var(--rent)}}
 .tag{{font-weight:600}}
+/* 目玉物件（賃料23万以下・55㎡超の賃貸）。一目で分かるようにする */
+.deal{{display:inline-block;background:#c8912a;color:#1b1a18;font-size:11px;
+  font-weight:700;border-radius:5px;padding:2px 7px;margin-bottom:4px}}
+.card[data-deal="1"]{{border-color:#c8912a;box-shadow:0 0 0 1px #c8912a inset}}
 .card[data-type="rent"] .tag{{color:var(--rent)}}
 .card:not([data-type="rent"]) .tag{{color:var(--buy)}}
 .lnk{{display:flex;gap:11px;text-decoration:none;color:inherit}}
@@ -478,6 +486,7 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
   .thumb img{{width:100%;height:190px;object-fit:cover}}
   .noimg{{width:100%;height:120px;min-height:120px}}
   .body{{padding:11px 13px 12px}}
+  .deal{{font-size:12px;padding:3px 9px;margin-bottom:5px}}
   .name{{font-size:15px;line-height:1.35;letter-spacing:0;
     word-break:break-word;overflow-wrap:anywhere}}
   .price{{font-size:19px;margin-bottom:5px}}
@@ -495,7 +504,7 @@ main{{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap
   <div class="count"><span id="shown">{len(cards)}</span> / {len(cards)}物件
     <span id="bd"></span>（掲載{len(items)}件）　{jst:%Y-%m-%d %H:%M} JST時点</div>
   <div class="filters">
-    <button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="rooms" data-v="1">2LDK以上</button><button class="chip" data-f="cut" data-v="1">値下げ実績</button><button class="chip" data-f="stale" data-v="1">90日以上</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button>{tchips}
+    <button class="chip" data-f="deal" data-v="1">⭐目玉</button><button class="chip" data-f="down" data-v="1">🔻値下げ</button><button class="chip" data-f="rooms" data-v="1">2LDK以上</button><button class="chip" data-f="cut" data-v="1">値下げ実績</button><button class="chip" data-f="stale" data-v="1">90日以上</button><button class="chip" data-f="parking" data-v="1">🚗駐車場あり</button>{tchips}
   </div>
   <div class="filters">{chips}</div>
 </header>
