@@ -81,20 +81,26 @@ jobs:
           touch .nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # docs/index.html も必ずコミットする。取り残すと次の
-          # git pull --rebase が「unstaged changes」で止まり、
-          # 518件取れていても公開できずに失敗していた（2日連続で発生）
-          git add -A index.html .nojekyll state.json docs/index.html
-          git diff --cached --quiet && echo "変更なし" || \
-            git commit -q -m "在庫ページ更新 $(date -u +%Y-%m-%dT%H:%M)"
+          # 生成物は「今回作ったものが正」。rebaseで混ぜるとHTMLが
+          # コンフリクトし、マーカー入りのまま公開されていた
+          # （実測2026-09-25: 258箇所のマーカーが公開ページに出た）。
+          # 退避しておいて、リモートを取り込んだあとに上書きし直す。
+          cp docs/index.html /tmp/page.html
+          cp state.json /tmp/state.json 2>/dev/null || true
           for i in 1 2 3; do
-            # 念のため毎回残った変更を退避してからpullする
-            git stash -u -q || true
-            git pull --rebase -q origin main || true
-            git stash pop -q 2>/dev/null || true
+            git checkout -- . 2>/dev/null || true
+            git pull --rebase -q origin main || git rebase --abort || true
+            cp /tmp/page.html docs/index.html
+            cp /tmp/page.html index.html
+            cp /tmp/state.json state.json 2>/dev/null || true
+            touch .nojekyll
+            # マーカーが残っていたら絶対に公開しない
+            if grep -qE '^(<<<<<<< |=======$|>>>>>>> )' index.html; then
+              echo "コンフリクトマーカーが残っているので公開を中止"; exit 1
+            fi
             git add -A index.html .nojekyll state.json docs/index.html
-            git diff --cached --quiet || \
-              git commit -q -m "在庫ページ更新 $(date -u +%Y-%m-%dT%H:%M)"
+            git diff --cached --quiet && { echo "変更なし"; break; }
+            git commit -q -m "在庫ページ更新 $(date -u +%Y-%m-%dT%H:%M)"
             git push origin HEAD:main && break
             sleep 5
           done
@@ -107,4 +113,3 @@ jobs:
             sleep 10
           done
           echo "公開が確認できませんでした (期待:$WANT 実際:$n)"; exit 1
-
