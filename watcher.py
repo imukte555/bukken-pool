@@ -2842,6 +2842,7 @@ def collect_all():
             print(f"local_feed.json の取り込みに失敗: {e}", file=sys.stderr)
 
     print_site_stats()
+    print(f"詳細ページで補完: 試行{_RESCUE_STATS[0]}件 → 条件合格{_RESCUE_STATS[1]}件")
     print("\n=== ポータル別取得 ===")
     for k, v in portal_count.most_common():
         print(f"  {k}: {v}")
@@ -2945,7 +2946,7 @@ def collect_station(station, codes):
                     break
                 items.extend(page_items)
                 time.sleep(SLEEP_BETWEEN)
-            kept = [i for i in items if apply_rent_filters(i)]
+            kept = filter_with_walk_rescue(items)
             log.append(f"[HOMES賃貸] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count["HOMES賃貸"] += len(kept)
@@ -2967,8 +2968,7 @@ def collect_station(station, codes):
                 if not page_items:
                     break
                 items.extend(page_items)
-            kept = ([i for i in items if apply_rent_filters(i)] if kind == "rent"
-                    else filter_with_walk_rescue(items))
+            kept = filter_with_walk_rescue(items)
             log.append(f"[アットホーム {kind}] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count[f"アットホーム {kind}"] += len(kept)
@@ -3025,7 +3025,7 @@ def collect_station(station, codes):
                     break
                 items.extend(page_items)
                 time.sleep(SLEEP_BETWEEN)
-            kept = [i for i in items if apply_rent_filters(i)]
+            kept = filter_with_walk_rescue(items)
             log.append(f"[goo住宅] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count["goo住宅"] += len(kept)
@@ -3055,7 +3055,7 @@ def collect_station(station, codes):
                     break
                 items.extend(page_items)
                 time.sleep(SLEEP_BETWEEN)
-            kept = [i for i in items if apply_rent_filters(i)]
+            kept = filter_with_walk_rescue(items)
             log.append(f"[スモッカ] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count["賃貸スモッカ"] += len(kept)
@@ -3099,7 +3099,7 @@ def collect_station(station, codes):
                         break
                     items.extend(page_items)
                     time.sleep(SLEEP_BETWEEN)
-            kept = [i for i in items if apply_rent_filters(i)]
+            kept = filter_with_walk_rescue(items)
             log.append(f"[スマイティ賃貸] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count["スマイティ賃貸"] += len(kept)
@@ -3118,7 +3118,7 @@ def collect_station(station, codes):
                     break
                 items.extend(page_items)
                 time.sleep(SLEEP_BETWEEN)
-            kept = [i for i in items if apply_rent_filters(i)]
+            kept = filter_with_walk_rescue(items)
             log.append(f"[リバブル賃貸] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count["リバブル賃貸"] += len(kept)
@@ -3144,7 +3144,7 @@ def collect_station(station, codes):
                         break
                     items.extend(page_items)
                     time.sleep(SLEEP_BETWEEN)
-            kept = [i for i in items if apply_rent_filters(i)]
+            kept = filter_with_walk_rescue(items)
             log.append(f"[ハウスコム] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count["ハウスコム"] += len(kept)
@@ -3176,8 +3176,7 @@ def collect_station(station, codes):
                         break
                     items.extend(page_items)
                     time.sleep(SLEEP_BETWEEN)
-                kept = ([i for i in items if apply_rent_filters(i)] if kind == "rent"
-                        else filter_with_walk_rescue(items))
+                kept = filter_with_walk_rescue(items)
                 log.append(f"[ニフティ {kind}] {station}: parsed={len(items)} kept={len(kept)}")
                 all_items.extend(kept)
                 portal_count[f"ニフティ {kind}"] += len(kept)
@@ -3215,7 +3214,7 @@ def collect_station(station, codes):
                         break
                     items.extend(page_items)
                     time.sleep(SLEEP_BETWEEN)
-            kept = [i for i in items if apply_rent_filters(i)]
+            kept = filter_with_walk_rescue(items)
             log.append(f"[CHINTAI] {station}: parsed={len(items)} kept={len(kept)}")
             all_items.extend(kept)
             portal_count["CHINTAI"] += len(kept)
@@ -3359,7 +3358,7 @@ def collect_station(station, codes):
             if not page:
                 break
         keep_raw(rent_items)
-        kept = [it for it in rent_items if apply_rent_filters(it)]
+        kept = filter_with_walk_rescue(rent_items)
         # 同一物件の重複部屋を間引き（住所+賃料+面積+間取りで一意化）
         # ※建物名が「◯◯マンション」と「品川区◯◯ 賃貸」で割れても同一とみなす
         # 同一建物の別部屋は「間取り or 賃料 or 面積」が違えば残す。
@@ -3420,7 +3419,7 @@ def filter_with_walk_rescue(items):
     keep_raw(items)
     kept, todo = [], []
     for it in items:
-        if apply_filters(it):
+        if _passes(it):
             kept.append(it)
             continue
         needs_walk = it.get("walk") is None
@@ -3452,10 +3451,11 @@ def filter_with_walk_rescue(items):
             if walks:
                 it["walks"] = walks
                 d = dict(walks)
-                if it["station"] in d:
-                    it["walk"] = d[it["station"]]
+                sname = station_match_name(it["station"])
+                if sname in d:
+                    it["walk"] = d[sname]
             if it.get("walk") is None:
-                w = parse_walk(transit or text, it["station"])
+                w = parse_walk(transit or text, station_match_name(it["station"]))
                 if w is not None:
                     it["walk"] = w
         if needs_built:
@@ -3481,14 +3481,28 @@ def filter_with_walk_rescue(items):
                 m = re.search(r"(東京都[^\s、,]{1,4}区[^\s、,]{0,12})", text)
                 if m:
                     it["addr"] = m.group(1)
-        return it if apply_filters(it) else None
+        return it if _passes(it) else None
 
     if todo:
+        ok = 0
         with ThreadPoolExecutor(max_workers=RESCUE_WORKERS) as ex:
             for r in ex.map(_one, todo):
                 if r is not None:
-                    kept.append(r)
+                    kept.append(r); ok += 1
+        _RESCUE_STATS[0] += len(todo); _RESCUE_STATS[1] += ok
     return kept
+
+
+# 詳細ページで補完した件数 [試行, 救済成功]。実行の最後に出す
+_RESCUE_STATS = [0, 0]
+
+
+def _passes(it):
+    """種別に応じた判定。賃貸は以前 apply_rent_filters を直接当てていて
+    一覧に徒歩・築年・住所が出ない賃貸が詳細を見ずに全部捨てられていた。"""
+    if it.get("type") == "rent":
+        return apply_rent_filters(it)
+    return apply_filters(it)
 
 def apply_rent_filters(item):
     """賃貸用フィルタ: 管理費込み賃料・面積・徒歩"""
@@ -3500,12 +3514,16 @@ def apply_rent_filters(item):
         return False
     w = item.get("walk")
     rlimit = WALK_MAX_BY_STATION.get(item.get("station"), RENT_WALK_MAX)
-    if w is None or w > rlimit:
-        return False
+    if w is None:
+        note_reject("徒歩が不明(賃貸)"); return False
+    if w > rlimit:
+        note_reject(f"徒歩{rlimit}分超(賃貸)"); return False
     # 築20年未満のみ。築年が取れない物件は条件を検証できないので通さない
     b = item.get("built")
-    if not b or (CURRENT_YEAR - b) >= RENT_MAX_AGE:
-        return False
+    if not b:
+        note_reject("築年不明(賃貸)"); return False
+    if (CURRENT_YEAR - b) >= RENT_MAX_AGE:
+        note_reject("築20年以上(賃貸)"); return False
     # 間取り: 賃貸は1LDK以上（売買は2LDK相当以上）。sho指示 2026-09-14
     # 1K/1DK/1R/ワンルームは除外。1DK+S も居間が無いので除外する
     # （verifierの指摘: 1DK+S が「1DKを含む」まま通っていた）
