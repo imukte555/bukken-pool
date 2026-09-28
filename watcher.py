@@ -4073,12 +4073,22 @@ def revalidate_walk(item):
         return True                      # 検証材料が無い場合は一覧の値を信じる
     st = station_match_name(item.get("station"))
     d = dict(walks)
-    if st not in d:
-        return _drop("対象駅なし")       # 対象駅が最寄りに存在しない
-    limit = WALK_MAX_BY_STATION.get(st,
-                                    RENT_WALK_MAX if item.get("type") == "rent" else WALK_MAX)
-    if d[st] > limit:
-        return _drop(f"{d[st]}分")
+    def _lim(name):
+        return WALK_MAX_BY_STATION.get(
+            name, RENT_WALK_MAX if item.get("type") == "rent" else WALK_MAX)
+    if st not in d or d[st] > _lim(st):
+        # 隣駅の検索結果に出ていた物件でも、監視13駅のどれかから徒歩圏なら
+        # その駅の物件として残す（例: 五反田の検索に出た不動前徒歩2分の物件）。
+        # 以前は落としていた＝条件を満たす物件を捨てていた。
+        for disp in STATIONS:
+            m = station_match_name(disp)
+            if m != st and m in d and d[m] <= _lim(m):
+                print(f"   駅を付け替え {item.get('station')}→{disp} {d[m]}分 {item.get('url')}")
+                item["station"] = disp
+                item["walk"] = d[m]
+                return True
+        return _drop("対象駅なし" if st not in d else f"{d[st]}分")
+    limit = _lim(st)
     item["walk"] = d[st]                 # 実際の値に直す
     return True
 
