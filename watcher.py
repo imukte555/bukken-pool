@@ -2285,6 +2285,9 @@ WALK_RE = re.compile(
 def parse_all_walks(text: str):
     """交通欄から (駅名, 分) を全部拾う。近い順、駅名重複は最短を採用。"""
     best = {}
+    # ハウスコムは「武蔵小山駅 （徒歩6分）」と括弧で書く。括弧を外さないと
+    # 駅名が「徒」と読まれ、対象駅なしで条件を満たす物件を落としていた
+    text = re.sub(r"[（(]\s*(徒歩\s*\d{1,3}\s*分)\s*[）)]", r"\1", text or "")
     for m in WALK_RE.finditer(text):
         name = m.group(1).strip()
         # 「目黒駅まで徒歩7分」の「まで」など、駅名に付く助詞を落とす
