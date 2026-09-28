@@ -4062,19 +4062,23 @@ def revalidate_walk(item):
     （例: 日本橋の検索結果に、最寄りが水天宮前/茅場町の物件が混ざる）。
     True=残す / False=除外。
     """
+    def _drop(why):
+        print(f"   徒歩再判定で除外[{why}] {item.get('station')} {item.get('source')} "
+              f"{item.get('walks')} {item.get('url')}")
+        return False
     if item.get("_bus_only"):
-        return False                     # 交通欄に徒歩が無くバスのみ
+        return _drop("バスのみ")         # 交通欄に徒歩が無くバスのみ
     walks = item.get("walks")
     if not walks:
         return True                      # 検証材料が無い場合は一覧の値を信じる
     st = station_match_name(item.get("station"))
     d = dict(walks)
     if st not in d:
-        return False                     # 対象駅が最寄りに存在しない
+        return _drop("対象駅なし")       # 対象駅が最寄りに存在しない
     limit = WALK_MAX_BY_STATION.get(st,
                                     RENT_WALK_MAX if item.get("type") == "rent" else WALK_MAX)
     if d[st] > limit:
-        return False
+        return _drop(f"{d[st]}分")
     item["walk"] = d[st]                 # 実際の値に直す
     return True
 
