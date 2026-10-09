@@ -2303,6 +2303,73 @@ def parse_all_walks(text: str):
     return sorted(best.items(), key=lambda kv: kv[1])
 
 
+_CLOSED_RE = re.compile(
+    r"(この物件は(すでに|既に)?(掲載|募集)を?(終了|停止)|掲載(を)?終了(しました|いたしました)"
+    r"|募集を終了|成約済|お探しの物件(は|が)(見つかりません|ありません)"
+    r"|ページが見つかりません|現在(掲載|募集)されておりません|公開(を)?終了)")
+
+# 取得できなかった回に物件が消えないよう、直近の在庫を持ち越す日数。
+# 実測(2026-10): sumaity/CHINTAIがbot検知で止まる回は74〜87件、
+# 止まらない回は88〜92件。サイトの取得ムラで件数が揺れていた。
+CARRY_DAYS = 3
+_POOL_NOW = None
+
+
+def _jst_today():
+    from datetime import datetime, timezone, timedelta
+    return datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d")
+
+
+def build_pool(items, prev_pool, today):
+    """今回の在庫 + 前回までの持ち越し（CARRY_DAYS以内に見た物件）"""
+    from datetime import datetime
+    pool = {}
+    for it in items:
+        rec = {k: v for k, v in it.items() if not k.startswith("_")}
+        try:
+            json.dumps(rec, ensure_ascii=False)
+        except Exception:
+            continue
+        pool[it["id"]] = {"item": rec, "last_seen": today}
+    for pid, ent in (prev_pool or {}).items():
+        if pid in pool:
+            continue
+        try:
+            age = (datetime.strptime(today, "%Y-%m-%d")
+                   - datetime.strptime(ent["last_seen"], "%Y-%m-%d")).days
+        except Exception:
+            continue
+        if age <= CARRY_DAYS:
+            pool[pid] = ent
+    return pool
+
+
+def merge_carried(items, prev_pool, today):
+    """前回の在庫のうち今回の取得に出てこなかった物件を戻す。
+    戻した物件も詳細取得・条件の再判定・リンク確認・掲載終了の確認を
+    通るので、終わった物件や条件を外れた物件はここで落ちる。"""
+    from datetime import datetime
+    have = {it["id"] for it in items}
+    add = []
+    for pid, ent in (prev_pool or {}).items():
+        if pid in have:
+            continue
+        try:
+            age = (datetime.strptime(today, "%Y-%m-%d")
+                   - datetime.strptime(ent["last_seen"], "%Y-%m-%d")).days
+        except Exception:
+            continue
+        if 0 <= age <= CARRY_DAYS:
+            it = dict(ent["item"])
+            it["_carried"] = True
+            add.append(it)
+    if add:
+        by = Counter(i.get("source", "?") for i in add)
+        print(f"前回の在庫から持ち越し: {len(add)}件 "
+              f"({', '.join(f'{k}{v}' for k, v in by.most_common())})")
+    return items + add
+
+
 def enrich_from_detail(item):
     """詳細ページを1回だけ取得し、駐車場と『全駅からの徒歩』を埋める"""
     use_cffi = item.get("source") in ("HOMES", "アットホーム",
@@ -2316,6 +2383,10 @@ def enrich_from_detail(item):
         return
     item["_detail_ok"] = True
     soup = BeautifulSoup(html, "html.parser")
+    # 掲載終了ページはHTTP 200のまま返るサイトがある。持ち越した物件が
+    # すでに終わっていないかをここで見て、終わっていれば出さない
+    if _CLOSED_RE.search(soup.get_text(" ", strip=True)):
+        item["_closed"] = True
 
     if item.get("parking") is None:
         raw = _row_value(soup, "駐車場", "駐車", "駐輪・駐車")
@@ -4665,6 +4736,7 @@ def main():
 
     # 同一物件の重複除外（別ポータル/別掲載で同じ物件が並ぶのを防ぐ）
     # 判定キー: 駅 + 種別 + 価格 + 面積（小数1桁）
+    items = merge_carried(items, (load_state().get("pool") or {}), _jst_today())
     items = dedupe_items(items)
 
     global _ALL_ITEMS
@@ -4691,6 +4763,11 @@ def main():
         # 詳細取得で住所・間取りが埋まったので、もう一度重複を落とす。
         # 一覧の時点では住所が空のポータルがあり、1回目では突き合わせ
         # られなかったぶんがここで消える。
+        _nclosed = [i for i in items if i.get("_closed")]
+        if _nclosed:
+            print(f"掲載終了ページを除外: {len(_nclosed)}件 "
+                  f"(うち持ち越し{sum(1 for i in _nclosed if i.get('_carried'))}件)")
+            items = [i for i in items if not i.get("_closed")]
         items = dedupe_items(items, "(詳細取得後)")
         # リンクを開けないサイトの掲載は出さない。
         # 実測: goo住宅はブラウザでも403を返す状態で、代表カード139件中
@@ -4770,6 +4847,10 @@ def main():
         # 終了することがある（実測2026-09-25: 公開前チェックが
         # 「掲載が消えたリンクが2件」で公開を止めた）
         items = drop_dead_links(items)
+        global _POOL_NOW
+        _POOL_NOW = build_pool(items, (_state.get("pool") or {}), _today)
+        print(f"持ち越し用の在庫を保存: {len(_POOL_NOW)}件 "
+              f"(今回{sum(1 for e in _POOL_NOW.values() if e['last_seen'] == _today)}件)")
         # 駅タブは左から優先順（恵比寿/目黒/中目黒 → 以降はSTATIONS定義順）
         order = PRIORITY_STATIONS + [s for s in STATIONS if s not in PRIORITY_STATIONS]
         n = gen_page.build(items, str(BASE_DIR / "docs" / "index.html"),
@@ -4819,7 +4900,8 @@ def main():
         print("初回実行: スナップショットのみ保存（通知なし）")
         save_state({"seen_ids": [it["id"] for it in items], "last_run": int(time.time()),
                     "prices": price_now, "watchlist": watch_now,
-                    "history": history_now, "page_count": _PAGE_COUNT})
+                    "history": history_now, "page_count": _PAGE_COUNT,
+                    "pool": _POOL_NOW if _POOL_NOW is not None else (load_state().get("pool") or {})})
         return
 
     new_items = [it for it in items if it["id"] not in seen]
@@ -4997,7 +5079,8 @@ def main():
                 "notified_on": prev.get("notified_on")
                                if (already or (manual_hold and not forced))
                                else today_jst,
-                "page_count": _PAGE_COUNT})
+                "page_count": _PAGE_COUNT,
+                "pool": _POOL_NOW if _POOL_NOW is not None else (prev.get("pool") or {})})
 
 
 def send_heartbeat(total, summary):
