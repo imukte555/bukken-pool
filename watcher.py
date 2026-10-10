@@ -2631,7 +2631,8 @@ _HOST_GATE = {
     "suumo.jp":         (threading.Lock(), 1.3),
     # 新しく追加した3サイト。まとめて叩くと弾かれるので同時1本+間隔を置く
     "myhome.nifty.com": (threading.Lock(), 2.5),
-    "sumaity.com":      (threading.Lock(), 1.5),
+    # スマイティは短時間に叩くと429。間隔を広めに取る
+    "sumaity.com":      (threading.Lock(), 2.5),
     "www.chintai.net":  (threading.Lock(), 1.5),
     "www.housecom.jp":  (threading.Lock(), 1.5),
     "smocca.jp":        (threading.Lock(), 1.5),
@@ -2826,8 +2827,15 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
         slow_down(host, f"(retry {attempt + 1}/{max_retry})")
         if attempt == max_retry - 1:
             break
-        # SUUMOの503は待てば直る類ではなく、単に混んでいるだけのことが多い。
-        # 指数バックオフを長く取ると実行時間が跳ね上がる（実測: 待ち時間だけで27分）
+        # スマイティの429は数十秒待てば戻る。300秒丸ごとスキップすると
+        # その間の駅が全部取れず、物件が消えていた（実測2026-10-10: 36回中0回成功）
+        if host == "sumaity.com":
+            wait = 40 * (attempt + 1) + random.uniform(0, 10)
+            if wait >= budget_left():
+                return ""
+            print(f"  {host}: 429のため{wait:.0f}秒待って再試行", file=sys.stderr)
+            time.sleep(wait)
+            continue
         if host == "suumo.jp":
             wait = 2.5 * (attempt + 1) + random.uniform(0, 1.5)
         else:
@@ -2835,7 +2843,7 @@ def fetch_with_retry(url: str, impersonate: bool = False, max_retry: int = 4):
         time.sleep(wait)
     # 規定回数失敗 → このホストはしばらく諦める
     # ただしSUUMOは本命ソースなので諦めない（諦めるとプールが激減する）
-    if host == "suumo.jp":
+    if host in ("suumo.jp", "sumaity.com"):
         return ""
     with _BLOCK_LOCK:
         _BLOCKED_UNTIL[host] = time.time() + BLOCK_COOLDOWN
@@ -3172,10 +3180,16 @@ def collect_station(station, codes):
             # 並び替え(sort1)でも返る集合が変わる
             # (sort1=1で60件 → 2と8を足すとユニーク366件)
             # 実測: sort1=8 の13/15/17/19ページ目でも 70/34/81/96件と出続ける
-            for _sort in ("1", "2", "8"):
+            # 実測(2026-10-10): 並び替え3通り×最大100ページで1駅300回近く
+            # 叩いていたため429で丸ごと弾かれ、取れない日があった。
+            # 駅徒歩で絞る toho_time1（メートル。800=徒歩10分）を付けると、
+            # 恵比寿でも20ページ・1,212件で全件が返り、並び替えを変えても
+            # 増えない（武蔵小山で sort1=1 と 2 の和集合が582件で同一）。
+            # 条件の7分より広い10分で取り、判定はこちらの条件で行う。
+            for _sort in ("1",):
                 for pn in range(1, 101):
                     url = (f"https://sumaity.com/chintai/{_sp}_eki/{_ss}-eki/"
-                           f"?sort1={_sort}"
+                           f"?sort1={_sort}&toho_time1=800"
                            + ("" if pn == 1 else f"&page={pn}"))
                     html = fetch_with_retry(url, impersonate=True)
                     page_items = parse_sumaity_rent(html, station)
@@ -3313,9 +3327,13 @@ def collect_station(station, codes):
                 # さらに並び替え(sort1)を変えると返る集合が変わる
                 # (sort1=1で49件 → 2と8を足すとユニーク131件)
                 # 実測: sort1=8 の6/8ページ目で 41/44件、10ページ以降は0
-                for _sort in ("1", "2", "8"):
+                # 賃貸と同じく駅徒歩10分(toho_time=10)で絞ると1通りの並びで
+                # 全件が返る（実測: 恵比寿の中古マンション 7ページ292件、
+                # sort1=2 との和集合も292件）。叩く回数を減らして429を避ける
+                for _sort in ("1",):
                     for pn in range(1, 91):
-                        _q = f"?sort1={_sort}" + ("" if pn == 1 else f"&page={pn}")
+                        _q = (f"?sort1={_sort}&toho_time=10"
+                              + ("" if pn == 1 else f"&page={pn}"))
                         url = f"https://sumaity.com/{path}{_q}"
                         html = fetch_with_retry(url, impersonate=True)
                         page_items = parse_sumaity(html, station, kind)
