@@ -1,0 +1,17 @@
+name: diag
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: URL to probe
+        default: "https://sumaity.com/chintai/tokyo_eki/shinagawa_ku_musashikoyama-eki/?sort1=1"
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -s ifconfig.me; echo
+          for i in 1 2 3; do
+            curl -s -o /tmp/b.html -D /tmp/h.txt -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36" "${{ inputs.url }}"
+            echo "=== try $i"; head -40 /tmp/h.txt; echo "--- body"; sed 's/<[^>]*>/ /g' /tmp/b.html | tr -s ' \n' | head -c 1500; echo; sleep 5
+          done
