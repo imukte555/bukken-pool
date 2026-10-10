@@ -6,6 +6,7 @@
   python3 verify_page.py docs/index.html
 """
 import html as H
+import json
 import re
 import sys
 from concurrent.futures import ThreadPoolExecutor
@@ -197,6 +198,38 @@ def main(path):
     else:
         ari = len(re.findall(r'data-parking="1"', body))
         ok(f"駐車場: 記載なし0件 / あり{ari}件")
+
+    # --- 見開き用のデータ（2026-10-10 追加） ---
+    mj = re.search(r'<script type="application/json" id="data">(.*?)</script>', h, re.S)
+    if not mj:
+        ng("見開き用のデータ(#data)が無い")
+    else:
+        if h.find('id="data"') < h.find("</main>"):
+            ng("#data が </main> より前にある")
+        try:
+            data = json.loads(mj.group(1))
+        except Exception as e:
+            data = {}
+            ng(f"#data のJSONが壊れている: {e}")
+        ids = re.findall(r'data-id="([^"]+)"', body)
+        if len(ids) != len(set(ids)):
+            ng("data-id が重複している")
+        missing = [i for i in ids if i not in data]
+        if missing or len(data) != len(cards):
+            ng(f"カードとデータが合わない: カード{len(cards)} / データ{len(data)} / 欠け{len(missing)}")
+        hrefs = dict(zip(ids, (H.unescape(u) for u in re.findall(r'<a class="lnk" href="([^"]+)"', body))))
+        diff = [i for i, u in hrefs.items() if i in data and data[i].get("url") != u]
+        if diff:
+            ng(f"カードのリンクと見開きのリンクが違う: {len(diff)}件")
+        nophoto = [i for i in ids if i in data and not data[i].get("photos")]
+        # 見開きの写真が実際に開けるか（各物件の1枚目、最大60枚）
+        firsts = [data[i]["photos"][0] for i in ids if i in data and data[i].get("photos")][:60]
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            dead_p = [u for u, a in zip(firsts, ex.map(W.image_alive, firsts)) if not a]
+        if firsts and len(dead_p) > max(2, len(firsts) * 0.1):
+            ng(f"見開きの写真が開けない: {len(dead_p)}/{len(firsts)}件 例 {dead_p[0][:80]}")
+        ok(f"見開き: データ{len(data)}件 / 写真なし{len(nophoto)}件 / "
+           f"1枚目の写真 {len(firsts) - len(dead_p)}/{len(firsts)}件 表示可")
 
     # --- 駅 ---
     tabs = re.findall(r"data-f='station' data-v='([^']+)'", h)

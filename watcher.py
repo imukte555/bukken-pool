@@ -2325,7 +2325,9 @@ def build_pool(items, prev_pool, today):
     from datetime import datetime
     pool = {}
     for it in items:
-        rec = {k: v for k, v in it.items() if not k.startswith("_")}
+        # 写真・諸元は毎回詳細ページから取り直すので持ち越さない（state.jsonが膨らむ）
+        rec = {k: v for k, v in it.items()
+               if not k.startswith("_") and k not in ("photos", "plan", "specs")}
         try:
             json.dumps(rec, ensure_ascii=False)
         except Exception:
@@ -2390,6 +2392,15 @@ def enrich_from_detail(item):
     _head = " ".join(
         [(soup.title.get_text(" ", strip=True) if soup.title else "")]
         + [h.get_text(" ", strip=True) for h in soup.find_all("h1", limit=2)])
+    # 見開き用: 写真・間取り図・諸元（管理費/修繕積立金/向き/構造/設備…）
+    try:
+        from extractors import extract_detail
+        _d = extract_detail(item.get("source"), soup, item["url"])
+        item["photos"] = _d["photos"]
+        item["plan"] = _d["plan"]
+        item["specs"] = _d["specs"]
+    except Exception as e:
+        print(f"   見開き用の抽出に失敗: {e}", file=sys.stderr)
     _m = _CLOSED_RE.search(_head)
     if _m:
         item["_closed"] = True
@@ -4408,6 +4419,14 @@ def verify_images(items, workers: int = 12):
 
     def one(it):
         nonlocal ok, fixed, dead
+        # 詳細ページの1枚目（外観・大きい画像）があれば代表写真にする。
+        # 一覧のサムネは小さい・間取り図・サイトのロゴ（実測: CHINTAIの
+        # brand.png）のことがある
+        ps = it.get("photos") or []
+        if ps:
+            p0 = unwrap_image_url(ps[0])
+            if image_alive(p0):
+                it["img"] = p0
         u = unwrap_image_url(it.get("img") or "")
         it["img"] = u
         if image_alive(u):
