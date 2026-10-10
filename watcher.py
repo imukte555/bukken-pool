@@ -2385,8 +2385,16 @@ def enrich_from_detail(item):
     soup = BeautifulSoup(html, "html.parser")
     # 掲載終了ページはHTTP 200のまま返るサイトがある。持ち越した物件が
     # すでに終わっていないかをここで見て、終わっていれば出さない
-    if _CLOSED_RE.search(soup.get_text(" ", strip=True)):
+    # 本文全体を見ると「成約済み事例」等の別リンクの文言に当たって生きた
+    # 物件まで落とすので、ページ自身の見出し(title/h1)だけを見る
+    _head = " ".join(
+        [(soup.title.get_text(" ", strip=True) if soup.title else "")]
+        + [h.get_text(" ", strip=True) for h in soup.find_all("h1", limit=2)])
+    _m = _CLOSED_RE.search(_head)
+    if _m:
         item["_closed"] = True
+        print(f"   掲載終了と判定: {_m.group(0)} / {item.get('source')} "
+              f"{item.get('url')}")
 
     if item.get("parking") is None:
         raw = _row_value(soup, "駐車場", "駐車", "駐輪・駐車")
