@@ -459,14 +459,14 @@ def _photos_of(it):
     img = it.get("img") or ""
     # 一覧のサムネが外観で、詳細の写真に無いなら先頭に足す（必ず1枚は出す）
     _bad = _re.compile(r"(brand\.png|/logo|logo[_.-]|noimage|no_image|nophoto|no_photo|spacer)", _re.I)
-    ps = [u for u in ps if not _bad.search(u)]
+    ps = [u for u in ps if not _bad.search(u.split("?")[0])]
     if (img.startswith("http") and not it.get("img_is_plan") and img not in ps
-            and not _bad.search(img)):
+            and not _bad.search(img.split("?")[0])):
         ps.insert(0, img)
     plan = it.get("plan") or ""
     if plan:
         ps = [u for u in ps if u != plan]
-    if not ps and img.startswith("http") and not _bad.search(img):
+    if not ps and img.startswith("http") and not _bad.search(img.split("?")[0]):
         ps = [img]
     return ps[:20], plan
 
