@@ -11,6 +11,7 @@
 """
 import base64
 import json
+import subprocess
 import os
 import re
 from urllib.parse import unquote
@@ -4135,6 +4136,28 @@ def drop_dead_links(items, workers: int = 3, pause: float = 1.0):
             print(f"   404 {(d.get('name') or '')[:22]} {d.get('url','')[:70]}")
     return items
 
+def _links_gone(page_path):
+    """生成したページのカードの主リンクを curl で確かめ、404/410のURL集合を返す
+    （verify_page.py と同じ方法）"""
+    import html as _h
+    h = Path(page_path).read_text(encoding="utf-8")
+    body = h.split('<details class="rej"')[0]
+    links = list(dict.fromkeys(
+        _h.unescape(u) for u in re.findall(r'<a class="lnk" href="([^"]+)"', body)))
+
+    def code(u):
+        try:
+            r = subprocess.run(["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
+                                "-A", UA, "-L", "--max-time", "20", u],
+                               capture_output=True, text=True, timeout=40)
+            return r.stdout.strip()
+        except Exception:
+            return "000"
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        codes = list(ex.map(code, links))
+    return {u for u, c in zip(links, codes) if c in ("404", "410")}
+
+
 def is_deal(it) -> bool:
     """目玉物件か。賃貸で 23万円以下 かつ 55㎡超（sho指示 2026-09-24）"""
     if it.get("type") != "rent":
@@ -4900,6 +4923,18 @@ def main():
         order = PRIORITY_STATIONS + [s for s in STATIONS if s not in PRIORITY_STATIONS]
         n = gen_page.build(items, str(BASE_DIR / "docs" / "index.html"),
                            station_order=order, reject_tally=REJECT_TALLY)
+        # 生成したページに載せたリンクを、公開前チェックと同じやり方で
+        # もう一度確かめる。drop_dead_links から生成までの間に掲載が終わる
+        # ことがあり、公開前チェックが1件で公開を止めていた
+        # （実測2026-10-16: スマイティの1件）。消えた物件は外して作り直す
+        for _round in range(2):
+            _gone = _links_gone(str(BASE_DIR / "docs" / "index.html"))
+            if not _gone:
+                break
+            print(f"生成後に掲載が消えたリンクを除外: {len(_gone)}件 {sorted(_gone)[:3]}")
+            items = [i for i in items if i.get("url") not in _gone]
+            n = gen_page.build(items, str(BASE_DIR / "docs" / "index.html"),
+                               station_order=order, reject_tally=REJECT_TALLY)
         globals()["_PAGE_COUNT"] = n
         print(f"在庫ページ生成: {n}件 → docs/index.html")
     except Exception as e:
