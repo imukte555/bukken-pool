@@ -50,9 +50,7 @@ jobs:
       - name: Run watcher
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
+          # 2026-10-20 shoさん指示で在庫メールを停止（GMAIL_* を渡さないと watcher.py は送信をスキップする）
           DEBUG_FORCE_NOTIFY: ${{ inputs.force_notify && '1' || '0' }}
           # 手動実行で取得時間を短くできるようにする（既定は watcher.py の110分）
           FETCH_BUDGET_SEC: ${{ inputs.fetch_budget_sec }}
