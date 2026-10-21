@@ -1,0 +1,108 @@
+name: Daily Property Watch
+
+on:
+  # 2026-10-20 shoさん指示で毎日の自動実行は削除済み。手動実行(更新)だけ残す
+  workflow_dispatch:  # 手動実行可能
+    inputs:
+      force_notify:
+        description: '強制テスト通知（新着0でも上位3件を通知）'
+        type: boolean
+        default: false
+      fetch_budget_sec:
+        description: '取得の締切(秒)。空なら既定の6600秒(110分)'
+        required: false
+        default: ''
+      min_keep_ratio:
+        description: 'ページ更新の歯止め。前回件数の何割を割ったら更新しないか(既定0.6、0で無効)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write  # state.jsonコミット用
+
+# 実行が重なるとstate.jsonとdocs/index.htmlの押し合いになり、
+# リポジトリの記録と公開ページが食い違う（2026-08-30に実際に発生）。
+# 同時に1本しか走らせない。後から来たものは前が終わるまで待つ。
+concurrency:
+  group: daily-property-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Run watcher
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          # 2026-10-20 shoさん指示で在庫メールを停止（GMAIL_* を渡さないと watcher.py は送信をスキップする）
+          DEBUG_FORCE_NOTIFY: ${{ inputs.force_notify && '1' || '0' }}
+          # 手動実行で取得時間を短くできるようにする（既定は watcher.py の110分）
+          FETCH_BUDGET_SEC: ${{ inputs.fetch_budget_sec }}
+          MIN_KEEP_RATIO: ${{ inputs.min_keep_ratio }}
+        run: python watcher.py
+
+      # 公開する前に自分で全部確かめる（sho指示 2026-09-14）
+      # 写真が開けない・条件違反・駅が違う・HTMLが壊れている のどれかが
+      # あれば失敗させ、壊れたページを公開しない
+      - name: 公開前チェック
+        id: verify
+        if: always()
+        timeout-minutes: 20
+        run: |
+          if [ ! -f docs/index.html ]; then echo "ページ未生成のためスキップ"; exit 0; fi
+          python verify_page.py docs/index.html
+
+      - name: Publish 在庫ページ (GitHub Pages)
+        # watcherが途中で失敗しても公開はする。ただし公開前チェックに
+        # 落ちたページは公開しない
+        if: always() && steps.verify.outcome == 'success'
+        timeout-minutes: 12
+        run: |
+          if [ ! -f docs/index.html ]; then echo "no page, skip"; exit 0; fi
+          cp docs/index.html index.html
+          touch .nojekyll
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 生成物は「今回作ったものが正」。rebaseで混ぜるとHTMLが
+          # コンフリクトし、マーカー入りのまま公開されていた
+          # （実測2026-09-25: 258箇所のマーカーが公開ページに出た）。
+          # 退避しておいて、リモートを取り込んだあとに上書きし直す。
+          cp docs/index.html /tmp/page.html
+          cp state.json /tmp/state.json 2>/dev/null || true
+          for i in 1 2 3; do
+            git checkout -- . 2>/dev/null || true
+            git pull --rebase -q origin main || git rebase --abort || true
+            cp /tmp/page.html docs/index.html
+            cp /tmp/page.html index.html
+            cp /tmp/state.json state.json 2>/dev/null || true
+            touch .nojekyll
+            # マーカーが残っていたら絶対に公開しない
+            if grep -qE '^(<<<<<<< |=======$|>>>>>>> )' index.html; then
+              echo "コンフリクトマーカーが残っているので公開を中止"; exit 1
+            fi
+            git add -A index.html .nojekyll state.json docs/index.html
+            git diff --cached --quiet && { echo "変更なし"; break; }
+            git commit -q -m "在庫ページ更新 $(date -u +%Y-%m-%dT%H:%M)"
+            git push origin HEAD:main && break
+            sleep 5
+          done
+          WANT=$(grep -oE '<title>物件在庫 [0-9]+件' index.html | head -1)
+          for i in $(seq 1 48); do
+            n=$(curl -s "https://imukte555.github.io/bukken-pool/?cb=$(date +%s)-$i" \
+                | grep -oE '<title>物件在庫 [0-9]+件' | head -1)
+            echo "check $i: $n"
+            if [ "$n" = "$WANT" ]; then echo "公開確認 OK ($n)"; exit 0; fi
+            sleep 10
+          done
+          echo "公開が確認できませんでした (期待:$WANT 実際:$n)"; exit 1
