@@ -5,6 +5,11 @@ import copy
 import importlib
 import re
 
+# 物件そのものでない写真（実測2026-10-23: ハウスコムの店舗外観 /shop/img/、
+# SUUMO系の周辺施設写真 _s1o.jpg=コンビニ等が、外観写真として出ていた）。
+# スマイティはURLの中に実URLが入っているので、クエリも含めて調べる
+BAD_FULL = re.compile(r"(/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg)", re.I)
+
 # サイトのロゴ・「画像なし」・バナー等。物件の写真ではない
 # （実測: CHINTAIの一覧サムネが brand.png のロゴだった）
 BAD_IMG = re.compile(r"(brand\.png|/logo|logo[_.-]|noimage|no_image|nophoto|no_photo|No_Photo"
@@ -34,10 +39,10 @@ def extract_detail(source, soup, url):
     photos, seen = [], set()
     for u in r.get("photos") or []:
         if (isinstance(u, str) and u.startswith("http") and u not in seen
-                and not BAD_IMG.search(u.split("?")[0])):
+                and not BAD_IMG.search(u.split("?")[0]) and not BAD_FULL.search(u)):
             seen.add(u); photos.append(u)
     specs = {str(k): str(v) for k, v in (r.get("specs") or {}).items() if k and v}
     plan = r.get("plan") if isinstance(r.get("plan"), str) and r.get("plan", "").startswith("http") else None
-    if plan and BAD_IMG.search(plan.split("?")[0]):
+    if plan and (BAD_IMG.search(plan.split("?")[0]) or BAD_FULL.search(plan)):
         plan = None
     return {"photos": photos[:20], "plan": plan, "specs": specs}

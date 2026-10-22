@@ -231,6 +231,17 @@ def main(path):
         ok(f"見開き: データ{len(data)}件 / 写真なし{len(nophoto)}件 / "
            f"1枚目の写真 {len(firsts) - len(dead_p)}/{len(firsts)}件 表示可")
 
+    # 一覧のサムネ・見開きの写真に、物件でない写真（店舗外観・周辺施設・ロゴ）が出ていないか
+    _bad = re.compile(r"(/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg|brand\.png|/logo|noimage|no_image|nophoto|no_photo)", re.I)
+    _thumbs = [H.unescape(u) for u in re.findall(r"<div class=\"thumb\"><img[^>]*src='([^']+)'", h)]
+    _bt = [u for u in _thumbs if _bad.search(u)]
+    if _bt:
+        ng(f"一覧のサムネに物件でない写真: {len(_bt)}件 例 {_bt[0][:80]}")
+    if mj:
+        _bp = sum(1 for d in data.values() for u in (d.get("photos") or []) if _bad.search(u))
+        if _bp:
+            ng(f"見開きの写真に物件でない写真: {_bp}枚")
+
     # --- 駅 ---
     tabs = re.findall(r"data-f='station' data-v='([^']+)'", h)
     want = W.PRIORITY_STATIONS + [s for s in W.STATIONS

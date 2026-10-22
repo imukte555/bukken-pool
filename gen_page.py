@@ -230,6 +230,9 @@ def _stn_match(st):
     return _ALIAS.get(st, st)
 
 
+_BADTHUMB = _re.compile(r"(/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg|brand\.png|/logo|noimage|no_image|nophoto|no_photo)", _re.I)
+
+
 def pid_of(it, n=8):
     return hashlib.sha1(it["id"].encode()).hexdigest()[:n]
 
@@ -459,14 +462,15 @@ def _photos_of(it):
     img = it.get("img") or ""
     # 一覧のサムネが外観で、詳細の写真に無いなら先頭に足す（必ず1枚は出す）
     _bad = _re.compile(r"(brand\.png|/logo|logo[_.-]|noimage|no_image|nophoto|no_photo|spacer)", _re.I)
-    ps = [u for u in ps if not _bad.search(u.split("?")[0])]
+    _badfull = _re.compile(r"(/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg)", _re.I)
+    ps = [u for u in ps if not _bad.search(u.split("?")[0]) and not _badfull.search(u)]
     if (img.startswith("http") and not it.get("img_is_plan") and img not in ps
-            and not _bad.search(img.split("?")[0])):
+            and not _bad.search(img.split("?")[0]) and not _badfull.search(img)):
         ps.insert(0, img)
     plan = it.get("plan") or ""
     if plan:
         ps = [u for u in ps if u != plan]
-    if not ps and img.startswith("http") and not _bad.search(img.split("?")[0]):
+    if not ps and img.startswith("http") and not _bad.search(img.split("?")[0]) and not _badfull.search(img):
         ps = [img]
     return ps[:20], plan
 
@@ -969,8 +973,8 @@ def build(items, out_path, station_order=None, reject_tally=None):
         data[pid] = item_json(it, pid, allx)
         photos = data[pid]["photos"]
         img = it.get("img") or ""
-        if not img.startswith("http") and photos:
-            img = photos[0]
+        if not img.startswith("http") or _BADTHUMB.search(img):
+            img = photos[0] if photos else ""
         if img.startswith("http"):
             h = _re.match(r"https?://([^/]+)", img)
             if h:
