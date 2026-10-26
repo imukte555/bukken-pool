@@ -98,7 +98,7 @@ jobs:
             sleep 5
           done
           WANT=$(grep -oE '<title>物件在庫 [0-9]+件' index.html | head -1)
-          for i in $(seq 1 48); do
+          for i in $(seq 1 120); do
             n=$(curl -s "https://imukte555.github.io/bukken-pool/?cb=$(date +%s)-$i" \
                 | grep -oE '<title>物件在庫 [0-9]+件' | head -1)
             echo "check $i: $n"
