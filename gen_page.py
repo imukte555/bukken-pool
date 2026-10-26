@@ -397,11 +397,17 @@ def cost_rows(it, raw):
     p = it.get("price")
     if it.get("type") == "rent":
         kanri, rent = it.get("kanri"), it.get("rent")
+        # 管理費の単位が掲載元でばらばら（円: 10000 / 万円: 1.0）。万円にそろえる。
+        # 実測(2026-10-26): 円のまま「10000万円」と出ていた（47物件）
+        if isinstance(kanri, (int, float)) and kanri >= 100:
+            kanri = round(kanri / 10000, 2)
         if rent is None and p is not None and isinstance(kanri, (int, float)):
             rent = round(p - kanri, 2)
         if rent is not None:
             rows.append(["賃料", _man(rent)])
-        if kanri not in (None, ""):
+        if kanri == 0:
+            rows.append(["管理費", "なし（または賃料に含む）"])
+        elif kanri not in (None, ""):
             rows.append(["管理費", _man(kanri)])
         else:
             k = _spec_any(raw, "管理費", "共益費")
