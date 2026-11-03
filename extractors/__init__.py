@@ -8,7 +8,7 @@ import re
 # 物件そのものでない写真（実測2026-10-23: ハウスコムの店舗外観 /shop/img/、
 # SUUMO系の周辺施設写真 _s1o.jpg=コンビニ等が、外観写真として出ていた）。
 # スマイティはURLの中に実URLが入っているので、クエリも含めて調べる
-BAD_FULL = re.compile(r"(/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg)", re.I)
+BAD_FULL = re.compile(r"(maps\.googleapis\.com|/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg)", re.I)
 
 # サイトのロゴ・「画像なし」・バナー等。物件の写真ではない
 # （実測: CHINTAIの一覧サムネが brand.png のロゴだった）

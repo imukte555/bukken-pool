@@ -230,7 +230,7 @@ def _stn_match(st):
     return _ALIAS.get(st, st)
 
 
-_BADTHUMB = _re.compile(r"(/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg|brand\.png|/logo|noimage|no_image|nophoto|no_photo)", _re.I)
+_BADTHUMB = _re.compile(r"(maps\.googleapis\.com|/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg|brand\.png|/logo|noimage|no_image|nophoto|no_photo)", _re.I)
 
 
 def pid_of(it, n=8):
