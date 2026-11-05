@@ -468,7 +468,7 @@ def _photos_of(it):
     img = it.get("img") or ""
     # 一覧のサムネが外観で、詳細の写真に無いなら先頭に足す（必ず1枚は出す）
     _bad = _re.compile(r"(brand\.png|/logo|logo[_.-]|noimage|no_image|nophoto|no_photo|spacer)", _re.I)
-    _badfull = _re.compile(r"(/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg)", _re.I)
+    _badfull = _re.compile(r"(maps\.googleapis\.com|/shop/img/|_s\d+[ot]\.jpg|_s\d+\.jpg)", _re.I)
     ps = [u for u in ps if not _bad.search(u.split("?")[0]) and not _badfull.search(u)]
     if (img.startswith("http") and not it.get("img_is_plan") and img not in ps
             and not _bad.search(img.split("?")[0]) and not _badfull.search(img)):
