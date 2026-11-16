@@ -3,9 +3,11 @@
     "suumo:m:21709869",
     "suumo:m:20837457",
     "suumo:m:22013102",
-    "suumo:m:21716988",
+    "suumo:m:21383104",
+    "suumo:m:20509341",
     "suumo:l:21021265",
     "suumo:l:22155220",
+    "suumo:h:21342505",
     "suumo:h:21064438",
     "suumo:m:21643103",
     "suumo:m:22113445",
@@ -16,12 +18,12 @@
     "suumo:l:20863072",
     "suumo:l:21046511",
     "suumo:m:22160394",
-    "suumo:m:22063375",
+    "suumo:m:22050897",
     "suumo:h:21434232",
     "suumo:h:21918445",
     "suumo:l:21720969",
     "suumo:m:21986887",
-    "suumo:m:22138956",
+    "suumo:m:22195359",
     "suumo:m:21972718",
     "suumo:m:22065307",
     "suumo:m:20540371",
@@ -36,15 +38,12 @@
     "suumo:l:22144494",
     "suumo:l:20301400",
     "suumo:l:21839254",
-    "suumo:l:21857352",
     "goo:r:41400740010322",
-    "goo:r:1030H100536285953",
-    "goo:r:1030H100532940630",
+    "goo:r:1030H100537230887",
+    "goo:r:1030H100534607053",
+    "goo:r:01183157315",
     "goo:r:01101547637",
-    "suumo:r:jnc_000110817118",
-    "goo:m:1030Z20509341",
     "goo:h:/buy/bh/detail/13109/030/W/21866574.html",
-    "goo:h:/buy/bh/detail/13109/030/W/21342505.html",
     "goo:h:/buy/bh/detail/13109/030/W/21064438.html",
     "goo:l:1030Z22155220",
     "goo:l:1030Z21021265",
@@ -52,6 +51,7 @@
     "goo:r:1030H100534072178",
     "goo:r:1030H100523335763",
     "chintai:r:bk-C010086990000005115089850001",
+    "suumo:r:jnc_000109533046",
     "goo:r:06991053577",
     "goo:m:1030Z21643103",
     "goo:h:1030Z21933910",
@@ -72,6 +72,7 @@
     "housecom:r:1856826",
     "housecom:r:4440246",
     "goo:m:1030Z22050897",
+    "goo:h:1030Z21918445",
     "goo:l:1030Z21526898",
     "goo:l:41497260000919",
     "goo:r:41534690001427",
@@ -82,19 +83,19 @@
     "goo:r:41460930077774",
     "goo:r:41460930077768",
     "goo:r:41587520000850",
-    "goo:r:1030H100537074983",
+    "goo:r:1030H100537233593",
     "goo:r:1030H100534940621",
     "sumaity:r:416223188",
     "housecom:r:5630288",
     "goo:r:41580550007641",
     "goo:r:41580550007154",
     "sumaity:r:414987642",
-    "housecom:r:2443726",
+    "housecom:r:2448055",
     "sumaity:m:21174049",
     "goo:m:1030Z21510085",
+    "goo:r:41562630010496",
     "goo:r:41351210092091",
     "goo:r:41564900025621",
-    "goo:r:41564900024678",
     "goo:r:41445520050828",
     "goo:r:41445520050826",
     "goo:r:1030H100531376856",
@@ -102,14 +103,14 @@
     "goo:r:1030H100512068900",
     "chintai:r:bk-C010087030000005062650740001",
     "chintai:r:bk-C010086980000005035720780001",
-    "goo:r:41587520006601",
+    "goo:r:41580550008682",
     "goo:r:1030H100533945557",
     "sumaity:r:412399540",
     "sumaity:r:405833700",
     "sumaity:r:402220712",
-    "sumaity:r:401932364",
     "sumaity:r:415967884",
     "sumaity:r:415685782",
+    "sumaity:r:401932364",
     "sumaity:r:406173730",
     "sumaity:r:406173718",
     "chintai:r:bk-0000001080000000005955850012",
@@ -137,21 +138,23 @@
     "goo:r:06992762519",
     "chintai:r:bk-C010088700000010731333390001",
     "chintai:r:bk-C010086490000002471378450001",
-    "suumo:r:jnc_000110538923",
     "suumo:r:jnc_000110860900",
     "suumo:r:jnc_000110987307",
-    "suumo:r:jnc_000111001903",
     "suumo:r:jnc_000109246840",
-    "suumo:r:jnc_000110745793"
+    "suumo:r:jnc_000110552281",
+    "suumo:r:jnc_000110745793",
+    "suumo:r:jnc_000111001903"
   ],
-  "last_run": 1794770483,
+  "last_run": 1794826787,
   "prices": {
     "suumo:m:21709869": 9900,
     "suumo:m:20837457": 10480,
     "suumo:m:22013102": 11980,
-    "suumo:m:21716988": 11980,
+    "suumo:m:21383104": 11980,
+    "suumo:m:20509341": 11980,
     "suumo:l:21021265": 4980,
     "suumo:l:22155220": 6480,
+    "suumo:h:21342505": 10880,
     "suumo:h:21064438": 9980,
     "suumo:m:21643103": 8980,
     "suumo:m:22113445": 9480,
@@ -162,12 +165,12 @@
     "suumo:l:20863072": 11000,
     "suumo:l:21046511": 11000,
     "suumo:m:22160394": 11680,
-    "suumo:m:22063375": 9800,
+    "suumo:m:22050897": 9800,
     "suumo:h:21434232": 5580,
     "suumo:h:21918445": 8980,
     "suumo:l:21720969": 8980,
     "suumo:m:21986887": 10990,
-    "suumo:m:22138956": 9990,
+    "suumo:m:22195359": 9480,
     "suumo:m:21972718": 10990,
     "suumo:m:22065307": 11980,
     "suumo:m:20540371": 11480,
@@ -182,15 +185,12 @@
     "suumo:l:22144494": 5480,
     "suumo:l:20301400": 5980,
     "suumo:l:21839254": 6000,
-    "suumo:l:21857352": 6000,
     "goo:r:41400740010322": 25.5,
-    "goo:r:1030H100536285953": 18.2,
-    "goo:r:1030H100532940630": 25.5,
+    "goo:r:1030H100537230887": 18.2,
+    "goo:r:1030H100534607053": 25.7,
+    "goo:r:01183157315": 25.5,
     "goo:r:01101547637": 25.5,
-    "suumo:r:jnc_000110817118": 25.7,
-    "goo:m:1030Z20509341": 11980,
     "goo:h:/buy/bh/detail/13109/030/W/21866574.html": 11980,
-    "goo:h:/buy/bh/detail/13109/030/W/21342505.html": 10880,
     "goo:h:/buy/bh/detail/13109/030/W/21064438.html": 9980,
     "goo:l:1030Z22155220": 6480,
     "goo:l:1030Z21021265": 4980,
@@ -198,6 +198,7 @@
     "goo:r:1030H100534072178": 25.0,
     "goo:r:1030H100523335763": 24.2,
     "chintai:r:bk-C010086990000005115089850001": 24.5,
+    "suumo:r:jnc_000109533046": 26.5,
     "goo:r:06991053577": 23.1,
     "goo:m:1030Z21643103": 8980,
     "goo:h:1030Z21933910": 9980,
@@ -218,6 +219,7 @@
     "housecom:r:1856826": 27.2,
     "housecom:r:4440246": 26.9,
     "goo:m:1030Z22050897": 9800,
+    "goo:h:1030Z21918445": 8980,
     "goo:l:1030Z21526898": 11000,
     "goo:l:41497260000919": 8280,
     "goo:r:41534690001427": 26.6,
@@ -228,19 +230,19 @@
     "goo:r:41460930077774": 26.6,
     "goo:r:41460930077768": 27.6,
     "goo:r:41587520000850": 28.0,
-    "goo:r:1030H100537074983": 26.5,
+    "goo:r:1030H100537233593": 26.5,
     "goo:r:1030H100534940621": 27.0,
     "sumaity:r:416223188": 26.5,
     "housecom:r:5630288": 27.0,
     "goo:r:41580550007641": 26.2,
     "goo:r:41580550007154": 26.0,
     "sumaity:r:414987642": 27.0,
-    "housecom:r:2443726": 26.2,
+    "housecom:r:2448055": 26.2,
     "sumaity:m:21174049": 11490,
     "goo:m:1030Z21510085": 12000,
+    "goo:r:41562630010496": 23.9,
     "goo:r:41351210092091": 27.5,
     "goo:r:41564900025621": 27.2,
-    "goo:r:41564900024678": 23.9,
     "goo:r:41445520050828": 25.9,
     "goo:r:41445520050826": 26.9,
     "goo:r:1030H100531376856": 25.0,
@@ -248,14 +250,14 @@
     "goo:r:1030H100512068900": 28.0,
     "chintai:r:bk-C010087030000005062650740001": 26.3,
     "chintai:r:bk-C010086980000005035720780001": 25.1,
-    "goo:r:41587520006601": 25.8,
+    "goo:r:41580550008682": 25.8,
     "goo:r:1030H100533945557": 25.8,
     "sumaity:r:412399540": 22.0,
     "sumaity:r:405833700": 15.8,
     "sumaity:r:402220712": 13.5,
-    "sumaity:r:401932364": 13.5,
     "sumaity:r:415967884": 13.85,
     "sumaity:r:415685782": 10.3,
+    "sumaity:r:401932364": 13.5,
     "sumaity:r:406173730": 13.1,
     "sumaity:r:406173718": 12.3,
     "chintai:r:bk-0000001080000000005955850012": 15.5,
@@ -283,14 +285,32 @@
     "goo:r:06992762519": 27.2,
     "chintai:r:bk-C010088700000010731333390001": 26.3,
     "chintai:r:bk-C010086490000002471378450001": 24.7,
-    "suumo:r:jnc_000110538923": 24.0,
     "suumo:r:jnc_000110860900": 25.0,
     "suumo:r:jnc_000110987307": 25.2,
-    "suumo:r:jnc_000111001903": 25.7,
     "suumo:r:jnc_000109246840": 27.0,
-    "suumo:r:jnc_000110745793": 25.0
+    "suumo:r:jnc_000110552281": 24.0,
+    "suumo:r:jnc_000110745793": 25.0,
+    "suumo:r:jnc_000111001903": 25.7
   },
   "watchlist": {
+    "goo:h:1030Z22021198": {
+      "price": 12900,
+      "name": "東京都品川区小山４ 1億2,900万円 2SLDK",
+      "station": "武蔵小山",
+      "type": "house",
+      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22021198/002654114/x1030Z22021198.html",
+      "area": 93.05,
+      "first": 12900
+    },
+    "goo:h:1030Z22017279": {
+      "price": 12900,
+      "name": "東京都品川区小山４ 1億2,900万円 2SLDK",
+      "station": "武蔵小山",
+      "type": "house",
+      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22017279/169399001/x1030Z22017279.html",
+      "area": 93.05,
+      "first": 12900
+    },
     "goo:h:1030Z22109286": {
       "price": 12900,
       "name": "東京都品川区小山４ 1億2,900万円 2SLDK",
@@ -300,12 +320,12 @@
       "area": 93.05,
       "first": 12900
     },
-    "goo:h:1030Z22021198": {
+    "goo:h:1030Z22022749": {
       "price": 12900,
-      "name": "東京都品川区小山４ 1億2,900万円 2SLDK",
+      "name": "東京都品川区小山４ 1億2,900万円 3LDK",
       "station": "武蔵小山",
       "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22021198/002654114/x1030Z22021198.html",
+      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22022749/181949001/x1030Z22022749.html",
       "area": 93.05,
       "first": 12900
     },
@@ -324,33 +344,6 @@
       "station": "武蔵小山",
       "type": "house",
       "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22022645/139076001/x1030Z22022645.html",
-      "area": 93.05,
-      "first": 12900
-    },
-    "goo:h:1030Z22045816": {
-      "price": 12900,
-      "name": "東京都品川区小山４ 1億2,900万円 2SLDK",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22045816/182541001/x1030Z22045816.html",
-      "area": 93.05,
-      "first": 12900
-    },
-    "goo:h:1030Z22022749": {
-      "price": 12900,
-      "name": "東京都品川区小山４ 1億2,900万円 3LDK",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22022749/181949001/x1030Z22022749.html",
-      "area": 93.05,
-      "first": 12900
-    },
-    "goo:h:1030Z22017279": {
-      "price": 12900,
-      "name": "東京都品川区小山４ 1億2,900万円 2SLDK",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22017279/169399001/x1030Z22017279.html",
       "area": 93.05,
       "first": 12900
     },
@@ -399,15 +392,6 @@
       "area": 105.43,
       "first": 13980
     },
-    "goo:h:1030Z21641719": {
-      "price": 13980,
-      "name": "東京都目黒区目黒本町６ 1億3,980万円 2SLDK",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21641719/147652001/x1030Z21641719.html",
-      "area": 100.33,
-      "first": 13980
-    },
     "goo:h:1030Z21221839": {
       "price": 13500,
       "name": "東京都目黒区原町２ 1億3,500万円 2SLDK",
@@ -416,6 +400,24 @@
       "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21221839/006050680/x1030Z21221839.html",
       "area": 104.87,
       "first": 13500
+    },
+    "goo:h:1030Z22045816": {
+      "price": 12900,
+      "name": "東京都品川区小山４ 1億2,900万円 2SLDK",
+      "station": "武蔵小山",
+      "type": "house",
+      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22045816/182541001/x1030Z22045816.html",
+      "area": 93.05,
+      "first": 12900
+    },
+    "goo:h:1030Z21641719": {
+      "price": 13980,
+      "name": "東京都目黒区目黒本町６ 1億3,980万円 2SLDK",
+      "station": "武蔵小山",
+      "type": "house",
+      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21641719/147652001/x1030Z21641719.html",
+      "area": 100.33,
+      "first": 13980
     },
     "goo:h:1030Z21713218": {
       "price": 13480,
@@ -443,15 +445,6 @@
       "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z22012810/132354001/x1030Z22012810.html",
       "area": 93.05,
       "first": 12900
-    },
-    "goo:h:1030Z21670808": {
-      "price": 13980,
-      "name": "東京都目黒区目黒本町５ 1億3,980万円 2SLDK",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21670808/042873000/x1030Z21670808.html",
-      "area": 107.4,
-      "first": 13980
     },
     "goo:h:41358090023609": {
       "price": 12900,
@@ -498,15 +491,6 @@
       "area": 93.05,
       "first": 12900
     },
-    "goo:h:41557410000228": {
-      "price": 13980,
-      "name": "東京都目黒区目黒本町５丁目 1億3,980万円 3LDK",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/uh/detail/4/13110/1557410000228/155741/x41557410000228.html",
-      "area": 107.4,
-      "first": 13980
-    },
     "goo:h:41210390001212": {
       "price": 12900,
       "name": "東京都品川区小山４丁目 1億2,900万円 3LDK",
@@ -534,15 +518,6 @@
       "area": 107.4,
       "first": 13980
     },
-    "goo:h:/buy/bh/detail/13109/030/Z/21994092.html": {
-      "price": 13680,
-      "name": "西中延１（荏原中延駅） 1億3680万円",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/bh/detail/13109/030/Z/21994092.html",
-      "area": 104.37,
-      "first": 13680
-    },
     "goo:h:/buy/bh/detail/13110/030/W/22120762.html": {
       "price": 13990,
       "name": "目黒区目黒本町4丁目　新築分譲住宅　全2棟　【見学予約随時受付中】",
@@ -561,23 +536,14 @@
       "area": 116.33,
       "first": 13990
     },
-    "goo:h:1030Z20692311": {
-      "price": 13990,
-      "name": "東京都目黒区目黒本町４ 1億3,990万円 4LDK",
+    "goo:h:/buy/bh/detail/13109/030/Z/21994092.html": {
+      "price": 13680,
+      "name": "西中延１（荏原中延駅） 1億3680万円",
       "station": "武蔵小山",
       "type": "house",
-      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13110/030Z20692311/000266444/x1030Z20692311.html",
-      "area": 116.33,
-      "first": 13990
-    },
-    "goo:h:1030Z22181865": {
-      "price": 12199,
-      "name": "東京都目黒区目黒本町４ 1億2,199万円 3LDK",
-      "station": "武蔵小山",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13110/030Z22181865/140905002/x1030Z22181865.html",
-      "area": 86.79,
-      "first": 12199
+      "url": "https://house.goo.ne.jp/buy/bh/detail/13109/030/Z/21994092.html",
+      "area": 104.37,
+      "first": 13680
     },
     "goo:h:1030Z21484208": {
       "price": 13180,
@@ -588,6 +554,15 @@
       "area": 111.55,
       "first": 13180
     },
+    "goo:h:1030Z22070339": {
+      "price": 13900,
+      "name": "東京都品川区荏原２ 1億3,900万円 2SLDK",
+      "station": "武蔵小山",
+      "type": "house",
+      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13109/030Z22070339/006050838/x1030Z22070339.html",
+      "area": 90.63,
+      "first": 13900
+    },
     "goo:h:1030Z22005914": {
       "price": 13900,
       "name": "東京都品川区荏原２ 1億3,900万円 2SLDK",
@@ -597,13 +572,13 @@
       "area": 90.63,
       "first": 13900
     },
-    "goo:h:1030Z22070339": {
+    "goo:h:1030Z22020493": {
       "price": 13900,
       "name": "東京都品川区荏原２ 1億3,900万円 2SLDK",
       "station": "武蔵小山",
       "type": "house",
-      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13109/030Z22070339/006050838/x1030Z22070339.html",
-      "area": 90.63,
+      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13109/030Z22020493/121135019/x1030Z22020493.html",
+      "area": 104.71,
       "first": 13900
     },
     "goo:h:1030Z22008175": {
@@ -614,6 +589,15 @@
       "url": "https://house.goo.ne.jp/buy/bh/detail/1/13109/030Z22008175/100451226/x1030Z22008175.html",
       "area": 104.71,
       "first": 13900
+    },
+    "goo:l:1030Z21526608": {
+      "price": 12580,
+      "name": "東京都目黒区原町２ 土地",
+      "station": "武蔵小山",
+      "type": "land",
+      "url": "https://house.goo.ne.jp/buy/la/detail/1/13110/030Z21526608/121135001/x1030Z21526608.html",
+      "area": 108.5,
+      "first": 12580
     },
     "goo:l:1030Z22151778": {
       "price": 13800,
@@ -633,15 +617,6 @@
       "area": 187.84,
       "first": 13800
     },
-    "goo:l:1030Z21526608": {
-      "price": 12580,
-      "name": "東京都目黒区原町２ 土地",
-      "station": "武蔵小山",
-      "type": "land",
-      "url": "https://house.goo.ne.jp/buy/la/detail/1/13110/030Z21526608/121135001/x1030Z21526608.html",
-      "area": 108.5,
-      "first": 12580
-    },
     "goo:m:1030Z21889776": {
       "price": 12500,
       "name": "ワコーレ目黒アートステージ",
@@ -659,6 +634,15 @@
       "url": "https://house.goo.ne.jp/buy/la/detail/4/13110/1244810012261/124481/x41244810012261.html",
       "area": 70.36,
       "first": 12980
+    },
+    "goo:l:41063460028480": {
+      "price": 13780,
+      "name": "東京都渋谷区恵比寿２丁目 土地",
+      "station": "恵比寿",
+      "type": "land",
+      "url": "https://house.goo.ne.jp/buy/la/detail/4/13113/1063460028480/106346/x41063460028480.html",
+      "area": 54.22,
+      "first": 13780
     },
     "goo:l:1030Z21667261": {
       "price": 13980,
@@ -687,30 +671,30 @@
       "area": 61.72,
       "first": 28.8
     },
-    "goo:r:41577680013810": {
+    "goo:r:41587520006311": {
       "price": 32.75,
       "name": "Ｌａｕｒｕｓ武蔵小山",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1577680013810/157768/x41577680013810.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1587520006311/158752/x41587520006311.html",
       "area": 56.2,
       "first": 32.75
     },
-    "goo:r:41587520006426": {
+    "goo:r:41587560006412": {
       "price": 28.8,
-      "name": "Ｂａｒｋ　Ｌａｎｅ武蔵小山",
+      "name": "Ｂａｒｋ　Ｌａｎｅ武蔵小山２",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1587520006426/158752/x41587520006426.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1587560006412/158756/x41587560006412.html",
       "area": 61.72,
       "first": 28.8
     },
-    "goo:r:41587550006034": {
+    "goo:r:41587520006036": {
       "price": 28.7,
       "name": "レクス武蔵小山",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1587550006034/158755/x41587550006034.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1587520006036/158752/x41587520006036.html",
       "area": 59.51,
       "first": 28.7
     },
@@ -804,32 +788,41 @@
       "area": 59.51,
       "first": 28.7
     },
-    "goo:r:1030H100530212659": {
-      "price": 29.8,
-      "name": "スタイリオフィット武蔵小山",
+    "goo:r:1030H100537301410": {
+      "price": 28.5,
+      "name": "ドレッセ武蔵小山プレヴィ",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100530212659/048849065/x1030H100530212659.html",
-      "area": 65.33,
-      "first": 29.8
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100537301410/000389766/x1030H100537301410.html",
+      "area": 54.86,
+      "first": 28.5
     },
-    "goo:r:1030H100487031431": {
-      "price": 28.75,
-      "name": "Ｌａｕｒｕｓ　武蔵小山（ラウルス武蔵小山）",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100487031431/179577020/x1030H100487031431.html",
-      "area": 56.2,
-      "first": 32.75
-    },
-    "goo:r:1030H100536641292": {
+    "goo:r:1030H100537313772": {
       "price": 28.8,
       "name": "Ｂａｒｋ　Ｌａｎｅ　武蔵小山ＩＩ",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536641292/194064001/x1030H100536641292.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100537313772/179577005/x1030H100537313772.html",
       "area": 61.72,
       "first": 28.8
+    },
+    "goo:r:1030H100526327004": {
+      "price": 28.7,
+      "name": "東京都品川区小山２ 築2年10ヶ月 5階建",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100526327004/112858001/x1030H100526327004.html",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "goo:r:1030H100530838877": {
+      "price": 28.75,
+      "name": "Ｌａｕｒｕｓ武蔵小山（ラウルスムサシコヤマ）",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100530838877/085226008/x1030H100530838877.html",
+      "area": 56.2,
+      "first": 32.75
     },
     "goo:r:1030H100536615238": {
       "price": 28.8,
@@ -894,14 +887,14 @@
       "area": 59.51,
       "first": 28.7
     },
-    "goo:r:1030H100529739615": {
-      "price": 28.7,
-      "name": "東京都品川区小山２ 築2年10ヶ月 5階建",
+    "goo:r:1030H100530212659": {
+      "price": 29.8,
+      "name": "スタイリオフィット武蔵小山",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100529739615/048849060/x1030H100529739615.html",
-      "area": 59.51,
-      "first": 28.7
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100530212659/048849065/x1030H100530212659.html",
+      "area": 65.33,
+      "first": 29.8
     },
     "goo:r:1030H100532501372": {
       "price": 32.75,
@@ -921,15 +914,6 @@
       "area": 65.33,
       "first": 29.8
     },
-    "goo:r:1030H100530838877": {
-      "price": 32.75,
-      "name": "Ｌａｕｒｕｓ武蔵小山（ラウルスムサシコヤマ）",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100530838877/085226008/x1030H100530838877.html",
-      "area": 56.2,
-      "first": 32.75
-    },
     "goo:r:1030H100511934457": {
       "price": 29.8,
       "name": "東京都目黒区目黒本町３ 築8年2ヶ月 地上3階地下1階建",
@@ -948,12 +932,21 @@
       "area": 65.33,
       "first": 29.8
     },
-    "goo:r:01107512738": {
+    "goo:r:1030H100487031431": {
+      "price": 28.75,
+      "name": "Ｌａｕｒｕｓ　武蔵小山（ラウルス武蔵小山）",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100487031431/179577020/x1030H100487031431.html",
+      "area": 56.2,
+      "first": 32.75
+    },
+    "goo:r:01133992126": {
       "price": 28.8,
       "name": "Ｂａｒｋ　Ｌａｎｅ武蔵小山Ⅱ",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/0/13109/1107512738/00161821/x01107512738.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/0/13109/1133992126/00101726/x01133992126.html",
       "area": 61.72,
       "first": 28.8
     },
@@ -1101,6 +1094,150 @@
       "area": 50.28,
       "first": 29.8
     },
+    "sumaity:r:415316944": {
+      "price": 33.0,
+      "name": "シティタワー武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_415316944/",
+      "area": 55.87,
+      "first": 33.0
+    },
+    "sumaity:r:413254228": {
+      "price": 32.75,
+      "name": "LAURUS武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_413254228/",
+      "area": 56.2,
+      "first": 32.75
+    },
+    "sumaity:r:416018244": {
+      "price": 28.75,
+      "name": "LAURUS武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_416018244/",
+      "area": 56.2,
+      "first": 28.75
+    },
+    "sumaity:r:414393334": {
+      "price": 32.75,
+      "name": "目黒線武蔵小山駅まで徒歩2分",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_414393334/",
+      "area": 56.2,
+      "first": 32.75
+    },
+    "sumaity:r:416132086": {
+      "price": 28.75,
+      "name": "目黒線武蔵小山駅まで徒歩2分",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_416132086/",
+      "area": 56.2,
+      "first": 28.75
+    },
+    "sumaity:r:405163616": {
+      "price": 29.8,
+      "name": "ランドパレス武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_405163616/",
+      "area": 65.33,
+      "first": 29.8
+    },
+    "sumaity:r:405163618": {
+      "price": 29.8,
+      "name": "目黒線武蔵小山駅まで徒歩5分",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_405163618/",
+      "area": 65.33,
+      "first": 29.8
+    },
+    "sumaity:r:406458962": {
+      "price": 29.8,
+      "name": "スタイリオフィット武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_406458962/",
+      "area": 65.33,
+      "first": 29.8
+    },
+    "sumaity:r:415948880": {
+      "price": 28.8,
+      "name": "目黒線武蔵小山駅まで徒歩4分",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_415948880/",
+      "area": 61.72,
+      "first": 28.8
+    },
+    "sumaity:r:415932114": {
+      "price": 28.8,
+      "name": "Bark Lane 武蔵小山II",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_415932114/",
+      "area": 61.72,
+      "first": 28.8
+    },
+    "sumaity:r:416294422": {
+      "price": 28.75,
+      "name": "Laurus 武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_416294422/",
+      "area": 56.2,
+      "first": 28.75
+    },
+    "sumaity:r:410708582": {
+      "price": 28.7,
+      "name": "レクス武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_410708582/",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "sumaity:r:410821810": {
+      "price": 28.7,
+      "name": "目黒線武蔵小山駅まで徒歩4分",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_410821810/",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "sumaity:r:410761150": {
+      "price": 28.7,
+      "name": "目黒線武蔵小山駅まで徒歩4分",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_410761150/",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "sumaity:r:410798210": {
+      "price": 28.7,
+      "name": "レクス武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_410798210/",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "sumaity:r:381276122": {
+      "price": 28.7,
+      "name": "レクス武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_381276122/",
+      "area": 59.51,
+      "first": 28.7
+    },
     "sumaity:r:403681542": {
       "price": 32.0,
       "name": "ディームス大井町",
@@ -1200,159 +1337,6 @@
       "area": 76.53,
       "first": 29.0
     },
-    "sumaity:r:415316944": {
-      "price": 33.0,
-      "name": "シティタワー武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_415316944/",
-      "area": 55.87,
-      "first": 33.0
-    },
-    "sumaity:r:413254228": {
-      "price": 32.75,
-      "name": "Laurus武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_413254228/",
-      "area": 56.2,
-      "first": 32.75
-    },
-    "sumaity:r:416018244": {
-      "price": 28.75,
-      "name": "Laurus武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_416018244/",
-      "area": 56.2,
-      "first": 28.75
-    },
-    "sumaity:r:414393334": {
-      "price": 32.75,
-      "name": "目黒線武蔵小山駅まで徒歩2分",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_414393334/",
-      "area": 56.2,
-      "first": 32.75
-    },
-    "sumaity:r:416132086": {
-      "price": 28.75,
-      "name": "目黒線武蔵小山駅まで徒歩2分",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_416132086/",
-      "area": 56.2,
-      "first": 28.75
-    },
-    "sumaity:r:405163616": {
-      "price": 29.8,
-      "name": "ランドパレス武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_405163616/",
-      "area": 65.33,
-      "first": 29.8
-    },
-    "sumaity:r:405163618": {
-      "price": 29.8,
-      "name": "目黒線武蔵小山駅まで徒歩5分",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_405163618/",
-      "area": 65.33,
-      "first": 29.8
-    },
-    "sumaity:r:406458962": {
-      "price": 29.8,
-      "name": "スタイリオフィット武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_406458962/",
-      "area": 65.33,
-      "first": 29.8
-    },
-    "sumaity:r:415948880": {
-      "price": 28.8,
-      "name": "目黒線武蔵小山駅まで徒歩4分",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_415948880/",
-      "area": 61.72,
-      "first": 28.8
-    },
-    "sumaity:r:415948878": {
-      "price": 28.8,
-      "name": "Bark Lane 武蔵小山II",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_415948878/",
-      "area": 61.72,
-      "first": 28.8
-    },
-    "sumaity:r:415932114": {
-      "price": 28.8,
-      "name": "Bark Lane 武蔵小山II",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_415932114/",
-      "area": 61.72,
-      "first": 28.8
-    },
-    "sumaity:r:416294422": {
-      "price": 28.75,
-      "name": "Laurus 武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_416294422/",
-      "area": 56.2,
-      "first": 28.75
-    },
-    "sumaity:r:410708582": {
-      "price": 28.7,
-      "name": "レクス武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_410708582/",
-      "area": 59.51,
-      "first": 28.7
-    },
-    "sumaity:r:410821810": {
-      "price": 28.7,
-      "name": "目黒線武蔵小山駅まで徒歩4分",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_410821810/",
-      "area": 59.51,
-      "first": 28.7
-    },
-    "sumaity:r:410761150": {
-      "price": 28.7,
-      "name": "目黒線武蔵小山駅まで徒歩4分",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_410761150/",
-      "area": 59.51,
-      "first": 28.7
-    },
-    "sumaity:r:410798210": {
-      "price": 28.7,
-      "name": "レクス武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_410798210/",
-      "area": 59.51,
-      "first": 28.7
-    },
-    "sumaity:r:381276122": {
-      "price": 28.7,
-      "name": "レクス武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_381276122/",
-      "area": 59.51,
-      "first": 28.7
-    },
     "goo:r:41587520001254": {
       "price": 31.0,
       "name": "クレヴィア恵比寿",
@@ -1361,15 +1345,6 @@
       "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1587520001254/158752/x41587520001254.html",
       "area": 52.17,
       "first": 31.0
-    },
-    "goo:r:41476490240596": {
-      "price": 33.0,
-      "name": "東京都渋谷区恵比寿１丁目 築9年8ヶ月 地上13階地下1階建",
-      "station": "恵比寿",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1476490240596/147649/x41476490240596.html",
-      "area": 52.22,
-      "first": 33.0
     },
     "goo:r:41574450015459": {
       "price": 31.5,
@@ -1380,14 +1355,23 @@
       "area": 52.22,
       "first": 31.5
     },
-    "goo:r:41587520005772": {
+    "goo:r:41578320005206": {
       "price": 33.0,
       "name": "Ｌｏｎｇ　Ｉｓｌａｎｄ　Ｅｂｉｓｕ",
       "station": "恵比寿",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1587520005772/158752/x41587520005772.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1578320005206/157832/x41578320005206.html",
       "area": 52.22,
       "first": 33.0
+    },
+    "goo:r:41460930077711": {
+      "price": 31.5,
+      "name": "東京都渋谷区恵比寿１丁目 築9年8ヶ月 地上13階地下1階建",
+      "station": "恵比寿",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1460930077711/146093/x41460930077711.html",
+      "area": 52.22,
+      "first": 31.5
     },
     "goo:r:41259230146220": {
       "price": 31.0,
@@ -1395,6 +1379,15 @@
       "station": "恵比寿",
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1259230146220/125923/x41259230146220.html",
+      "area": 52.17,
+      "first": 31.0
+    },
+    "goo:r:41424700063932": {
+      "price": 31.0,
+      "name": "クレヴィア恵比寿",
+      "station": "恵比寿",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1424700063932/142470/x41424700063932.html",
       "area": 52.17,
       "first": 31.0
     },
@@ -1413,15 +1406,6 @@
       "station": "恵比寿",
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1151200512442/115120/x41151200512442.html",
-      "area": 52.17,
-      "first": 31.0
-    },
-    "goo:r:41471530045131": {
-      "price": 31.0,
-      "name": "クレヴィア恵比寿",
-      "station": "恵比寿",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1471530045131/147153/x41471530045131.html",
       "area": 52.17,
       "first": 31.0
     },
@@ -1490,7 +1474,7 @@
     },
     "goo:r:1030H100536661183": {
       "price": 30.45,
-      "name": "Ｉ．Ｄａｉｋａｎｙａｍａ",
+      "name": "東京都渋谷区恵比寿西１ 築6年 4階建",
       "station": "恵比寿",
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100536661183/148890006/x1030H100536661183.html",
@@ -1533,12 +1517,12 @@
       "area": 52.17,
       "first": 31.0
     },
-    "goo:r:1030H100535949238": {
+    "goo:r:1030H100535701773": {
       "price": 30.45,
-      "name": "東京都渋谷区恵比寿西１ 築6年 4階建",
+      "name": "Ｉ．Ｄａｉｋａｎｙａｍａ",
       "station": "恵比寿",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100535949238/148890050/x1030H100535949238.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100535701773/087765000/x1030H100535701773.html",
       "area": 54.74,
       "first": 30.45
     },
@@ -1587,15 +1571,6 @@
       "area": 52.22,
       "first": 33.0
     },
-    "goo:r:1030H100531894941": {
-      "price": 31.5,
-      "name": "東京都渋谷区恵比寿１ 築9年8ヶ月 13階建",
-      "station": "恵比寿",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100531894941/175002069/x1030H100531894941.html",
-      "area": 52.22,
-      "first": 33.0
-    },
     "goo:r:1030H100531899861": {
       "price": 31.5,
       "name": "ロングアイランド恵比寿",
@@ -1611,6 +1586,15 @@
       "station": "恵比寿",
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100531899871/158677001/x1030H100531899871.html",
+      "area": 52.22,
+      "first": 33.0
+    },
+    "goo:r:1030H100531894941": {
+      "price": 31.5,
+      "name": "東京都渋谷区恵比寿１ 築9年8ヶ月 13階建",
+      "station": "恵比寿",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100531894941/175002069/x1030H100531894941.html",
       "area": 52.22,
       "first": 33.0
     },
@@ -1650,14 +1634,14 @@
       "area": 52.22,
       "first": 31.5
     },
-    "goo:r:01112354705": {
-      "price": 33.0,
-      "name": "東京都渋谷区恵比寿１丁目 築9年8ヶ月 地上13階地下1階建",
+    "goo:r:01147997805": {
+      "price": 30.45,
+      "name": "Ⅰ　Ｄａｉｋａｎｙａｍａ",
       "station": "恵比寿",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/0/13113/1112354705/99000047/x01112354705.html",
-      "area": 52.22,
-      "first": 33.0
+      "url": "https://house.goo.ne.jp/rent/ap/detail/0/13113/1147997805/00080016/x01147997805.html",
+      "area": 54.74,
+      "first": 30.45
     },
     "goo:r:01124364530": {
       "price": 33.0,
@@ -1667,15 +1651,6 @@
       "url": "https://house.goo.ne.jp/rent/ap/detail/0/13113/1124364530/00106802/x01124364530.html",
       "area": 52.22,
       "first": 33.0
-    },
-    "goo:r:01147997805": {
-      "price": 30.45,
-      "name": "Ⅰ　Ｄａｉｋａｎｙａｍａ",
-      "station": "恵比寿",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/0/13113/1147997805/00080016/x01147997805.html",
-      "area": 54.74,
-      "first": 30.45
     },
     "goo:r:06985713060": {
       "price": 33.0,
@@ -1704,12 +1679,12 @@
       "area": 52.17,
       "first": 31.0
     },
-    "goo:r:41537890051711": {
+    "goo:r:41548620054015": {
       "price": 31.0,
       "name": "パークキューブ目黒タワー",
       "station": "目黒",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1537890051711/153789/x41537890051711.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1548620054015/154862/x41548620054015.html",
       "area": 52.3,
       "first": 31.0
     },
@@ -1722,12 +1697,12 @@
       "area": 64.12,
       "first": 31.0
     },
-    "goo:r:41578320005548": {
+    "goo:r:41587520007809": {
       "price": 31.3,
       "name": "パークキューブ目黒タワー",
       "station": "目黒",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1578320005548/157832/x41578320005548.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1587520007809/158752/x41587520007809.html",
       "area": 52.3,
       "first": 31.3
     },
@@ -1749,23 +1724,23 @@
       "area": 54.98,
       "first": 31.9
     },
-    "goo:r:41587520002658": {
-      "price": 31.0,
-      "name": "オーベル目黒",
-      "station": "目黒",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1587520002658/158752/x41587520002658.html",
-      "area": 56.44,
-      "first": 31.0
-    },
-    "goo:r:41577680010273": {
+    "goo:r:41578320004205": {
       "price": 29.2,
       "name": "オークプレイス目黒行人坂",
       "station": "目黒",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1577680010273/157768/x41577680010273.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1578320004205/157832/x41578320004205.html",
       "area": 55.89,
       "first": 29.2
+    },
+    "goo:r:41587570002658": {
+      "price": 31.0,
+      "name": "オーベル目黒",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1587570002658/158757/x41587570002658.html",
+      "area": 56.44,
+      "first": 31.0
     },
     "goo:r:41580550008275": {
       "price": 31.0,
@@ -1785,21 +1760,21 @@
       "area": 54.75,
       "first": 32.0
     },
-    "goo:r:41564900022435": {
+    "goo:r:41565010038334": {
       "price": 28.5,
       "name": "東京都目黒区下目黒２丁目 築18年10ヶ月 地上22階地下2階建",
       "station": "目黒",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1564900022435/156490/x41564900022435.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1565010038334/156501/x41565010038334.html",
       "area": 52.3,
-      "first": 30.0
+      "first": 28.5
     },
-    "goo:r:41564900029198": {
+    "goo:r:41565010037359": {
       "price": 29.2,
       "name": "東京都目黒区下目黒１丁目 築14年9ヶ月 7階建",
       "station": "目黒",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1564900029198/156490/x41564900029198.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1565010037359/156501/x41565010037359.html",
       "area": 55.89,
       "first": 29.2
     },
@@ -1830,15 +1805,6 @@
       "area": 56.44,
       "first": 31.0
     },
-    "goo:r:1030H100537010830": {
-      "price": 32.7,
-      "name": "東京都目黒区下目黒２ 築7年11ヶ月 7階建",
-      "station": "目黒",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100537010830/189109001/x1030H100537010830.html",
-      "area": 67.52,
-      "first": 32.7
-    },
     "goo:r:1030H100535582287": {
       "price": 28.5,
       "name": "東京都目黒区下目黒２ 築18年10ヶ月 地上22階地下2階建",
@@ -1866,32 +1832,14 @@
       "area": 52.3,
       "first": 31.3
     },
-    "goo:r:1030H100533729596": {
-      "price": 28.5,
-      "name": "パークキューブ目黒タワー",
+    "goo:r:1030H100537010830": {
+      "price": 32.7,
+      "name": "東京都目黒区下目黒２ 築7年11ヶ月 7階建",
       "station": "目黒",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100533729596/175002073/x1030H100533729596.html",
-      "area": 52.3,
-      "first": 28.5
-    },
-    "goo:r:1030H100533729595": {
-      "price": 31.8,
-      "name": "パークキューブ目黒タワー",
-      "station": "目黒",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100533729595/175002073/x1030H100533729595.html",
-      "area": 53.14,
-      "first": 31.8
-    },
-    "goo:r:1030H100532763454": {
-      "price": 31.3,
-      "name": "パークキューブ目黒タワー",
-      "station": "目黒",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100532763454/188662011/x1030H100532763454.html",
-      "area": 52.3,
-      "first": 31.3
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100537010830/189109001/x1030H100537010830.html",
+      "area": 67.52,
+      "first": 32.7
     },
     "goo:r:1030H100536097680": {
       "price": 31.3,
@@ -1935,6 +1883,33 @@
       "station": "目黒",
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100533729593/175002073/x1030H100533729593.html",
+      "area": 52.3,
+      "first": 31.3
+    },
+    "goo:r:1030H100533729596": {
+      "price": 28.5,
+      "name": "パークキューブ目黒タワー",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100533729596/175002073/x1030H100533729596.html",
+      "area": 52.3,
+      "first": 28.5
+    },
+    "goo:r:1030H100533729595": {
+      "price": 31.8,
+      "name": "パークキューブ目黒タワー",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100533729595/175002073/x1030H100533729595.html",
+      "area": 53.14,
+      "first": 31.8
+    },
+    "goo:r:1030H100532763454": {
+      "price": 31.3,
+      "name": "パークキューブ目黒タワー",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100532763454/188662011/x1030H100532763454.html",
       "area": 52.3,
       "first": 31.3
     },
@@ -2028,6 +2003,15 @@
       "area": 63.75,
       "first": 30.0
     },
+    "goo:r:41493000043802": {
+      "price": 28.8,
+      "name": "東京都大田区西蒲田７丁目  14階建",
+      "station": "JR蒲田",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13111/1493000043802/149300/x41493000043802.html",
+      "area": 52.83,
+      "first": 28.8
+    },
     "goo:r:1030H100530214720": {
       "price": 28.8,
       "name": "スタイリオ蒲田ＷＥＳＴ",
@@ -2045,15 +2029,6 @@
       "url": "https://house.goo.ne.jp/rent/ap/detail/4/13111/1259230136979/125923/x41259230136979.html",
       "area": 52.83,
       "first": 28.2
-    },
-    "goo:r:41493000043802": {
-      "price": 28.8,
-      "name": "東京都大田区西蒲田７丁目  14階建",
-      "station": "JR蒲田",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13111/1493000043802/149300/x41493000043802.html",
-      "area": 52.83,
-      "first": 28.8
     },
     "goo:r:41332990121816": {
       "price": 28.1,
@@ -2208,6 +2183,15 @@
       "area": 52.17,
       "first": 31.0
     },
+    "sumaity:r:416329014": {
+      "price": 30.45,
+      "name": "I Daikanyama",
+      "station": "恵比寿",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_416329014/",
+      "area": 54.74,
+      "first": 30.45
+    },
     "sumaity:r:416037430": {
       "price": 30.45,
       "name": "I.Daikanyama",
@@ -2234,6 +2218,51 @@
       "url": "https://sumaity.com/chintai/tokyo_prop/prop_415041760/",
       "area": 50.62,
       "first": 30.0
+    },
+    "housecom:r:2039998": {
+      "price": 28.75,
+      "name": "Ｌａｕｒｕｓ　武蔵小山（ラウルス武蔵小山）",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_2039998/",
+      "area": 56.2,
+      "first": 32.75
+    },
+    "housecom:r:1869776": {
+      "price": 28.7,
+      "name": "レクス武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_1869776/",
+      "area": 59.51,
+      "first": 28.7
+    },
+    "housecom:r:5719269": {
+      "price": 28.8,
+      "name": "Ｂａｒｋ　Ｌａｎｅ武蔵小山Ⅱ",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_5719269/",
+      "area": 61.72,
+      "first": 28.8
+    },
+    "housecom:r:3445352": {
+      "price": 29.8,
+      "name": "スタイリオフィット武蔵小山",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_3445352/",
+      "area": 65.33,
+      "first": 29.8
+    },
+    "housecom:r:2042762": {
+      "price": 28.75,
+      "name": "Ｌａｕｒｕｓ　武蔵小山（ラウルス武蔵小山）",
+      "station": "武蔵小山",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_2042762/",
+      "area": 56.2,
+      "first": 28.75
     },
     "sumaity:r:408681802": {
       "price": 31.9,
@@ -2478,6 +2507,15 @@
       "area": 52.83,
       "first": 28.8
     },
+    "sumaity:r:412305430": {
+      "price": 28.8,
+      "name": "スタイリオ蒲田WEST",
+      "station": "JR蒲田",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_412305430/",
+      "area": 52.83,
+      "first": 28.8
+    },
     "sumaity:r:412309138": {
       "price": 28.3,
       "name": "スタイリオ蒲田WEST",
@@ -2514,51 +2552,6 @@
       "area": 52.83,
       "first": 28.3
     },
-    "housecom:r:2039998": {
-      "price": 28.75,
-      "name": "Ｌａｕｒｕｓ　武蔵小山（ラウルス武蔵小山）",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://www.housecom.jp/room_2039998/",
-      "area": 56.2,
-      "first": 32.75
-    },
-    "housecom:r:1869776": {
-      "price": 28.7,
-      "name": "レクス武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://www.housecom.jp/room_1869776/",
-      "area": 59.51,
-      "first": 28.7
-    },
-    "housecom:r:5719269": {
-      "price": 28.8,
-      "name": "Ｂａｒｋ　Ｌａｎｅ武蔵小山Ⅱ",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://www.housecom.jp/room_5719269/",
-      "area": 61.72,
-      "first": 28.8
-    },
-    "housecom:r:3445352": {
-      "price": 29.8,
-      "name": "スタイリオフィット武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://www.housecom.jp/room_3445352/",
-      "area": 65.33,
-      "first": 29.8
-    },
-    "housecom:r:3447535": {
-      "price": 29.8,
-      "name": "スタイリオフィット武蔵小山",
-      "station": "武蔵小山",
-      "type": "rent",
-      "url": "https://www.housecom.jp/room_3447535/",
-      "area": 65.33,
-      "first": 29.8
-    },
     "chintai:r:bk-C010090950000004620621180001": {
       "price": 30.8,
       "name": "ディームス大井町",
@@ -2586,6 +2579,15 @@
       "area": 54.56,
       "first": 31.0
     },
+    "housecom:r:5814712": {
+      "price": 31.5,
+      "name": "Ｌｏｎｇ　Ｉｓｌａｎｄ　Ｅｂｉｓｕ",
+      "station": "恵比寿",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_5814712/",
+      "area": 52.22,
+      "first": 31.5
+    },
     "sumaity:m:21239567": {
       "price": 13480,
       "name": "ピアース大井仙台坂",
@@ -2594,33 +2596,6 @@
       "url": "https://sumaity.com/mansion/used/tokyo_prop/prop_21239567/",
       "area": 54.28,
       "first": 13480
-    },
-    "housecom:r:5741952": {
-      "price": 31.5,
-      "name": "Ｌｏｎｇ　Ｉｓｌａｎｄ　Ｅｂｉｓｕ",
-      "station": "恵比寿",
-      "type": "rent",
-      "url": "https://www.housecom.jp/room_5741952/",
-      "area": 52.22,
-      "first": 33.0
-    },
-    "rehouse:m:FKXBFA01": {
-      "price": 13400,
-      "name": "プレシス大井町パークフロント",
-      "station": "大井町",
-      "type": "mansion",
-      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBFA01/",
-      "area": 55.68,
-      "first": 13400
-    },
-    "nomu:m:FC7C9011": {
-      "price": 13950,
-      "name": "プレシス大井町パークフロント",
-      "station": "大井町",
-      "type": "mansion",
-      "url": "https://www.nomu.com/mansion/id/FC7C9011/",
-      "area": 53.61,
-      "first": 13950
     },
     "chintai:r:bk-C010090840000004551310500001": {
       "price": 29.8,
@@ -2667,14 +2642,14 @@
       "area": 65.33,
       "first": 29.8
     },
-    "housecom:r:5485140": {
-      "price": 31.0,
-      "name": "オーベル目黒",
-      "station": "目黒",
-      "type": "rent",
-      "url": "https://www.housecom.jp/room_5485140/",
-      "area": 56.44,
-      "first": 31.0
+    "rehouse:m:FKXBFA01": {
+      "price": 13400,
+      "name": "プレシス大井町パークフロント",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.rehouse.co.jp/buy/mansion/bkdetail/FKXBFA01/",
+      "area": 55.68,
+      "first": 13400
     },
     "sumaity:h:21216569": {
       "price": 13980,
@@ -2729,6 +2704,42 @@
       "url": "https://sumaity.com/house/used/tokyo_prop/prop_21430623/",
       "area": 93.05,
       "first": 12900
+    },
+    "nomu:m:FC7C9011": {
+      "price": 13950,
+      "name": "プレシス大井町パークフロント",
+      "station": "大井町",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/FC7C9011/",
+      "area": 53.61,
+      "first": 13950
+    },
+    "housecom:r:5485140": {
+      "price": 31.0,
+      "name": "オーベル目黒",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_5485140/",
+      "area": 56.44,
+      "first": 31.0
+    },
+    "housecom:r:5814655": {
+      "price": 31.3,
+      "name": "パークキューブ目黒タワー",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_5814655/",
+      "area": 52.3,
+      "first": 31.3
+    },
+    "housecom:r:5814654": {
+      "price": 31.8,
+      "name": "パークキューブ目黒タワー",
+      "station": "目黒",
+      "type": "rent",
+      "url": "https://www.housecom.jp/room_5814654/",
+      "area": 53.14,
+      "first": 31.8
     },
     "rehouse:h:F5GBTA10": {
       "price": 12900,
@@ -2874,15 +2885,6 @@
       "area": 57.54,
       "first": 32.1
     },
-    "suumo:r:jnc_000111043417": {
-      "price": 29.0,
-      "name": "アリュールゼームス坂",
-      "station": "大井町",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000111043417/?bc=100536341904",
-      "area": 76.53,
-      "first": 29.0
-    },
     "chintai:r:bk-C010099991111590074273300001": {
       "price": 28.5,
       "name": "南北線 目黒駅 22階建 築18年",
@@ -2937,12 +2939,21 @@
       "area": 55.89,
       "first": 29.2
     },
+    "suumo:r:jnc_000111043417": {
+      "price": 29.0,
+      "name": "アリュールゼームス坂",
+      "station": "大井町",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000111043417/?bc=100536341904",
+      "area": 76.53,
+      "first": 29.0
+    },
     "suumo:r:jnc_000108740582": {
       "price": 28.7,
       "name": "品川区小山２ 賃貸",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000108740582/?bc=100529859091",
+      "url": "https://suumo.jp/chintai/jnc_000108740582/?bc=100529739615",
       "area": 59.51,
       "first": 28.7
     },
@@ -2960,7 +2971,7 @@
       "name": "Bark Lane武蔵小山II",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000110992816/?bc=100535922814",
+      "url": "https://suumo.jp/chintai/jnc_000110992816/?bc=100535922715",
       "area": 61.72,
       "first": 28.8
     },
@@ -2969,7 +2980,7 @@
       "name": "スタイリオフィット武蔵小山",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000106298026/?bc=100534344055",
+      "url": "https://suumo.jp/chintai/jnc_000106298026/?bc=100531340200",
       "area": 65.33,
       "first": 29.8
     },
@@ -2978,7 +2989,7 @@
       "name": "レクス武蔵小山",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000095960345/?bc=100518877959",
+      "url": "https://suumo.jp/chintai/jnc_000095960345/?bc=100518667500",
       "area": 59.51,
       "first": 28.7
     },
@@ -3005,7 +3016,7 @@
       "name": "品川区小山４ 賃貸",
       "station": "武蔵小山",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000110992817/?bc=100535942921",
+      "url": "https://suumo.jp/chintai/jnc_000110992817/?bc=100536615238",
       "area": 61.72,
       "first": 28.8
     },
@@ -3027,6 +3038,15 @@
       "area": 56.44,
       "first": 12480
     },
+    "goo:l:1030Z22191492": {
+      "price": 13500,
+      "name": "東京都品川区西五反田３ 土地",
+      "station": "不動前",
+      "type": "land",
+      "url": "https://house.goo.ne.jp/buy/la/detail/1/13109/030Z22191492/006050446/x1030Z22191492.html",
+      "area": 88.09,
+      "first": 13500
+    },
     "goo:l:41243260010024": {
       "price": 12980,
       "name": "東京都品川区西五反田４丁目 土地",
@@ -3046,13 +3066,22 @@
       "first": 13800
     },
     "goo:h:1030Z21559530": {
-      "price": 12990,
-      "name": "東京都目黒区中目黒５ 1億2,990万円 2LDK",
+      "price": 12499,
+      "name": "東京都目黒区中目黒５ 1億2,499万円 2LDK",
       "station": "中目黒",
       "type": "house",
       "url": "https://house.goo.ne.jp/buy/uh/detail/1/13110/030Z21559530/084833000/x1030Z21559530.html",
       "area": 84.26,
       "first": 12990
+    },
+    "goo:h:1030Z22188517": {
+      "price": 13580,
+      "name": "東京都目黒区中目黒５ 1億3,580万円 3LDK",
+      "station": "中目黒",
+      "type": "house",
+      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13110/030Z22188517/170634001/x1030Z22188517.html",
+      "area": 90.15,
+      "first": 13580
     },
     "goo:h:1030Z21808420": {
       "price": 13980,
@@ -3062,15 +3091,6 @@
       "url": "https://house.goo.ne.jp/buy/bh/detail/1/13112/030Z21808420/163595002/x1030Z21808420.html",
       "area": 104.63,
       "first": 13980
-    },
-    "goo:h:1030Z22132911": {
-      "price": 13580,
-      "name": "東京都目黒区中目黒５ 1億3,580万円 3LDK",
-      "station": "中目黒",
-      "type": "house",
-      "url": "https://house.goo.ne.jp/buy/bh/detail/1/13110/030Z22132911/170634001/x1030Z22132911.html",
-      "area": 90.15,
-      "first": 13580
     },
     "goo:h:1030Z22119982": {
       "price": 13580,
@@ -3135,6 +3155,15 @@
       "area": 54.4,
       "first": 31.0
     },
+    "goo:r:1030H100537233020": {
+      "price": 32.8,
+      "name": "Ｔｅａｍｓ　Ｎｉｓｈｉ－Ｇｏｔａｎｄａ",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100537233020/175002073/x1030H100537233020.html",
+      "area": 50.37,
+      "first": 32.8
+    },
     "goo:r:1030H100532887670": {
       "price": 28.6,
       "name": "Ｔｅａｍｓ　Ｎｉｓｈｉ－Ｇｏｔａｎｄａ",
@@ -3162,14 +3191,23 @@
       "area": 50.37,
       "first": 29.0
     },
-    "goo:r:1030H100532887727": {
-      "price": 29.8,
-      "name": "Ｔｅａｍｓ　Ｎｉｓｈｉ－Ｇｏｔａｎｄａ",
+    "goo:r:1030H100523019592": {
+      "price": 29.4,
+      "name": "東京都品川区西五反田３ 築19年11ヶ月 30階建",
       "station": "不動前",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100532887727/175002016/x1030H100532887727.html",
-      "area": 50.37,
-      "first": 29.8
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100523019592/162534003/x1030H100523019592.html",
+      "area": 57.34,
+      "first": 29.4
+    },
+    "goo:r:1030H100526326062": {
+      "price": 29.5,
+      "name": "東京都品川区西五反田３ 築19年11ヶ月 30階建",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100526326062/112858001/x1030H100526326062.html",
+      "area": 57.34,
+      "first": 29.5
     },
     "goo:r:1030H100529509832": {
       "price": 31.1,
@@ -3206,15 +3244,6 @@
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100528229387/175002012/x1030H100528229387.html",
       "area": 50.37,
       "first": 29.0
-    },
-    "goo:r:1030H100528229378": {
-      "price": 29.8,
-      "name": "東京都品川区西五反田４  地上3階地下1階建",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100528229378/175002012/x1030H100528229378.html",
-      "area": 50.37,
-      "first": 29.8
     },
     "goo:r:1030H100518433734": {
       "price": 32.0,
@@ -3396,30 +3425,12 @@
       "area": 50.37,
       "first": 28.6
     },
-    "goo:r:41587520001084": {
-      "price": 30.0,
-      "name": "セレソ中目黒",
-      "station": "中目黒",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1587520001084/158752/x41587520001084.html",
-      "area": 50.07,
-      "first": 30.0
-    },
-    "goo:r:41537890054371": {
+    "goo:r:41517680014176": {
       "price": 30.0,
       "name": "東京都目黒区中目黒１丁目 築7年1ヶ月 地上6階地下2階建",
       "station": "中目黒",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1537890054371/153789/x41537890054371.html",
-      "area": 50.07,
-      "first": 30.0
-    },
-    "goo:r:41552220008847": {
-      "price": 30.0,
-      "name": "東京都目黒区中目黒１丁目 築7年1ヶ月 6階建",
-      "station": "中目黒",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1552220008847/155222/x41552220008847.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1517680014176/151768/x41517680014176.html",
       "area": 50.07,
       "first": 30.0
     },
@@ -3430,6 +3441,15 @@
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1578320004486/157832/x41578320004486.html",
       "area": 50.23,
+      "first": 30.0
+    },
+    "goo:r:1030H100535839083": {
+      "price": 30.0,
+      "name": "セレソ中目黒",
+      "station": "中目黒",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100535839083/167919004/x1030H100535839083.html",
+      "area": 50.07,
       "first": 30.0
     },
     "goo:r:1030H100533767640": {
@@ -3450,15 +3470,6 @@
       "area": 50.07,
       "first": 30.0
     },
-    "goo:r:1030H100533613274": {
-      "price": 30.0,
-      "name": "セレソ中目黒",
-      "station": "中目黒",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100533613274/130765004/x1030H100533613274.html",
-      "area": 50.07,
-      "first": 30.0
-    },
     "goo:r:1030H100508417422": {
       "price": 30.4,
       "name": "ビバリーホームズ代官山",
@@ -3467,6 +3478,15 @@
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100508417422/191554001/x1030H100508417422.html",
       "area": 55.68,
       "first": 30.4
+    },
+    "goo:r:06992164139": {
+      "price": 30.0,
+      "name": "クオーレ中目黒（中目黒駅７分）",
+      "station": "中目黒",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/0/13110/6992164139/00276743/x06992164139.html",
+      "area": 50.23,
+      "first": 30.0
     },
     "suumo:r:jnc_000109423249": {
       "price": 28.1,
@@ -3491,7 +3511,7 @@
       "name": "スタイリオ蒲田ＷＥＳＴ",
       "station": "JR蒲田",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109416087/?bc=100531347060",
+      "url": "https://suumo.jp/chintai/jnc_000109416087/?bc=100484241216",
       "area": 52.83,
       "first": 28.8
     },
@@ -3513,6 +3533,15 @@
       "area": 52.83,
       "first": 28.8
     },
+    "goo:l:1030Z21518050": {
+      "price": 13500,
+      "name": "東京都品川区東五反田４ 土地",
+      "station": "五反田",
+      "type": "land",
+      "url": "https://house.goo.ne.jp/buy/la/detail/1/13109/030Z21518050/121135004/x1030Z21518050.html",
+      "area": 76.11,
+      "first": 13500
+    },
     "sumaity:r:415232136": {
       "price": 30.0,
       "name": "Ｃｅｒｅｚｏ中目黒",
@@ -3528,24 +3557,6 @@
       "station": "中目黒",
       "type": "rent",
       "url": "https://sumaity.com/chintai/tokyo_prop/prop_415275276/",
-      "area": 50.07,
-      "first": 30.0
-    },
-    "sumaity:r:413045416": {
-      "price": 30.0,
-      "name": "クオーレ中目黒",
-      "station": "中目黒",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_413045416/",
-      "area": 50.23,
-      "first": 30.0
-    },
-    "housecom:r:5595085": {
-      "price": 30.0,
-      "name": "セレソ中目黒",
-      "station": "中目黒",
-      "type": "rent",
-      "url": "https://www.housecom.jp/room_5595085/",
       "area": 50.07,
       "first": 30.0
     },
@@ -3576,26 +3587,8 @@
       "area": 62.41,
       "first": 30.0
     },
-    "goo:r:1030H100536495736": {
-      "price": 29.4,
-      "name": "東京都品川区西五反田３ 築19年10ヶ月 地上30階地下3階建",
-      "station": "五反田",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536495736/130607001/x1030H100536495736.html",
-      "area": 57.34,
-      "first": 29.8
-    },
-    "goo:r:1030H100535742666": {
-      "price": 29.5,
-      "name": "東京都品川区西五反田３ 築19年10ヶ月 地上30階地下3階建",
-      "station": "五反田",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100535742666/130607001/x1030H100535742666.html",
-      "area": 57.34,
-      "first": 29.5
-    },
     "goo:r:1030H100531934537": {
-      "price": 29.8,
+      "price": 29.4,
       "name": "東京都品川区西五反田３ 築19年11ヶ月 30階建",
       "station": "五反田",
       "type": "rent",
@@ -3612,12 +3605,21 @@
       "area": 57.34,
       "first": 29.5
     },
-    "goo:r:1030H100536726281": {
-      "price": 29.5,
-      "name": "レジディアタワー目黒不動前",
+    "goo:r:1030H100536495736": {
+      "price": 29.4,
+      "name": "東京都品川区西五反田３ 築19年10ヶ月 地上30階地下3階建",
       "station": "五反田",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536726281/175002014/x1030H100536726281.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536495736/130607001/x1030H100536495736.html",
+      "area": 57.34,
+      "first": 29.8
+    },
+    "goo:r:1030H100535742666": {
+      "price": 29.5,
+      "name": "東京都品川区西五反田３ 築19年10ヶ月 地上30階地下3階建",
+      "station": "五反田",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100535742666/130607001/x1030H100535742666.html",
       "area": 57.34,
       "first": 29.5
     },
@@ -3638,51 +3640,6 @@
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100510078401/175002012/x1030H100510078401.html",
       "area": 57.34,
       "first": 29.8
-    },
-    "chintai:r:bk-0000000750000000007882750027": {
-      "price": 32.7,
-      "name": "ザ・パークハビオ目黒フォート",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://www.chintai.net/detail/bk-0000000750000000007882750027/",
-      "area": 67.52,
-      "first": 32.7
-    },
-    "chintai:r:bk-C010100001111720071890580001": {
-      "price": 28.7,
-      "name": "ガーデンザヴィス不動前",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://www.chintai.net/detail/bk-C010100001111720071890580001/",
-      "area": 52.29,
-      "first": 28.7
-    },
-    "chintai:r:bk-C010102271111730071890800001": {
-      "price": 28.7,
-      "name": "東急目黒線 不動前駅 6階建 新築",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://www.chintai.net/detail/bk-C010102271111730071890800001/",
-      "area": 52.29,
-      "first": 28.7
-    },
-    "chintai:r:bk-C010086990000005115343730001": {
-      "price": 29.8,
-      "name": "Teams Nishi-Gotanda",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://www.chintai.net/detail/bk-C010086990000005115343730001/",
-      "area": 50.37,
-      "first": 29.8
-    },
-    "chintai:r:bk-C010086990000005115343710001": {
-      "price": 29.0,
-      "name": "Teams Nishi-Gotanda",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://www.chintai.net/detail/bk-C010086990000005115343710001/",
-      "area": 50.37,
-      "first": 29.0
     },
     "sumaity:r:415621212": {
       "price": 31.5,
@@ -3729,32 +3686,41 @@
       "area": 55.2,
       "first": 13800
     },
-    "rehouse:l:F07BUA06": {
-      "price": 13500,
-      "name": "西五反田三丁目土地",
+    "chintai:r:bk-C010086990000005115343710001": {
+      "price": 29.0,
+      "name": "Teams Nishi-Gotanda",
       "station": "不動前",
-      "type": "land",
-      "url": "https://www.rehouse.co.jp/buy/tochi/bkdetail/F07BUA06/",
-      "area": 88.09,
-      "first": 13500
-    },
-    "livable:m:C48267270": {
-      "price": 13740,
-      "name": "ヴィークハウス目黒",
-      "station": "不動前",
-      "type": "mansion",
-      "url": "https://www.livable.co.jp/mansion/C48267270/",
-      "area": 54.03,
-      "first": 13740
-    },
-    "chintai:r:bk-C010086990000005115404740001": {
-      "price": 30.0,
-      "name": "セレソ中目黒",
-      "station": "中目黒",
       "type": "rent",
-      "url": "https://www.chintai.net/detail/bk-C010086990000005115404740001/",
-      "area": 50.07,
-      "first": 30.0
+      "url": "https://www.chintai.net/detail/bk-C010086990000005115343710001/",
+      "area": 50.37,
+      "first": 29.0
+    },
+    "chintai:r:bk-0000000750000000007882750027": {
+      "price": 32.7,
+      "name": "ザ・パークハビオ目黒フォート",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://www.chintai.net/detail/bk-0000000750000000007882750027/",
+      "area": 67.52,
+      "first": 32.7
+    },
+    "chintai:r:bk-C010100001111720071890580001": {
+      "price": 28.7,
+      "name": "ガーデンザヴィス不動前",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://www.chintai.net/detail/bk-C010100001111720071890580001/",
+      "area": 52.29,
+      "first": 28.7
+    },
+    "chintai:r:bk-C010102271111730071890800001": {
+      "price": 28.7,
+      "name": "東急目黒線 不動前駅 6階建 新築",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://www.chintai.net/detail/bk-C010102271111730071890800001/",
+      "area": 52.29,
+      "first": 28.7
     },
     "goo:r:06992429425": {
       "price": 32.9,
@@ -3765,6 +3731,15 @@
       "area": 67.5,
       "first": 32.9
     },
+    "rehouse:l:F07BUA06": {
+      "price": 13500,
+      "name": "西五反田三丁目土地",
+      "station": "不動前",
+      "type": "land",
+      "url": "https://www.rehouse.co.jp/buy/tochi/bkdetail/F07BUA06/",
+      "area": 88.09,
+      "first": 13500
+    },
     "goo:r:41259230133793": {
       "price": 28.3,
       "name": "ジェノヴィア東日本橋駅前グリーンヴェール",
@@ -3773,6 +3748,15 @@
       "url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1259230133793/125923/x41259230133793.html",
       "area": 56.42,
       "first": 28.3
+    },
+    "goo:r:41351210090367": {
+      "price": 30.0,
+      "name": "東京都中央区日本橋馬喰町１丁目 築2年6ヶ月 14階建",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1351210090367/135121/x41351210090367.html",
+      "area": 52.73,
+      "first": 30.0
     },
     "goo:r:41577680014963": {
       "price": 29.5,
@@ -3837,21 +3821,21 @@
       "area": 50.38,
       "first": 30.0
     },
-    "goo:r:1030H100531871880": {
-      "price": 30.0,
-      "name": "東京都中央区日本橋馬喰町１ 築2年6ヶ月 14階建",
+    "goo:r:1030H100537250329": {
+      "price": 28.8,
+      "name": "東京都中央区日本橋馬喰町２ 築4年2ヶ月 12階建",
       "station": "東日本橋",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100531871880/185672001/x1030H100531871880.html",
-      "area": 52.73,
-      "first": 31.0
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100537250329/087209014/x1030H100537250329.html",
+      "area": 50.18,
+      "first": 28.8
     },
-    "goo:r:1030H100443454655": {
+    "goo:r:1030H100536996721": {
       "price": 30.4,
       "name": "東京都中央区日本橋馬喰町１ 築1年10ヶ月 15階建",
       "station": "東日本橋",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100443454655/172767001/x1030H100443454655.html",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100536996721/110499019/x1030H100536996721.html",
       "area": 52.39,
       "first": 30.4
     },
@@ -3888,6 +3872,15 @@
       "station": "東日本橋",
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100532055695/087209014/x1030H100532055695.html",
+      "area": 52.73,
+      "first": 31.0
+    },
+    "goo:r:1030H100531871880": {
+      "price": 30.0,
+      "name": "東京都中央区日本橋馬喰町１ 築2年6ヶ月 14階建",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100531871880/185672001/x1030H100531871880.html",
       "area": 52.73,
       "first": 31.0
     },
@@ -3965,12 +3958,21 @@
     },
     "goo:r:1030H100526190833": {
       "price": 29.5,
-      "name": "プティ・メゾン日本橋",
+      "name": "東京都中央区日本橋浜町１ 築1年9ヶ月 3階建",
       "station": "東日本橋",
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100526190833/175556004/x1030H100526190833.html",
       "area": 61.38,
       "first": 29.5
+    },
+    "goo:r:1030H100526050620": {
+      "price": 28.7,
+      "name": "プティ・メゾン日本橋",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100526050620/145338001/x1030H100526050620.html",
+      "area": 61.38,
+      "first": 28.7
     },
     "goo:r:1030H100524291882": {
       "price": 32.0,
@@ -3990,86 +3992,23 @@
       "area": 56.46,
       "first": 29.0
     },
-    "suumo:r:jnc_000109943749": {
-      "price": 28.6,
-      "name": "Teams Nishi-Gotanda",
+    "livable:m:C48267270": {
+      "price": 13740,
+      "name": "ヴィークハウス目黒",
       "station": "不動前",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109943749/?bc=100528044184",
-      "area": 50.37,
-      "first": 28.6
-    },
-    "suumo:r:jnc_000109943751": {
-      "price": 28.8,
-      "name": "Teams Nishi-Gotanda",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109943751/?bc=100528044182",
-      "area": 50.37,
-      "first": 28.8
-    },
-    "suumo:r:jnc_000109943753": {
-      "price": 29.0,
-      "name": "Teams Nishi-Gotanda",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109943753/?bc=100528044181",
-      "area": 50.37,
-      "first": 29.0
-    },
-    "suumo:r:jnc_000109998664": {
-      "price": 28.7,
-      "name": "品川区西五反田５ 賃貸",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109998664/?bc=100518721611",
-      "area": 52.29,
-      "first": 28.7
-    },
-    "suumo:r:jnc_000111043399": {
-      "price": 28.5,
-      "name": "プレミスト不動前",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000111043399/?bc=100487766793",
-      "area": 51.22,
-      "first": 28.5
-    },
-    "suumo:r:jnc_000109995031": {
-      "price": 28.6,
-      "name": "品川区西五反田４ 賃貸",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109995031/?bc=100528229398",
-      "area": 50.37,
-      "first": 28.6
-    },
-    "suumo:r:jnc_000109995033": {
-      "price": 28.8,
-      "name": "品川区西五反田４ 賃貸",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109995033/?bc=100528229383",
-      "area": 50.37,
-      "first": 28.8
-    },
-    "suumo:r:jnc_000109995035": {
-      "price": 29.0,
-      "name": "品川区西五反田４ 賃貸",
-      "station": "不動前",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109995035/?bc=100528229387",
-      "area": 50.37,
-      "first": 29.0
-    },
-    "sumaity:m:20934737": {
-      "price": 13500,
-      "name": "プラウド五反田",
-      "station": "五反田",
       "type": "mansion",
-      "url": "https://sumaity.com/mansion/used/tokyo_prop/prop_20934737/",
-      "area": 55.21,
-      "first": 13500
+      "url": "https://www.livable.co.jp/mansion/C48267270/",
+      "area": 54.03,
+      "first": 13740
+    },
+    "chintai:r:bk-C010086990000005115404740001": {
+      "price": 30.0,
+      "name": "セレソ中目黒",
+      "station": "中目黒",
+      "type": "rent",
+      "url": "https://www.chintai.net/detail/bk-C010086990000005115404740001/",
+      "area": 50.07,
+      "first": 30.0
     },
     "sumaity:m:20935545": {
       "price": 13500,
@@ -4086,6 +4025,15 @@
       "station": "五反田",
       "type": "mansion",
       "url": "https://sumaity.com/mansion/used/tokyo_prop/prop_21423459/",
+      "area": 55.21,
+      "first": 12480
+    },
+    "sumaity:m:21448213": {
+      "price": 12480,
+      "name": "プラウド五反田",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://sumaity.com/mansion/used/tokyo_prop/prop_21448213/",
       "area": 55.21,
       "first": 12480
     },
@@ -4179,41 +4127,23 @@
       "area": 59.5,
       "first": 12998
     },
-    "nomu:m:W8670030": {
-      "price": 12980,
-      "name": "ザ・パークハウスアーバンス東五反田",
-      "station": "五反田",
-      "type": "mansion",
-      "url": "https://www.nomu.com/mansion/id/W8670030/",
-      "area": 56.91,
-      "first": 13980
+    "chintai:r:bk-0000006510000000007810910066": {
+      "price": 29.9,
+      "name": "パークアクシス日本橋浜町レジデンス",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://www.chintai.net/detail/bk-0000006510000000007810910066/",
+      "area": 50.36,
+      "first": 29.9
     },
-    "nomu:m:R8671144": {
-      "price": 14000,
-      "name": "リビオ目黒リバーサウス",
-      "station": "五反田",
-      "type": "mansion",
-      "url": "https://www.nomu.com/mansion/id/R8671144/",
-      "area": 65.58,
-      "first": 14000
-    },
-    "nomu:m:W8670025": {
-      "price": 12080,
-      "name": "ザ・パークハウスアーバンス東五反田",
-      "station": "五反田",
-      "type": "mansion",
-      "url": "https://www.nomu.com/mansion/id/W8670025/",
-      "area": 58.07,
-      "first": 12080
-    },
-    "nomu:m:R8671128": {
-      "price": 12998,
-      "name": "クラッシィスイート五反田",
-      "station": "五反田",
-      "type": "mansion",
-      "url": "https://www.nomu.com/mansion/id/R8671128/",
-      "area": 59.5,
-      "first": 12998
+    "chintai:r:bk-C010086960000005141703040001": {
+      "price": 29.9,
+      "name": "パークアクシス日本橋浜町レジデンス",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://www.chintai.net/detail/bk-C010086960000005141703040001/",
+      "area": 50.36,
+      "first": 29.9
     },
     "chintai:r:bk-C010104181111280032113850001": {
       "price": 28.8,
@@ -4269,15 +4199,6 @@
       "area": 60.86,
       "first": 31.7
     },
-    "chintai:r:bk-C010086960000005141703040001": {
-      "price": 29.9,
-      "name": "パークアクシス日本橋浜町レジデンス",
-      "station": "東日本橋",
-      "type": "rent",
-      "url": "https://www.chintai.net/detail/bk-C010086960000005141703040001/",
-      "area": 50.36,
-      "first": 29.9
-    },
     "chintai:r:bk-0000006510000000006764380001": {
       "price": 28.3,
       "name": "ｼﾞｪﾉｳﾞｨｱ東日本橋駅前ｸﾞﾘｰﾝｳﾞｪｰﾙ",
@@ -4323,6 +4244,114 @@
       "area": 52.73,
       "first": 31.0
     },
+    "nomu:m:W8670030": {
+      "price": 12980,
+      "name": "ザ・パークハウスアーバンス東五反田",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/W8670030/",
+      "area": 56.91,
+      "first": 13980
+    },
+    "nomu:m:R8671144": {
+      "price": 14000,
+      "name": "リビオ目黒リバーサウス",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/R8671144/",
+      "area": 65.58,
+      "first": 14000
+    },
+    "nomu:m:W8670025": {
+      "price": 12080,
+      "name": "ザ・パークハウスアーバンス東五反田",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/W8670025/",
+      "area": 58.07,
+      "first": 12080
+    },
+    "nomu:m:R8671128": {
+      "price": 12998,
+      "name": "クラッシィスイート五反田",
+      "station": "五反田",
+      "type": "mansion",
+      "url": "https://www.nomu.com/mansion/id/R8671128/",
+      "area": 59.5,
+      "first": 12998
+    },
+    "suumo:r:jnc_000109943749": {
+      "price": 28.6,
+      "name": "Teams Nishi-Gotanda",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109943749/?bc=100527761423",
+      "area": 50.37,
+      "first": 28.6
+    },
+    "suumo:r:jnc_000109943751": {
+      "price": 28.8,
+      "name": "Teams Nishi-Gotanda",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109943751/?bc=100527761429",
+      "area": 50.37,
+      "first": 28.8
+    },
+    "suumo:r:jnc_000109943753": {
+      "price": 29.0,
+      "name": "Teams Nishi-Gotanda",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109943753/?bc=100527761420",
+      "area": 50.37,
+      "first": 29.0
+    },
+    "suumo:r:jnc_000109998664": {
+      "price": 28.7,
+      "name": "品川区西五反田５ 賃貸",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109998664/?bc=100518721611",
+      "area": 52.29,
+      "first": 28.7
+    },
+    "suumo:r:jnc_000111043399": {
+      "price": 28.5,
+      "name": "プレミスト不動前",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000111043399/?bc=100487766793",
+      "area": 51.22,
+      "first": 28.5
+    },
+    "suumo:r:jnc_000109995031": {
+      "price": 28.6,
+      "name": "品川区西五反田４ 賃貸",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109995031/?bc=100528229398",
+      "area": 50.37,
+      "first": 28.6
+    },
+    "suumo:r:jnc_000109995033": {
+      "price": 28.8,
+      "name": "品川区西五反田４ 賃貸",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109995033/?bc=100528229383",
+      "area": 50.37,
+      "first": 28.8
+    },
+    "suumo:r:jnc_000109995035": {
+      "price": 29.0,
+      "name": "品川区西五反田４ 賃貸",
+      "station": "不動前",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109995035/?bc=100528229387",
+      "area": 50.37,
+      "first": 29.0
+    },
     "nomu:m:V8770016": {
       "price": 12800,
       "name": "プレミスト日本橋浜町リデアル",
@@ -4331,15 +4360,6 @@
       "url": "https://www.nomu.com/mansion/id/V8770016/",
       "area": 56.61,
       "first": 13800
-    },
-    "suumo:r:jnc_000109483276": {
-      "price": 28.3,
-      "name": "ジェノヴィア東日本橋駅前グリーンヴェール",
-      "station": "東日本橋",
-      "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000109483276/?bc=100524719315",
-      "area": 56.42,
-      "first": 28.3
     },
     "suumo:r:jnc_000109483277": {
       "price": 28.3,
@@ -4350,12 +4370,21 @@
       "area": 56.42,
       "first": 28.3
     },
+    "suumo:r:jnc_000109483276": {
+      "price": 28.3,
+      "name": "ジェノヴィア東日本橋駅前グリーンヴェール",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000109483276/?bc=100524719315",
+      "area": 56.42,
+      "first": 28.3
+    },
     "suumo:r:jnc_000091429074": {
       "price": 30.0,
       "name": "ＭＦＰＲコート日本橋馬喰町",
       "station": "東日本橋",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000091429074/?bc=100531898833",
+      "url": "https://suumo.jp/chintai/jnc_000091429074/?bc=100537399068",
       "area": 52.73,
       "first": 30.0
     },
@@ -4364,7 +4393,7 @@
       "name": "バウスフラッツ日本橋馬喰町",
       "station": "東日本橋",
       "type": "rent",
-      "url": "https://suumo.jp/chintai/jnc_000111132489/?bc=100537142890",
+      "url": "https://suumo.jp/chintai/jnc_000111132489/?bc=100537185800",
       "area": 50.18,
       "first": 28.8
     },
@@ -4395,6 +4424,15 @@
       "area": 56.46,
       "first": 30.0
     },
+    "suumo:r:jnc_000110608513": {
+      "price": 29.5,
+      "name": "ＯＮＥ ＲＯＯＦ ＲＥＳＩＤＥＮＣＥ ＡＳＡＫＵＳＡＢＡＳＨＩ",
+      "station": "東日本橋",
+      "type": "rent",
+      "url": "https://suumo.jp/chintai/jnc_000110608513/?bc=100533021825",
+      "area": 50.59,
+      "first": 29.5
+    },
     "suumo:r:jnc_000109707786": {
       "price": 28.7,
       "name": "プティ・メゾン日本橋",
@@ -4404,95 +4442,14 @@
       "area": 61.38,
       "first": 28.7
     },
-    "goo:r:41580550008915": {
-      "price": 31.0,
-      "name": "パークシティ武蔵小杉ザガーデンタワーズイースト",
-      "station": "武蔵小杉",
+    "goo:r:41400740010280": {
+      "price": 32.5,
+      "name": "コンフォリア三田ＥＡＳＴ",
+      "station": "田町",
       "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/14133/1580550008915/158055/x41580550008915.html",
-      "area": 59.24,
-      "first": 31.0
-    },
-    "goo:r:41225750046738": {
-      "price": 31.0,
-      "name": "神奈川県川崎市中原区小杉町２丁目 築9年1ヶ月 地上53階地下1階建",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/14133/1225750046738/122575/x41225750046738.html",
-      "area": 59.24,
-      "first": 31.0
-    },
-    "goo:r:41580550008631": {
-      "price": 30.0,
-      "name": "パークシティ武蔵小杉ミッドスカイタワー",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/14133/1580550008631/158055/x41580550008631.html",
-      "area": 63.57,
-      "first": 30.0
-    },
-    "goo:r:1030H100537099988": {
-      "price": 29.4,
-      "name": "プラウドタワー武蔵小杉",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100537099988/000389958/x1030H100537099988.html",
-      "area": 62.17,
-      "first": 29.4
-    },
-    "goo:r:1030H100536228465": {
-      "price": 31.0,
-      "name": "パークシティ武蔵小杉ザ・ガーデンタワーズイースト",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100536228465/123005003/x1030H100536228465.html",
-      "area": 59.24,
-      "first": 31.0
-    },
-    "goo:r:1030H100536244051": {
-      "price": 31.0,
-      "name": "パークシティ武蔵小杉ザガーデンタワーズイースト",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100536244051/144050002/x1030H100536244051.html",
-      "area": 59.24,
-      "first": 31.0
-    },
-    "goo:r:1030H100536084004": {
-      "price": 31.0,
-      "name": "パークシティ武蔵小杉ザガーデンタワーズイースト（０２０９５１）",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100536084004/153297006/x1030H100536084004.html",
-      "area": 59.24,
-      "first": 31.0
-    },
-    "goo:r:1030H100536173535": {
-      "price": 31.0,
-      "name": "パークシティ武蔵小杉　ザガーデンタワーズイースト",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100536173535/147511001/x1030H100536173535.html",
-      "area": 59.24,
-      "first": 31.0
-    },
-    "goo:r:1030H100529768363": {
-      "price": 33.0,
-      "name": "シティタワー武蔵小杉",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100529768363/194325015/x1030H100529768363.html",
-      "area": 54.66,
-      "first": 33.0
-    },
-    "goo:r:01102766737": {
-      "price": 33.0,
-      "name": "リエトコート武蔵小杉ザ・クラッシィタワー",
-      "station": "武蔵小杉",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/0/14133/1102766737/00313142/x01102766737.html",
-      "area": 75.87,
-      "first": 33.0
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1400740010280/140074/x41400740010280.html",
+      "area": 50.24,
+      "first": 32.5
     },
     "goo:r:41206950509680": {
       "price": 32.5,
@@ -4509,15 +4466,6 @@
       "station": "田町",
       "type": "rent",
       "url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1476490244591/147649/x41476490244591.html",
-      "area": 50.24,
-      "first": 32.5
-    },
-    "goo:r:41400740010280": {
-      "price": 32.5,
-      "name": "コンフォリア三田ＥＡＳＴ",
-      "station": "田町",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1400740010280/140074/x41400740010280.html",
       "area": 50.24,
       "first": 32.5
     },
@@ -4539,15 +4487,6 @@
       "area": 55.11,
       "first": 32.0
     },
-    "goo:r:1030H100537136781": {
-      "price": 32.5,
-      "name": "コンフォリア三田イースト",
-      "station": "田町",
-      "type": "rent",
-      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100537136781/162382001/x1030H100537136781.html",
-      "area": 50.24,
-      "first": 32.5
-    },
     "goo:r:1030H100537058715": {
       "price": 32.0,
       "name": "東京都港区芝浦３ 築10年11ヶ月 11階建",
@@ -4556,6 +4495,15 @@
       "url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100537058715/180605001/x1030H100537058715.html",
       "area": 55.11,
       "first": 32.0
+    },
+    "goo:r:1030H100537208651": {
+      "price": 32.5,
+      "name": "コンフォリア三田イースト",
+      "station": "田町",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100537208651/168624001/x1030H100537208651.html",
+      "area": 50.24,
+      "first": 32.5
     },
     "goo:r:1030H100537065864": {
       "price": 32.5,
@@ -4602,6 +4550,114 @@
       "area": 50.24,
       "first": 32.5
     },
+    "goo:r:41580550008915": {
+      "price": 31.0,
+      "name": "パークシティ武蔵小杉ザガーデンタワーズイースト",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/14133/1580550008915/158055/x41580550008915.html",
+      "area": 59.24,
+      "first": 31.0
+    },
+    "goo:r:41225750046738": {
+      "price": 31.0,
+      "name": "神奈川県川崎市中原区小杉町２丁目 築9年1ヶ月 地上53階地下1階建",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/14133/1225750046738/122575/x41225750046738.html",
+      "area": 59.24,
+      "first": 31.0
+    },
+    "goo:r:41580550008631": {
+      "price": 30.0,
+      "name": "パークシティ武蔵小杉ミッドスカイタワー",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/4/14133/1580550008631/158055/x41580550008631.html",
+      "area": 63.57,
+      "first": 30.0
+    },
+    "goo:r:1030H100537099988": {
+      "price": 29.4,
+      "name": "プラウドタワー武蔵小杉",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100537099988/000389958/x1030H100537099988.html",
+      "area": 62.17,
+      "first": 29.4
+    },
+    "goo:r:1030H100536244051": {
+      "price": 31.0,
+      "name": "パークシティ武蔵小杉ザガーデンタワーズイースト",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100536244051/144050002/x1030H100536244051.html",
+      "area": 59.24,
+      "first": 31.0
+    },
+    "goo:r:1030H100536228465": {
+      "price": 31.0,
+      "name": "パークシティ武蔵小杉ザ・ガーデンタワーズイースト",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100536228465/123005003/x1030H100536228465.html",
+      "area": 59.24,
+      "first": 31.0
+    },
+    "goo:r:1030H100536084004": {
+      "price": 31.0,
+      "name": "パークシティ武蔵小杉ザガーデンタワーズイースト（０２０９５１）",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100536084004/153297006/x1030H100536084004.html",
+      "area": 59.24,
+      "first": 31.0
+    },
+    "goo:r:1030H100536173535": {
+      "price": 31.0,
+      "name": "パークシティ武蔵小杉　ザガーデンタワーズイースト",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100536173535/147511001/x1030H100536173535.html",
+      "area": 59.24,
+      "first": 31.0
+    },
+    "goo:r:1030H100529768363": {
+      "price": 33.0,
+      "name": "シティタワー武蔵小杉",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/1/14133/030H100529768363/194325015/x1030H100529768363.html",
+      "area": 54.66,
+      "first": 33.0
+    },
+    "goo:r:01102766737": {
+      "price": 33.0,
+      "name": "リエトコート武蔵小杉ザ・クラッシィタワー",
+      "station": "武蔵小杉",
+      "type": "rent",
+      "url": "https://house.goo.ne.jp/rent/ap/detail/0/14133/1102766737/00313142/x01102766737.html",
+      "area": 75.87,
+      "first": 33.0
+    },
+    "sumaity:r:412509614": {
+      "price": 32.0,
+      "name": "山手線田町駅まで徒歩7分",
+      "station": "田町",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_412509614/",
+      "area": 55.11,
+      "first": 32.0
+    },
+    "sumaity:r:414708536": {
+      "price": 29.5,
+      "name": "SK 三田 Residence",
+      "station": "田町",
+      "type": "rent",
+      "url": "https://sumaity.com/chintai/tokyo_prop/prop_414708536/",
+      "area": 52.5,
+      "first": 29.5
+    },
     "sumaity:r:416043682": {
       "price": 31.0,
       "name": "パークシティ武蔵小杉ザガーデンタワーズイースト",
@@ -4646,33 +4702,6 @@
       "url": "https://sumaity.com/chintai/kanagawa_prop/prop_416299398/",
       "area": 62.17,
       "first": 29.4
-    },
-    "sumaity:r:412455064": {
-      "price": 32.0,
-      "name": "ＮＴＰＲレジデンス芝浦三丁目",
-      "station": "田町",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_412455064/",
-      "area": 55.11,
-      "first": 32.0
-    },
-    "sumaity:r:412509614": {
-      "price": 32.0,
-      "name": "山手線田町駅まで徒歩7分",
-      "station": "田町",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_412509614/",
-      "area": 55.11,
-      "first": 32.0
-    },
-    "sumaity:r:414708536": {
-      "price": 29.5,
-      "name": "SK 三田 Residence",
-      "station": "田町",
-      "type": "rent",
-      "url": "https://sumaity.com/chintai/tokyo_prop/prop_414708536/",
-      "area": 52.5,
-      "first": 29.5
     },
     "housecom:r:5664435": {
       "price": 32.0,
@@ -9409,10 +9438,52 @@
       "first_price": 24.7,
       "cuts": [],
       "last_price": 24.7
+    },
+    "suumo:m:22050897": {
+      "first": "2026-11-16",
+      "first_price": 9800,
+      "cuts": [],
+      "last_price": 9800
+    },
+    "suumo:m:22195359": {
+      "first": "2026-11-16",
+      "first_price": 9480,
+      "cuts": [],
+      "last_price": 9480
+    },
+    "goo:r:1030H100537230887": {
+      "first": "2026-11-16",
+      "first_price": 18.2,
+      "cuts": [],
+      "last_price": 18.2
+    },
+    "goo:r:1030H100537233593": {
+      "first": "2026-11-16",
+      "first_price": 26.5,
+      "cuts": [],
+      "last_price": 26.5
+    },
+    "goo:r:41562630010496": {
+      "first": "2026-11-16",
+      "first_price": 23.9,
+      "cuts": [],
+      "last_price": 23.9
+    },
+    "goo:r:41580550008682": {
+      "first": "2026-11-16",
+      "first_price": 25.8,
+      "cuts": [],
+      "last_price": 25.8
+    },
+    "suumo:r:jnc_000110552281": {
+      "first": "2026-11-16",
+      "first_price": 24.0,
+      "cuts": [],
+      "last_price": 24.0
     }
   },
-  "notified_on": "2026-11-11",
-  "page_count": 99,
+  "notified_on": "2026-11-16",
+  "page_count": 102,
   "pool": {
     "suumo:m:21709869": {
       "item": {
@@ -9498,12 +9569,12 @@
       },
       "last_seen": "2026-11-16"
     },
-    "suumo:m:21716988": {
+    "suumo:m:21383104": {
       "item": {
-        "id": "suumo:m:21716988",
+        "id": "suumo:m:21383104",
         "station": "大井町",
         "type": "mansion",
-        "name": "■進化する大井町駅周辺複合開発（大井町トラックス他）に近く利便性良好",
+        "name": "東大井５（大井町駅） 1億1980万円",
         "price": 11980,
         "area": 52.16,
         "layout": "2LDK",
@@ -9516,12 +9587,48 @@
         ],
         "addr": "品川区東大井５",
         "built": 2014,
-        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_21716988/",
-        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/988/21716988/21716988_0001.jpg",
+        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_21383104/",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/104/21383104/21383104_0023.jpg",
         "floor": "2階",
         "source": "SUUMO",
+        "parking": "無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:m:20509341": {
+      "item": {
+        "id": "suumo:m:20509341",
+        "station": "武蔵小山",
+        "type": "mansion",
+        "name": "◆ハイルーフ駐車場空きあり！◇6階南東向きで眺望良好！◆充実の設備！",
+        "price": 11980,
+        "area": 57.01,
+        "layout": "2LDK",
+        "walk": 4,
+        "walks": [
+          [
+            "武蔵小山",
+            4
+          ],
+          [
+            "西小山",
+            11
+          ],
+          [
+            "学芸大学",
+            24
+          ]
+        ],
+        "addr": "目黒区目黒本町３",
+        "built": 2007,
+        "url": "https://suumo.jp/ms/chuko/tokyo/sc_meguro/nc_20509341/",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/341/20509341/20509341_0060.jpg",
+        "floor": "6階",
+        "source": "SUUMO",
         "parking": "有",
-        "parking_price": "2万2,000円〜3万2,000円/月",
+        "parking_price": "2万5,000円〜2万8,000円/月",
         "img_is_plan": false
       },
       "last_seen": "2026-11-16"
@@ -9585,6 +9692,42 @@
         "floor": "—",
         "source": "SUUMO",
         "parking": "—",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:h:21342505": {
+      "item": {
+        "id": "suumo:h:21342505",
+        "station": "武蔵小山",
+        "type": "house",
+        "name": "「武蔵小山駅」徒歩7分の新築戸建分譲交通アクセス、生活利便性の良い立地",
+        "price": 10880,
+        "area": 61.9,
+        "layout": "3LDK",
+        "walk": 7,
+        "walks": [
+          [
+            "武蔵小山",
+            7
+          ],
+          [
+            "不動前",
+            10
+          ],
+          [
+            "戸越銀座",
+            19
+          ]
+        ],
+        "addr": "品川区小山台１",
+        "built": 2027,
+        "url": "https://suumo.jp/ikkodate/tokyo/sc_shinagawa/nc_21342505/",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/505/21342505/21342505_0021.jpg",
+        "floor": "3階建",
+        "source": "SUUMO",
+        "parking": "無",
         "parking_price": "",
         "img_is_plan": false
       },
@@ -9910,12 +10053,12 @@
       },
       "last_seen": "2026-11-16"
     },
-    "suumo:m:22063375": {
+    "suumo:m:22050897": {
       "item": {
-        "id": "suumo:m:22063375",
+        "id": "suumo:m:22050897",
         "station": "不動前",
         "type": "mansion",
-        "name": "地上5階建ての洗練された佇まい！街並みに調和する、落ち着きと質の高い暮らし",
+        "name": "小山１（不動前駅） 9800万円",
         "price": 9800,
         "area": 54.25,
         "layout": "2LDK",
@@ -9927,17 +10070,17 @@
           ],
           [
             "武蔵小山",
-            11
+            9
           ],
           [
-            "戸越銀座",
-            15
+            "目黒",
+            19
           ]
         ],
         "addr": "品川区小山１",
         "built": 2013,
-        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_22063375/",
-        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/375/22063375/22063375_0008.jpg",
+        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_22050897/",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/897/22050897/22050897_0030.jpg",
         "floor": "1階",
         "source": "SUUMO",
         "parking": "空無",
@@ -10070,13 +10213,13 @@
       },
       "last_seen": "2026-11-16"
     },
-    "suumo:m:22138956": {
+    "suumo:m:22195359": {
       "item": {
-        "id": "suumo:m:22138956",
+        "id": "suumo:m:22195359",
         "station": "五反田",
         "type": "mansion",
         "name": "2013年築 5階東南角住戸奥行きたっぷりワイドバルコニー 新耐震基準",
-        "price": 9990,
+        "price": 9480,
         "area": 53.81,
         "layout": "2LDK",
         "walk": 5,
@@ -10092,8 +10235,8 @@
         ],
         "addr": "品川区西五反田２",
         "built": 2013,
-        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_22138956/",
-        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/956/22138956/22138956_0001.jpg",
+        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_22195359/",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/359/22195359/22195359_0001.jpg",
         "floor": "5階",
         "source": "SUUMO",
         "parking": "有",
@@ -10545,7 +10688,7 @@
         "type": "land",
         "name": "螢池東町２（蛍池駅） 6000万円",
         "price": 6000,
-        "area": 133.83,
+        "area": 138.88,
         "layout": "",
         "walk": 3,
         "walks": [
@@ -10562,38 +10705,6 @@
         "built": null,
         "url": "https://suumo.jp/tochi/osaka/sc_toyonaka/nc_21839254/",
         "img": "https://suumo.jp/front/gazo/bukken/060/N010000/img/254/21839254/21839254_0017.jpg",
-        "floor": "—",
-        "source": "SUUMO",
-        "parking": "—",
-        "parking_price": "",
-        "img_is_plan": false
-      },
-      "last_seen": "2026-11-16"
-    },
-    "suumo:l:21857352": {
-      "item": {
-        "id": "suumo:l:21857352",
-        "station": "蛍池",
-        "type": "land",
-        "name": "■ウィル不動産販売■建築条件無し土地につきお好きなハウスメーカーで建築可■",
-        "price": 6000,
-        "area": 138.88,
-        "layout": "",
-        "walk": 3,
-        "walks": [
-          [
-            "蛍池",
-            3
-          ],
-          [
-            "大阪空港",
-            23
-          ]
-        ],
-        "addr": "豊中市螢池東町２",
-        "built": null,
-        "url": "https://suumo.jp/tochi/osaka/sc_toyonaka/nc_21857352/",
-        "img": "https://suumo.jp/front/gazo/bukken/060/N010000/img/352/21857352/21857352_0002.jpg",
         "floor": "—",
         "source": "SUUMO",
         "parking": "—",
@@ -10637,13 +10748,13 @@
       },
       "last_seen": "2026-11-16"
     },
-    "goo:r:1030H100536285953": {
+    "goo:r:1030H100537230887": {
       "item": {
-        "id": "goo:r:1030H100536285953",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/953/100536285953/100536285953_go.jpg?800x800",
+        "id": "goo:r:1030H100537230887",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/887/100537230887/100537230887_go.jpg?800x800",
         "station": "大井町",
         "type": "rent",
-        "name": "東京都品川区東大井３ 築10年4ヶ月 3階建",
+        "name": "エルリヴェール大井町",
         "price": 18.2,
         "rent": 17.9,
         "kanri": 3000,
@@ -10668,7 +10779,7 @@
         "floor": "3階",
         "shikirei": "敷1ヶ月/礼1ヶ月",
         "addr": "品川区東大井３",
-        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536285953/175002014/x1030H100536285953.html",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100537230887/175002015/x1030H100537230887.html",
         "source": "goo住宅",
         "parking": "無",
         "parking_price": "",
@@ -10676,13 +10787,53 @@
       },
       "last_seen": "2026-11-16"
     },
-    "goo:r:1030H100532940630": {
+    "goo:r:1030H100534607053": {
       "item": {
-        "id": "goo:r:1030H100532940630",
-        "img": "http://img10.suumo.jp/front/gazo/fr/bukken/630/100532940630/100532940630_gw.jpg?800x800",
+        "id": "goo:r:1030H100534607053",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/053/100534607053/100534607053_go.jpg?800x800",
         "station": "大井町",
         "type": "rent",
-        "name": "東京都品川区大井２  3階建",
+        "name": "Ｓ・ＦＬＡＴＶ",
+        "price": 25.7,
+        "rent": 25.0,
+        "kanri": 7000,
+        "area": 52.7,
+        "layout": "2LDK",
+        "walk": 7,
+        "walks": [
+          [
+            "大井町",
+            7
+          ],
+          [
+            "下神明",
+            7
+          ],
+          [
+            "西大井",
+            12
+          ]
+        ],
+        "built": 2026,
+        "floor": "3階",
+        "shikirei": "敷1ヶ月/礼1ヶ月",
+        "addr": "品川区大井２",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100534607053/163594003/x1030H100534607053.html",
+        "source": "goo住宅",
+        "parking": "無",
+        "parking_price": "",
+        "built_listed": 2025,
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "goo:r:01183157315": {
+      "item": {
+        "id": "goo:r:01183157315",
+        "img": "https://img4.athome.jp/image_files/index/bukken/1183157315/2.jpeg?height=500&width=500&stno20024&oemdate=20261021071332?800x800",
+        "station": "大井町",
+        "type": "rent",
+        "name": "東京都品川区大井２丁目  3階建",
         "price": 25.5,
         "rent": 25.0,
         "kanri": 5000,
@@ -10702,8 +10853,8 @@
         "built": 2026,
         "floor": "3階",
         "shikirei": "敷25万円/礼25万円",
-        "addr": "品川区大井２",
-        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100532940630/107039017/x1030H100532940630.html",
+        "addr": "品川区大井２丁目",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/0/13109/1183157315/00621317/x01183157315.html",
         "source": "goo住宅",
         "parking": "無",
         "parking_price": "",
@@ -10717,7 +10868,7 @@
         "img": "https://img4.athome.jp/image_files/index/bukken/1101547637/2.jpeg?height=500&width=500&stno20024&oemdate=20261026094720?800x800",
         "station": "大井町",
         "type": "rent",
-        "name": "Ｓ．ＦＬＡＴ　Ⅴ",
+        "name": "東京都品川区大井２丁目  3階建",
         "price": 25.5,
         "rent": 25.0,
         "kanri": 5000,
@@ -10746,81 +10897,6 @@
         "source": "goo住宅",
         "parking": "無",
         "parking_price": "",
-        "img_is_plan": false
-      },
-      "last_seen": "2026-11-16"
-    },
-    "suumo:r:jnc_000110817118": {
-      "item": {
-        "id": "suumo:r:jnc_000110817118",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/053/100534607053/100534607053_ro.jpg",
-        "station": "大井町",
-        "type": "rent",
-        "name": "S・FLATV",
-        "price": 25.7,
-        "rent": 25.0,
-        "kanri": 0.7,
-        "area": 52.7,
-        "layout": "2LDK",
-        "walk": 7,
-        "built": 2025,
-        "floor": "3階",
-        "shikirei": "敷25万円/礼25万円",
-        "addr": "東京都品川区大井２",
-        "url": "https://suumo.jp/chintai/jnc_000110817118/?bc=100534607053",
-        "source": "SUUMO賃貸",
-        "parking": "無",
-        "parking_price": "",
-        "walks": [
-          [
-            "大井町",
-            7
-          ],
-          [
-            "下神明",
-            7
-          ],
-          [
-            "西大井",
-            12
-          ]
-        ],
-        "img_is_plan": false
-      },
-      "last_seen": "2026-11-16"
-    },
-    "goo:m:1030Z20509341": {
-      "item": {
-        "id": "goo:m:1030Z20509341",
-        "img": "https://img01.suumo.com/front/gazo/bukken/030/N010000/img/341/20509341/20509341_0019.jpg?800x800",
-        "station": "武蔵小山",
-        "type": "mansion",
-        "name": "アトラス目黒本町",
-        "price": 11980,
-        "area": 57.01,
-        "layout": "2LDK",
-        "walk": 4,
-        "walks": [
-          [
-            "武蔵小山",
-            4
-          ],
-          [
-            "西小山",
-            11
-          ],
-          [
-            "学芸大学",
-            24
-          ]
-        ],
-        "built": 2007,
-        "floor": "6階",
-        "addr": "目黒区目黒本町３",
-        "url": "https://house.goo.ne.jp/buy/um/detail/1/13110/030Z20509341/068892033/x1030Z20509341.html",
-        "source": "goo住宅",
-        "parking": "有",
-        "parking_price": "2万5,000円〜2万8,000円/月",
         "img_is_plan": false
       },
       "last_seen": "2026-11-16"
@@ -10854,87 +10930,6 @@
         "floor": "3階建",
         "addr": "目黒区目黒本町4丁目",
         "url": "https://house.goo.ne.jp/buy/bh/detail/13109/030/W/21866574.html",
-        "source": "goo住宅",
-        "parking": "無",
-        "parking_price": "",
-        "built_listed": 2026,
-        "img_is_plan": false
-      },
-      "last_seen": "2026-11-16"
-    },
-    "goo:h:/buy/bh/detail/13109/030/W/21342505.html": {
-      "item": {
-        "id": "goo:h:/buy/bh/detail/13109/030/W/21342505.html",
-        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/505/21342505/21342505_0021.jpg?200",
-        "station": "武蔵小山",
-        "type": "house",
-        "name": "武蔵小山駅　新築戸建",
-        "price": 10880,
-        "area": 93.97,
-        "layout": "3LDK",
-        "walk": 2,
-        "walks": [
-          [
-            "武蔵小山",
-            2
-          ],
-          [
-            "◆パルム商店街",
-            3
-          ],
-          [
-            "徒",
-            4
-          ],
-          [
-            "戸越銀座",
-            5
-          ],
-          [
-            "学芸大学",
-            7
-          ],
-          [
-            "荏原中延",
-            7
-          ],
-          [
-            "西小山",
-            8
-          ],
-          [
-            "不動前",
-            8
-          ],
-          [
-            "戸越",
-            9
-          ],
-          [
-            "・武蔵小山",
-            13
-          ],
-          [
-            "祐天寺",
-            15
-          ],
-          [
-            "目黒",
-            17
-          ],
-          [
-            "洗足",
-            18
-          ],
-          [
-            "中目黒",
-            27
-          ]
-        ],
-        "built": 2027,
-        "floor": "3階建",
-        "addr": "目黒区目黒本町4丁目",
-        "url": "https://house.goo.ne.jp/buy/bh/detail/13109/030/W/21342505.html",
         "source": "goo住宅",
         "parking": "無",
         "parking_price": "",
@@ -10998,7 +10993,7 @@
         ],
         "built": null,
         "floor": "—",
-        "addr": "品川区小山３",
+        "addr": "目黒区下目黒５",
         "url": "https://house.goo.ne.jp/buy/la/detail/1/13109/030Z22155220/177318001/x1030Z22155220.html",
         "source": "goo住宅",
         "parking": "—",
@@ -11034,7 +11029,7 @@
         ],
         "built": null,
         "floor": "—",
-        "addr": "品川区小山３",
+        "addr": "目黒区下目黒５",
         "url": "https://house.goo.ne.jp/buy/la/detail/1/13110/030Z21021265/132354001/x1030Z21021265.html",
         "source": "goo住宅",
         "parking": "—",
@@ -11195,6 +11190,45 @@
       },
       "last_seen": "2026-11-16"
     },
+    "suumo:r:jnc_000109533046": {
+      "item": {
+        "id": "suumo:r:jnc_000109533046",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/470/100535248470/100535248470_ro.jpg",
+        "station": "武蔵小山",
+        "type": "rent",
+        "name": "ＬＡＰｉＳ武蔵小山",
+        "price": 26.5,
+        "rent": 25.5,
+        "kanri": 1.0,
+        "area": 50.07,
+        "layout": "2LDK",
+        "walk": 7,
+        "built": 2022,
+        "floor": "4階",
+        "shikirei": "敷25.5万円/礼25.5万円",
+        "addr": "東京都品川区小山２",
+        "url": "https://suumo.jp/chintai/jnc_000109533046/?bc=100535248470",
+        "source": "SUUMO賃貸",
+        "parking": "無",
+        "parking_price": "",
+        "walks": [
+          [
+            "武蔵小山",
+            7
+          ],
+          [
+            "不動前",
+            9
+          ],
+          [
+            "戸越銀座",
+            12
+          ]
+        ],
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
     "goo:r:06991053577": {
       "item": {
         "id": "goo:r:06991053577",
@@ -11321,7 +11355,7 @@
         ],
         "built": null,
         "floor": "—",
-        "addr": "大田区蒲田２",
+        "addr": "大田区大森西４",
         "url": "https://house.goo.ne.jp/buy/la/detail/1/13111/030Z21483914/000389041/x1030Z21483914.html",
         "source": "goo住宅",
         "parking": "—",
@@ -11477,7 +11511,7 @@
     "goo:r:41517680014022": {
       "item": {
         "id": "goo:r:41517680014022",
-        "img": "https://image.homes.jp/smallimg/image.php?file=http%3A%2F%2Fimg.homes.jp%2F151768%2Frent%2F14022%2F2%2F2%2Fel6p.jpg&width=500&height=500?800x800",
+        "img": "https://image1.homes.jp/smallimg/image.php?file=http%3A%2F%2Fimg.homes.jp%2F151768%2Frent%2F14022%2F2%2F2%2Fel6p.jpg&width=500&height=500?800x800",
         "station": "JR蒲田",
         "type": "rent",
         "name": "東京都大田区蒲田４丁目  5階建",
@@ -11547,7 +11581,7 @@
     "goo:r:1030H100536470700": {
       "item": {
         "id": "goo:r:1030H100536470700",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/700/100536470700/100536470700_go.jpg?800x800",
+        "img": "http://img10.suumo.jp/front/gazo/fr/bukken/700/100536470700/100536470700_gw.jpg?800x800",
         "station": "JR蒲田",
         "type": "rent",
         "name": "Ｌｉｌａｓ　Ｖｅｓｔａ（リラ　ヴェスタ）",
@@ -11625,7 +11659,7 @@
     "goo:r:1030H100531913809": {
       "item": {
         "id": "goo:r:1030H100531913809",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/809/100531913809/100531913809_po.jpg?800x800",
+        "img": "http://img10.suumo.jp/front/gazo/fr/bukken/809/100531913809/100531913809_pw.jpg?800x800",
         "station": "JR蒲田",
         "type": "rent",
         "name": "Ｌｉｌａｓ　Ｖｅｓｔａ",
@@ -11664,7 +11698,7 @@
     "goo:r:1030H100531913808": {
       "item": {
         "id": "goo:r:1030H100531913808",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/808/100531913808/100531913808_po.jpg?800x800",
+        "img": "http://img10.suumo.jp/front/gazo/fr/bukken/808/100531913808/100531913808_pw.jpg?800x800",
         "station": "JR蒲田",
         "type": "rent",
         "name": "Ｌｉｌａｓ　Ｖｅｓｔａ",
@@ -11899,6 +11933,34 @@
       },
       "last_seen": "2026-11-16"
     },
+    "goo:h:1030Z21918445": {
+      "item": {
+        "id": "goo:h:1030Z21918445",
+        "img": "https://img01.suumo.com/front/gazo/bukken/030/N010000/img/445/21918445/21918445_0001.jpg?800x800",
+        "station": "不動前",
+        "type": "house",
+        "name": "東京都品川区西五反田４ 8,980万円 2SLDK",
+        "price": 8980,
+        "area": 73.18,
+        "layout": "2SLDK",
+        "walk": 4,
+        "walks": [
+          [
+            "不動前",
+            4
+          ]
+        ],
+        "built": 2021,
+        "floor": "2階建",
+        "addr": "品川区西五反田４",
+        "url": "https://house.goo.ne.jp/buy/uh/detail/1/13109/030Z21918445/000389364/x1030Z21918445.html",
+        "source": "goo住宅",
+        "parking": "無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
     "goo:l:1030Z21526898": {
       "item": {
         "id": "goo:l:1030Z21526898",
@@ -11926,7 +11988,7 @@
         ],
         "built": null,
         "floor": "—",
-        "addr": "品川区小山３",
+        "addr": "品川区西五反田３",
         "url": "https://house.goo.ne.jp/buy/la/detail/1/13109/030Z21526898/187338001/x1030Z21526898.html",
         "source": "goo住宅",
         "parking": "—",
@@ -11958,7 +12020,7 @@
         ],
         "built": null,
         "floor": "—",
-        "addr": "品川区小山３",
+        "addr": "品川区西五反田３",
         "url": "https://house.goo.ne.jp/buy/la/detail/4/13109/1497260000919/149726/x41497260000919.html",
         "source": "goo住宅",
         "parking": "—",
@@ -12263,10 +12325,10 @@
       },
       "last_seen": "2026-11-16"
     },
-    "goo:r:1030H100537074983": {
+    "goo:r:1030H100537233593": {
       "item": {
-        "id": "goo:r:1030H100537074983",
-        "img": "http://img10.suumo.jp/front/gazo/fr/bukken/983/100537074983/100537074983_gw.jpg?800x800",
+        "id": "goo:r:1030H100537233593",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/593/100537233593/100537233593_go.jpg?800x800",
         "station": "中目黒",
         "type": "rent",
         "name": "Ｂｅｌｌｅｖｉａｇｅ　Ｎａｋａｍｅｇｕｒｏ",
@@ -12284,17 +12346,13 @@
           [
             "代官山",
             9
-          ],
-          [
-            "恵比寿",
-            13
           ]
         ],
         "built": 2015,
         "floor": "1階",
         "shikirei": "敷なし/礼なし",
         "addr": "目黒区中目黒１",
-        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100537074983/175002011/x1030H100537074983.html",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100537233593/179530001/x1030H100537233593.html",
         "source": "goo住宅",
         "parking": "無",
         "parking_price": "",
@@ -12505,26 +12563,26 @@
             7
           ],
           [
-            "大崎広小路",
-            16
+            "品川",
+            15
           ]
         ],
         "built": 2011,
-        "floor": "2階",
+        "floor": "3階",
         "shikirei": "敷26万円/礼26万円",
         "addr": "品川区東五反田３丁目",
         "url": "https://sumaity.com/chintai/tokyo_prop/prop_414987642/",
         "source": "スマイティ賃貸",
-        "parking": "近隣",
-        "parking_price": "41,580円",
+        "parking": "無",
+        "parking_price": "",
         "built_listed": 2010,
         "img_is_plan": false
       },
       "last_seen": "2026-11-16"
     },
-    "housecom:r:2443726": {
+    "housecom:r:2448055": {
       "item": {
-        "id": "housecom:r:2443726",
+        "id": "housecom:r:2448055",
         "img": "https://img-hc.s3-ap-northeast-1.amazonaws.com/img/room/14439/14439410/14439410_2.jpg?v=1754877480",
         "station": "五反田",
         "type": "rent",
@@ -12545,7 +12603,7 @@
         "floor": "1階",
         "shikirei": "敷252,000円/礼なし",
         "addr": "品川区東五反田",
-        "url": "https://www.housecom.jp/room_2443726/",
+        "url": "https://www.housecom.jp/room_2448055/",
         "source": "ハウスコム",
         "parking": "無",
         "parking_price": "",
@@ -12621,6 +12679,41 @@
       },
       "last_seen": "2026-11-16"
     },
+    "goo:r:41562630010496": {
+      "item": {
+        "id": "goo:r:41562630010496",
+        "img": "https://image1.homes.jp/smallimg/image.php?file=https%3A%2F%2Fcdn-lambda-img.cloud.ielove.jp%2Fimage%2Frent%2Ff307725f%2F1249_1192345_1_132000_132000.jpg%3Ft%3D20261014132123&width=500&height=500?800x800",
+        "station": "東日本橋",
+        "type": "rent",
+        "name": "アクラス日本橋",
+        "price": 23.9,
+        "rent": 23.9,
+        "kanri": 0,
+        "area": 50.21,
+        "layout": "2LDK",
+        "walk": 3,
+        "walks": [
+          [
+            "馬喰横山",
+            3
+          ],
+          [
+            "東日本橋",
+            3
+          ]
+        ],
+        "built": 2016,
+        "floor": "6階",
+        "shikirei": "",
+        "addr": "中央区東日本橋３丁目",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1562630010496/156263/x41562630010496.html",
+        "source": "goo住宅",
+        "parking": "無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
     "goo:r:41351210092091": {
       "item": {
         "id": "goo:r:41351210092091",
@@ -12684,41 +12777,6 @@
         "shikirei": "敷なし/礼なし",
         "addr": "中央区日本橋横山町",
         "url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1564900025621/156490/x41564900025621.html",
-        "source": "goo住宅",
-        "parking": "無",
-        "parking_price": "",
-        "img_is_plan": false
-      },
-      "last_seen": "2026-11-16"
-    },
-    "goo:r:41564900024678": {
-      "item": {
-        "id": "goo:r:41564900024678",
-        "img": "https://image1.homes.jp/smallimg/image.php?file=https%3A%2F%2Fcdn-lambda-img.cloud.ielove.jp%2Fimage%2Frent%2Fec1248da%2F51706_1062562_1_132000_132000.jpg%3Ft%3D20261017200604&width=500&height=500?800x800",
-        "station": "東日本橋",
-        "type": "rent",
-        "name": "東京都中央区東日本橋３丁目 築10年6ヶ月 10階建",
-        "price": 23.9,
-        "rent": 23.9,
-        "kanri": 0,
-        "area": 50.21,
-        "layout": "2LDK",
-        "walk": 3,
-        "walks": [
-          [
-            "東日本橋",
-            3
-          ],
-          [
-            "馬喰横山",
-            3
-          ]
-        ],
-        "built": 2016,
-        "floor": "6階",
-        "shikirei": "",
-        "addr": "中央区東日本橋３丁目",
-        "url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1564900024678/156490/x41564900024678.html",
         "source": "goo住宅",
         "parking": "無",
         "parking_price": "",
@@ -12999,10 +13057,10 @@
       },
       "last_seen": "2026-11-16"
     },
-    "goo:r:41587520006601": {
+    "goo:r:41580550008682": {
       "item": {
-        "id": "goo:r:41587520006601",
-        "img": "https://image4.homes.jp/smallimg/image.php?file=http%3A%2F%2Fimg.homes.jp%2F158752%2Frent%2F6601%2F2%2F1%2Fefr6.jpg&width=500&height=500?800x800",
+        "id": "goo:r:41580550008682",
+        "img": "https://image4.homes.jp/smallimg/image.php?file=http%3A%2F%2Fimg.homes.jp%2F158055%2Frent%2F8682%2F2%2F16%2Fks8t.jpg&width=500&height=500?800x800",
         "station": "田町",
         "type": "rent",
         "name": "テーラードコート",
@@ -13024,12 +13082,12 @@
         ],
         "built": 2015,
         "floor": "7階",
-        "shikirei": "敷1ヶ月/礼1.5ヶ月",
+        "shikirei": "敷25万円/礼37.5万円",
         "addr": "港区芝５",
-        "url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1587520006601/158752/x41587520006601.html",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1580550008682/158055/x41580550008682.html",
         "source": "goo住宅",
-        "parking": "近隣",
-        "parking_price": "50,000円",
+        "parking": "空無",
+        "parking_price": "",
         "img_is_plan": false
       },
       "last_seen": "2026-11-16"
@@ -13177,46 +13235,6 @@
       },
       "last_seen": "2026-11-16"
     },
-    "sumaity:r:401932364": {
-      "item": {
-        "id": "sumaity:r:401932364",
-        "img": "https://sumaity01.k-img.com/optimized/?img_path=%2Festate_img1%2Fimage_324%2F10000110%2F00000110%2F00015452103_001.jpg&estate_id=401932364&estate_company_id=1616766792&width=180",
-        "station": "蛍池",
-        "type": "rent",
-        "name": "スローハスコート",
-        "price": 13.5,
-        "rent": 12.5,
-        "kanri": 10000,
-        "area": 56.5,
-        "layout": "1SLDK",
-        "walk": 7,
-        "walks": [
-          [
-            "蛍池",
-            7
-          ],
-          [
-            "大阪空港",
-            8
-          ],
-          [
-            "石橋阪大前",
-            24
-          ]
-        ],
-        "built": 2010,
-        "floor": "1階",
-        "shikirei": "敷なし/礼1ヶ月",
-        "addr": "豊中市螢池西町１丁目",
-        "url": "https://sumaity.com/chintai/osaka_prop/prop_401932364/",
-        "source": "スマイティ賃貸",
-        "parking": "有",
-        "parking_price": "16,500円",
-        "built_listed": 2009,
-        "img_is_plan": false
-      },
-      "last_seen": "2026-11-16"
-    },
     "sumaity:r:415967884": {
       "item": {
         "id": "sumaity:r:415967884",
@@ -13289,6 +13307,46 @@
         "parking": "有",
         "parking_price": "14,300円",
         "built_listed": 2013,
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "sumaity:r:401932364": {
+      "item": {
+        "id": "sumaity:r:401932364",
+        "img": "https://image.apamanshop.com/props/4440dcce-5bd6-4aa0-b028-838709199c5e.jpg?im=Resize=(640,640)",
+        "station": "蛍池",
+        "type": "rent",
+        "name": "スローハスコート",
+        "price": 13.5,
+        "rent": 12.5,
+        "kanri": 10000,
+        "area": 56.5,
+        "layout": "1SLDK",
+        "walk": 7,
+        "walks": [
+          [
+            "蛍池",
+            7
+          ],
+          [
+            "石橋阪大前",
+            24
+          ],
+          [
+            "柴原阪大前",
+            25
+          ]
+        ],
+        "built": 2010,
+        "floor": "1階",
+        "shikirei": "敷なし/礼12.5万円",
+        "addr": "豊中市螢池西町１丁目",
+        "url": "https://sumaity.com/chintai/osaka_prop/prop_401932364/",
+        "source": "スマイティ賃貸",
+        "parking": "無",
+        "parking_price": "",
+        "built_listed": 2009,
         "img_is_plan": false
       },
       "last_seen": "2026-11-16"
@@ -13767,7 +13825,7 @@
     "suumo:r:jnc_000109286232": {
       "item": {
         "id": "suumo:r:jnc_000109286232",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/673/100510977673/100510977673_go.jpg",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/488/100535340488/100535340488_go.jpg",
         "station": "蛍池",
         "type": "rent",
         "name": "豊中市螢池東町１丁目戸建て",
@@ -13781,7 +13839,7 @@
         "floor": "2階",
         "shikirei": "敷なし/礼44万円",
         "addr": "大阪府豊中市螢池東町１",
-        "url": "https://suumo.jp/chintai/jnc_000109286232/?bc=100510977673",
+        "url": "https://suumo.jp/chintai/jnc_000109286232/?bc=100535340488",
         "source": "SUUMO賃貸",
         "parking": "無",
         "parking_price": "",
@@ -14255,41 +14313,6 @@
       },
       "last_seen": "2026-11-16"
     },
-    "suumo:r:jnc_000110538923": {
-      "item": {
-        "id": "suumo:r:jnc_000110538923",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/005/100532567005/100532567005_go.jpg",
-        "station": "武蔵小杉",
-        "type": "rent",
-        "name": "フローラルガーデン",
-        "price": 24.0,
-        "rent": 24.0,
-        "kanri": 0.0,
-        "area": 57.13,
-        "layout": "2LDK",
-        "walk": 4,
-        "built": 2008,
-        "floor": "6階",
-        "shikirei": "敷24万円/礼24万円",
-        "addr": "神奈川県川崎市中原区新丸子東３",
-        "url": "https://suumo.jp/chintai/jnc_000110538923/?bc=100532567005",
-        "source": "SUUMO賃貸",
-        "parking": "有",
-        "parking_price": "24,200円",
-        "walks": [
-          [
-            "武蔵小杉",
-            4
-          ],
-          [
-            "沼部",
-            29
-          ]
-        ],
-        "img_is_plan": false
-      },
-      "last_seen": "2026-11-16"
-    },
     "suumo:r:jnc_000110860900": {
       "item": {
         "id": "suumo:r:jnc_000110860900",
@@ -14352,6 +14375,107 @@
       },
       "last_seen": "2026-11-16"
     },
+    "suumo:r:jnc_000109246840": {
+      "item": {
+        "id": "suumo:r:jnc_000109246840",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/195/100517547195/100517547195_go.jpg",
+        "station": "武蔵小杉",
+        "type": "rent",
+        "name": "ドレッセタワー武蔵小杉",
+        "price": 27.0,
+        "rent": 27.0,
+        "kanri": 0.0,
+        "area": 54.47,
+        "layout": "1SLDK",
+        "walk": 4,
+        "built": 2023,
+        "floor": "17階",
+        "shikirei": "敷27万円/礼27万円",
+        "addr": "神奈川県川崎市中原区小杉町３",
+        "url": "https://suumo.jp/chintai/jnc_000109246840/?bc=100517547195",
+        "source": "SUUMO賃貸",
+        "parking": "有",
+        "parking_price": "23,000円",
+        "walks": [
+          [
+            "武蔵小杉",
+            4
+          ]
+        ],
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:r:jnc_000110552281": {
+      "item": {
+        "id": "suumo:r:jnc_000110552281",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/388/100532394388/100532394388_go.jpg",
+        "station": "武蔵小杉",
+        "type": "rent",
+        "name": "神奈川県川崎市中原区新丸子東３ 賃貸",
+        "price": 24.0,
+        "rent": 24.0,
+        "kanri": 0.0,
+        "area": 57.13,
+        "layout": "2LDK",
+        "walk": 3,
+        "built": 2008,
+        "floor": "6階",
+        "shikirei": "敷24万円/礼24万円",
+        "addr": "神奈川県川崎市中原区新丸子東３",
+        "url": "https://suumo.jp/chintai/jnc_000110552281/?bc=100532394388",
+        "source": "SUUMO賃貸",
+        "parking": "有",
+        "parking_price": "27,500円",
+        "walks": [
+          [
+            "武蔵小杉",
+            3
+          ],
+          [
+            "新丸子",
+            12
+          ],
+          [
+            "元住吉",
+            17
+          ]
+        ],
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:r:jnc_000110745793": {
+      "item": {
+        "id": "suumo:r:jnc_000110745793",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/866/100533508866/100533508866_ro.jpg",
+        "station": "武蔵小杉",
+        "type": "rent",
+        "name": "神奈川県川崎市中原区小杉町２ 賃貸",
+        "price": 25.0,
+        "rent": 25.0,
+        "kanri": 0.0,
+        "area": 74.9,
+        "layout": "3LDK",
+        "walk": 5,
+        "built": 2017,
+        "floor": "7階",
+        "shikirei": "敷25万円/礼25万円",
+        "addr": "神奈川県川崎市中原区小杉町２",
+        "url": "https://suumo.jp/chintai/jnc_000110745793/?bc=100533508866",
+        "source": "SUUMO賃貸",
+        "parking": "無",
+        "parking_price": "",
+        "walks": [
+          [
+            "武蔵小杉",
+            5
+          ]
+        ],
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
     "suumo:r:jnc_000111001903": {
       "item": {
         "id": "suumo:r:jnc_000111001903",
@@ -14387,62 +14511,533 @@
       },
       "last_seen": "2026-11-16"
     },
-    "suumo:r:jnc_000109246840": {
+    "suumo:m:21716988": {
       "item": {
-        "id": "suumo:r:jnc_000109246840",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/195/100517547195/100517547195_go.jpg",
-        "station": "武蔵小杉",
-        "type": "rent",
-        "name": "ドレッセタワー武蔵小杉",
-        "price": 27.0,
-        "rent": 27.0,
-        "kanri": 0.0,
-        "area": 54.47,
-        "layout": "1SLDK",
-        "walk": 4,
-        "built": 2023,
-        "floor": "17階",
-        "shikirei": "敷27万円/礼27万円",
-        "addr": "神奈川県川崎市中原区小杉町３",
-        "url": "https://suumo.jp/chintai/jnc_000109246840/?bc=100517547195",
-        "source": "SUUMO賃貸",
-        "parking": "有",
-        "parking_price": "23,000円",
+        "id": "suumo:m:21716988",
+        "station": "大井町",
+        "type": "mansion",
+        "name": "■進化する大井町駅周辺複合開発（大井町トラックス他）に近く利便性良好",
+        "price": 11980,
+        "area": 52.16,
+        "layout": "2LDK",
+        "walk": 3,
         "walks": [
           [
-            "武蔵小杉",
-            4
+            "大井町",
+            3
+          ]
+        ],
+        "addr": "品川区東大井５",
+        "built": 2014,
+        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_21716988/",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/988/21716988/21716988_0001.jpg",
+        "floor": "2階",
+        "source": "SUUMO",
+        "parking": "有",
+        "parking_price": "2万2,000円〜3万2,000円/月",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:m:22063375": {
+      "item": {
+        "id": "suumo:m:22063375",
+        "station": "不動前",
+        "type": "mansion",
+        "name": "地上5階建ての洗練された佇まい！街並みに調和する、落ち着きと質の高い暮らし",
+        "price": 9800,
+        "area": 54.25,
+        "layout": "2LDK",
+        "walk": 6,
+        "walks": [
+          [
+            "不動前",
+            6
+          ],
+          [
+            "武蔵小山",
+            11
+          ],
+          [
+            "戸越銀座",
+            15
+          ]
+        ],
+        "addr": "品川区小山１",
+        "built": 2013,
+        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_22063375/",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/375/22063375/22063375_0008.jpg",
+        "floor": "1階",
+        "source": "SUUMO",
+        "parking": "空無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:m:22138956": {
+      "item": {
+        "id": "suumo:m:22138956",
+        "station": "五反田",
+        "type": "mansion",
+        "name": "2013年築 5階東南角住戸奥行きたっぷりワイドバルコニー 新耐震基準",
+        "price": 9990,
+        "area": 53.81,
+        "layout": "2LDK",
+        "walk": 5,
+        "walks": [
+          [
+            "五反田",
+            5
+          ],
+          [
+            "不動前",
+            9
+          ]
+        ],
+        "addr": "品川区西五反田２",
+        "built": 2013,
+        "url": "https://suumo.jp/ms/chuko/tokyo/sc_shinagawa/nc_22138956/",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/956/22138956/22138956_0001.jpg",
+        "floor": "5階",
+        "source": "SUUMO",
+        "parking": "有",
+        "parking_price": "2万8,000円〜3万2,000円/月",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:l:21857352": {
+      "item": {
+        "id": "suumo:l:21857352",
+        "station": "蛍池",
+        "type": "land",
+        "name": "■ウィル不動産販売■建築条件無し土地につきお好きなハウスメーカーで建築可■",
+        "price": 6000,
+        "area": 138.88,
+        "layout": "",
+        "walk": 3,
+        "walks": [
+          [
+            "蛍池",
+            3
+          ],
+          [
+            "大阪空港",
+            23
+          ]
+        ],
+        "addr": "豊中市螢池東町２",
+        "built": null,
+        "url": "https://suumo.jp/tochi/osaka/sc_toyonaka/nc_21857352/",
+        "img": "https://suumo.jp/front/gazo/bukken/060/N010000/img/352/21857352/21857352_0002.jpg",
+        "floor": "—",
+        "source": "SUUMO",
+        "parking": "—",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "goo:r:1030H100536285953": {
+      "item": {
+        "id": "goo:r:1030H100536285953",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/953/100536285953/100536285953_go.jpg?800x800",
+        "station": "大井町",
+        "type": "rent",
+        "name": "東京都品川区東大井３ 築10年4ヶ月 3階建",
+        "price": 18.2,
+        "rent": 17.9,
+        "kanri": 3000,
+        "area": 51.65,
+        "layout": "2LDK",
+        "walk": 7,
+        "walks": [
+          [
+            "大井町",
+            7
+          ],
+          [
+            "鮫洲",
+            9
+          ],
+          [
+            "青物横丁",
+            16
+          ]
+        ],
+        "built": 2016,
+        "floor": "3階",
+        "shikirei": "敷1ヶ月/礼1ヶ月",
+        "addr": "品川区東大井３",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536285953/175002014/x1030H100536285953.html",
+        "source": "goo住宅",
+        "parking": "無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "goo:r:1030H100532940630": {
+      "item": {
+        "id": "goo:r:1030H100532940630",
+        "img": "http://img10.suumo.jp/front/gazo/fr/bukken/630/100532940630/100532940630_gw.jpg?800x800",
+        "station": "大井町",
+        "type": "rent",
+        "name": "東京都品川区大井２  3階建",
+        "price": 25.5,
+        "rent": 25.0,
+        "kanri": 5000,
+        "area": 52.17,
+        "layout": "1LDK",
+        "walk": 7,
+        "walks": [
+          [
+            "大井町",
+            7
+          ],
+          [
+            "西大井",
+            12
+          ]
+        ],
+        "built": 2026,
+        "floor": "3階",
+        "shikirei": "敷25万円/礼25万円",
+        "addr": "品川区大井２",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100532940630/107039017/x1030H100532940630.html",
+        "source": "goo住宅",
+        "parking": "無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:r:jnc_000110817118": {
+      "item": {
+        "id": "suumo:r:jnc_000110817118",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/053/100534607053/100534607053_ro.jpg",
+        "station": "大井町",
+        "type": "rent",
+        "name": "S・FLATV",
+        "price": 25.7,
+        "rent": 25.0,
+        "kanri": 0.7,
+        "area": 52.7,
+        "layout": "2LDK",
+        "walk": 7,
+        "built": 2025,
+        "floor": "3階",
+        "shikirei": "敷25万円/礼25万円",
+        "addr": "東京都品川区大井２",
+        "url": "https://suumo.jp/chintai/jnc_000110817118/?bc=100534607053",
+        "source": "SUUMO賃貸",
+        "parking": "無",
+        "parking_price": "",
+        "walks": [
+          [
+            "大井町",
+            7
+          ],
+          [
+            "下神明",
+            7
+          ],
+          [
+            "西大井",
+            12
           ]
         ],
         "img_is_plan": false
       },
       "last_seen": "2026-11-16"
     },
-    "suumo:r:jnc_000110745793": {
+    "goo:m:1030Z20509341": {
       "item": {
-        "id": "suumo:r:jnc_000110745793",
-        "img": "https://img01.suumo.com/front/gazo/fr/bukken/866/100533508866/100533508866_ro.jpg",
-        "station": "武蔵小杉",
-        "type": "rent",
-        "name": "神奈川県川崎市中原区小杉町２ 賃貸",
-        "price": 25.0,
-        "rent": 25.0,
-        "kanri": 0.0,
-        "area": 74.9,
+        "id": "goo:m:1030Z20509341",
+        "img": "https://img01.suumo.com/front/gazo/bukken/030/N010000/img/341/20509341/20509341_0019.jpg?800x800",
+        "station": "武蔵小山",
+        "type": "mansion",
+        "name": "アトラス目黒本町",
+        "price": 11980,
+        "area": 57.01,
+        "layout": "2LDK",
+        "walk": 4,
+        "walks": [
+          [
+            "武蔵小山",
+            4
+          ],
+          [
+            "西小山",
+            11
+          ],
+          [
+            "学芸大学",
+            24
+          ]
+        ],
+        "built": 2007,
+        "floor": "6階",
+        "addr": "目黒区目黒本町３",
+        "url": "https://house.goo.ne.jp/buy/um/detail/1/13110/030Z20509341/068892033/x1030Z20509341.html",
+        "source": "goo住宅",
+        "parking": "有",
+        "parking_price": "2万5,000円〜2万8,000円/月",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "goo:h:/buy/bh/detail/13109/030/W/21342505.html": {
+      "item": {
+        "id": "goo:h:/buy/bh/detail/13109/030/W/21342505.html",
+        "img": "https://suumo.jp/front/gazo/bukken/030/N010000/img/505/21342505/21342505_0021.jpg?200",
+        "station": "武蔵小山",
+        "type": "house",
+        "name": "武蔵小山駅　新築戸建",
+        "price": 10880,
+        "area": 93.97,
         "layout": "3LDK",
-        "walk": 5,
-        "built": 2017,
-        "floor": "7階",
-        "shikirei": "敷25万円/礼25万円",
-        "addr": "神奈川県川崎市中原区小杉町２",
-        "url": "https://suumo.jp/chintai/jnc_000110745793/?bc=100533508866",
-        "source": "SUUMO賃貸",
+        "walk": 2,
+        "walks": [
+          [
+            "武蔵小山",
+            2
+          ],
+          [
+            "◆パルム商店街",
+            3
+          ],
+          [
+            "徒",
+            4
+          ],
+          [
+            "戸越銀座",
+            5
+          ],
+          [
+            "学芸大学",
+            7
+          ],
+          [
+            "荏原中延",
+            7
+          ],
+          [
+            "西小山",
+            8
+          ],
+          [
+            "不動前",
+            8
+          ],
+          [
+            "戸越",
+            9
+          ],
+          [
+            "・武蔵小山",
+            13
+          ],
+          [
+            "祐天寺",
+            15
+          ],
+          [
+            "目黒",
+            17
+          ],
+          [
+            "洗足",
+            18
+          ],
+          [
+            "中目黒",
+            27
+          ]
+        ],
+        "built": 2027,
+        "floor": "3階建",
+        "addr": "目黒区目黒本町4丁目",
+        "url": "https://house.goo.ne.jp/buy/bh/detail/13109/030/W/21342505.html",
+        "source": "goo住宅",
         "parking": "無",
         "parking_price": "",
+        "built_listed": 2026,
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "goo:r:1030H100537074983": {
+      "item": {
+        "id": "goo:r:1030H100537074983",
+        "img": "http://img10.suumo.jp/front/gazo/fr/bukken/983/100537074983/100537074983_gw.jpg?800x800",
+        "station": "中目黒",
+        "type": "rent",
+        "name": "Ｂｅｌｌｅｖｉａｇｅ　Ｎａｋａｍｅｇｕｒｏ",
+        "price": 26.5,
+        "rent": 25.2,
+        "kanri": 13000,
+        "area": 56.38,
+        "layout": "1LDK",
+        "walk": 6,
+        "walks": [
+          [
+            "中目黒",
+            6
+          ],
+          [
+            "代官山",
+            9
+          ],
+          [
+            "恵比寿",
+            13
+          ]
+        ],
+        "built": 2015,
+        "floor": "1階",
+        "shikirei": "敷なし/礼なし",
+        "addr": "目黒区中目黒１",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100537074983/175002011/x1030H100537074983.html",
+        "source": "goo住宅",
+        "parking": "無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "housecom:r:2443726": {
+      "item": {
+        "id": "housecom:r:2443726",
+        "img": "https://img-hc.s3-ap-northeast-1.amazonaws.com/img/room/14439/14439410/14439410_2.jpg?v=1754877480",
+        "station": "五反田",
+        "type": "rent",
+        "name": "コンフォール池田山",
+        "price": 26.2,
+        "rent": 25.2,
+        "kanri": 10000,
+        "area": 59.68,
+        "layout": "1LDK",
+        "walk": 4,
+        "walks": [
+          [
+            "五反田",
+            4
+          ]
+        ],
+        "built": 2015,
+        "floor": "1階",
+        "shikirei": "敷252,000円/礼なし",
+        "addr": "品川区東五反田",
+        "url": "https://www.housecom.jp/room_2443726/",
+        "source": "ハウスコム",
+        "parking": "無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "goo:r:41564900024678": {
+      "item": {
+        "id": "goo:r:41564900024678",
+        "img": "https://image1.homes.jp/smallimg/image.php?file=https%3A%2F%2Fcdn-lambda-img.cloud.ielove.jp%2Fimage%2Frent%2Fec1248da%2F51706_1062562_1_132000_132000.jpg%3Ft%3D20261017200604&width=500&height=500?800x800",
+        "station": "東日本橋",
+        "type": "rent",
+        "name": "東京都中央区東日本橋３丁目 築10年6ヶ月 10階建",
+        "price": 23.9,
+        "rent": 23.9,
+        "kanri": 0,
+        "area": 50.21,
+        "layout": "2LDK",
+        "walk": 3,
+        "walks": [
+          [
+            "東日本橋",
+            3
+          ],
+          [
+            "馬喰横山",
+            3
+          ]
+        ],
+        "built": 2016,
+        "floor": "6階",
+        "shikirei": "",
+        "addr": "中央区東日本橋３丁目",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1564900024678/156490/x41564900024678.html",
+        "source": "goo住宅",
+        "parking": "無",
+        "parking_price": "",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "goo:r:41587520006601": {
+      "item": {
+        "id": "goo:r:41587520006601",
+        "img": "https://image4.homes.jp/smallimg/image.php?file=http%3A%2F%2Fimg.homes.jp%2F158752%2Frent%2F6601%2F2%2F1%2Fefr6.jpg&width=500&height=500?800x800",
+        "station": "田町",
+        "type": "rent",
+        "name": "テーラードコート",
+        "price": 25.8,
+        "rent": 25.0,
+        "kanri": 8000,
+        "area": 54.99,
+        "layout": "1LDK",
+        "walk": 5,
+        "walks": [
+          [
+            "三田",
+            3
+          ],
+          [
+            "田町",
+            5
+          ]
+        ],
+        "built": 2015,
+        "floor": "7階",
+        "shikirei": "敷1ヶ月/礼1.5ヶ月",
+        "addr": "港区芝５",
+        "url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1587520006601/158752/x41587520006601.html",
+        "source": "goo住宅",
+        "parking": "近隣",
+        "parking_price": "50,000円",
+        "img_is_plan": false
+      },
+      "last_seen": "2026-11-16"
+    },
+    "suumo:r:jnc_000110538923": {
+      "item": {
+        "id": "suumo:r:jnc_000110538923",
+        "img": "https://img01.suumo.com/front/gazo/fr/bukken/005/100532567005/100532567005_go.jpg",
+        "station": "武蔵小杉",
+        "type": "rent",
+        "name": "フローラルガーデン",
+        "price": 24.0,
+        "rent": 24.0,
+        "kanri": 0.0,
+        "area": 57.13,
+        "layout": "2LDK",
+        "walk": 4,
+        "built": 2008,
+        "floor": "6階",
+        "shikirei": "敷24万円/礼24万円",
+        "addr": "神奈川県川崎市中原区新丸子東３",
+        "url": "https://suumo.jp/chintai/jnc_000110538923/?bc=100532567005",
+        "source": "SUUMO賃貸",
+        "parking": "有",
+        "parking_price": "24,200円",
         "walks": [
           [
             "武蔵小杉",
-            5
+            4
+          ],
+          [
+            "沼部",
+            29
           ]
         ],
         "img_is_plan": false
