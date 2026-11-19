@@ -1,0 +1,22 @@
+name: Prune ended
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python prune.py
+      - run: python verify_page.py index.html
+      - run: |
+          git diff --quiet && exit 0
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git commit -am "掲載終了を除外（早回し）"
+          git push
