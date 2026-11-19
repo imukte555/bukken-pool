@@ -17,6 +17,10 @@ DATA_RE = re.compile(r'(<script type="application/json" id="data">)(.*?)(</scrip
 
 def status(url):
     try:
+        # SUUMOは掲載終了を http:// の /library/ へ301で飛ばす。追うとタイムアウトするので先に見る
+        r = requests.get(url, impersonate="chrome", timeout=25, allow_redirects=False)
+        if "/library/" in r.headers.get("location", ""):
+            return "ended"
         r = requests.get(url, impersonate="chrome", timeout=25, allow_redirects=True)
     except Exception:
         return "unknown"
