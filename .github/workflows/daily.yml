@@ -61,6 +61,8 @@ jobs:
         timeout-minutes: 20
         run: |
           if [ ! -f docs/index.html ]; then echo "ページ未生成のためスキップ"; exit 0; fi
+          # 取り直しでは掲載終了（SUUMOの/library/転送など）を拾えないので最後に外す
+          cp docs/index.html index.html && python prune.py
           python verify_page.py docs/index.html
 
       - name: Publish 在庫ページ (GitHub Pages)
