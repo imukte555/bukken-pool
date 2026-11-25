@@ -19,7 +19,9 @@ def status(url):
     try:
         # SUUMOは掲載終了を http:// の /library/ へ301で飛ばす。追うとタイムアウトするので先に見る
         r = requests.get(url, impersonate="chrome", timeout=25, allow_redirects=False)
-        if "/library/" in r.headers.get("location", ""):
+        loc = r.headers.get("location", "")
+        # goo住宅は掲載終了を /house/error/ へ302で飛ばす
+        if "/library/" in loc or "/error/" in loc:
             return "ended"
         r = requests.get(url, impersonate="chrome", timeout=25, allow_redirects=True)
     except Exception:
@@ -38,7 +40,15 @@ def main():
     counts = {s: sum(v == s for v in res.values()) for s in ("live", "ended", "unknown")}
     print(counts)
     ended = [k for k, v in res.items() if v == "ended"]
-    if not ended:
+    # 同じ部屋の別掲載(sibs)も開き、終わったものは一覧から落とす
+    sib_urls = {s["url"] for k, v in data.items() if k not in ended for s in v.get("sibs", []) if s["url"] != v["url"]}
+    with ThreadPoolExecutor(8) as ex:
+        dead_sibs = {u for u, st in zip(sib_urls, ex.map(status, sib_urls)) if st == "ended"}
+    print("dead sibs", len(dead_sibs))
+    for k, v in data.items():
+        if "sibs" in v:
+            v["sibs"] = [s for s in v["sibs"] if s["url"] not in dead_sibs]
+    if not ended and not dead_sibs:
         return
     for k in ended:
         html = re.sub(r'<div class="card"\s+data-id="%s".*?(?=<div class="card"|</main>)' % re.escape(k), "", html, flags=re.S)
@@ -49,6 +59,7 @@ def main():
     for f in FILES:
         open(f, "w", encoding="utf-8").write(html)
     print("removed", len(ended), "->", len(data))
+    print("ended ids", ended)
 
 
 if __name__ == "__main__":
