@@ -163,6 +163,7 @@ STATIONS = {
     "武蔵小山": {"suumo": "38730", "homes": "musashikoyama_05069-st", "nomu": "ensen_tokyo/2327/2327230", "livable": "tokyo/s2327230", "athome": "musashikoyama-st", "rehouse": "13/2327/230", "sumaity": "musashikoyama", "chintai": "tokyo/000005103", "nifty": "musashikoyama", "housecom": "tokyo/23270230", "sumaity_rent": "tokyo/shinagawa_ku_musashikoyama", "cowcamo": "1123"},
     "東日本橋": {"suumo": "32170", "homes": "higashinihombashi_06405-st",                "nomu": "ensen_tokyo/2351/2351060", "livable": "tokyo/s2351060", "athome": "higashinihombashi-st", "rehouse": "13/2351/060", "sumaity": None, "chintai": "tokyo/000005347", "nifty": "higashinihombashi", "housecom": "tokyo/23510060", "sumaity_rent": None, "cowcamo": None},
     "武蔵小杉": {"suumo": "38720", "pref": "kanagawa", "homes": "musashikosugi_00657-st", "nomu": "ensen_kanagawa/2321/2321110", "livable": "kanagawa/s2321110", "athome": "musashikosugi-st", "rehouse": "14/2321/110", "sumaity": "musashikosugi", "chintai": "kanagawa/000000092", "nifty": "musashikosugi", "housecom": None, "sumaity_rent": "kanagawa/kawasaki_nakahara_ku_musashikosugi", "cowcamo": None},
+    "豊洲": {"suumo": "26540", "homes": "toyosu_06389-st", "nomu": "ensen_tokyo/2347/2347220", "livable": "tokyo/s2347220", "athome": "toyosu-st", "rehouse": "13/2347/220", "sumaity": "toyosu", "chintai": "tokyo/000005328", "nifty": "toyosu", "housecom": "tokyo/23470220", "sumaity_rent": "tokyo/koto_ku_toyosu", "cowcamo": "659"},
     "蛍池": {"suumo": "35080", "pref": "osaka", "homes": None, "nomu": "ensen_osaka/6668/6668100", "livable": None, "athome": "hotarugaike-st", "rehouse": "27/6668/100", "sumaity": "hotarugaike", "chintai": "osaka/000006365", "nifty": "hotarugaike", "housecom": "osaka/66680100", "sumaity_rent": "osaka/toyonaka_hotarugaike", "cowcamo": None},
 }
 
@@ -191,6 +192,7 @@ STATION_AREAS = {
     "田町":     ["港区"],
     "蛍池":     ["豊中市", "池田市"],
     "武蔵小杉": ["中原区", "高津区"],
+    "豊洲":     ["江東区"],
 }
 
 OIMACHI_REJECT_PATTERNS = [
